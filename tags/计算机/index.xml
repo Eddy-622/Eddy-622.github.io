@@ -1,55 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Eddy&#39;s Boke</title>
-    <link>https://Eddy-622.github.io/</link>
-    <description>Recent content on Eddy&#39;s Boke</description>
+    <title>计算机 on Eddy&#39;s Boke</title>
+    <link>https://Eddy-622.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/</link>
+    <description>Recent content in 计算机 on Eddy&#39;s Boke</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Fri, 30 Oct 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 28 Oct 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://Eddy-622.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://Eddy-622.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>关于</title>
-      <link>https://Eddy-622.github.io/about-hugo/</link>
-      <pubDate>Fri, 30 Oct 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://Eddy-622.github.io/about-hugo/</guid>
-      <description>此博客创建于2020-10-30
-用以记录学习数据分析以及python中遇到的各种问题
-定期上传更新学习中的课程笔记等</description>
-    </item>
-    
-    <item>
-      <title>初识Python</title>
-      <link>https://Eddy-622.github.io/posts/python%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</link>
-      <pubDate>Thu, 29 Oct 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://Eddy-622.github.io/posts/python%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</guid>
-      <description>10.28回顾   简单的cmd操作 选择盘符E: ， cd 切换目录，dir显示当前列表
-  路径的概念
-​	相对路径
-​	绝对路径
-  环境变量的设置
-win7 大同小异，win7注意单行地址栏操作各路径之间用；隔开
-win10
-  解释器的多版本共存
-配置不同的环境变量以及拷贝exe文件修改文件名以达到共存的目的
-  执行python程序
-cmd窗口中输入代码
-txt，word等文件中输入代码，用解释器执行
-专业的python编辑器
-  python编辑器推荐
-vscode 凑合用，适合老手
-anaconda 主要用途为数据分析、
-pycharm 好东西，要钱，破解
-  pycharm的使用
-&amp;#39;&amp;#39;&amp;#39;安装好设置好文件存放路径已经选择好解释器版本后启动新建py文件，写入代码，运行文件&amp;#39;&amp;#39;&amp;#39;  文件后缀名
-&amp;#39;&amp;#39;&amp;#39;明确对文件的分类，使人一眼就能看懂文件的类型&amp;#39;&amp;#39;&amp;#39;  今日内容   python中的注释 &amp;#39;&amp;#39;&amp;#39;注释就是对于一段代码的文字解释。python中的注释是用来给人看，给自己看，帮助理解代码使用的方便后期更新维护方式1（单行注释）#或选中注释区域后使用 快捷键 CTRL + /再次激活快捷键为解开注释&amp;#39;&amp;#39;&amp;#39;&amp;#39;&amp;#39;&amp;#39;方式2（多行注释）&amp;#39;&amp;#39;&amp;#39;&amp;#39;&amp;#39;&amp;#39;三个单引号&amp;#39;&amp;#39;&amp;#39;&amp;#34;&amp;#34;&amp;#34;三个双引号&amp;#34;&amp;#34;&amp;#34;  python中的变量 &amp;#39;&amp;#39;&amp;#39;1.</description>
-    </item>
     
     <item>
       <title>计算机基础知识</title>
@@ -60,19 +21,6 @@ pycharm 好东西，要钱，破解
       <description>10.27回顾 1.计算机的由来  1623年：德国科学家契克卡德（W. Schickard）制造了人类有史以来第一台机械计算机，这台机器能够 进行六位数的加减乘除运算。 1642年：法国科学家帕斯卡（B.Pascal）发明了著名的帕斯卡机械计算机，首次确立了计算机器的概念。 1674年：莱布尼茨改进了帕斯卡的计算机，使之成为一种能够进行连续运算的机器，并且提出了“二进制”数的概念。（据说这个概念来源于中国的八卦） 此后发展了两百多年于 1895年： 英国青年工程师弗莱明（J.Fleming）通过“爱迪生效应”发明了人类第一只电子管。 从此进入电子管时代 1943年：10月，绰号为“巨人”的用来破译德军密码的计算机在英国布雷契莱庄园制造成功，此后又制造多台，为第二次世界大战的胜利立下了汗马功劳。  2.计算机的工作原理  计算机通过识别0101的二进制数值进行工作  3.计算机的硬件组成  控制器 （控制计算机各部分的运行，下达指令） 运算器 （进行逻辑运算，判断对错） 储存器 (数据的短期长期储存) 输入设备 (键盘鼠标等人机交互设备) 输出设备(显示器，扬声器等)  4.计算机三大核心硬件  CPU	中央运算处理器 (计算机的大脑，集成了控制器运算器，以及最新的AR模块和集成显卡） 内存	与cpu直接进行沟通，进行数据吞吐，读写速度快，但是断电后会清空所有数据 硬盘	负责数据的长期的储存，虽然读写速度想对慢的多，但是理论情况下可以实现对数据的完整保 存  5.操作系统   windows 、MacOS 、Linux、ubuntu
 操作系统就是充当人与计算机之间沟通的桥梁，因为计算机只认识01二进制数值，返回的	数值也生涩僵硬难懂，操作系统可以高效率的将指令传达给计算机，并且返回的指令进行	可视化处理，人类看起来更加方便，易懂。
   6.三层架构  应用程序	我们所使用的所有软件即是应用程序层面的，侧重与用户的使用体验 操作系统	基于底层架构起来的系统，也属于应用层序，不过侧重于与计算的交互 计算机硬件	即计算机本身的实体化部分，CPU内存等，随着迭代，性能不断增强  7.编程语言  人和计算机沟通的语言，把人类的语言编写成计算机可以听懂看懂的语言，已达到为计算机下达工作指令的目的  8.编程  将编程语言编写下来的过程就是编程  9.编程语言的发展史  机器语言	计算机的原生语言，0101的二进制字符 晦涩难懂，难学难用 汇编语言	使用特定的英文字母代替二进制字符，语言进化迭代的产物 高级语言	使用人类的语言单词，简单易懂，目前的主流语言python，Java，C++等  10.</description>
-    </item>
-    
-    <item>
-      <title>Eddy&#39;s Boke</title>
-      <link>https://Eddy-622.github.io/posts/%E7%AC%91%E4%B8%80%E4%B8%AA%E8%8C%84%E5%AD%90~/</link>
-      <pubDate>Mon, 26 Oct 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://Eddy-622.github.io/posts/%E7%AC%91%E4%B8%80%E4%B8%AA%E8%8C%84%E5%AD%90~/</guid>
-      <description>这是我创建的第一个个人网站
-刚刚开始摸索其中的乐趣
-做的的不好的地方以后会尽量优化
-今天也是充满希望的一天Fighting！打工人
-当然我知道这个网站是没有几个人会看的~</description>
     </item>
     
   </channel>
