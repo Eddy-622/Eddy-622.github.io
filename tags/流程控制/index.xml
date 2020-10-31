@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>流程控制 on Eddy&#39;s Boke</title>
+    <link>https://Eddy-622.github.io/tags/%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6/</link>
+    <description>Recent content in 流程控制 on Eddy&#39;s Boke</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Fri, 30 Oct 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://Eddy-622.github.io/tags/%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>用户交互、格式化输出、运算符、流程控制</title>
+      <link>https://Eddy-622.github.io/posts/%E7%94%A8%E6%88%B7%E4%BA%A4%E4%BA%92%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA%E8%BF%90%E7%AE%97%E7%AC%A6%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6-/</link>
+      <pubDate>Fri, 30 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/posts/%E7%94%A8%E6%88%B7%E4%BA%A4%E4%BA%92%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA%E8%BF%90%E7%AE%97%E7%AC%A6%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6-/</guid>
+      <description>10.29内容回顾   代码的注释
+&amp;#39;&amp;#39;&amp;#39;1.# 单行注释2.&amp;#39;&amp;#39;&amp;#39;&amp;#39;&amp;#39;&amp;#39;,&amp;#34;&amp;#34;&amp;#34;&amp;#34;&amp;#34;&amp;#34; 多行注释在pycharm中的快捷键ctrl+? 注释快捷键，再次激活取消注释&amp;#39;&amp;#39;&amp;#39;  变量
+&amp;#39;&amp;#39;&amp;#39;语法规范变量名 赋值符号 变量的值&amp;#39;&amp;#39;&amp;#39;name = &amp;#39;Eddy&amp;#39;&amp;#34;&amp;#34;&amp;#34;遇到赋值符号先看符号右边的再看符号左边的&amp;#34;&amp;#34;&amp;#34;# 情况1  name = &amp;#39;jason&amp;#39;name = &amp;#39;egon&amp;#39;name = &amp;#39;tony&amp;#39;&amp;#39;&amp;#39;&amp;#39;name依次被赋予 jason egon tony 三个值，但是最后只能指向一个值所有此时name对应的值为 tony&amp;#39;&amp;#39;&amp;#39;# 情况2 name = &amp;#39;jason&amp;#39;name1 = namename2 = name&amp;#39;&amp;#39;&amp;#39;name被赋予Jason，name1,name2 同时被赋予name的值所有 name1 = name2 = name = Jason&amp;#39;&amp;#39;&amp;#39;  变量的命名规范(必须遵守)
+&amp;#39;&amp;#39;&amp;#39;1.只能包含数字、字母、下划线2.数字不能开头、下划线也尽量不要开头(隐藏变量)3.</description>
+    </item>
+    
+  </channel>
+</rss>
