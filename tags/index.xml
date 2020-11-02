@@ -7,10 +7,46 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Fri, 30 Oct 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 02 Nov 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://Eddy-622.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>for循环</title>
+      <link>https://Eddy-622.github.io/tags/for%E5%BE%AA%E7%8E%AF/</link>
+      <pubDate>Mon, 02 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/tags/for%E5%BE%AA%E7%8E%AF/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>While循环</title>
+      <link>https://Eddy-622.github.io/tags/while%E5%BE%AA%E7%8E%AF/</link>
+      <pubDate>Mon, 02 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/tags/while%E5%BE%AA%E7%8E%AF/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>数据类型</title>
+      <link>https://Eddy-622.github.io/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</link>
+      <pubDate>Mon, 02 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>数据类型的内置</title>
+      <link>https://Eddy-622.github.io/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%86%85%E7%BD%AE/</link>
+      <pubDate>Mon, 02 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%86%85%E7%BD%AE/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>格式化输出</title>
@@ -49,15 +85,6 @@
     </item>
     
     <item>
-      <title>数据类型</title>
-      <link>https://Eddy-622.github.io/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</link>
-      <pubDate>Thu, 29 Oct 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://Eddy-622.github.io/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>操作系统</title>
       <link>https://Eddy-622.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</link>
       <pubDate>Wed, 28 Oct 2020 00:00:00 +0000</pubDate>
@@ -72,33 +99,6 @@
       <pubDate>Wed, 28 Oct 2020 00:00:00 +0000</pubDate>
       
       <guid>https://Eddy-622.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>for循环</title>
-      <link>https://Eddy-622.github.io/tags/for%E5%BE%AA%E7%8E%AF/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://Eddy-622.github.io/tags/for%E5%BE%AA%E7%8E%AF/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>While循环</title>
-      <link>https://Eddy-622.github.io/tags/while%E5%BE%AA%E7%8E%AF/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://Eddy-622.github.io/tags/while%E5%BE%AA%E7%8E%AF/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>数据类型的内置</title>
-      <link>https://Eddy-622.github.io/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%86%85%E7%BD%AE/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://Eddy-622.github.io/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%86%85%E7%BD%AE/</guid>
       <description></description>
     </item>
     
