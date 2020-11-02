@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>for循环 on Eddy&#39;s Boke</title>
+    <link>https://Eddy-622.github.io/tags/for%E5%BE%AA%E7%8E%AF/</link>
+    <description>Recent content in for循环 on Eddy&#39;s Boke</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    
+	<atom:link href="https://Eddy-622.github.io/tags/for%E5%BE%AA%E7%8E%AF/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>While循环，for循环，嵌套，数据类型的内置</title>
+      <link>https://Eddy-622.github.io/posts/while%E5%BE%AA%E7%8E%AFfor%E5%BE%AA%E7%8E%AF%E5%B5%8C%E5%A5%97%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%86%85%E7%BD%AE/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/posts/while%E5%BE%AA%E7%8E%AFfor%E5%BE%AA%E7%8E%AF%E5%B5%8C%E5%A5%97%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%86%85%E7%BD%AE/</guid>
+      <description>上周内容回顾 数据类型 &amp;#39;&amp;#39;&amp;#39;布尔值 bool布尔值的命名传统前面加上is_eg: is_deleteis_status元组 tuplet = (1,2,3,4,5)当容器类型里面只有一个元素的时候也应该将逗号加上集合 sets = {1,2,3,4,5}&amp;#39;&amp;#39;&amp;#39;可变类型与不可变类型 &amp;#39;&amp;#39;&amp;#39; 查询数值的内存地址id()可变类型（列表，字典）值改变内存地址不变不可变类型（整型，浮点型，字符串）值改变内存地址一定变&amp;#39;&amp;#39;&amp;#39;用户交互 &amp;#39;&amp;#39;&amp;#39;获取用户输入inputinput获取到的数据都是字符串类型输出结果print可以一次性输出多个元素，逗号隔开即可&amp;#39;&amp;#39;&amp;#39;格式化输出 &amp;#39;&amp;#39;&amp;#39;占位符 ： %s(可以给任意的数据类型占位)。d%(只能给数字占位)&amp;#39;my name is %sand my age is s%&amp;#39; (Eddy, 18)字符串里有几个占位符，后面给数据的时候就要给出几个真实数据&amp;#39;&amp;#39;&amp;#39;运算符 &amp;#39;&amp;#39;&amp;#39;基本运算符+-*/%**增量赋值x += 1x -= 1x *= 1x /= 1链式赋值a = b = c = 666交叉赋值m = 10n = 999交换m 和 n 的数值方式一利用中间变量tum = mm = n n = tum方式二交叉赋值m,n = n,m解压赋值l = [11,22,33]默认情况下左右两边的个数一定要相等有多少个值就要给多少个变量名a ,b,c = l利用*打破变量名数量的限制a,*_,b = l*_常用来表达无用的数据逻辑运算and or notand连接多个条件，且必须成立，输出结果才为True，有一个条件不成立直接结束，输出Flaseor与and恰恰相反，链接的结果只要一个成立，结果都为True。有一个成立则直接输出结果Truenot取反 not True = Flase身份运算is判断地址是否相等==判断值是否想同值相同内存地址可能不同内存地址相同值一定相同&amp;#39;&amp;#39;&amp;#39;代码的缩进 &amp;#39;&amp;#39;&amp;#39;python中利用代码的缩进来表示代码的从属关系并不是所有的代码都可以又子代码的权限属于同一个代码的多个子代码，子代码之间的缩进必须是相同的遇到冒号说明接下来的代码需要缩进&amp;#39;&amp;#39;&amp;#39;流程控制值if判断 &amp;#39;&amp;#39;&amp;#39;if的固定句式if 条件1:代码1代码2elif 条件2:代码1代码2elif 条件3:代码1代码2else :代码1代码2那个条件成立就会执行哪个条件的子代码其他的都不会被执行所有条件代码中只会被执行一个&amp;#39;&amp;#39;&amp;#39;今日内容 if 判断结束 循环结构值while循环 循环结构之for循环 数据类型的内置方法 字符编码 今日内容详细 if判断 &amp;#39;&amp;#39;&amp;#39;if的嵌套(代码的缩进以及子代码的从属关系)eg:如果女人的年龄小于28岁且定义为漂亮的则上去要微信如果成功则邀请看电影吃饭逛街不成功则 打扰了&amp;#39;&amp;#39;&amp;#39;age = 26is_beautiful = Trueis_success = Trueif age &amp;lt; 28 and is_beautifulprint(&amp;#39;小姐姐加个微信&amp;#39;)#二次判断 if is_success:print(&amp;#39;我们去吃饭看电影逛街吧&amp;#39;)else:print(&amp;#39;打扰了&amp;#39;)else:print(&amp;#39;不好意思认错人了&amp;#39;)循环结构之while循环 break 用于结束离他最近的while循环</description>
+    </item>
+    
+  </channel>
+</rss>
