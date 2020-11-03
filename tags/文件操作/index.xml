@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>文件操作 on Eddy&#39;s Boke</title>
+    <link>https://Eddy-622.github.io/tags/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/</link>
+    <description>Recent content in 文件操作 on Eddy&#39;s Boke</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Tue, 03 Nov 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://Eddy-622.github.io/tags/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>字符编码，字符处理，文件处理，文件操作</title>
+      <link>https://Eddy-622.github.io/posts/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E5%AD%97%E7%AC%A6%E5%A4%84%E7%90%86%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/</link>
+      <pubDate>Tue, 03 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/posts/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E5%AD%97%E7%AC%A6%E5%A4%84%E7%90%86%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/</guid>
+      <description>今日内容概要   字符编码的概念
+  文件处理
+用python代码来操作文件的创建、书写、修改
+  函数
+  模块
+  面向对象
+python本质就是一门面向对象的编程语言
+  今日内容详细 知识补充
+​	布尔值为False的情况有哪些
+​	0 、None 、 &#39;&amp;rsquo; 、[ ] 、 { }
+字符编码 &amp;#39;&amp;#39;&amp;#39;有时候当我们打开一个文件的时候发现展示的内容是一段乱码，这种情况是如何产生的，以及如何解决字符编码的研究只针对文本文件，视频音频文件没有字符一说，不在研究范围之内知识回顾1、软件运行前，软件的代码及其相关数据都是存放于硬盘中的2、任何软件的启动都是将数据从硬盘中读入内存，然后cpu从内存中取出指令并执行3、软件运行过程中产生的数据最先都是存放于内存中的，若想永久保存软件产生的数据，则需要将数据由内存写入硬盘普通的文本编辑器阶段1、启动一个文件编辑器（文本编辑器如nodepad++，pycharm，word）阶段2、文件编辑器会将文件内容从硬盘读入内存阶段3、文本编辑器会将刚刚读入内存中的内容显示到屏幕上python解释器阶段1、启动python解释器，此时就相当于启动了一个文本编辑器阶段2、python解释器相当于文本编辑器，从硬盘上将test.py的内容读入到内存中阶段3、python解释器解释执行刚刚读入的内存的内容，开始识别python语法 文本编辑器和python解释器的异同点1、相同点：前两个阶段二者完全一致，都是将硬盘中文件的内容读入内存，详解如下python解释器是解释执行文件内容的，因而python解释器具备读py文件的功能，这一点与文本编辑器一样2、不同点：在阶段3时，针对内存中读入的内容处理方式不同，详解如下文本编辑器将文件内容读入内存后，是为了显示或者编辑，根本不去理会python的语法，而python解释器将文件内容读入内存后，可不是为了给你瞅一眼python代码写的啥，而是为了执行python代码、会识别python语法）计算机由于是基于电工作的，只能识别识别010101二进制数据，但是我们人在使用计算机的时候却可以使用各式各样的文字语言人类的字符	转换过程	二进制数字&amp;#39;&amp;#39;&amp;#39;字符编码发展史 &amp;#39;&amp;#39;&amp;#39;计算机起源于美国美国人用的是英文，而计算机只认识二进制，美国人需要解决英文字符和二进制之间的转换关系(ASCII码)&amp;#34;&amp;#34;&amp;#34;8bit = 1bytes1024bytes = 1KB1024KB = 1MB1024MB = 1GB&amp;#34;&amp;#34;&amp;#34;一家独大ASCII码记录了英文字符和数字之间的转换关系用8位来来表示一个英文字符2**8(其实2的7次方足以表示所有的英文字符，但是考虑到后续可能会出现新的语言，所以留了一位备用)群雄割据自己得开发一套自己的字符编码表中国人GBK编码表记录了中文字符、英文字符跟数字的对应关系用16位来表示一个中文字符，针对英文字符还是用8位(针对生僻字我们可能会使用更高位数来表示)韩国人Euc_kr编码表记录了韩文、英文跟数字的对应关系日本人shift_JIS编码表记录了日文、英文跟数字的对应关系# 每个国家自己使用自己的编码，无法实现国家之间数据的交互&amp;#34;&amp;#34;&amp;#34;在中国电脑上使用GBK编写的文件基于网络发送给日本人打开的时候使用的是shift_JIS编码表，会造成文件乱码现象&amp;#34;&amp;#34;&amp;#34;天下一统为了解决群雄割据的局面，实现数据的统一思想unicode编码表	万国码兼容所有国家的所有编码统一使用16位即2bytes表示数据(针对生僻字会采用更多的位数)我们现在之所以能够在一台计算机上敲出各个国家的文字就是因为我们计算机内存中使用的是unicode编码表unicode的弊端，针对纯英文的文件存储空间会翻倍，随之而来的等待时间也会翻倍这个是我们无法容忍的utf8 万国码的转换格式它是存在与硬盘中的(内存使用unicode硬盘使用utf8)针对中文使用3bytes英文使用1bytes当我们书写文件的时候编码默认使用utf8即可，目前绝大多数的软件使用的都是utf8&amp;#39;&amp;#39;&amp;#39;字符编码和要掌握的内容 变量名.</description>
+    </item>
+    
+  </channel>
+</rss>
