@@ -14,10 +14,10 @@
     
     <item>
       <title>初识Python</title>
-      <link>https://Eddy-622.github.io/posts/python%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</link>
+      <link>https://Eddy-622.github.io/posts/python/python%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</link>
       <pubDate>Thu, 29 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://Eddy-622.github.io/posts/python%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</guid>
+      <guid>https://Eddy-622.github.io/posts/python/python%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</guid>
       <description>10.28回顾   简单的cmd操作 选择盘符E: ， cd 切换目录，dir显示当前列表
   路径的概念
 ​	相对路径

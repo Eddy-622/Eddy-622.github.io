@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="theme-color" content="#494f5c">
+	<meta name="msapplication-TileColor" content="#494f5c">
+<meta itemprop="name" content="计算机基础知识">
+<meta itemprop="description" content="10.27回顾 1.计算机的由来  1623年：德国科学家契克卡德（W. Schickard）制造了人类有史以来第一台机械计算机，这台机器能够 进行六位数的加减乘除运算。 1642年：法国科学家帕斯卡（B.Pascal）发明了著名的帕斯卡机械计算机，首次确立了计算机器的概念。 1674年：莱布尼茨改进了帕斯卡的计算机，使之成为一种能够进行连续运算的机器，并且提出了“二进制”数的概念。（据说这个概念来源于中国的八卦） 此后发展了两百多年于 1895年： 英国青年工程师弗莱明（J.Fleming）通过“爱迪生效应”发明了人类第一只电子管。 从此进入电子管时代 1943年：10月，绰号为“巨人”的用来破译德军密码的计算机在英国布雷契莱庄园制造成功，此后又制造多台，为第二次世界大战的胜利立下了汗马功劳。  2.计算机的工作原理  计算机通过识别0101的二进制数值进行工作  3.计算机的硬件组成  控制器 （控制计算机各部分的运行，下达指令） 运算器 （进行逻辑运算，判断对错） 储存器 (数据的短期长期储存) 输入设备 (键盘鼠标等人机交互设备) 输出设备(显示器，扬声器等)  4.计算机三大核心硬件  CPU	中央运算处理器 (计算机的大脑，集成了控制器运算器，以及最新的AR模块和集成显卡） 内存	与cpu直接进行沟通，进行数据吞吐，读写速度快，但是断电后会清空所有数据 硬盘	负责数据的长期的储存，虽然读写速度想对慢的多，但是理论情况下可以实现对数据的完整保 存  5.操作系统   windows 、MacOS 、Linux、ubuntu
+操作系统就是充当人与计算机之间沟通的桥梁，因为计算机只认识01二进制数值，返回的	数值也生涩僵硬难懂，操作系统可以高效率的将指令传达给计算机，并且返回的指令进行	可视化处理，人类看起来更加方便，易懂。
+  6.三层架构  应用程序	我们所使用的所有软件即是应用程序层面的，侧重与用户的使用体验 操作系统	基于底层架构起来的系统，也属于应用层序，不过侧重于与计算的交互 计算机硬件	即计算机本身的实体化部分，CPU内存等，随着迭代，性能不断增强  7.编程语言  人和计算机沟通的语言，把人类的语言编写成计算机可以听懂看懂的语言，已达到为计算机下达工作指令的目的  8.编程  将编程语言编写下来的过程就是编程  9.编程语言的发展史  机器语言	计算机的原生语言，0101的二进制字符 晦涩难懂，难学难用 汇编语言	使用特定的英文字母代替二进制字符，语言进化迭代的产物 高级语言	使用人类的语言单词，简单易懂，目前的主流语言python，Java，C&#43;&#43;等  10.">
+<meta itemprop="datePublished" content="2020-10-28T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-10-28T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="125">
+
+
+
+<meta itemprop="keywords" content="计算机,操作系统," /><meta property="og:title" content="计算机基础知识" />
+<meta property="og:description" content="10.27回顾 1.计算机的由来  1623年：德国科学家契克卡德（W. Schickard）制造了人类有史以来第一台机械计算机，这台机器能够 进行六位数的加减乘除运算。 1642年：法国科学家帕斯卡（B.Pascal）发明了著名的帕斯卡机械计算机，首次确立了计算机器的概念。 1674年：莱布尼茨改进了帕斯卡的计算机，使之成为一种能够进行连续运算的机器，并且提出了“二进制”数的概念。（据说这个概念来源于中国的八卦） 此后发展了两百多年于 1895年： 英国青年工程师弗莱明（J.Fleming）通过“爱迪生效应”发明了人类第一只电子管。 从此进入电子管时代 1943年：10月，绰号为“巨人”的用来破译德军密码的计算机在英国布雷契莱庄园制造成功，此后又制造多台，为第二次世界大战的胜利立下了汗马功劳。  2.计算机的工作原理  计算机通过识别0101的二进制数值进行工作  3.计算机的硬件组成  控制器 （控制计算机各部分的运行，下达指令） 运算器 （进行逻辑运算，判断对错） 储存器 (数据的短期长期储存) 输入设备 (键盘鼠标等人机交互设备) 输出设备(显示器，扬声器等)  4.计算机三大核心硬件  CPU	中央运算处理器 (计算机的大脑，集成了控制器运算器，以及最新的AR模块和集成显卡） 内存	与cpu直接进行沟通，进行数据吞吐，读写速度快，但是断电后会清空所有数据 硬盘	负责数据的长期的储存，虽然读写速度想对慢的多，但是理论情况下可以实现对数据的完整保 存  5.操作系统   windows 、MacOS 、Linux、ubuntu
+操作系统就是充当人与计算机之间沟通的桥梁，因为计算机只认识01二进制数值，返回的	数值也生涩僵硬难懂，操作系统可以高效率的将指令传达给计算机，并且返回的指令进行	可视化处理，人类看起来更加方便，易懂。
+  6.三层架构  应用程序	我们所使用的所有软件即是应用程序层面的，侧重与用户的使用体验 操作系统	基于底层架构起来的系统，也属于应用层序，不过侧重于与计算的交互 计算机硬件	即计算机本身的实体化部分，CPU内存等，随着迭代，性能不断增强  7.编程语言  人和计算机沟通的语言，把人类的语言编写成计算机可以听懂看懂的语言，已达到为计算机下达工作指令的目的  8.编程  将编程语言编写下来的过程就是编程  9.编程语言的发展史  机器语言	计算机的原生语言，0101的二进制字符 晦涩难懂，难学难用 汇编语言	使用特定的英文字母代替二进制字符，语言进化迭代的产物 高级语言	使用人类的语言单词，简单易懂，目前的主流语言python，Java，C&#43;&#43;等  10." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://Eddy-622.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" />
+<meta property="article:published_time" content="2020-10-28T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-10-28T00:00:00+00:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="计算机基础知识"/>
+<meta name="twitter:description" content="10.27回顾 1.计算机的由来  1623年：德国科学家契克卡德（W. Schickard）制造了人类有史以来第一台机械计算机，这台机器能够 进行六位数的加减乘除运算。 1642年：法国科学家帕斯卡（B.Pascal）发明了著名的帕斯卡机械计算机，首次确立了计算机器的概念。 1674年：莱布尼茨改进了帕斯卡的计算机，使之成为一种能够进行连续运算的机器，并且提出了“二进制”数的概念。（据说这个概念来源于中国的八卦） 此后发展了两百多年于 1895年： 英国青年工程师弗莱明（J.Fleming）通过“爱迪生效应”发明了人类第一只电子管。 从此进入电子管时代 1943年：10月，绰号为“巨人”的用来破译德军密码的计算机在英国布雷契莱庄园制造成功，此后又制造多台，为第二次世界大战的胜利立下了汗马功劳。  2.计算机的工作原理  计算机通过识别0101的二进制数值进行工作  3.计算机的硬件组成  控制器 （控制计算机各部分的运行，下达指令） 运算器 （进行逻辑运算，判断对错） 储存器 (数据的短期长期储存) 输入设备 (键盘鼠标等人机交互设备) 输出设备(显示器，扬声器等)  4.计算机三大核心硬件  CPU	中央运算处理器 (计算机的大脑，集成了控制器运算器，以及最新的AR模块和集成显卡） 内存	与cpu直接进行沟通，进行数据吞吐，读写速度快，但是断电后会清空所有数据 硬盘	负责数据的长期的储存，虽然读写速度想对慢的多，但是理论情况下可以实现对数据的完整保 存  5.操作系统   windows 、MacOS 、Linux、ubuntu
+操作系统就是充当人与计算机之间沟通的桥梁，因为计算机只认识01二进制数值，返回的	数值也生涩僵硬难懂，操作系统可以高效率的将指令传达给计算机，并且返回的指令进行	可视化处理，人类看起来更加方便，易懂。
+  6.三层架构  应用程序	我们所使用的所有软件即是应用程序层面的，侧重与用户的使用体验 操作系统	基于底层架构起来的系统，也属于应用层序，不过侧重于与计算的交互 计算机硬件	即计算机本身的实体化部分，CPU内存等，随着迭代，性能不断增强  7.编程语言  人和计算机沟通的语言，把人类的语言编写成计算机可以听懂看懂的语言，已达到为计算机下达工作指令的目的  8.编程  将编程语言编写下来的过程就是编程  9.编程语言的发展史  机器语言	计算机的原生语言，0101的二进制字符 晦涩难懂，难学难用 汇编语言	使用特定的英文字母代替二进制字符，语言进化迭代的产物 高级语言	使用人类的语言单词，简单易懂，目前的主流语言python，Java，C&#43;&#43;等  10."/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="/favicon.ico">
+
+	<title>计算机基础知识</title>
+	<link rel="stylesheet" href="https://Eddy-622.github.io/css/style.min.657bcb7af31123e4156b1a3d2ff60a636717e54ead74f882136b5114cf72b55e.css" integrity="sha256-ZXvLevMRI+QVaxo9L/YKY2cX5U6tdPiCE2tRFM9ytV4=" crossorigin="anonymous">
+	
+</head>
+
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp faster">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="https://Eddy-622.github.io">Eddy&#39;s Boke</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					
+				<a href="https://Eddy-622.github.io/posts/">笔记</a>
+				<a href="https://Eddy-622.github.io/about-hugo/">关于</a>
+
+				</nav>
+			</div>
+			<div class="hdr-right hdr-icons">
+				<span class="hdr-social hide-in-mobile"><a href="https://mobile.twitter.com/zhang_kea" target="_blank" rel="noopener me" title="Twitter"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a><a href="https://www.facebook.com/kea.zhang.92" target="_blank" rel="noopener me" title="Instagram"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line></svg></a><a href="https://github.com/Eddy-622" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></span><button id="menu-btn" class="hdr-btn" title="Menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast">
+		<ul>
+			<li><a href="https://Eddy-622.github.io/posts/">笔记</a></li>
+			<li><a href="https://Eddy-622.github.io/about-hugo/">关于</a></li>
+		</ul>
+	</div>
+
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta"><span>Oct 28, 2020</span></div>
+				<h1>计算机基础知识</h1>
+			</header>
+			<div class="content">
+				<h1 id="1027回顾">10.27回顾<a href="#1027回顾" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<h4 id="1计算机的由来">1.计算机的由来<a href="#1计算机的由来" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<ul>
+<li>1623年：德国科学家契克卡德（W. Schickard）制造了人类有史以来第一台机械计算机，这台机器能够  进行六位数的加减乘除运算。
+1642年：法国科学家帕斯卡（B.Pascal）发明了著名的帕斯卡机械计算机，首次确立了计算机器的概念。
+1674年：莱布尼茨改进了帕斯卡的计算机，使之成为一种能够进行连续运算的机器，并且提出了“二进制”数的概念。（据说这个概念来源于中国的八卦）
+此后发展了两百多年于
+1895年： 英国青年工程师弗莱明（J.Fleming）通过“爱迪生效应”发明了人类第一只电子管。
+从此进入电子管时代
+1943年：10月，绰号为“巨人”的用来破译德军密码的计算机在英国布雷契莱庄园制造成功，此后又制造多台，为第二次世界大战的胜利立下了汗马功劳。</li>
+</ul>
+<h4 id="2计算机的工作原理">2.计算机的工作原理<a href="#2计算机的工作原理" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<ul>
+<li>计算机通过识别0101的二进制数值进行工作</li>
+</ul>
+<h4 id="3计算机的硬件组成">3.计算机的硬件组成<a href="#3计算机的硬件组成" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<ul>
+<li>控制器 （控制计算机各部分的运行，下达指令）
+运算器 （进行逻辑运算，判断对错）
+储存器 (数据的短期长期储存)
+输入设备 (键盘鼠标等人机交互设备)
+输出设备(显示器，扬声器等)</li>
+</ul>
+<h4 id="4计算机三大核心硬件">4.计算机三大核心硬件<a href="#4计算机三大核心硬件" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<ul>
+<li>CPU		中央运算处理器 (计算机的大脑，集成了控制器运算器，以及最新的AR模块和集成显卡）
+内存	与cpu直接进行沟通，进行数据吞吐，读写速度快，但是断电后会清空所有数据
+硬盘	负责数据的长期的储存，虽然读写速度想对慢的多，但是理论情况下可以实现对数据的完整保   存</li>
+</ul>
+<h4 id="5操作系统">5.操作系统<a href="#5操作系统" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<ul>
+<li>
+<p>windows 、MacOS 、Linux、ubuntu</p>
+<p>操作系统就是充当人与计算机之间沟通的桥梁，因为计算机只认识01二进制数值，返回的				数值也生涩僵硬难懂，操作系统可以高效率的将指令传达给计算机，并且返回的指令进行					可视化处理，人类看起来更加方便，易懂。</p>
+</li>
+</ul>
+<h4 id="6三层架构">6.三层架构<a href="#6三层架构" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<ul>
+<li>应用程序		我们所使用的所有软件即是应用程序层面的，侧重与用户的使用体验
+操作系统		基于底层架构起来的系统，也属于应用层序，不过侧重于与计算的交互
+计算机硬件		即计算机本身的实体化部分，CPU内存等，随着迭代，性能不断增强</li>
+</ul>
+<h4 id="7编程语言">7.编程语言<a href="#7编程语言" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<ul>
+<li>人和计算机沟通的语言，把人类的语言编写成计算机可以听懂看懂的语言，已达到为计算机下达工作指令的目的</li>
+</ul>
+<h4 id="8编程">8.编程<a href="#8编程" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<ul>
+<li>将编程语言编写下来的过程就是编程</li>
+</ul>
+<h4 id="9编程语言的发展史">9.编程语言的发展史<a href="#9编程语言的发展史" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<ul>
+<li>机器语言	计算机的原生语言，0101的二进制字符  晦涩难懂，难学难用
+汇编语言	使用特定的英文字母代替二进制字符，语言进化迭代的产物
+高级语言	使用人类的语言单词，简单易懂，目前的主流语言python，Java，C++等</li>
+</ul>
+<h4 id="10编程语言分类">10.编程语言分类<a href="#10编程语言分类" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<ul>
+<li>编译型：将编程下来的语言一次性编译给操作系统，跨平台性不高
+解释型：真的不同的平台有不同的解释器，只需要写一遍代码即可解释成不同操作系统可识别的语言，通用性高，跨平台语言。</li>
+</ul>
+<h4 id="11解释器下载安装与启动">11.解释器下载安装与启动<a href="#11解释器下载安装与启动" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<ul>
+<li>再装不好吃屎去吧</li>
+</ul>
+<h1 id="今日内容">今日内容<a href="#今日内容" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<h4 id="1环境变量">1.环境变量<a href="#1环境变量" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<ul>
+<li>
+<p>通过设置系统的环境变量可以达成在CMD命令窗口不进入软件路径下直接启动软件的目的。
+原理是在CMD窗口下运行命令时，计算机会读取设置的各项环境变量路径寻找符合条件的命令，
+如果没有，所处路径又不对，则报错
+·计算机右键属性==&gt;高级系统设置==&gt;环境变量
+在下面系统变量中找到path，双击打开
+新建==&gt;将软件路径添加到里面即可。
+如果添加完成后还不能在CMD窗口中正常启动则
+· 设置变量后CMD窗口需重启才能生效
+· 校验变量路径，是否存储在用户变量上
+· 软件过多时path的变量路径过多，则可能有名称相同的变量文件，但是软件只有部分功能不能使用
+需要把python的路径添加值path变量的最上方，CMD查找使从上往下一次查找，这样就能解决问题。</p>
+<p>CMD中查看当前路径下的文件   dir
+实现多版本共存
+1.将两个版本的python.exe文件所在的路径都添加到环境变量中
+2.将两个版本下的python.exe文件拷贝一份修改名字(不要直接修改原文件)</p>
+</li>
+</ul>
+<h4 id="2python的第一个程序">2.python的第一个程序<a href="#2python的第一个程序" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<ul>
+<li>CMD 窗口下编写程序困难多多，想要挑战自我，没事去玩玩
+用处为大多时候的短命令运行
+python可以在任意文件中进行编写，txt，word等，但是这些文档仅限于记录的基本功能，没有编程相关的功能提示等。
+推荐使用代码编辑器
+vscode      ===&gt;新手入门不建议
+Anaconda    ===&gt;侧重于数据分析，不在编程
+pycharm     ===&gt;专业软件，好用，要钱，贵，破解！
+建议安装2020.1版本进行破解
+激活码下载网站：http://idea.medeming.com/jets/</li>
+</ul>
+<h4 id="3pycharm的使用">3.pycharm的使用<a href="#3pycharm的使用" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<ul>
+<li>1.创建文件夹  ==&gt;文件保存路径，设置于除c盘外的其他盘
+2.创建py文件 ==&gt; NEW Python File
+3.修改字体大小  ==&gt;File==&gt;setting==&gt;Editor==&gt;General</li>
+</ul>
+<p><img src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201029021741038.png" alt="image-20201029021741038"></p>
+<ul>
+<li>​                                          意为使用CTRL+鼠标滚轮进行放大缩小操作，勾上即可
+4.设置风格   个人随意
+5.切换解释器  ==&gt;File==&gt;setting==&gt;project:py==&gt;python interperter</li>
+</ul>
+<p><img src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201029022215906.png" alt="image-20201029022215906"></p>
+<ul>
+<li>
+<p>此处进行添加不同版本的解释器，也可以实现多版本解释器共存及解释器切换
+另外
+路径类似于坐标，即目标所在的位置</p>
+</li>
+<li>
+<p>1.相对路径
+有一个参考点，基于该参考点所描绘出来的路径
+这个路径并不是通用的 
+2.绝对路径
+不需要有参考点，描绘出来的路径给任何人都可以
+明确的找到目标位置</p>
+</li>
+</ul>
+
+			</div>
+			<hr class="post-end">
+			<footer class="post-info">
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>Eddy Zhang</p>
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://Eddy-622.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA">计算机</a></span><span class="tag"><a href="https://Eddy-622.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F">操作系统</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>125 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-10-28 08:00 &#43;0800</p>
+			</footer>
+		</article>
+		<div class="post-nav thin">
+			<a class="next-post" href="https://Eddy-622.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/python%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
+				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>初识Python</span>
+			</a>
+			<a class="prev-post" href="https://Eddy-622.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/eddys-boke/">
+				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>Eddy&#39;s Boke</span>
+			</a>
+		</div>
+		<div id="comments" class="thin">
+</div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p>&copy; 2020 <a href="https://Eddy-622.github.io">Eddy Zhang</a></p>
+		<p>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://Eddy-622.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+		</p>
+	</footer>
+
+
+
+	<script src="https://Eddy-622.github.io/js/bundle.min.4a9a0ac3d2217822c7865b4161e6c2a71de1d70492264337755427898dd718f6.js" integrity="sha256-SpoKw9IheCLHhltBYebCpx3h1wSSJkM3dVQniY3XGPY=" crossorigin="anonymous"></script>
+	
+
+</body>
+
+</html>

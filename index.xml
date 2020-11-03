@@ -14,10 +14,10 @@
     
     <item>
       <title>While循环，for循环，嵌套，数据类型的内置</title>
-      <link>https://Eddy-622.github.io/posts/while%E5%BE%AA%E7%8E%AFfor%E5%BE%AA%E7%8E%AF%E5%B5%8C%E5%A5%97%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%86%85%E7%BD%AE/</link>
+      <link>https://Eddy-622.github.io/posts/python/while%E5%BE%AA%E7%8E%AFfor%E5%BE%AA%E7%8E%AF%E5%B5%8C%E5%A5%97%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%86%85%E7%BD%AE/</link>
       <pubDate>Mon, 02 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://Eddy-622.github.io/posts/while%E5%BE%AA%E7%8E%AFfor%E5%BE%AA%E7%8E%AF%E5%B5%8C%E5%A5%97%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%86%85%E7%BD%AE/</guid>
+      <guid>https://Eddy-622.github.io/posts/python/while%E5%BE%AA%E7%8E%AFfor%E5%BE%AA%E7%8E%AF%E5%B5%8C%E5%A5%97%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%86%85%E7%BD%AE/</guid>
       <description>上周内容回顾 数据类型 &amp;#39;&amp;#39;&amp;#39;布尔值 bool布尔值的命名传统前面加上is_eg: is_deleteis_status元组 tuplet = (1,2,3,4,5)当容器类型里面只有一个元素的时候也应该将逗号加上集合 sets = {1,2,3,4,5}&amp;#39;&amp;#39;&amp;#39;可变类型与不可变类型 &amp;#39;&amp;#39;&amp;#39; 查询数值的内存地址id()可变类型（列表，字典）值改变内存地址不变不可变类型（整型，浮点型，字符串）值改变内存地址一定变&amp;#39;&amp;#39;&amp;#39;用户交互 &amp;#39;&amp;#39;&amp;#39;获取用户输入inputinput获取到的数据都是字符串类型输出结果print可以一次性输出多个元素，逗号隔开即可&amp;#39;&amp;#39;&amp;#39;格式化输出 &amp;#39;&amp;#39;&amp;#39;占位符 ： %s(可以给任意的数据类型占位)。d%(只能给数字占位)&amp;#39;my name is %sand my age is s%&amp;#39; (Eddy, 18)字符串里有几个占位符，后面给数据的时候就要给出几个真实数据&amp;#39;&amp;#39;&amp;#39;运算符 &amp;#39;&amp;#39;&amp;#39;基本运算符+-*/%**增量赋值x += 1x -= 1x *= 1x /= 1链式赋值a = b = c = 666交叉赋值m = 10n = 999交换m 和 n 的数值方式一利用中间变量tum = mm = n n = tum方式二交叉赋值m,n = n,m解压赋值l = [11,22,33]默认情况下左右两边的个数一定要相等有多少个值就要给多少个变量名a ,b,c = l利用*打破变量名数量的限制a,*_,b = l*_常用来表达无用的数据逻辑运算and or notand连接多个条件，且必须成立，输出结果才为True，有一个条件不成立直接结束，输出Flaseor与and恰恰相反，链接的结果只要一个成立，结果都为True。有一个成立则直接输出结果Truenot取反 not True = Flase身份运算is判断地址是否相等==判断值是否想同值相同内存地址可能不同内存地址相同值一定相同&amp;#39;&amp;#39;&amp;#39;代码的缩进 &amp;#39;&amp;#39;&amp;#39;python中利用代码的缩进来表示代码的从属关系并不是所有的代码都可以又子代码的权限属于同一个代码的多个子代码，子代码之间的缩进必须是相同的遇到冒号说明接下来的代码需要缩进&amp;#39;&amp;#39;&amp;#39;流程控制值if判断 &amp;#39;&amp;#39;&amp;#39;if的固定句式if 条件1:代码1代码2elif 条件2:代码1代码2elif 条件3:代码1代码2else :代码1代码2那个条件成立就会执行哪个条件的子代码其他的都不会被执行所有条件代码中只会被执行一个&amp;#39;&amp;#39;&amp;#39;今日内容 if 判断结束 循环结构值while循环 循环结构之for循环 数据类型的内置方法 字符编码 今日内容详细 if判断 &amp;#39;&amp;#39;&amp;#39;if的嵌套(代码的缩进以及子代码的从属关系)eg:如果女人的年龄小于28岁且定义为漂亮的则上去要微信如果成功则邀请看电影吃饭逛街不成功则 打扰了&amp;#39;&amp;#39;&amp;#39;age = 26is_beautiful = Trueis_success = Trueif age &amp;lt; 28 and is_beautifulprint(&amp;#39;小姐姐加个微信&amp;#39;)#二次判断 if is_success:print(&amp;#39;我们去吃饭看电影逛街吧&amp;#39;)else:print(&amp;#39;打扰了&amp;#39;)else:print(&amp;#39;不好意思认错人了&amp;#39;)循环结构之while循环 break 用于结束离他最近的while循环</description>
     </item>
     
@@ -34,10 +34,10 @@
     
     <item>
       <title>用户交互、格式化输出、运算符、流程控制</title>
-      <link>https://Eddy-622.github.io/posts/%E7%94%A8%E6%88%B7%E4%BA%A4%E4%BA%92%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA%E8%BF%90%E7%AE%97%E7%AC%A6%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6-/</link>
+      <link>https://Eddy-622.github.io/posts/python/%E7%94%A8%E6%88%B7%E4%BA%A4%E4%BA%92%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA%E8%BF%90%E7%AE%97%E7%AC%A6%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6-/</link>
       <pubDate>Fri, 30 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://Eddy-622.github.io/posts/%E7%94%A8%E6%88%B7%E4%BA%A4%E4%BA%92%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA%E8%BF%90%E7%AE%97%E7%AC%A6%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6-/</guid>
+      <guid>https://Eddy-622.github.io/posts/python/%E7%94%A8%E6%88%B7%E4%BA%A4%E4%BA%92%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA%E8%BF%90%E7%AE%97%E7%AC%A6%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6-/</guid>
       <description>10.29内容回顾   代码的注释
 &amp;#39;&amp;#39;&amp;#39;1.# 单行注释2.&amp;#39;&amp;#39;&amp;#39;&amp;#39;&amp;#39;&amp;#39;,&amp;#34;&amp;#34;&amp;#34;&amp;#34;&amp;#34;&amp;#34; 多行注释在pycharm中的快捷键ctrl+? 注释快捷键，再次激活取消注释&amp;#39;&amp;#39;&amp;#39;  变量
 &amp;#39;&amp;#39;&amp;#39;语法规范变量名 赋值符号 变量的值&amp;#39;&amp;#39;&amp;#39;name = &amp;#39;Eddy&amp;#39;&amp;#34;&amp;#34;&amp;#34;遇到赋值符号先看符号右边的再看符号左边的&amp;#34;&amp;#34;&amp;#34;# 情况1  name = &amp;#39;jason&amp;#39;name = &amp;#39;egon&amp;#39;name = &amp;#39;tony&amp;#39;&amp;#39;&amp;#39;&amp;#39;name依次被赋予 jason egon tony 三个值，但是最后只能指向一个值所有此时name对应的值为 tony&amp;#39;&amp;#39;&amp;#39;# 情况2 name = &amp;#39;jason&amp;#39;name1 = namename2 = name&amp;#39;&amp;#39;&amp;#39;name被赋予Jason，name1,name2 同时被赋予name的值所有 name1 = name2 = name = Jason&amp;#39;&amp;#39;&amp;#39;  变量的命名规范(必须遵守)
@@ -46,10 +46,10 @@
     
     <item>
       <title>初识Python</title>
-      <link>https://Eddy-622.github.io/posts/python%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</link>
+      <link>https://Eddy-622.github.io/posts/python/python%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</link>
       <pubDate>Thu, 29 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://Eddy-622.github.io/posts/python%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</guid>
+      <guid>https://Eddy-622.github.io/posts/python/python%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</guid>
       <description>10.28回顾   简单的cmd操作 选择盘符E: ， cd 切换目录，dir显示当前列表
   路径的概念
 ​	相对路径
@@ -74,10 +74,10 @@ pycharm 好东西，要钱，破解
     
     <item>
       <title>计算机基础知识</title>
-      <link>https://Eddy-622.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</link>
+      <link>https://Eddy-622.github.io/posts/python/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</link>
       <pubDate>Wed, 28 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://Eddy-622.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</guid>
+      <guid>https://Eddy-622.github.io/posts/python/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</guid>
       <description>10.27回顾 1.计算机的由来  1623年：德国科学家契克卡德（W. Schickard）制造了人类有史以来第一台机械计算机，这台机器能够 进行六位数的加减乘除运算。 1642年：法国科学家帕斯卡（B.Pascal）发明了著名的帕斯卡机械计算机，首次确立了计算机器的概念。 1674年：莱布尼茨改进了帕斯卡的计算机，使之成为一种能够进行连续运算的机器，并且提出了“二进制”数的概念。（据说这个概念来源于中国的八卦） 此后发展了两百多年于 1895年： 英国青年工程师弗莱明（J.Fleming）通过“爱迪生效应”发明了人类第一只电子管。 从此进入电子管时代 1943年：10月，绰号为“巨人”的用来破译德军密码的计算机在英国布雷契莱庄园制造成功，此后又制造多台，为第二次世界大战的胜利立下了汗马功劳。  2.计算机的工作原理  计算机通过识别0101的二进制数值进行工作  3.计算机的硬件组成  控制器 （控制计算机各部分的运行，下达指令） 运算器 （进行逻辑运算，判断对错） 储存器 (数据的短期长期储存) 输入设备 (键盘鼠标等人机交互设备) 输出设备(显示器，扬声器等)  4.计算机三大核心硬件  CPU	中央运算处理器 (计算机的大脑，集成了控制器运算器，以及最新的AR模块和集成显卡） 内存	与cpu直接进行沟通，进行数据吞吐，读写速度快，但是断电后会清空所有数据 硬盘	负责数据的长期的储存，虽然读写速度想对慢的多，但是理论情况下可以实现对数据的完整保 存  5.操作系统   windows 、MacOS 、Linux、ubuntu
 操作系统就是充当人与计算机之间沟通的桥梁，因为计算机只认识01二进制数值，返回的	数值也生涩僵硬难懂，操作系统可以高效率的将指令传达给计算机，并且返回的指令进行	可视化处理，人类看起来更加方便，易懂。
   6.三层架构  应用程序	我们所使用的所有软件即是应用程序层面的，侧重与用户的使用体验 操作系统	基于底层架构起来的系统，也属于应用层序，不过侧重于与计算的交互 计算机硬件	即计算机本身的实体化部分，CPU内存等，随着迭代，性能不断增强  7.编程语言  人和计算机沟通的语言，把人类的语言编写成计算机可以听懂看懂的语言，已达到为计算机下达工作指令的目的  8.编程  将编程语言编写下来的过程就是编程  9.编程语言的发展史  机器语言	计算机的原生语言，0101的二进制字符 晦涩难懂，难学难用 汇编语言	使用特定的英文字母代替二进制字符，语言进化迭代的产物 高级语言	使用人类的语言单词，简单易懂，目前的主流语言python，Java，C++等  10.</description>
@@ -85,10 +85,10 @@ pycharm 好东西，要钱，破解
     
     <item>
       <title>Eddy&#39;s Boke</title>
-      <link>https://Eddy-622.github.io/posts/eddys-boke/</link>
+      <link>https://Eddy-622.github.io/posts/python/eddys-boke/</link>
       <pubDate>Mon, 26 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://Eddy-622.github.io/posts/eddys-boke/</guid>
+      <guid>https://Eddy-622.github.io/posts/python/eddys-boke/</guid>
       <description>这是我创建的第一个个人网站
 刚刚开始摸索其中的乐趣
 做的的不好的地方以后会尽量优化
