@@ -325,50 +325,53 @@ get_user()
 <span class="c1"># 登录</span>
 <span class="n">login</span><span class="p">()</span>
 </code></pre></div><h4 id="模块">模块</h4>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="err">模块你可以看成是已经写好的具有一定功能的代码块</span>
-<span class="err">模块的表现形式可以是单个的</span><span class="n">py文件</span><span class="err">，也可以是多个</span><span class="n">py文件组成的文件夹</span>
-
-
-<span class="err">使用方式</span>
-	<span class="mf">1.</span><span class="err">内置的</span><span class="p">(</span><span class="n">python解释器自带的</span><span class="p">)</span>
-    	<span class="kn">import</span> <span class="nn">os</span>
-    <span class="mf">2.</span><span class="err">自己写的</span>
-        <span class="kn">import</span> <span class="nn">mydd</span>  <span class="c1"># 将mydd内所有的变量全部导入</span>
-        <span class="kn">from</span> <span class="nn">mydd</span> <span class="kn">import</span> <span class="n">name</span>  <span class="c1"># 从mydd中只导入一个name变量</span>
-    <span class="s2">&#34;&#34;&#34;
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">模块你可以看成是已经写好的具有一定功能的代码块
+</span><span class="s2">模块的表现形式可以是单个的py文件，也可以是多个py文件组成的文件夹
+</span><span class="s2">
+</span><span class="s2">
+</span><span class="s2">使用方式
+</span><span class="s2">	1.内置的(python解释器自带的)
+</span><span class="s2">    	import os
+</span><span class="s2">    2.自己写的
+</span><span class="s2">        import mydd  # 将mydd内所有的变量全部导入
+</span><span class="s2">        from mydd import name  # 从mydd中只导入一个name变量
+</span><span class="s2">
 </span><span class="s2">    导入模块其实会自动执行模块文件内的所有代码
 </span><span class="s2">    之后通过模块名的形式就可以直接使用模块内所有的功能
-</span><span class="s2">    &#34;&#34;&#34;</span>
-    <span class="mf">3.</span><span class="err">导入第三方</span><span class="p">(</span><span class="err">存于网上</span><span class="p">)</span>
-    	<span class="err">要想第三方模块必须先下载</span>
-        <span class="n">pip3</span> 
-        <span class="n">pip3</span> <span class="n">install</span> <span class="n">requests</span>  <span class="c1"># 默认是去国外的仓库下载 速度会比较慢</span>
-        <span class="c1"># 针对下载地址我们可以有以下几种方式修改</span>
-        <span class="err">（</span><span class="mi">1</span><span class="err">）阿里云</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">mirrors</span><span class="o">.</span><span class="n">aliyun</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">pypi</span><span class="o">/</span><span class="n">simple</span><span class="o">/</span>
-        <span class="err">（</span><span class="mi">2</span><span class="err">）豆瓣</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">pypi</span><span class="o">.</span><span class="n">douban</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">simple</span><span class="o">/</span>
-        <span class="err">（</span><span class="mi">3</span><span class="err">）清华大学</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">pypi</span><span class="o">.</span><span class="n">tuna</span><span class="o">.</span><span class="n">tsinghua</span><span class="o">.</span><span class="n">edu</span><span class="o">.</span><span class="n">cn</span><span class="o">/</span><span class="n">simple</span><span class="o">/</span>
-        <span class="err">（</span><span class="mi">4</span><span class="err">）中国科学技术大学</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">pypi</span><span class="o">.</span><span class="n">mirrors</span><span class="o">.</span><span class="n">ustc</span><span class="o">.</span><span class="n">edu</span><span class="o">.</span><span class="n">cn</span><span class="o">/</span><span class="n">simple</span><span class="o">/</span>
-        <span class="err">（</span><span class="mi">5</span><span class="err">）华中科技大学</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">pypi</span><span class="o">.</span><span class="n">hustunique</span><span class="o">.</span><span class="n">com</span><span class="o">/</span>
-            
-        <span class="c1"># 方式1 </span>
-        <span class="n">pip3</span> <span class="n">install</span> <span class="o">-</span><span class="n">i</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">pypi</span><span class="o">.</span><span class="n">tuna</span><span class="o">.</span><span class="n">tsinghua</span><span class="o">.</span><span class="n">edu</span><span class="o">.</span><span class="n">cn</span><span class="o">/</span><span class="n">simple</span><span class="o">/</span> <span class="n">requests</span>
-        <span class="c1"># 方式2</span>
-        <span class="n">pycharm快捷方式修改</span>
-        <span class="c1"># 方式3(修改python的配置文件)</span>
-        <span class="err">不建议修改</span>
-     
+</span><span class="s2">
+</span><span class="s2">3.导入第三方(存于网上)
+</span><span class="s2">    	要想第三方模块必须先下载
+</span><span class="s2">        pip3 
+</span><span class="s2">        pip3 install requests  # 默认是去国外的仓库下载 速度会比较慢
+</span><span class="s2">        针对下载地址我们可以有以下几种方式修改
+</span><span class="s2">        （1）阿里云 http://mirrors.aliyun.com/pypi/simple/
+</span><span class="s2">        （2）豆瓣http://pypi.douban.com/simple/
+</span><span class="s2">        （3）清华大学 https://pypi.tuna.tsinghua.edu.cn/simple/
+</span><span class="s2">        （4）中国科学技术大学 http://pypi.mirrors.ustc.edu.cn/simple/
+</span><span class="s2">        （5）华中科技大学http://pypi.hustunique.com/
+</span><span class="s2">            
+</span><span class="s2">         方式1 
+</span><span class="s2">        pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple/ requests
+</span><span class="s2">         方式2
+</span><span class="s2">        pycharm快捷方式修改
+</span><span class="s2">         方式3(修改python的配置文件)
+</span><span class="s2">        不建议修改
+</span><span class="s2">&#34;&#34;&#34;</span>
 </code></pre></div><h4 id="模块的使用">模块的使用</h4>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">random</span>
-
-<span class="c1"># 内置的 随机模块</span>
-<span class="c1"># print(random.random())  # 0-1之间的随机小数</span>
-<span class="c1"># print(random.randint(1,6))  # 1-6之间的整数  类似于摇骰子</span>
-<span class="c1"># l = [2, 3, 4, 5, 6, 7, 8, 9, 10, &#39;J&#39;, &#39;Q&#39;, &#39;K&#39;, &#39;A&#39;]</span>
-<span class="c1"># random.shuffle(l)  # 洗牌功能  打乱原来的顺序</span>
-<span class="c1"># print(l)</span>
-<span class="n">l1</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;三等奖&#39;</span><span class="p">,</span><span class="s1">&#39;二等奖&#39;</span><span class="p">,</span><span class="s1">&#39;一等奖&#39;</span><span class="p">,</span><span class="s1">&#39;谢谢惠顾&#39;</span><span class="p">,</span><span class="s1">&#39;如花抱回家&#39;</span><span class="p">]</span>
-<span class="n">res</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">l1</span><span class="p">)</span>  <span class="c1"># 随机抽取</span>
-<span class="k">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">import random
+</span><span class="s2">
+</span><span class="s2"># 内置的 随机模块
+</span><span class="s2"># print(random.random())  # 0-1之间的随机小数
+</span><span class="s2"># print(random.randint(1,6))  # 1-6之间的整数  类似于摇骰子
+</span><span class="s2"># l = [2, 3, 4, 5, 6, 7, 8, 9, 10, &#39;J&#39;, &#39;Q&#39;, &#39;K&#39;, &#39;A&#39;]
+</span><span class="s2"># random.shuffle(l)  # 洗牌功能  打乱原来的顺序
+</span><span class="s2"># print(l)
+</span><span class="s2">l1 = [&#39;三等奖&#39;,&#39;二等奖&#39;,&#39;一等奖&#39;,&#39;谢谢惠顾&#39;,&#39;如花抱回家&#39;]
+</span><span class="s2">res = random.choice(l1)  # 随机抽取
+</span><span class="s2">print(res)
+</span><span class="s2">&#34;&#34;&#34;</span>
 </code></pre></div>]]></content>
 		</item>
 		
