@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>面向对象 on Eddy&#39;s Boke</title>
+    <link>https://Eddy-622.github.io/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/</link>
+    <description>Recent content in 面向对象 on Eddy&#39;s Boke</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Thu, 05 Nov 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://Eddy-622.github.io/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>常用模块，面向对象，类</title>
+      <link>https://Eddy-622.github.io/posts/%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%B1%BB/</link>
+      <pubDate>Thu, 05 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/posts/%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%B1%BB/</guid>
+      <description>今日内容   常用模块
+random模块、时间模块、hashlib模块
+  面向对象
+什么是对象，什么是类，如何创建类，如何创建对象，基本使用
+  今日内容详细 常用模块 python的精髓在于模块，不论是什么功能都可能已经有前人写好打包好的模块供我们使用，所以遇到问题应该先找一下有没有模块已经实现了我想要的功能或大致实现，以减少时间提高效率
+&amp;#34;&amp;#34;&amp;#34;利用random随机模块实现随机验证码五位随机验证码，每一位都可以是大写字母小写字母或者数字★ 必备基础知识点英文大小写26个字母与十进制的ASCII码表对应关系A-Z &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; 65-90a-z &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; 97-122★chr 通过数值表达式把数值转换编码表现的字符这里可以利用for循环 循环五次每一次循环产生三个数据，大写字母，小写字母和数字三个里面随机选取一位import random &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;导入random模块code = &amp;#39;&amp;#39; 将产生的数据拼接到字符串中for i in range(5): &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;for循环五次random_upper = chr(random.randint(65,90))&amp;gt;&amp;gt;&amp;gt;&amp;gt;从65-90数字中随机抽取并通过chr转换为数值表达式所表达的字符产生随机的大写字符random_lower = chr(random.randint(97,122))&amp;gt;&amp;gt;&amp;gt;&amp;gt;产生随机的小写字符random_int = str(random.randint(0,9))&amp;gt;&amp;gt;&amp;gt;&amp;gt;产生随机数字 并转换为字符串格式temp = random.choice([random_supper,random_lower,random_int])&amp;gt;&amp;gt;&amp;gt;&amp;gt;三个随机数字随机抽取一个赋值给tempcode += temp&amp;gt;&amp;gt;&amp;gt;&amp;gt; 五位随机数拼接到code中print(code)把封装成函数def get_code(n) &amp;gt;&amp;gt;&amp;gt;&amp;gt;需要产生n位的随机验证码，code = &amp;#39;&amp;#39; 将产生的数据拼接到字符串中for i in range(n): &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;for循环五次random_upper = chr(random.</description>
+    </item>
+    
+  </channel>
+</rss>

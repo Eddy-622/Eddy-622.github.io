@@ -6,8 +6,525 @@
 		<generator>Hugo -- gohugo.io</generator>
 		<language>zh-CN</language>
 		<copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-		<lastBuildDate>Wed, 04 Nov 2020 00:00:00 +0000</lastBuildDate>
+		<lastBuildDate>Thu, 05 Nov 2020 00:00:00 +0000</lastBuildDate>
 		<atom:link href="https://Eddy-622.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>常用模块，面向对象，类</title>
+			<link>https://Eddy-622.github.io/posts/%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%B1%BB/</link>
+			<pubDate>Thu, 05 Nov 2020 00:00:00 +0000</pubDate>
+			
+			<guid>https://Eddy-622.github.io/posts/%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%B1%BB/</guid>
+			<description>今日内容   常用模块
+random模块、时间模块、hashlib模块
+  面向对象
+什么是对象，什么是类，如何创建类，如何创建对象，基本使用
+  今日内容详细 常用模块 python的精髓在于模块，不论是什么功能都可能已经有前人写好打包好的模块供我们使用，所以遇到问题应该先找一下有没有模块已经实现了我想要的功能或大致实现，以减少时间提高效率
+&amp;#34;&amp;#34;&amp;#34;利用random随机模块实现随机验证码五位随机验证码，每一位都可以是大写字母小写字母或者数字★ 必备基础知识点英文大小写26个字母与十进制的ASCII码表对应关系A-Z &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; 65-90a-z &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; 97-122★chr 通过数值表达式把数值转换编码表现的字符这里可以利用for循环 循环五次每一次循环产生三个数据，大写字母，小写字母和数字三个里面随机选取一位import random &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;导入random模块code = &amp;#39;&amp;#39; 将产生的数据拼接到字符串中for i in range(5): &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;for循环五次random_upper = chr(random.randint(65,90))&amp;gt;&amp;gt;&amp;gt;&amp;gt;从65-90数字中随机抽取并通过chr转换为数值表达式所表达的字符产生随机的大写字符random_lower = chr(random.randint(97,122))&amp;gt;&amp;gt;&amp;gt;&amp;gt;产生随机的小写字符random_int = str(random.randint(0,9))&amp;gt;&amp;gt;&amp;gt;&amp;gt;产生随机数字 并转换为字符串格式temp = random.choice([random_supper,random_lower,random_int])&amp;gt;&amp;gt;&amp;gt;&amp;gt;三个随机数字随机抽取一个赋值给tempcode += temp&amp;gt;&amp;gt;&amp;gt;&amp;gt; 五位随机数拼接到code中print(code)把封装成函数def get_code(n) &amp;gt;&amp;gt;&amp;gt;&amp;gt;需要产生n位的随机验证码，code = &amp;#39;&amp;#39; 将产生的数据拼接到字符串中for i in range(n): &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;for循环五次random_upper = chr(random.</description>
+			<content type="html"><![CDATA[<h1 id="今日内容">今日内容</h1>
+<ul>
+<li>
+<p>常用模块</p>
+<p>random模块、时间模块、hashlib模块</p>
+</li>
+<li>
+<p>面向对象</p>
+<p>什么是对象，什么是类，如何创建类，如何创建对象，基本使用</p>
+</li>
+</ul>
+<h1 id="今日内容详细">今日内容详细</h1>
+<h4 id="常用模块">常用模块</h4>
+<p>python的精髓在于模块，不论是什么功能都可能已经有前人写好打包好的模块供我们使用，所以遇到问题应该先找一下有没有模块已经实现了我想要的功能或大致实现，以减少时间提高效率</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">利用random随机模块实现随机验证码
+</span><span class="s2">五位随机验证码，每一位都可以是大写字母小写字母或者数字
+</span><span class="s2">
+</span><span class="s2">★ 必备基础知识点
+</span><span class="s2"> 英文大小写26个字母与十进制的ASCII码表对应关系
+</span><span class="s2">    A-Z    &gt;&gt;&gt;&gt;&gt;   65-90
+</span><span class="s2">    a-z    &gt;&gt;&gt;&gt;&gt;   97-122
+</span><span class="s2">    
+</span><span class="s2">★chr  通过数值表达式把数值转换编码表现的字符
+</span><span class="s2">
+</span><span class="s2">这里可以利用for循环  循环五次
+</span><span class="s2">每一次循环产生三个数据，大写字母，小写字母和数字
+</span><span class="s2">三个里面随机选取一位
+</span><span class="s2">import random         &gt;&gt;&gt;&gt;&gt;导入random模块
+</span><span class="s2">code = &#39;&#39;   将产生的数据拼接到字符串中
+</span><span class="s2">for i in range(5):    &gt;&gt;&gt;&gt;&gt;for循环五次
+</span><span class="s2">    random_upper = chr(random.randint(65,90))
+</span><span class="s2">    &gt;&gt;&gt;&gt;从65-90数字中随机抽取并通过chr转换为数值表达式所表达的字符
+</span><span class="s2">    	产生随机的大写字符
+</span><span class="s2">    random_lower = chr(random.randint(97,122))
+</span><span class="s2">    &gt;&gt;&gt;&gt;产生随机的小写字符
+</span><span class="s2">    random_int = str(random.randint(0,9))
+</span><span class="s2">    &gt;&gt;&gt;&gt;产生随机数字 并转换为字符串格式
+</span><span class="s2">    temp = random.choice([random_supper,random_lower,random_int])
+</span><span class="s2">    &gt;&gt;&gt;&gt;三个随机数字随机抽取一个赋值给temp
+</span><span class="s2">    code += temp
+</span><span class="s2">    &gt;&gt;&gt;&gt; 五位随机数拼接到code中
+</span><span class="s2">print(code)
+</span><span class="s2">
+</span><span class="s2">把封装成函数
+</span><span class="s2">def get_code(n)        &gt;&gt;&gt;&gt;需要产生n位的随机验证码，
+</span><span class="s2">code = &#39;&#39;   将产生的数据拼接到字符串中
+</span><span class="s2">    for i in range(n):    &gt;&gt;&gt;&gt;&gt;for循环五次
+</span><span class="s2">        random_upper = chr(random.randint(65,90))
+</span><span class="s2">        &gt;&gt;&gt;&gt;从65-90数字中随机抽取并通过chr转换为数值表达式所表达的字符
+</span><span class="s2">            产生随机的大写字符
+</span><span class="s2">        random_lower = chr(random.randint(97,122))
+</span><span class="s2">        &gt;&gt;&gt;&gt;产生随机的小写字符
+</span><span class="s2">        random_int = str(random.randint(0,9))
+</span><span class="s2">        &gt;&gt;&gt;&gt;产生随机数字 并转换为字符串格式
+</span><span class="s2">        temp = random.choice([random_supper,random_lower,random_int])
+</span><span class="s2">        &gt;&gt;&gt;&gt;三个随机数字随机抽取一个赋值给temp
+</span><span class="s2">        code += temp
+</span><span class="s2">        &gt;&gt;&gt;&gt; 五位随机数拼接到code中
+</span><span class="s2">    return(code)
+</span><span class="s2">
+</span><span class="s2">res = get_code(10)
+</span><span class="s2">print(res)
+</span><span class="s2">&#34;&#34;&#34;</span>
+
+</code></pre></div><h4 id="时间模块">时间模块</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">time           时间模块
+</span><span class="s2">datatime       时间日期模块
+</span><span class="s2">都是内置模块,可以直接使用
+</span><span class="s2">
+</span><span class="s2">时间数据三大类型
+</span><span class="s2">1。时间戳    &gt;&gt;&gt;&gt;时间戳表达的是从1970.1.1 00：00至今所过的秒数
+</span><span class="s2">2.结构化时间（用来给机器识别的）
+</span><span class="s2">3.格式化时间（用来给人看的）
+</span><span class="s2">
+</span><span class="s2">import time   导入时间模块
+</span><span class="s2">print(time.time())  获取时间戳
+</span><span class="s2">
+</span><span class="s2">时间戳可以用来计算某一段代码执行的时间
+</span><span class="s2">拿上面的随机验证码模块举例
+</span><span class="s2">def get_code(n)        &gt;&gt;&gt;&gt;需要产生n位的随机验证码，
+</span><span class="s2">code = &#39;&#39;   将产生的数据拼接到字符串中
+</span><span class="s2">    for i in range(n):    &gt;&gt;&gt;&gt;&gt;for循环五次
+</span><span class="s2">        random_upper = chr(random.randint(65,90))
+</span><span class="s2">        &gt;&gt;&gt;&gt;从65-90数字中随机抽取并通过chr转换为数值表达式所表达的字符
+</span><span class="s2">            产生随机的大写字符
+</span><span class="s2">        random_lower = chr(random.randint(97,122))
+</span><span class="s2">        &gt;&gt;&gt;&gt;产生随机的小写字符
+</span><span class="s2">        random_int = str(random.randint(0,9))
+</span><span class="s2">        &gt;&gt;&gt;&gt;产生随机数字 并转换为字符串格式
+</span><span class="s2">        temp = random.choice([random_supper,random_lower,random_int])
+</span><span class="s2">        &gt;&gt;&gt;&gt;三个随机数字随机抽取一个赋值给temp
+</span><span class="s2">        code += temp
+</span><span class="s2">        &gt;&gt;&gt;&gt; 五位随机数拼接到code中
+</span><span class="s2">    return(code)
+</span><span class="s2">
+</span><span class="s2">start_time = time.time()
+</span><span class="s2">res = get_code(10)
+</span><span class="s2">print(res)
+</span><span class="s2">end_time = time.time()
+</span><span class="s2">print(&#39;运行时间：</span><span class="si">%s</span><span class="s2">&#39;%(start_time-end_time))
+</span><span class="s2">
+</span><span class="s2">格式化时间
+</span><span class="s2">res = time.stiftime(&#39;%Y/%m/</span><span class="si">%d</span><span class="s2"> %H:%M:%S&#39;)
+</span><span class="s2">print(res)   &gt;&gt;&gt; 2020/11/05 10:13:07
+</span><span class="s2">res1 = time.strftime(&#39;%Y/%m/</span><span class="si">%d</span><span class="s2"> </span><span class="si">%X</span><span class="s2">&#39;)
+</span><span class="s2">print(res1)   &gt;&gt;&gt;2020/11/05 10:13:07
+</span><span class="s2">        
+</span><span class="s2">结构化时间
+</span><span class="s2">print(time.struct_time((2020,11,11,1,1,1,1,1,1)))
+</span><span class="s2">
+</span><span class="s2">
+</span><span class="s2">
+</span><span class="s2">import datetime
+</span><span class="s2">print(datetime.datetime.today())  # 2020-11-05 10:16:38.606066
+</span><span class="s2">print(datetime.date.today())  # 2020-11-05
+</span><span class="s2">from datetime import datetime,date
+</span><span class="s2">print(datetime.today())
+</span><span class="s2">print(date.today())
+</span><span class="s2">
+</span><span class="s2">date     年月日
+</span><span class="s2">datetime    年月日 时分秒
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></div><h4 id="加密模块">加密模块</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">import hushlib
+</span><span class="s2">
+</span><span class="s2">pwd = &#39;eddy666&#39;
+</span><span class="s2">
+</span><span class="s2">使用md5算法进行加密
+</span><span class="s2">md5 = hashlib.md5()
+</span><span class="s2">将铭文数据传入md5中
+</span><span class="s2">md5.updata(pwd.encode(utf8))   传入的数据必须是二进制类型
+</span><span class="s2">获取加密后的密文结果
+</span><span class="s2">res = md5.hexdigest()
+</span><span class="s2">print(res)
+</span><span class="s2">
+</span><span class="s2">密文越长则表示加密算法越复杂
+</span><span class="s2">
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></div><h4 id="面向对象">面向对象</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">什么是对象
+</span><span class="s2">	对象就是一系列数据和功能的结合体
+</span><span class="s2">    
+</span><span class="s2">数据
+</span><span class="s2">username = eddy
+</span><span class="s2">password = 123
+</span><span class="s2">功能
+</span><span class="s2">def index():
+</span><span class="s2">    print(username,password)
+</span><span class="s2">    
+</span><span class="s2">数据相当于我们做饭是用的原材料，蔬菜，肉之类的，而功能就是做饭时用到的
+</span><span class="s2">锅碗瓢盆，对象则就是二者结合一起的产物
+</span><span class="s2">
+</span><span class="s2">什么是类
+</span><span class="s2">	类是对象公共的数据和功能结合体，用来减少对象内代码的书写
+</span><span class="s2">    减少代码冗余
+</span><span class="s2">    
+</span><span class="s2">    我们可以把同一类对象相同的数据与功能存放在类里，而无需每一个对象都重复存一份，这样每个对象里面就只存自己独有的数据，极大的节省了空间。所以，如果说对象是用来存放数据与功能的容器，那么类则是用来存放多个对象相同的数据与功能的容器。
+</span><span class="s2">    &#34;&#34;&#34;</span>
+</code></pre></div><h4 id="面对对象与编程">面对对象与编程</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">面对对象编程的基本思路
+</span><span class="s2">以开发一个选课系例为例，先考虑学生对象
+</span><span class="s2"># 学生的数据有
+</span><span class="s2">学校
+</span><span class="s2">名字
+</span><span class="s2">年龄
+</span><span class="s2">性别
+</span><span class="s2"># 学生的功能有
+</span><span class="s2">选课
+</span><span class="s2">
+</span><span class="s2"># 学生对象1：
+</span><span class="s2">    数据:
+</span><span class="s2">        学校=清华大学
+</span><span class="s2">        姓名=李建刚
+</span><span class="s2">        性别=男
+</span><span class="s2">        年龄=28
+</span><span class="s2">    功能：
+</span><span class="s2">        选课
+</span><span class="s2"># 学生对象2：
+</span><span class="s2">    数据:
+</span><span class="s2">        学校=清华大学
+</span><span class="s2">        姓名=王大力
+</span><span class="s2">        性别=女
+</span><span class="s2">        年龄=18
+</span><span class="s2">    功能：
+</span><span class="s2">        选课
+</span><span class="s2"># 学生对象3：
+</span><span class="s2">    数据:
+</span><span class="s2">        学校=清华大学
+</span><span class="s2">        姓名=牛嗷嗷
+</span><span class="s2">        性别=男
+</span><span class="s2">        年龄=38
+</span><span class="s2">    功能：
+</span><span class="s2">        选课
+</span><span class="s2">        
+</span><span class="s2"># 学生类
+</span><span class="s2">    相同的特征:
+</span><span class="s2">        学校=清华大学
+</span><span class="s2">    相同的功能：
+</span><span class="s2">        选课
+</span><span class="s2">        
+</span><span class="s2">        
+</span><span class="s2">★ 代码层面如何定义类
+</span><span class="s2">class Student：
+</span><span class="s2">	school = &#39;清华大学&#39;
+</span><span class="s2">    def choose_course(self):
+</span><span class="s2">        pass
+</span><span class="s2">    
+</span><span class="s2">类的语法结构
+</span><span class="s2">1.class 是定义类的关键字
+</span><span class="s2">2.Student 是类名 （类名的首字母大写）
+</span><span class="s2">3。注释  解释这个类的一些信息
+</span><span class="s2">4.类体代码   （就是多个对象公共的数据和功能存放地）
+</span><span class="s2">
+</span><span class="s2">★代码层面如何产生对象
+</span><span class="s2"> 类名+()  即可产生对象
+</span><span class="s2">    st1 = Student()
+</span><span class="s2">    st2 = Student()
+</span><span class="s2">    st3 = Student()
+</span><span class="s2">    
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></div><h4 id="如何查看对象类一切皆对象里面的名字">如何查看对象/类（一切皆对象）里面的名字</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">如何产看对象/类里面的数据
+</span><span class="s2">print(类名.__dict__)  查看类里面所有的名字
+</span><span class="s2">print(对象名.__dict__) 查看对象里面的数据
+</span><span class="s2">
+</span><span class="s2">类
+</span><span class="s2">    公共的数据
+</span><span class="s2">    公共的功能
+</span><span class="s2">对象1
+</span><span class="s2">    数据1
+</span><span class="s2">    功能1
+</span><span class="s2">对象2
+</span><span class="s2">    数据1
+</span><span class="s2">    功能1
+</span><span class="s2">对象3
+</span><span class="s2">    数据1
+</span><span class="s2">    功能1
+</span><span class="s2">三个对象都仅仅只有公共的数据和功能，自己没有独有的数据和功能
+</span><span class="s2">
+</span><span class="s2">针对双下划线开头双下划綫结尾的变量名我们在读的时候
+</span><span class="s2">最标准的读法是 双下xxx
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></div><h4 id="如何让对象有自己独有的数据">如何让对象有自己独有的数据</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">就是在定义类的时候在类体代码中加一个__init__即可
+</span><span class="s2">class Student:
+</span><span class="s2">    school = &#39;老男孩大学&#39;
+</span><span class="s2">
+</span><span class="s2">    固定写法 让类在产生对象的时候可以让对象有自己独有的数据
+</span><span class="s2">    def __init__(self, username, gender, age):
+</span><span class="s2">        固定写法 init函数里面有几个形式参数下面就按照固定的句式写几行代码
+</span><span class="s2">        self.username = username
+</span><span class="s2">        self.gender = gender
+</span><span class="s2">        self.age = age
+</span><span class="s2">       
+</span><span class="s2">    def choose_course(self):
+</span><span class="s2">        pass
+</span><span class="s2">st1 = Student(&#39;jason&#39;,&#39;male&#39;,18)
+</span><span class="s2">st2 = Student(&#39;egon&#39;,&#39;female&#39;,73)
+</span><span class="s2">st3 = Student(&#39;alex&#39;,&#39;male&#39;,84)
+</span><span class="s2">print(Student.__dict__)
+</span><span class="s2">print(st1.__dict__)
+</span><span class="s2">print(st2.__dict__)
+</span><span class="s2">print(st3.__dict__)
+</span><span class="s2">
+</span><span class="s2">
+</span><span class="s2">{&#39;__module__&#39;: &#39;__main__&#39;, &#39;school&#39;: &#39;老男孩大学&#39;, &#39;__init__&#39;: &lt;function Student.__init__ at 0x0000001D30DA98C8&gt;, &#39;choose_course&#39;: &lt;function Student.choose_course at 0x0000001D30DA9950&gt;, &#39;__dict__&#39;: &lt;attribute &#39;__dict__&#39; of &#39;Student&#39; objects&gt;, &#39;__weakref__&#39;: &lt;attribute &#39;__weakref__&#39; of &#39;Student&#39; objects&gt;, &#39;__doc__&#39;: None}
+</span><span class="s2">{&#39;username&#39;: &#39;jason&#39;, &#39;gender&#39;: &#39;male&#39;, &#39;age&#39;: 18}
+</span><span class="s2">{&#39;username&#39;: &#39;egon&#39;, &#39;gender&#39;: &#39;female&#39;, &#39;age&#39;: 73}
+</span><span class="s2">{&#39;username&#39;: &#39;alex&#39;, &#39;gender&#39;: &#39;male&#39;, &#39;age&#39;: 84}
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></div><h4 id="如何访问数据">如何访问数据</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">访问对象的数据
+</span><span class="s2">使用句点符 . 
+</span><span class="s2">eg；
+</span><span class="s2">print(st1.username)
+</span><span class="s2">print(st2.age)
+</span><span class="s2">
+</span><span class="s2">访问类的数据
+</span><span class="s2">print(Student.School)
+</span><span class="s2">
+</span><span class="s2">对象直接访问类的数据
+</span><span class="s2">print(st1.school)
+</span><span class="s2">print(st1.choose_course)
+</span><span class="s2">
+</span><span class="s2">数据的查找顺序
+</span><span class="s2">1.先从对象自己里面找
+</span><span class="s2">2.没有匹配数据后才会从类里面的公共数据查找
+</span><span class="s2">3.对象的类也找不到则会从类的父类里找
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></div><h4 id="绑定方法与非绑定方法">绑定方法与非绑定方法</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">class Student:
+</span><span class="s2">    school = &#39;老男孩大学&#39;
+</span><span class="s2">    def __init__(self, username, gender, age):
+</span><span class="s2">        self.username = username
+</span><span class="s2">        self.gender = gender
+</span><span class="s2">        self.age = age
+</span><span class="s2">     绑定给对象的方法
+</span><span class="s2">    def choose_course(self):
+</span><span class="s2">        &#39;&#39;&#39;self哪个对象来调用 这个self就指代哪个对象&#39;&#39;&#39;
+</span><span class="s2">        print(&#39;self:&#39;,self)
+</span><span class="s2">        print(&#39;</span><span class="si">%s</span><span class="s2"> is choosing course&#39;</span><span class="si">%s</span><span class="s2">elf.username)
+</span><span class="s2">     绑定给类的方法
+</span><span class="s2">    @classmethod
+</span><span class="s2">    def get_cls(cls):
+</span><span class="s2">        print(cls)
+</span><span class="s2">     普通函数
+</span><span class="s2">    @staticmethod
+</span><span class="s2">    def get_func(self):
+</span><span class="s2">        print(self)
+</span><span class="s2">
+</span><span class="s2">        
+</span><span class="s2">类中定义的函数 默认都是绑定给对象的
+</span><span class="s2">对象来调 会自动将对象当做第一个参数自动传入
+</span><span class="s2">st1.choose_course()  ==   st1.choose_course(st1)
+</span><span class="s2">st2.choose_course()  ==   st2.choose_course(st2)
+</span><span class="s2">st3.choose_course()  ==   st3.choose_course(st3)
+</span><span class="s2">
+</span><span class="s2">修改类里面的参数
+</span><span class="s2">st1.username = &#39;jasonNBNB&#39;    &gt;&gt;&gt;&gt;&gt;加赋值符号就是设值
+</span><span class="s2">print(st1.username)
+</span><span class="s2">
+</span><span class="s2">类来调 有几个参数就需要自己手动传几个 不会自动传入
+</span><span class="s2">
+</span><span class="s2">
+</span><span class="s2">绑定给类的方法
+</span><span class="s2">    类来调会自动将类当做第一个参数传入
+</span><span class="s2">    对象来调也不需要传参数 会自动找到该对象的类传入
+</span><span class="s2">普通函数
+</span><span class="s2">    不管谁来调 都需要自己手动传参数
+</span><span class="s2">    
+</span><span class="s2">Student.get_cls()   &gt;&gt;&gt;&gt;get_cls  默认绑定给类，自动将类的参数传入函数
+</span><span class="s2">print(Student)
+</span><span class="s2">st1.get_cls()  
+</span><span class="s2">
+</span><span class="s2">
+</span><span class="s2">Student.get_func()
+</span><span class="s2">st1.get_func()     不管谁调用都需要手动输入参数
+</span><span class="s2">
+</span><span class="s2">总结:
+</span><span class="s2">在类中定义的函数我们一般情况下不叫函数
+</span><span class="s2">叫方法
+</span><span class="s2">在类中的数据我们也不叫数据
+</span><span class="s2">叫属性
+</span><span class="s2">并且属性有时候既可以指代数据也可以指代功能
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></div><h4 id="面向对象的三大特性">面向对象的三大特性</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">1.封装
+</span><span class="s1">	将数据和功能封装到了类/对象里面
+</span><span class="s1">2.继承
+</span><span class="s1">	一个类可以继承多个父类，继承之后就可以拥有该类的一切
+</span><span class="s1">3.多态
+</span><span class="s1">	一种事物的多种形态
+</span><span class="s1">    
+</span><span class="s1">封装之隐藏变量
+</span><span class="s1">	class MyClass:
+</span><span class="s1">    	school = &#39;oldboy&#39;
+</span><span class="s1">    	__username = &#39;jason&#39;
+</span><span class="s1">		
+</span><span class="s1">    obj = MyClass()
+</span><span class="s1">    print(obj.school)
+</span><span class="s1">    &#39;&#39;&#39;</span>
+    <span class="s1">&#39;&#39;&#39;
+</span><span class="s1">    在定义类的时候 如果变量名前面加了两个下划线
+</span><span class="s1">    那么该变量会变成隐藏变量 外界无法直接访问
+</span><span class="s1">    __username      变形成     _MyClass__username
+</span><span class="s1">    __变量名        变形成     _类名__变量名
+</span><span class="s1">    &#39;&#39;&#39;</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">_MyClass__username</span><span class="p">)</span>
+    
+ 
+<span class="s1">&#39;继承&#39;</span>
+	<span class="k">class</span> <span class="nc">P1</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+    <span class="k">class</span> <span class="nc">P2</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="k">class</span> <span class="nc">S1</span><span class="p">(</span><span class="n">P1</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">class</span> <span class="nc">S2</span><span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="n">P2</span><span class="p">):</span>
+        <span class="k">pass</span>
+    <span class="s1">&#39;&#39;&#39;
+</span><span class="s1">    在类定义的时候类名后面可以加括号
+</span><span class="s1">    括号里面可以书写你想要继承的类的名字
+</span><span class="s1">    并且在python不单单支持单继承
+</span><span class="s1">    还支持多继承
+</span><span class="s1">    &#39;&#39;&#39;</span>
+	<span class="s1">&#39;&#39;&#39;
+</span><span class="s1">     如何查看类的父类
+</span><span class="s1">     print(S1.__bases__)  # (&lt;class &#39;__main__.P1&#39;&gt;,)
+</span><span class="s1">     print(S2.__bases__)  # (&lt;class &#39;__main__.P1&#39;&gt;, &lt;class &#39;__main__.P2&#39;&gt;)
+</span><span class="s1">    
+</span><span class="s1">     print(P1.__bases__)  # (&lt;class &#39;object&#39;&gt;,)
+</span><span class="s1">     print(P2.__bases__)  # (&lt;class &#39;object&#39;&gt;,)
+</span><span class="s1">	&#39;&#39;&#39;</span>
+    <span class="s1">&#39;&#39;&#39;
+</span><span class="s1">    在python3中 类如果没有继承任何的父类
+</span><span class="s1">    那么这个类会默认继承object
+</span><span class="s1">    &#39;&#39;&#39;</span>
+    <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">    经典类
+</span><span class="s2">        不继承任何的类包括object
+</span><span class="s2">        只有在python2中才有经典类
+</span><span class="s2">    新式类
+</span><span class="s2">        继承了object或者其子类的类
+</span><span class="s2">    
+</span><span class="s2">    class PPP(object):
+</span><span class="s2">        username = &#39;jason666&#39;
+</span><span class="s2">    class PP1(PPP):
+</span><span class="s2">        username = &#39;jason4&#39;
+</span><span class="s2">
+</span><span class="s2">    class PP2(PPP):
+</span><span class="s2">        username = &#39;jason5&#39;
+</span><span class="s2">
+</span><span class="s2">    class PP3(PPP):
+</span><span class="s2">        username = &#39;jason6&#39;
+</span><span class="s2">
+</span><span class="s2">    class P1(PP1):
+</span><span class="s2">        username = &#39;jason1&#39;
+</span><span class="s2">    class P2(PP2):
+</span><span class="s2">        username = &#39;jason2&#39;
+</span><span class="s2">    class P3(PP3):
+</span><span class="s2">        username = &#39;jason3&#39;
+</span><span class="s2">
+</span><span class="s2">
+</span><span class="s2">
+</span><span class="s2">    class SS1(P1,P2,P3):
+</span><span class="s2">         username = &#39;egon&#39;
+</span><span class="s2">         def __init__(self,username):
+</span><span class="s2">             self.username = username
+</span><span class="s2">        pass
+</span><span class="s2">
+</span><span class="s2">     obj1 = SS1(&#39;alex&#39;)
+</span><span class="s2">     print(obj1.username)
+</span><span class="s2">     obj2 = SS1()
+</span><span class="s2">     print(obj2.username)
+</span><span class="s2">     当多继承的情况发生的时候 我们可以根据mro方法直接确定查找的顺序
+</span><span class="s2">    print(SS1.mro())
+</span><span class="s2">    &#34;&#34;&#34;</span>
+    <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">    [
+</span><span class="s2">    &lt;class &#39;__main__.SS1&#39;&gt;, 
+</span><span class="s2">    &lt;class &#39;__main__.P1&#39;&gt;, 
+</span><span class="s2">    &lt;class &#39;__main__.P2&#39;&gt;, 
+</span><span class="s2">    &lt;class &#39;__main__.P3&#39;&gt;, 
+</span><span class="s2">    &lt;class &#39;object&#39;&gt;]
+</span><span class="s2">    &#34;&#34;&#34;</span>
+    <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">    广度优先(菱形继承)
+</span><span class="s2">    [
+</span><span class="s2">    &lt;class &#39;__main__.SS1&#39;&gt;,
+</span><span class="s2">     &lt;class &#39;__main__.P1&#39;&gt;, 
+</span><span class="s2">     &lt;class &#39;__main__.PP1&#39;&gt;, 
+</span><span class="s2">     &lt;class &#39;__main__.P2&#39;&gt;, 
+</span><span class="s2">     &lt;class &#39;__main__.PP2&#39;&gt;, 
+</span><span class="s2">     &lt;class &#39;__main__.P3&#39;&gt;, 
+</span><span class="s2">     &lt;class &#39;__main__.PP3&#39;&gt;, 
+</span><span class="s2">     &lt;class &#39;__main__.PPP&#39;&gt;, 
+</span><span class="s2">     &lt;class &#39;object&#39;&gt;]
+</span><span class="s2">    &#34;&#34;&#34;</span>
+    
+<span class="s2">&#34;&#34;&#34;    
+</span><span class="s2">多态
+</span><span class="s2">	 我们可以在不考虑三者类型的情况下直接使用统计三个对象的长度
+</span><span class="s2">    s.__len__()
+</span><span class="s2">    l.__len__()
+</span><span class="s2">    t.__len__()
+</span><span class="s2">
+</span><span class="s2">     Python内置了一个统一的接口
+</span><span class="s2">    len(s)
+</span><span class="s2">    len(l)
+</span><span class="s2">    len(t)
+</span><span class="s2">    
+</span><span class="s2">  	鸭子类型
+</span><span class="s2">    	如果你看上去像鸭子，走路像鸭子，说话像鸭子
+</span><span class="s2">        那么你就是鸭子!!!
+</span><span class="s2">        
+</span><span class="s2">    linux系统一切皆文件
+</span><span class="s2">   	二者看起来都像文件,因而就可以当文件一样去用，然而它们并没有直接的关系
+</span><span class="s2">    class Txt: #Txt类有两个与文件类型同名的方法，即read和write
+</span><span class="s2">        def read(self):
+</span><span class="s2">            pass
+</span><span class="s2">        def write(self):
+</span><span class="s2">            pass
+</span><span class="s2">
+</span><span class="s2">    class Disk: #Disk类也有两个与文件类型同名的方法：read和write
+</span><span class="s2">        def read(self):
+</span><span class="s2">            pass
+</span><span class="s2">        def write(self):
+</span><span class="s2">            pass
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></div>]]></content>
+		</item>
 		
 		<item>
 			<title>函数分类，形参实参，结构，模块</title>
