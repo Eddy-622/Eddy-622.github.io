@@ -6,8 +6,279 @@
 		<generator>Hugo -- gohugo.io</generator>
 		<language>zh-CN</language>
 		<copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-		<lastBuildDate>Thu, 05 Nov 2020 00:00:00 +0000</lastBuildDate>
+		<lastBuildDate>Fri, 06 Nov 2020 00:00:00 +0000</lastBuildDate>
 		<atom:link href="https://Eddy-622.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>MySQL下载安装</title>
+			<link>https://Eddy-622.github.io/posts/mysql%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85/</link>
+			<pubDate>Fri, 06 Nov 2020 00:00:00 +0000</pubDate>
+			
+			<guid>https://Eddy-622.github.io/posts/mysql%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85/</guid>
+			<description>数据库 软件开发架构 &amp;#34;&amp;#34;&amp;#34;1.c/s架构c:client 客户端s:server 服务端2.b/s架构b:broswer:浏览器s:server 服务器服务端就类似于是一家家的店客户端就类似于是去店里消费的客人c/s架构下我们客人要想体验服务，就必须下载对应服务的app客户端b/s架构下我们要想体验服务，必须要挨个下载对应的app，只需要使用浏览器即可我们之前下载的一个个app其实本质就是客户端# b/s架构本质上也是c/s架构&amp;#34;&amp;#34;&amp;#34;数据库的演变过程 单机游戏
+&amp;#39;&amp;#39;&amp;#39;1.不用联网2.计算机与计算机之间游戏数据不共享数据都是保存的各自的本地(数据彼此不共享)&amp;#39;&amp;#39;&amp;#39;联网游戏
+&amp;#39;&amp;#39;&amp;#39;1.得有互联网2.游戏数据是共享的数据彼此都是共享的&amp;#39;&amp;#39;&amp;#39;总结:其实数据库软件本质上还是c/s架构的软件
+数据库的作用 文件存储数据
+&amp;#39;&amp;#39;&amp;#39;用户Ajason:123用户Bjason|123用户Cjason~123每个人存储数据的格式是千差万别的，程序兼容性非常的差&amp;#39;&amp;#39;&amp;#39;按照数据类型的不同创建不同的文件夹处理
+&amp;#39;&amp;#39;&amp;#39;存储数据的文件一般情况下我们都会默认放在一个data文件夹内虽然没有解决数据格式的问题，但是统一了数据存储位置的问题&amp;#39;&amp;#39;&amp;#39;数据库软件
+&amp;#39;&amp;#39;&amp;#39;1.针对数据的存储有固定的格式2.针对数据的存储位置也做了限制(统一都存在数据库服务端)&amp;#39;&amp;#39;&amp;#39;数据库的分类 &amp;#39;&amp;#39;&amp;#39;1.关系型数据库MySQL、Oracle、PostgreSQL、MariaDB(跟MySQL很像)、DB2、SQL server、sqlite特点:1.存储数据基本上都是以表结构的形式(表结构 表字段 字段类型)2.表与表之间可以创建代码层面上的关系(后续课程会详细的讲)用户表房屋表虽然数据库软件有很多，但是内部原理的都是一样的，尤其是当你学会了MySQL之后，再去学其他的数据库软件非常的轻松2.</description>
+			<content type="html"><![CDATA[<h1 id="数据库">数据库</h1>
+<h3 id="软件开发架构">软件开发架构</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">1.c/s架构
+</span><span class="s2">	c:client  客户端
+</span><span class="s2">     s:server  服务端
+</span><span class="s2">    
+</span><span class="s2">    
+</span><span class="s2">2.b/s架构
+</span><span class="s2">	b:broswer:浏览器
+</span><span class="s2">    s:server  服务器
+</span><span class="s2">        
+</span><span class="s2">
+</span><span class="s2">服务端就类似于是一家家的店
+</span><span class="s2">客户端就类似于是去店里消费的客人
+</span><span class="s2">
+</span><span class="s2">c/s架构下
+</span><span class="s2">	我们客人要想体验服务，就必须下载对应服务的app客户端
+</span><span class="s2">b/s架构下
+</span><span class="s2">	我们要想体验服务，必须要挨个下载对应的app，只需要使用浏览器即可
+</span><span class="s2">
+</span><span class="s2">我们之前下载的一个个app其实本质就是客户端
+</span><span class="s2">
+</span><span class="s2"># b/s架构本质上也是c/s架构
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></div><h3 id="数据库的演变过程">数据库的演变过程</h3>
+<p>单机游戏</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">1.不用联网
+</span><span class="s1">2.计算机与计算机之间游戏数据不共享
+</span><span class="s1">
+</span><span class="s1">数据都是保存的各自的本地(数据彼此不共享)
+</span><span class="s1">&#39;&#39;&#39;</span>
+</code></pre></div><p>联网游戏</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">1.得有互联网
+</span><span class="s1">2.游戏数据是共享的
+</span><span class="s1">
+</span><span class="s1">数据彼此都是共享的
+</span><span class="s1">&#39;&#39;&#39;</span>
+</code></pre></div><p>总结:其实数据库软件本质上还是c/s架构的软件</p>
+<h3 id="数据库的作用">数据库的作用</h3>
+<p>文件存储数据</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">用户A
+</span><span class="s1">	jason:123
+</span><span class="s1">用户B
+</span><span class="s1">	jason|123
+</span><span class="s1">用户C
+</span><span class="s1">	jason~123
+</span><span class="s1">每个人存储数据的格式是千差万别的，程序兼容性非常的差
+</span><span class="s1">&#39;&#39;&#39;</span>
+</code></pre></div><p>按照数据类型的不同创建不同的文件夹处理</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">存储数据的文件一般情况下我们都会默认放在一个data文件夹内
+</span><span class="s1">
+</span><span class="s1">虽然没有解决数据格式的问题，但是统一了数据存储位置的问题
+</span><span class="s1">&#39;&#39;&#39;</span>
+</code></pre></div><p>数据库软件</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">1.针对数据的存储有固定的格式
+</span><span class="s1">2.针对数据的存储位置也做了限制(统一都存在数据库服务端)
+</span><span class="s1">&#39;&#39;&#39;</span>
+</code></pre></div><h3 id="数据库的分类">数据库的分类</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">1.关系型数据库
+</span><span class="s1">	MySQL、Oracle、PostgreSQL、MariaDB(跟MySQL很像)、DB2、SQL server、sqlite
+</span><span class="s1">	特点:
+</span><span class="s1">        1.存储数据基本上都是以表结构的形式(表结构 表字段 字段类型)
+</span><span class="s1">        2.表与表之间可以创建代码层面上的关系(后续课程会详细的讲)
+</span><span class="s1">        	用户表
+</span><span class="s1">            房屋表
+</span><span class="s1">	虽然数据库软件有很多，但是内部原理的都是一样的，尤其是当你学会了MySQL之后，再去学其他的数据库软件非常的轻松
+</span><span class="s1">    
+</span><span class="s1">
+</span><span class="s1">2.非关系型数据库
+</span><span class="s1">	redis、mongoDB(后续讲爬虫会讲到)、memcache(被redis取代了)
+</span><span class="s1">	特点:
+</span><span class="s1">        1.存储数据没有表结构，基本上都是以key:value键值对的形式
+</span><span class="s1">        2.数据与数据之间无法创建代码层面上的关系
+</span><span class="s1">        &#39;&#39;&#39;</span>
+</code></pre></div><h3 id="mysql简介">MySQL简介</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">MySQL仅仅只是一款基于C/S架构开发的数据库软件
+</span><span class="s1">
+</span><span class="s1">	MySQL服务端
+</span><span class="s1">		
+</span><span class="s1">
+</span><span class="s1">	MySQL客户端
+</span><span class="s1">    
+</span><span class="s1">学习阶段我们可以下载一个MySQL的压缩包，里面包含了MySQL的服务端和客户端
+</span><span class="s1">可以让学习的用户在自己的机器上有服务端和客户端从而摆脱必须要联网才能学习的麻烦
+</span><span class="s1">
+</span><span class="s1">
+</span><span class="s1">
+</span><span class="s1">由于可以充当MySQL的客户端非常的多，会导致语言沟通的障碍
+</span><span class="s1">为了解决这个问题，我们统一了数据库语
+</span><span class="s1">	SQL语句(客户端与服务端沟通交流的媒介)
+</span><span class="s1">  
+</span><span class="s1"> 总结:SQL语句的由来其实体现的就是&#34;统一&#34;思想
+</span><span class="s1">&#39;&#39;&#39;</span>
+</code></pre></div><h3 id="mysql下载与安装">MySQL下载与安装</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">MySQL的版本问题
+</span><span class="s1">    1.MySQL5.6
+</span><span class="s1">    2.MySQL5.7
+</span><span class="s1">    3.MySQL8.0
+</span><span class="s1">在IT行业，我们基本上不会轻易的尝试新版本的软件，尤其是运行的好好的没有任何问题的项目，我们更不会傻吧垃圾的去更新软件版本
+</span><span class="s1">
+</span><span class="s1">针对MySQL的版本问题，目前市面上使用的最多的恰恰是MySQL5.6版本
+</span><span class="s1">使用哪个版本其实问题不大，因为内部的SQL语句都是一样的
+</span><span class="s1">
+</span><span class="s1">
+</span><span class="s1">下载地址
+</span><span class="s1">https://www.mysql.com/
+</span><span class="s1"> 
+</span><span class="s1">解压
+</span><span class="s1">&#39;&#39;&#39;</span>
+</code></pre></div><h3 id="mysql的目录结构">MySQL的目录结构</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">bin文件夹
+</span><span class="s1">	都是用来存放可执行文件
+</span><span class="s1">data文件夹
+</span><span class="s1">	MySQL存放数据的地方
+</span><span class="s1">my-default.ini
+</span><span class="s1">	MySQL的配置文件
+</span><span class="s1">Readme
+</span><span class="s1">	类似于软件说明书，主要用于介绍软件功能、打广告等
+</span><span class="s1">	&#39;&#39;&#39;</span>
+</code></pre></div><h3 id="mysql的启动">MySQL的启动</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">在bin目录下
+</span><span class="s1">    mysqld.exe 	MySQL服务端
+</span><span class="s1">    
+</span><span class="s1">    mysql.exe	MySQL客户端
+</span><span class="s1">    
+</span><span class="s1">如何启动
+</span><span class="s1">	一定要先启动服务端才可以用客户端去连接
+</span><span class="s1">
+</span><span class="s1">如果在启动服务的时候出现了类似于课上的报错，不要慌，百度搜索即可解决问题
+</span><span class="s1">    
+</span><span class="s1">在启动的时候最好是用管理员的身份运行的cmd窗口
+</span><span class="s1">
+</span><span class="s1">客户端链接MySQL需要输入用户名和密码
+</span><span class="s1">	mysql -uroot -p
+</span><span class="s1">初始MySQL管理员是没有密码的，你直接enter即可
+</span><span class="s1">	如果你直接输入mysql那么你会以游客模式的身份进入(权限非常的少)
+</span><span class="s1">	&#39;&#39;&#39;</span>
+</code></pre></div><h3 id="环境变量的配置">环境变量的配置</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;1.将mysqld.exe和mysql.exe所在的文件路径添加到环境变量中&#39;&#39;&#39;</span>
+</code></pre></div><h3 id="系统服务">系统服务</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">将MySQL的服务端制作成系统服务(开机自启动)
+</span><span class="s2">
+</span><span class="s2">1.保证你的MySQL服务端关闭的情况下
+</span><span class="s2">	用管理员身份打开cmd窗口
+</span><span class="s2">
+</span><span class="s2">2.制作系统服务
+</span><span class="s2">	mysqld --install
+</span><span class="s2">   
+</span><span class="s2">3.启动服务
+</span><span class="s2">	第一次制作系统服务之后需要你主动启动一次
+</span><span class="s2">    	1.命令行
+</span><span class="s2">        	net start mysql
+</span><span class="s2">            # net stop mysql 停止服务
+</span><span class="s2">        2.操作界面点点点即可
+</span><span class="s2">        	右键启动即可
+</span><span class="s2">	完毕之后，后续就无需手动启动了，会随着计算机的开机和关机自动启动和关闭
+</span><span class="s2">  
+</span><span class="s2">4.移除服务
+</span><span class="s2">	mysqld --remove
+</span><span class="s2">    
+</span><span class="s2">
+</span><span class="s2">如何查看当前计算机内部所有的服务
+</span><span class="s2">	1.windows+r调出输入框
+</span><span class="s2">		services.msc
+</span><span class="s2">	2.任务栏直接鼠标右键选择任务管理器
+</span><span class="s2">		查看正在运行的服务
+</span><span class="s2">	3.命令行
+</span><span class="s2">		tasklisk
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></div><h3 id="mysql的重要概念">MySQL的重要概念</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">数据库					文件夹
+</span><span class="s1">
+</span><span class="s1">
+</span><span class="s1">数据表					文件夹里面的一个个文件
+</span><span class="s1">
+</span><span class="s1">
+</span><span class="s1">数据记录				文件里面的一行行数据
+</span><span class="s1">&#39;&#39;&#39;</span>
+</code></pre></div><h3 id="简单的sql操作">简单的SQL操作</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">在链接到MySQL服务端之后，所有的SQL语句结束符是分号
+</span><span class="s1">
+</span><span class="s1">1.客户端链接服务端
+</span><span class="s1">	mysql -uroot -p
+</span><span class="s1">    
+</span><span class="s1">2.查看所有的数据库
+</span><span class="s1">	show databases;
+</span><span class="s1">    
+</span><span class="s1">3.退出服务端命令(可以不加分号)
+</span><span class="s1">	exit
+</span><span class="s1">     quit
+</span><span class="s1">  
+</span><span class="s1">4.取消之前没有加分号的命令
+</span><span class="s1">	\c
+</span><span class="s1">&#39;&#39;&#39;</span>
+</code></pre></div><h3 id="设置密码">设置密码</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">1.直接在cmd窗口内输入命令(不进去MySQL服务端)
+</span><span class="s1">	mysqladmin -u用户名 -p旧密码 password 新密码
+</span><span class="s1">    # 第一次修改
+</span><span class="s1">    mysqladmin -uroot -p password 123
+</span><span class="s1">    # 第二次修改
+</span><span class="s1">    mysqladmin -uroot -p123 password 123456
+</span><span class="s1">    
+</span><span class="s1">2.进入MySQL服务端之后输入SQL语句
+</span><span class="s1">	set password=PASSWORD(&#39;新密码&#39;);
+</span><span class="s1">&#39;&#39;&#39;</span>
+</code></pre></div><h3 id="忘记密码">忘记密码</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">1.关闭你的MySQL服务端
+</span><span class="s1">	net stop mysql
+</span><span class="s1">2.以跳过授权表的方式重新启动MySQL服务端
+</span><span class="s1">	mysqld --skip-grant-tables
+</span><span class="s1">3.修改忘记密码用户的密码
+</span><span class="s1">	update mysql.user set password=password(&#39;jason123&#39;) where user=&#39;root&#39; and 
+</span><span class="s1">    host = &#39;localhost&#39;;
+</span><span class="s1">4.先关闭之前命令行启动的服务端，然后正常启动MySQL服务端
+</span><span class="s1">	net start mysql
+</span><span class="s1">5.重新输入用户名和密码的方式
+</span><span class="s1">	mysql -uroot -p
+</span><span class="s1">&#39;&#39;&#39;</span>
+</code></pre></div><h3 id="配置文件">配置文件</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1"># 查看当前MySQL的基本信息
+</span><span class="s1">\s
+</span><span class="s1">
+</span><span class="s1"># 统一MySQL的字符编码
+</span><span class="s1">mysql默认的配置文件不要修改，拷贝一份再修改
+</span><span class="s1">	my.ini
+</span><span class="s1">
+</span><span class="s1">只需要拷贝固定的配置即可
+</span><span class="s1">	[mysqld]
+</span><span class="s1">    character-set-server=utf8
+</span><span class="s1">    collation-server=utf8_general_ci
+</span><span class="s1">
+</span><span class="s1">    [client]
+</span><span class="s1">    default-character-set=utf8
+</span><span class="s1">
+</span><span class="s1">    [mysql]
+</span><span class="s1">    default-character-set=utf8
+</span><span class="s1"># 修改配置文件之后一定要重启服务端才能生效
+</span><span class="s1">&#39;&#39;&#39;</span>
+</code></pre></div>]]></content>
+		</item>
 		
 		<item>
 			<title>常用模块，面向对象，类</title>

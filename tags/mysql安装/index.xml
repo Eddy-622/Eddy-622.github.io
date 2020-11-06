@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MySQL安装 on Eddy&#39;s Boke</title>
+    <link>https://Eddy-622.github.io/tags/mysql%E5%AE%89%E8%A3%85/</link>
+    <description>Recent content in MySQL安装 on Eddy&#39;s Boke</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Fri, 06 Nov 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://Eddy-622.github.io/tags/mysql%E5%AE%89%E8%A3%85/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>MySQL下载安装</title>
+      <link>https://Eddy-622.github.io/posts/mysql%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85/</link>
+      <pubDate>Fri, 06 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/posts/mysql%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85/</guid>
+      <description>数据库 软件开发架构 &amp;#34;&amp;#34;&amp;#34;1.c/s架构c:client 客户端s:server 服务端2.b/s架构b:broswer:浏览器s:server 服务器服务端就类似于是一家家的店客户端就类似于是去店里消费的客人c/s架构下我们客人要想体验服务，就必须下载对应服务的app客户端b/s架构下我们要想体验服务，必须要挨个下载对应的app，只需要使用浏览器即可我们之前下载的一个个app其实本质就是客户端# b/s架构本质上也是c/s架构&amp;#34;&amp;#34;&amp;#34;数据库的演变过程 单机游戏
+&amp;#39;&amp;#39;&amp;#39;1.不用联网2.计算机与计算机之间游戏数据不共享数据都是保存的各自的本地(数据彼此不共享)&amp;#39;&amp;#39;&amp;#39;联网游戏
+&amp;#39;&amp;#39;&amp;#39;1.得有互联网2.游戏数据是共享的数据彼此都是共享的&amp;#39;&amp;#39;&amp;#39;总结:其实数据库软件本质上还是c/s架构的软件
+数据库的作用 文件存储数据
+&amp;#39;&amp;#39;&amp;#39;用户Ajason:123用户Bjason|123用户Cjason~123每个人存储数据的格式是千差万别的，程序兼容性非常的差&amp;#39;&amp;#39;&amp;#39;按照数据类型的不同创建不同的文件夹处理
+&amp;#39;&amp;#39;&amp;#39;存储数据的文件一般情况下我们都会默认放在一个data文件夹内虽然没有解决数据格式的问题，但是统一了数据存储位置的问题&amp;#39;&amp;#39;&amp;#39;数据库软件
+&amp;#39;&amp;#39;&amp;#39;1.针对数据的存储有固定的格式2.针对数据的存储位置也做了限制(统一都存在数据库服务端)&amp;#39;&amp;#39;&amp;#39;数据库的分类 &amp;#39;&amp;#39;&amp;#39;1.关系型数据库MySQL、Oracle、PostgreSQL、MariaDB(跟MySQL很像)、DB2、SQL server、sqlite特点:1.存储数据基本上都是以表结构的形式(表结构 表字段 字段类型)2.表与表之间可以创建代码层面上的关系(后续课程会详细的讲)用户表房屋表虽然数据库软件有很多，但是内部原理的都是一样的，尤其是当你学会了MySQL之后，再去学其他的数据库软件非常的轻松2.</description>
+    </item>
+    
+  </channel>
+</rss>
