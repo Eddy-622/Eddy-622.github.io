@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>多表查询 on Eddy&#39;s Boke</title>
+    <link>https://Eddy-622.github.io/tags/%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/</link>
+    <description>Recent content in 多表查询 on Eddy&#39;s Boke</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Thu, 12 Nov 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://Eddy-622.github.io/tags/%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>MySQL多表查询、连接表、子查询、Nevicat</title>
+      <link>https://Eddy-622.github.io/posts/mysql%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2%E5%AD%90%E6%9F%A5%E8%AF%A2%E8%BF%9E%E6%8E%A5%E8%A1%A8/</link>
+      <pubDate>Thu, 12 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/posts/mysql%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2%E5%AD%90%E6%9F%A5%E8%AF%A2%E8%BF%9E%E6%8E%A5%E8%A1%A8/</guid>
+      <description>今日内容概要   多表操作的两大方法
+  Navicat软件的使用
+能够让你通过鼠标点点点的操作，来完成对数据库的增删改查
+  多表查询练习题(课上一起写五道练习题)
+  python如何操作MySQL
+  今日内容详细 多表操作的两大方法 &amp;#34;&amp;#34;&amp;#34;我们需要的数据可能来自于多张表 数据准备 &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;建表 create table dep( id int primary key auto_increment, name varchar(20) ); create table emp( id int primary key auto_increment, name varchar(20), sex enum(&amp;#39;male&amp;#39;,&amp;#39;female&amp;#39;) not null default &amp;#39;male&amp;#39;, age int, dep_id int ); &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;插入数据 insert into dep values (200,&amp;#39;技术&amp;#39;), (201,&amp;#39;人力资源&amp;#39;), (202,&amp;#39;销售&amp;#39;), (203,&amp;#39;运营&amp;#39;), (205,&amp;#39;财务&amp;#39;) ; insert into emp(name,sex,age,dep_id) values (&amp;#39;jason&amp;#39;,&amp;#39;male&amp;#39;,18,200), (&amp;#39;egon&amp;#39;,&amp;#39;female&amp;#39;,48,201), (&amp;#39;kevin&amp;#39;,&amp;#39;male&amp;#39;,18,201), (&amp;#39;nick&amp;#39;,&amp;#39;male&amp;#39;,28,202), (&amp;#39;owen&amp;#39;,&amp;#39;male&amp;#39;,18,203), (&amp;#39;jerry&amp;#39;,&amp;#39;female&amp;#39;,18,204);&amp;#34;&amp;#34;&amp;#34; 连接表的概念 &amp;#34;&amp;#34;&amp;#34;select * from dep,emp; &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; 结果是一个笛卡尔积(了解) &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; 我们要的不是全部对应一遍，而是按照相同的条件做对应关系 select * from dep,emp where dep.</description>
+    </item>
+    
+  </channel>
+</rss>

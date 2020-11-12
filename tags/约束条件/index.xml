@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>约束条件 on Eddy&#39;s Boke</title>
+    <link>https://Eddy-622.github.io/tags/%E7%BA%A6%E6%9D%9F%E6%9D%A1%E4%BB%B6/</link>
+    <description>Recent content in 约束条件 on Eddy&#39;s Boke</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Tue, 10 Nov 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://Eddy-622.github.io/tags/%E7%BA%A6%E6%9D%9F%E6%9D%A1%E4%BB%B6/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>MySQL完整语法、外键、约束条件</title>
+      <link>https://Eddy-622.github.io/posts/mysql%E5%AE%8C%E6%95%B4%E8%AF%AD%E6%B3%95%E4%B8%BB%E9%94%AE%E5%A4%96%E9%94%AE/</link>
+      <pubDate>Tue, 10 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/posts/mysql%E5%AE%8C%E6%95%B4%E8%AF%AD%E6%B3%95%E4%B8%BB%E9%94%AE%E5%A4%96%E9%94%AE/</guid>
+      <description>昨日内容回顾   存储引擎
+&amp;#39;&amp;#39;&amp;#39;查看存储引擎show engines;InnoDBMyISAMMemoryBlackHolecreate table t1(id int) engine=memory;&amp;#39;&amp;#39;&amp;#39;  基本SQL语句
+&amp;#39;&amp;#39;&amp;#39;针对库show databases;show create database db1;create database db1;alter database db1 charset=&amp;#39;gbk&amp;#39;;drop database db1;针对表select database();use db1;show tables;show create table t1;describe t1;desc t1;create table t1(id int);alter table t1 modify id tinyiny;alter table t1 change id nid int;alter table t1 rename t2;drop table t1;针对记录select * from t1;select id,username from t1;select User,Hostname from mysql.</description>
+    </item>
+    
+  </channel>
+</rss>

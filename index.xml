@@ -13,6 +13,60 @@
     
     
     <item>
+      <title>MySQL多表查询、连接表、子查询、Nevicat</title>
+      <link>https://Eddy-622.github.io/posts/mysql%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2%E5%AD%90%E6%9F%A5%E8%AF%A2%E8%BF%9E%E6%8E%A5%E8%A1%A8/</link>
+      <pubDate>Thu, 12 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/posts/mysql%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2%E5%AD%90%E6%9F%A5%E8%AF%A2%E8%BF%9E%E6%8E%A5%E8%A1%A8/</guid>
+      <description>今日内容概要   多表操作的两大方法
+  Navicat软件的使用
+能够让你通过鼠标点点点的操作，来完成对数据库的增删改查
+  多表查询练习题(课上一起写五道练习题)
+  python如何操作MySQL
+  今日内容详细 多表操作的两大方法 &amp;#34;&amp;#34;&amp;#34;我们需要的数据可能来自于多张表 数据准备 &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;建表 create table dep( id int primary key auto_increment, name varchar(20) ); create table emp( id int primary key auto_increment, name varchar(20), sex enum(&amp;#39;male&amp;#39;,&amp;#39;female&amp;#39;) not null default &amp;#39;male&amp;#39;, age int, dep_id int ); &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;插入数据 insert into dep values (200,&amp;#39;技术&amp;#39;), (201,&amp;#39;人力资源&amp;#39;), (202,&amp;#39;销售&amp;#39;), (203,&amp;#39;运营&amp;#39;), (205,&amp;#39;财务&amp;#39;) ; insert into emp(name,sex,age,dep_id) values (&amp;#39;jason&amp;#39;,&amp;#39;male&amp;#39;,18,200), (&amp;#39;egon&amp;#39;,&amp;#39;female&amp;#39;,48,201), (&amp;#39;kevin&amp;#39;,&amp;#39;male&amp;#39;,18,201), (&amp;#39;nick&amp;#39;,&amp;#39;male&amp;#39;,28,202), (&amp;#39;owen&amp;#39;,&amp;#39;male&amp;#39;,18,203), (&amp;#39;jerry&amp;#39;,&amp;#39;female&amp;#39;,18,204);&amp;#34;&amp;#34;&amp;#34; 连接表的概念 &amp;#34;&amp;#34;&amp;#34;select * from dep,emp; &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; 结果是一个笛卡尔积(了解) &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; 我们要的不是全部对应一遍，而是按照相同的条件做对应关系 select * from dep,emp where dep.</description>
+    </item>
+    
+    <item>
+      <title>MySQL单表查询，关键字，字段修改</title>
+      <link>https://Eddy-622.github.io/posts/mysql%E5%8D%95%E8%A1%A8%E6%9F%A5%E8%AF%A2%E5%85%B3%E9%94%AE%E5%AD%97%E5%AD%97%E6%AE%B5%E4%BF%AE%E6%94%B9/</link>
+      <pubDate>Wed, 11 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/posts/mysql%E5%8D%95%E8%A1%A8%E6%9F%A5%E8%AF%A2%E5%85%B3%E9%94%AE%E5%AD%97%E5%AD%97%E6%AE%B5%E4%BF%AE%E6%94%B9/</guid>
+      <description>昨日内容回顾   创建表的完整语法
+&amp;#39;&amp;#39;&amp;#39;create table 表名(字段名1 字段类型(数字) 约束条件1 约束条件2,字段名2 字段类型(数字) 约束条件1 约束条件2,字段名3 字段类型(数字) 约束条件1 约束条件2);&amp;#39;&amp;#39;&amp;#39;  约束条件
+&amp;#39;&amp;#39;&amp;#39;unsignedzerofillnot nulldefaultunique单列唯一联合唯一primary key单一主键联合主键auto_increment自增&amp;#39;&amp;#39;&amp;#39;  外键
+&amp;#39;&amp;#39;&amp;#39;外键就是用来建立表与表之间的关系表与表之间关系一对多多对多一对一如何判断表关系&amp;#34;换位思考&amp;#34;换位思考之后如果得出的结论是一方可以一方不可以那么表关系就是&amp;#34;一对多&amp;#34;换位思考之后如果得出的结论是双方都可以那么表关系就是&amp;#34;多对多&amp;#34;换位思考之后如果得出的结论是双方都不可以那么表关系就是&amp;#34;一对一&amp;#34;或者&amp;#34;没有关系&amp;#34;针对不同的表关系外键字段的创建位置也不同1.针对一对多外键字段建在多的一方2.针对多对多外键字段建在第三张关系表中3.针对一对一外键字段建在任何一方都可以但是建议你建在查询频率较高的表中&amp;#39;&amp;#39;&amp;#39;  SQL实现
+&amp;#39;&amp;#39;&amp;#39;create table emp(...dep_id int,foreign key(dep_id) references dep(id)on update cascade &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; 同步更新on delete cascade &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; 同步删除)&amp;#39;&amp;#39;&amp;#39;  作业</description>
+    </item>
+    
+    <item>
+      <title>MySQL完整语法、外键、约束条件</title>
+      <link>https://Eddy-622.github.io/posts/mysql%E5%AE%8C%E6%95%B4%E8%AF%AD%E6%B3%95%E4%B8%BB%E9%94%AE%E5%A4%96%E9%94%AE/</link>
+      <pubDate>Tue, 10 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/posts/mysql%E5%AE%8C%E6%95%B4%E8%AF%AD%E6%B3%95%E4%B8%BB%E9%94%AE%E5%A4%96%E9%94%AE/</guid>
+      <description>昨日内容回顾   存储引擎
+&amp;#39;&amp;#39;&amp;#39;查看存储引擎show engines;InnoDBMyISAMMemoryBlackHolecreate table t1(id int) engine=memory;&amp;#39;&amp;#39;&amp;#39;  基本SQL语句
+&amp;#39;&amp;#39;&amp;#39;针对库show databases;show create database db1;create database db1;alter database db1 charset=&amp;#39;gbk&amp;#39;;drop database db1;针对表select database();use db1;show tables;show create table t1;describe t1;desc t1;create table t1(id int);alter table t1 modify id tinyiny;alter table t1 change id nid int;alter table t1 rename t2;drop table t1;针对记录select * from t1;select id,username from t1;select User,Hostname from mysql.</description>
+    </item>
+    
+    <item>
+      <title>MySQL基本语句，数据类型</title>
+      <link>https://Eddy-622.github.io/posts/mysql%E5%9F%BA%E6%9C%AC%E8%AF%AD%E5%8F%A5%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</link>
+      <pubDate>Mon, 09 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/posts/mysql%E5%9F%BA%E6%9C%AC%E8%AF%AD%E5%8F%A5%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</guid>
+      <description>今日内容概要   基本的SQL的语句
+对数据库的增删改查
+对表的增删改查
+对记录的增删改查
+  数据库存储引擎
+  MySQL中的数据类型
+  今日内容详细 基本的SQL语句
+&amp;#34;&amp;#34;&amp;#34;针对数据库的增删改查查看show databases; &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;查看所有的数据库show create database 数据库名字； &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;单独查指定的数据库create database 数据库名字； &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;创建数据库alter database 数据库名字 charset=&amp;#39;gbk&amp;#39;; &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;更改数据库的字符编码drop database 数据库名字; &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;删除数据库针对表的增删改查如何查看当前在哪个库下select database();切换数据库use 数据库名；查看show tables; .&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;查看当前库下的所有表show create table 表名； &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;查看指定的表信息describe 表明; &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;查看指定表结构desc 表名；增create table 表名(字段名 字段类型); &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;新建表格改alter table 表名 modify 字段名 字段的数据类型; &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;更改字段的数据类型alter table 表名 change 字段名 新字段名 字段类型;	&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;改字段名alter table 表名 rename 新表名; &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;改表名删drop table 表名;针对记录的增删改查select * from 表名;	&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;查看指定表的所有数据select * from 库名.</description>
+    </item>
+    
+    <item>
       <title>MySQL下载安装</title>
       <link>https://Eddy-622.github.io/posts/mysql%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85/</link>
       <pubDate>Fri, 06 Nov 2020 00:00:00 +0000</pubDate>
@@ -29,10 +83,10 @@
     
     <item>
       <title>常用模块，面向对象，类</title>
-      <link>https://Eddy-622.github.io/posts/%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%B1%BB/</link>
+      <link>https://Eddy-622.github.io/posts/python%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97%E9%9D%A2%E5%90%91%E5%AF%B9%E7%B1%BB/</link>
       <pubDate>Thu, 05 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://Eddy-622.github.io/posts/%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%B1%BB/</guid>
+      <guid>https://Eddy-622.github.io/posts/python%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97%E9%9D%A2%E5%90%91%E5%AF%B9%E7%B1%BB/</guid>
       <description>今日内容   常用模块
 random模块、时间模块、hashlib模块
   面向对象
@@ -43,10 +97,10 @@ random模块、时间模块、hashlib模块
     
     <item>
       <title>函数分类，形参实参，结构，模块</title>
-      <link>https://Eddy-622.github.io/posts/%E5%87%BD%E6%95%B0%E5%88%86%E7%B1%BB%E5%BD%A2%E5%8F%82%E5%AE%9E%E5%8F%82%E7%BB%93%E6%9E%84%E6%A8%A1%E5%9D%97/</link>
+      <link>https://Eddy-622.github.io/posts/python%E5%87%BD%E6%95%B0%E5%88%86%E7%B1%BB%E5%BD%A2%E5%8F%82%E5%AE%9E%E5%8F%82%E7%BB%93%E6%9E%84%E6%A8%A1%E5%9D%97/</link>
       <pubDate>Wed, 04 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://Eddy-622.github.io/posts/%E5%87%BD%E6%95%B0%E5%88%86%E7%B1%BB%E5%BD%A2%E5%8F%82%E5%AE%9E%E5%8F%82%E7%BB%93%E6%9E%84%E6%A8%A1%E5%9D%97/</guid>
+      <guid>https://Eddy-622.github.io/posts/python%E5%87%BD%E6%95%B0%E5%88%86%E7%B1%BB%E5%BD%A2%E5%8F%82%E5%AE%9E%E5%8F%82%E7%BB%93%E6%9E%84%E6%A8%A1%E5%9D%97/</guid>
       <description>今日内容概要   函数
 认识学会基本的函数定义，基本的函数使用
   模块
@@ -57,10 +111,10 @@ random模块、时间模块、hashlib模块
     
     <item>
       <title>字符编码，字符处理，文件处理，文件操作</title>
-      <link>https://Eddy-622.github.io/posts/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E5%AD%97%E7%AC%A6%E5%A4%84%E7%90%86%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/</link>
+      <link>https://Eddy-622.github.io/posts/python%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E5%AD%97%E7%AC%A6%E5%A4%84%E7%90%86%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/</link>
       <pubDate>Tue, 03 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://Eddy-622.github.io/posts/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E5%AD%97%E7%AC%A6%E5%A4%84%E7%90%86%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/</guid>
+      <guid>https://Eddy-622.github.io/posts/python%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E5%AD%97%E7%AC%A6%E5%A4%84%E7%90%86%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/</guid>
       <description>今日内容概要   字符编码的概念
   文件处理
 用python代码来操作文件的创建、书写、修改
@@ -76,10 +130,10 @@ python本质就是一门面向对象的编程语言
     
     <item>
       <title>While循环，for循环，嵌套，数据类型的内置</title>
-      <link>https://Eddy-622.github.io/posts/while%E5%BE%AA%E7%8E%AFfor%E5%BE%AA%E7%8E%AF%E5%B5%8C%E5%A5%97%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%86%85%E7%BD%AE/</link>
+      <link>https://Eddy-622.github.io/posts/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%86%85%E7%BD%AEwhile%E5%BE%AA%E7%8E%AFfor%E5%BE%AA%E7%8E%AF/</link>
       <pubDate>Mon, 02 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://Eddy-622.github.io/posts/while%E5%BE%AA%E7%8E%AFfor%E5%BE%AA%E7%8E%AF%E5%B5%8C%E5%A5%97%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%86%85%E7%BD%AE/</guid>
+      <guid>https://Eddy-622.github.io/posts/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%86%85%E7%BD%AEwhile%E5%BE%AA%E7%8E%AFfor%E5%BE%AA%E7%8E%AF/</guid>
       <description>上周内容回顾 数据类型 &amp;#39;&amp;#39;&amp;#39;布尔值 bool布尔值的命名传统前面加上is_eg: is_deleteis_status元组 tuplet = (1,2,3,4,5)当容器类型里面只有一个元素的时候也应该将逗号加上集合 sets = {1,2,3,4,5}&amp;#39;&amp;#39;&amp;#39;可变类型与不可变类型 &amp;#39;&amp;#39;&amp;#39; 查询数值的内存地址id()可变类型（列表，字典）值改变内存地址不变不可变类型（整型，浮点型，字符串）值改变内存地址一定变&amp;#39;&amp;#39;&amp;#39;用户交互 &amp;#39;&amp;#39;&amp;#39;获取用户输入inputinput获取到的数据都是字符串类型输出结果print可以一次性输出多个元素，逗号隔开即可&amp;#39;&amp;#39;&amp;#39;格式化输出 &amp;#39;&amp;#39;&amp;#39;占位符 ： %s(可以给任意的数据类型占位)。d%(只能给数字占位)&amp;#39;my name is %sand my age is s%&amp;#39; (Eddy, 18)字符串里有几个占位符，后面给数据的时候就要给出几个真实数据&amp;#39;&amp;#39;&amp;#39;运算符 &amp;#39;&amp;#39;&amp;#39;基本运算符+-*/%**增量赋值x += 1x -= 1x *= 1x /= 1链式赋值a = b = c = 666交叉赋值m = 10n = 999交换m 和 n 的数值方式一利用中间变量tum = mm = n n = tum方式二交叉赋值m,n = n,m解压赋值l = [11,22,33]默认情况下左右两边的个数一定要相等有多少个值就要给多少个变量名a ,b,c = l利用*打破变量名数量的限制a,*_,b = l*_常用来表达无用的数据逻辑运算and or notand连接多个条件，且必须成立，输出结果才为True，有一个条件不成立直接结束，输出Flaseor与and恰恰相反，链接的结果只要一个成立，结果都为True。有一个成立则直接输出结果Truenot取反 not True = Flase身份运算is判断地址是否相等==判断值是否想同值相同内存地址可能不同内存地址相同值一定相同&amp;#39;&amp;#39;&amp;#39;代码的缩进 &amp;#39;&amp;#39;&amp;#39;python中利用代码的缩进来表示代码的从属关系并不是所有的代码都可以又子代码的权限属于同一个代码的多个子代码，子代码之间的缩进必须是相同的遇到冒号说明接下来的代码需要缩进&amp;#39;&amp;#39;&amp;#39;流程控制值if判断 &amp;#39;&amp;#39;&amp;#39;if的固定句式if 条件1:代码1代码2elif 条件2:代码1代码2elif 条件3:代码1代码2else :代码1代码2那个条件成立就会执行哪个条件的子代码其他的都不会被执行所有条件代码中只会被执行一个&amp;#39;&amp;#39;&amp;#39;今日内容 if 判断结束 循环结构值while循环 循环结构之for循环 数据类型的内置方法 字符编码 今日内容详细 if判断 &amp;#39;&amp;#39;&amp;#39;if的嵌套(代码的缩进以及子代码的从属关系)eg:如果女人的年龄小于28岁且定义为漂亮的则上去要微信如果成功则邀请看电影吃饭逛街不成功则 打扰了&amp;#39;&amp;#39;&amp;#39;age = 26is_beautiful = Trueis_success = Trueif age &amp;lt; 28 and is_beautifulprint(&amp;#39;小姐姐加个微信&amp;#39;)#二次判断 if is_success:print(&amp;#39;我们去吃饭看电影逛街吧&amp;#39;)else:print(&amp;#39;打扰了&amp;#39;)else:print(&amp;#39;不好意思认错人了&amp;#39;)循环结构之while循环 break 用于结束离他最近的while循环</description>
     </item>
     
@@ -92,70 +146,6 @@ python本质就是一门面向对象的编程语言
       <description>此博客创建于2020-10-30
 用以记录学习数据分析以及python中遇到的各种问题
 定期上传更新学习中的课程笔记等</description>
-    </item>
-    
-    <item>
-      <title>用户交互、格式化输出、运算符、流程控制</title>
-      <link>https://Eddy-622.github.io/posts/%E7%94%A8%E6%88%B7%E4%BA%A4%E4%BA%92%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA%E8%BF%90%E7%AE%97%E7%AC%A6%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6-/</link>
-      <pubDate>Fri, 30 Oct 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://Eddy-622.github.io/posts/%E7%94%A8%E6%88%B7%E4%BA%A4%E4%BA%92%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA%E8%BF%90%E7%AE%97%E7%AC%A6%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6-/</guid>
-      <description>10.29内容回顾   代码的注释
-&amp;#39;&amp;#39;&amp;#39;1.# 单行注释2.&amp;#39;&amp;#39;&amp;#39;&amp;#39;&amp;#39;&amp;#39;,&amp;#34;&amp;#34;&amp;#34;&amp;#34;&amp;#34;&amp;#34; 多行注释在pycharm中的快捷键ctrl+? 注释快捷键，再次激活取消注释&amp;#39;&amp;#39;&amp;#39;  变量
-&amp;#39;&amp;#39;&amp;#39;语法规范变量名 赋值符号 变量的值&amp;#39;&amp;#39;&amp;#39;name = &amp;#39;Eddy&amp;#39;&amp;#34;&amp;#34;&amp;#34;遇到赋值符号先看符号右边的再看符号左边的&amp;#34;&amp;#34;&amp;#34;# 情况1  name = &amp;#39;jason&amp;#39;name = &amp;#39;egon&amp;#39;name = &amp;#39;tony&amp;#39;&amp;#39;&amp;#39;&amp;#39;name依次被赋予 jason egon tony 三个值，但是最后只能指向一个值所有此时name对应的值为 tony&amp;#39;&amp;#39;&amp;#39;# 情况2 name = &amp;#39;jason&amp;#39;name1 = namename2 = name&amp;#39;&amp;#39;&amp;#39;name被赋予Jason，name1,name2 同时被赋予name的值所有 name1 = name2 = name = Jason&amp;#39;&amp;#39;&amp;#39;  变量的命名规范(必须遵守)
-&amp;#39;&amp;#39;&amp;#39;1.只能包含数字、字母、下划线2.数字不能开头、下划线也尽量不要开头(隐藏变量)3.</description>
-    </item>
-    
-    <item>
-      <title>初识Python</title>
-      <link>https://Eddy-622.github.io/posts/python%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</link>
-      <pubDate>Thu, 29 Oct 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://Eddy-622.github.io/posts/python%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</guid>
-      <description>10.28回顾   简单的cmd操作 选择盘符E: ， cd 切换目录，dir显示当前列表
-  路径的概念
-​	相对路径
-​	绝对路径
-  环境变量的设置
-win7 大同小异，win7注意单行地址栏操作各路径之间用；隔开
-win10
-  解释器的多版本共存
-配置不同的环境变量以及拷贝exe文件修改文件名以达到共存的目的
-  执行python程序
-cmd窗口中输入代码
-txt，word等文件中输入代码，用解释器执行
-专业的python编辑器
-  python编辑器推荐
-vscode 凑合用，适合老手
-anaconda 主要用途为数据分析、
-pycharm 好东西，要钱，破解
-  pycharm的使用
-&amp;#39;&amp;#39;&amp;#39;安装好设置好文件存放路径已经选择好解释器版本后启动新建py文件，写入代码，运行文件&amp;#39;&amp;#39;&amp;#39;  文件后缀名
-&amp;#39;&amp;#39;&amp;#39;明确对文件的分类，使人一眼就能看懂文件的类型&amp;#39;&amp;#39;&amp;#39;  今日内容   python中的注释 &amp;#39;&amp;#39;&amp;#39;注释就是对于一段代码的文字解释。python中的注释是用来给人看，给自己看，帮助理解代码使用的方便后期更新维护方式1（单行注释）#或选中注释区域后使用 快捷键 CTRL + /再次激活快捷键为解开注释&amp;#39;&amp;#39;&amp;#39;&amp;#39;&amp;#39;&amp;#39;方式2（多行注释）&amp;#39;&amp;#39;&amp;#39;&amp;#39;&amp;#39;&amp;#39;三个单引号&amp;#39;&amp;#39;&amp;#39;&amp;#34;&amp;#34;&amp;#34;三个双引号&amp;#34;&amp;#34;&amp;#34;  python中的变量 &amp;#39;&amp;#39;&amp;#39;1.</description>
-    </item>
-    
-    <item>
-      <title>计算机基础知识</title>
-      <link>https://Eddy-622.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</link>
-      <pubDate>Wed, 28 Oct 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://Eddy-622.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</guid>
-      <description>10.27回顾 1.计算机的由来  1623年：德国科学家契克卡德（W. Schickard）制造了人类有史以来第一台机械计算机，这台机器能够 进行六位数的加减乘除运算。 1642年：法国科学家帕斯卡（B.Pascal）发明了著名的帕斯卡机械计算机，首次确立了计算机器的概念。 1674年：莱布尼茨改进了帕斯卡的计算机，使之成为一种能够进行连续运算的机器，并且提出了“二进制”数的概念。（据说这个概念来源于中国的八卦） 此后发展了两百多年于 1895年： 英国青年工程师弗莱明（J.Fleming）通过“爱迪生效应”发明了人类第一只电子管。 从此进入电子管时代 1943年：10月，绰号为“巨人”的用来破译德军密码的计算机在英国布雷契莱庄园制造成功，此后又制造多台，为第二次世界大战的胜利立下了汗马功劳。  2.计算机的工作原理  计算机通过识别0101的二进制数值进行工作  3.计算机的硬件组成  控制器 （控制计算机各部分的运行，下达指令） 运算器 （进行逻辑运算，判断对错） 储存器 (数据的短期长期储存) 输入设备 (键盘鼠标等人机交互设备) 输出设备(显示器，扬声器等)  4.计算机三大核心硬件  CPU	中央运算处理器 (计算机的大脑，集成了控制器运算器，以及最新的AR模块和集成显卡） 内存	与cpu直接进行沟通，进行数据吞吐，读写速度快，但是断电后会清空所有数据 硬盘	负责数据的长期的储存，虽然读写速度想对慢的多，但是理论情况下可以实现对数据的完整保 存  5.操作系统   windows 、MacOS 、Linux、ubuntu
-操作系统就是充当人与计算机之间沟通的桥梁，因为计算机只认识01二进制数值，返回的	数值也生涩僵硬难懂，操作系统可以高效率的将指令传达给计算机，并且返回的指令进行	可视化处理，人类看起来更加方便，易懂。
-  6.三层架构  应用程序	我们所使用的所有软件即是应用程序层面的，侧重与用户的使用体验 操作系统	基于底层架构起来的系统，也属于应用层序，不过侧重于与计算的交互 计算机硬件	即计算机本身的实体化部分，CPU内存等，随着迭代，性能不断增强  7.编程语言  人和计算机沟通的语言，把人类的语言编写成计算机可以听懂看懂的语言，已达到为计算机下达工作指令的目的  8.编程  将编程语言编写下来的过程就是编程  9.编程语言的发展史  机器语言	计算机的原生语言，0101的二进制字符 晦涩难懂，难学难用 汇编语言	使用特定的英文字母代替二进制字符，语言进化迭代的产物 高级语言	使用人类的语言单词，简单易懂，目前的主流语言python，Java，C++等  10.</description>
-    </item>
-    
-    <item>
-      <title>Eddy&#39;s Boke</title>
-      <link>https://Eddy-622.github.io/posts/eddys-boke/</link>
-      <pubDate>Mon, 26 Oct 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://Eddy-622.github.io/posts/eddys-boke/</guid>
-      <description>这是我创建的第一个个人网站
-刚刚开始摸索其中的乐趣
-做的的不好的地方以后会尽量优化
-今天也是充满希望的一天Fighting！打工人
-当然我知道这个网站是没有几个人会看的~</description>
     </item>
     
   </channel>

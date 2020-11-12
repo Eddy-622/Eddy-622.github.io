@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="theme-color" content="#494f5c">
+	<meta name="msapplication-TileColor" content="#494f5c">
+<meta itemprop="name" content="MySQL多表查询、连接表、子查询、Nevicat">
+<meta itemprop="description" content="今日内容概要   多表操作的两大方法
+  Navicat软件的使用
+能够让你通过鼠标点点点的操作，来完成对数据库的增删改查
+  多表查询练习题(课上一起写五道练习题)
+  python如何操作MySQL
+  今日内容详细 多表操作的两大方法 &#34;&#34;&#34;我们需要的数据可能来自于多张表 数据准备 &gt;&gt;&gt;&gt;&gt;建表 create table dep( id int primary key auto_increment, name varchar(20) ); create table emp( id int primary key auto_increment, name varchar(20), sex enum(&#39;male&#39;,&#39;female&#39;) not null default &#39;male&#39;, age int, dep_id int ); &gt;&gt;&gt;&gt;&gt;插入数据 insert into dep values (200,&#39;技术&#39;), (201,&#39;人力资源&#39;), (202,&#39;销售&#39;), (203,&#39;运营&#39;), (205,&#39;财务&#39;) ; insert into emp(name,sex,age,dep_id) values (&#39;jason&#39;,&#39;male&#39;,18,200), (&#39;egon&#39;,&#39;female&#39;,48,201), (&#39;kevin&#39;,&#39;male&#39;,18,201), (&#39;nick&#39;,&#39;male&#39;,28,202), (&#39;owen&#39;,&#39;male&#39;,18,203), (&#39;jerry&#39;,&#39;female&#39;,18,204);&#34;&#34;&#34; 连接表的概念 &#34;&#34;&#34;select * from dep,emp; &gt;&gt;&gt;&gt;&gt; 结果是一个笛卡尔积(了解) &gt;&gt;&gt;&gt;&gt; 我们要的不是全部对应一遍，而是按照相同的条件做对应关系 select * from dep,emp where dep.">
+<meta itemprop="datePublished" content="2020-11-12T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-11-12T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="572">
+
+
+
+<meta itemprop="keywords" content="MySQL,多表查询,连接表,子查询," /><meta property="og:title" content="MySQL多表查询、连接表、子查询、Nevicat" />
+<meta property="og:description" content="今日内容概要   多表操作的两大方法
+  Navicat软件的使用
+能够让你通过鼠标点点点的操作，来完成对数据库的增删改查
+  多表查询练习题(课上一起写五道练习题)
+  python如何操作MySQL
+  今日内容详细 多表操作的两大方法 &#34;&#34;&#34;我们需要的数据可能来自于多张表 数据准备 &gt;&gt;&gt;&gt;&gt;建表 create table dep( id int primary key auto_increment, name varchar(20) ); create table emp( id int primary key auto_increment, name varchar(20), sex enum(&#39;male&#39;,&#39;female&#39;) not null default &#39;male&#39;, age int, dep_id int ); &gt;&gt;&gt;&gt;&gt;插入数据 insert into dep values (200,&#39;技术&#39;), (201,&#39;人力资源&#39;), (202,&#39;销售&#39;), (203,&#39;运营&#39;), (205,&#39;财务&#39;) ; insert into emp(name,sex,age,dep_id) values (&#39;jason&#39;,&#39;male&#39;,18,200), (&#39;egon&#39;,&#39;female&#39;,48,201), (&#39;kevin&#39;,&#39;male&#39;,18,201), (&#39;nick&#39;,&#39;male&#39;,28,202), (&#39;owen&#39;,&#39;male&#39;,18,203), (&#39;jerry&#39;,&#39;female&#39;,18,204);&#34;&#34;&#34; 连接表的概念 &#34;&#34;&#34;select * from dep,emp; &gt;&gt;&gt;&gt;&gt; 结果是一个笛卡尔积(了解) &gt;&gt;&gt;&gt;&gt; 我们要的不是全部对应一遍，而是按照相同的条件做对应关系 select * from dep,emp where dep." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://Eddy-622.github.io/posts/mysql%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2%E5%AD%90%E6%9F%A5%E8%AF%A2%E8%BF%9E%E6%8E%A5%E8%A1%A8/" />
+<meta property="article:published_time" content="2020-11-12T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-11-12T00:00:00+00:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="MySQL多表查询、连接表、子查询、Nevicat"/>
+<meta name="twitter:description" content="今日内容概要   多表操作的两大方法
+  Navicat软件的使用
+能够让你通过鼠标点点点的操作，来完成对数据库的增删改查
+  多表查询练习题(课上一起写五道练习题)
+  python如何操作MySQL
+  今日内容详细 多表操作的两大方法 &#34;&#34;&#34;我们需要的数据可能来自于多张表 数据准备 &gt;&gt;&gt;&gt;&gt;建表 create table dep( id int primary key auto_increment, name varchar(20) ); create table emp( id int primary key auto_increment, name varchar(20), sex enum(&#39;male&#39;,&#39;female&#39;) not null default &#39;male&#39;, age int, dep_id int ); &gt;&gt;&gt;&gt;&gt;插入数据 insert into dep values (200,&#39;技术&#39;), (201,&#39;人力资源&#39;), (202,&#39;销售&#39;), (203,&#39;运营&#39;), (205,&#39;财务&#39;) ; insert into emp(name,sex,age,dep_id) values (&#39;jason&#39;,&#39;male&#39;,18,200), (&#39;egon&#39;,&#39;female&#39;,48,201), (&#39;kevin&#39;,&#39;male&#39;,18,201), (&#39;nick&#39;,&#39;male&#39;,28,202), (&#39;owen&#39;,&#39;male&#39;,18,203), (&#39;jerry&#39;,&#39;female&#39;,18,204);&#34;&#34;&#34; 连接表的概念 &#34;&#34;&#34;select * from dep,emp; &gt;&gt;&gt;&gt;&gt; 结果是一个笛卡尔积(了解) &gt;&gt;&gt;&gt;&gt; 我们要的不是全部对应一遍，而是按照相同的条件做对应关系 select * from dep,emp where dep."/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="/favicon.ico">
+
+	<title>MySQL多表查询、连接表、子查询、Nevicat</title>
+	<link rel="stylesheet" href="https://Eddy-622.github.io/css/style.min.657bcb7af31123e4156b1a3d2ff60a636717e54ead74f882136b5114cf72b55e.css" integrity="sha256-ZXvLevMRI+QVaxo9L/YKY2cX5U6tdPiCE2tRFM9ytV4=" crossorigin="anonymous">
+	
+</head>
+
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp faster">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="https://Eddy-622.github.io">Eddy&#39;s Boke</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					
+				<a href="https://Eddy-622.github.io/posts/">博客</a>
+				<a href="https://Eddy-622.github.io/about-hugo/">关于</a>
+
+				</nav>
+			</div>
+			<div class="hdr-right hdr-icons">
+				<span class="hdr-social hide-in-mobile"><a href="https://mobile.twitter.com/zhang_kea" target="_blank" rel="noopener me" title="Twitter"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a><a href="https://www.facebook.com/kea.zhang.92" target="_blank" rel="noopener me" title="Instagram"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line></svg></a><a href="https://github.com/Eddy-622" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></span><button id="menu-btn" class="hdr-btn" title="Menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast">
+		<ul>
+			<li><a href="https://Eddy-622.github.io/posts/">博客</a></li>
+			<li><a href="https://Eddy-622.github.io/about-hugo/">关于</a></li>
+		</ul>
+	</div>
+
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta"><span>Nov 12, 2020</span></div>
+				<h1>MySQL多表查询、连接表、子查询、Nevicat</h1>
+			</header>
+			<div class="content">
+				<h1 id="今日内容概要">今日内容概要<a href="#今日内容概要" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<ul>
+<li>
+<p>多表操作的两大方法</p>
+</li>
+<li>
+<p>Navicat软件的使用</p>
+<p>能够让你通过鼠标点点点的操作，来完成对数据库的增删改查</p>
+</li>
+<li>
+<p>多表查询练习题(课上一起写五道练习题)</p>
+</li>
+<li>
+<p>python如何操作MySQL</p>
+</li>
+</ul>
+<h1 id="今日内容详细">今日内容详细<a href="#今日内容详细" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<h3 id="多表操作的两大方法">多表操作的两大方法<a href="#多表操作的两大方法" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;我们需要的数据可能来自于多张表
+</span><span class="s2">
+</span><span class="s2">数据准备
+</span><span class="s2">&gt;&gt;&gt;&gt;&gt;建表
+</span><span class="s2">create table dep(
+</span><span class="s2">id int primary key auto_increment,
+</span><span class="s2">name varchar(20) 
+</span><span class="s2">);
+</span><span class="s2">
+</span><span class="s2">create table emp(
+</span><span class="s2">id int primary key auto_increment,
+</span><span class="s2">name varchar(20),
+</span><span class="s2">sex enum(&#39;male&#39;,&#39;female&#39;) not null default &#39;male&#39;,
+</span><span class="s2">age int,
+</span><span class="s2">dep_id int
+</span><span class="s2">);
+</span><span class="s2">
+</span><span class="s2">&gt;&gt;&gt;&gt;&gt;插入数据
+</span><span class="s2">insert into dep values
+</span><span class="s2">(200,&#39;技术&#39;),
+</span><span class="s2">(201,&#39;人力资源&#39;),
+</span><span class="s2">(202,&#39;销售&#39;),
+</span><span class="s2">(203,&#39;运营&#39;),
+</span><span class="s2">(205,&#39;财务&#39;)
+</span><span class="s2">;
+</span><span class="s2">
+</span><span class="s2">insert into emp(name,sex,age,dep_id) values
+</span><span class="s2">(&#39;jason&#39;,&#39;male&#39;,18,200),
+</span><span class="s2">(&#39;egon&#39;,&#39;female&#39;,48,201),
+</span><span class="s2">(&#39;kevin&#39;,&#39;male&#39;,18,201),
+</span><span class="s2">(&#39;nick&#39;,&#39;male&#39;,28,202),
+</span><span class="s2">(&#39;owen&#39;,&#39;male&#39;,18,203),
+</span><span class="s2">(&#39;jerry&#39;,&#39;female&#39;,18,204);&#34;&#34;&#34;</span>
+
+</code></pre></div><h3 id="连接表的概念">连接表的概念<a href="#连接表的概念" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;select * from dep,emp;
+</span><span class="s2">&gt;&gt;&gt;&gt;&gt; 结果是一个笛卡尔积(了解)
+</span><span class="s2">
+</span><span class="s2">&gt;&gt;&gt;&gt;&gt; 我们要的不是全部对应一遍，而是按照相同的条件做对应关系
+</span><span class="s2">select * from dep,emp where dep.id = emp.dep_id;
+</span><span class="s2">&#34;&#34;&#34;</span>
+<span class="err">设计到多表操作的情况，非常容易出现两张表字段相同的情况</span>
+<span class="err">这个时候我们都会习惯性的在字段前面加上该字段所载的表名</span>
+<span class="err">来明确到底是哪张表的哪个字段</span>
+
+<span class="n">select</span> <span class="n">emp</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">dep</span><span class="o">.</span><span class="n">name</span> <span class="kn">from</span> <span class="nn">emp</span><span class="p">,</span><span class="n">dep</span> <span class="n">where</span> <span class="n">dep</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">emp</span><span class="o">.</span><span class="n">dep_id</span><span class="p">;</span><span class="s2">&#34;&#34;&#34;
+</span></code></pre></div><h3 id="多表查询方式1连接表">多表查询方式1:连接表<a href="#多表查询方式1连接表" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;内连接
+</span><span class="s2">	inner join
+</span><span class="s2">	select * from emp inner join dep on dep.id = emp.dep_id;
+</span><span class="s2">
+</span><span class="s2">  inner join是连接表的关键字
+</span><span class="s2">  on后面跟的是连接表的连接条件
+</span><span class="s2">  
+</span><span class="s2">  inner join只会连接两张表都有的数据，两张表中没有对应关系的数据都会被直接剔除
+</span><span class="s2">
+</span><span class="s2">  
+</span><span class="s2">  
+</span><span class="s2">左连接
+</span><span class="s2">	left join
+</span><span class="s2">	select * from emp left join dep on dep.id = emp.dep_id;
+</span><span class="s2">
+</span><span class="s2">  以left join左边的表为基准，保留左边表中所有的数据
+</span><span class="s2">  如果没有对应项，则直接使用null填充
+</span><span class="s2">
+</span><span class="s2">  
+</span><span class="s2">右连接
+</span><span class="s2">	right join
+</span><span class="s2">  select * from emp right join dep on dep.id = emp.dep_id;
+</span><span class="s2">
+</span><span class="s2">	以right join右边的表为基准，保留右边表中所有的数据
+</span><span class="s2">  如果没有对应项，则直接使用null填充
+</span><span class="s2">
+</span><span class="s2">  
+</span><span class="s2">全连接(了解)
+</span><span class="s2">	union
+</span><span class="s2">  select * from emp left join dep on dep.id = emp.dep_id
+</span><span class="s2">  union
+</span><span class="s2">  select * from emp right join dep on dep.id = emp.dep_id;
+</span><span class="s2">  
+</span><span class="s2">总结:
+</span><span class="s2">  学习完上述方法之后，其实我们就已经掌握了连接N多张表的方法
+</span><span class="s2">  先连接两张表然后将两张表的结果当做一张表再去连接其他表，依次往复其实我们就可以连接N多张表&#34;&#34;&#34;</span>
+</code></pre></div><h3 id="多表查询方式2子查询">多表查询方式2:子查询<a href="#多表查询方式2子查询" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">子查询其实就是我们日常生活中解决问题的最基本的方法即:分步操作
+</span><span class="s2">在MySQL中子查询的定义:将一张表的查询结果当做另外一条SQL语句的查询条件
+</span><span class="s2">
+</span><span class="s2">比如:我们想查员工jason所在的部门名称
+</span><span class="s2">	1.先去员工表中查询出jason对应的部门id
+</span><span class="s2">	2.拿着部门id去部门表中查询部门名称
+</span><span class="s2">&#34;&#34;&#34;</span>
+<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">select emp.dep_id from emp where emp.name=&#39;jason&#39;;
+</span><span class="s2">select dep.name from dep where dep.id = 200;
+</span><span class="s2">
+</span><span class="s2">&gt;&gt;&gt;&gt;&gt; 一旦一条sql语句需要被当做条件那么只需要在该sql语句前后加上括号即可
+</span><span class="s2">select dep.name from dep 
+</span><span class="s2">					where dep.id = (select emp.dep_id from emp where emp.name=&#39;jason&#39;);
+</span><span class="s2">&#39;&#39;&#39;
+</span><span class="s2">当子查询的条件是多个的情况下上述的等号我们习惯用in来代替即可
+</span><span class="s2">&#39;&#39;&#39;
+</span><span class="s2">
+</span><span class="s2">&gt;&gt;&gt;&gt;&gt; 2.每个部门最新入职的员工(依据昨天的员工表18条数据的) 了解
+</span><span class="s2">&gt;&gt;&gt;&gt;&gt; 思路：先查每个部门最新入职的员工，再按部门对应上联表查询
+</span><span class="s2">select t1.id,t1.name,t1.hire_date,t1.post,t2.* from emp as t1
+</span><span class="s2">inner join
+</span><span class="s2">(select post,max(hire_date) as max_date from emp group by post) as t2
+</span><span class="s2">on t1.post = t2.post
+</span><span class="s2">where t1.hire_date = t2.max_date
+</span><span class="s2">;&#34;&#34;&#34;</span>
+</code></pre></div><h3 id="总结">总结<a href="#总结" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<pre><code class="language-PYTHO" data-lang="PYTHO">'''设计到多表查询，往往可能都要连接表操作和子查询配合使用'''
+</code></pre><h3 id="补充">补充<a href="#补充" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">group_concat
+</span><span class="s1">	select group_concat(name,&#34;:&#34;,age) from emp group by id;
+</span><span class="s1">concat
+</span><span class="s1">	select concat(name,&#39;:&#39;,sex,&#39;:&#39;,age,&#39;:&#39;,dep_id) from emp;
+</span><span class="s1">concat_ws
+</span><span class="s1">	当连接多个字段信息的连接符一致的时候，我们可以使用concat_ws节省书写量
+</span><span class="s1">  select concat_ws(&#39;:&#39;,name,sex,age,dep_id) from emp;
+</span><span class="s1">  
+</span><span class="s1">&gt;&gt;&gt;&gt;&gt;exists(了解)
+</span><span class="s1">EXISTS关字键字表示存在。在使用EXISTS关键字时，内层查询语句不返回查询的记录，
+</span><span class="s1">而是返回一个真假值，True或False。
+</span><span class="s1">当返回True时，外层查询语句将进行查询
+</span><span class="s1">当返回值为False时，外层查询语句不进行查询。
+</span><span class="s1">select * from emp
+</span><span class="s1">    where exists
+</span><span class="s1">    (select id from dep where id &gt; 3);
+</span><span class="s1">
+</span><span class="s1">select * from emp
+</span><span class="s1">    where exists
+</span><span class="s1">    (select id from dep where id &gt; 250);&#39;&#39;&#39;</span>
+</code></pre></div><h3 id="navicat使用">Navicat使用<a href="#navicat使用" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">可以充当很多数据库软件的客户端
+</span><span class="s2">并且提供了很多简便的用于操作数据库的方法(鼠标点点点)
+</span><span class="s2">
+</span><span class="s2">下载与安装
+</span><span class="s2">	https://www.cr173.com/soft/126934.html
+</span><span class="s2">推荐参考:
+</span><span class="s2">	https://www.cnblogs.com/Kathrine/p/12844846.html
+</span><span class="s2">    
+</span><span class="s2">直接点击next安装即可，无需额外的设置
+</span><span class="s2">
+</span><span class="s2">使用特点
+</span><span class="s2">	讲很多sql语句的操作给你封装成了点点点的操作
+</span><span class="s2">  但是你需要知道的是虽然你用的是点点点，但是软件内部其实是自动帮你书写了对应的sql语句发送给了服务端执行
+</span><span class="s2">  
+</span><span class="s2">*********************************************************
+</span><span class="s2">在使用该软件的时候我们除了可以鼠标点点点之外，也可以自己修改sql语句
+</span><span class="s2">*********************************************************
+</span><span class="s2">
+</span><span class="s2">*********************************************************
+</span><span class="s2">MySQL中的注释
+</span><span class="s2">第一种
+</span><span class="s2">	&gt;&gt;&gt;&gt;&gt; 注释
+</span><span class="s2">第二种
+</span><span class="s2">	-- 注释
+</span><span class="s2">**********************************************************
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></div><h3 id="作业多表查询练习">作业：多表查询练习<a href="#作业多表查询练习" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">数据准备
+</span><span class="s2">  &gt;&gt;&gt;建表
+</span><span class="s2">create table dep(
+</span><span class="s2">id int primary key auto_increment,
+</span><span class="s2">name varchar(20) 
+</span><span class="s2">);
+</span><span class="s2">
+</span><span class="s2">create table emp(
+</span><span class="s2">id int primary key auto_increment,
+</span><span class="s2">name varchar(20),
+</span><span class="s2">sex enum(&#39;male&#39;,&#39;female&#39;) not null default &#39;male&#39;,
+</span><span class="s2">age int,
+</span><span class="s2">dep_id int
+</span><span class="s2">);
+</span><span class="s2">
+</span><span class="s2">  &gt;&gt;&gt;插入数据
+</span><span class="s2">insert into dep values
+</span><span class="s2">(200,&#39;技术&#39;),
+</span><span class="s2">(201,&#39;人力资源&#39;),
+</span><span class="s2">(202,&#39;销售&#39;),
+</span><span class="s2">(203,&#39;运营&#39;),
+</span><span class="s2">(205,&#39;财务&#39;)
+</span><span class="s2">;
+</span><span class="s2">
+</span><span class="s2">insert into emp(name,sex,age,dep_id) values
+</span><span class="s2">(&#39;jason&#39;,&#39;male&#39;,18,200),
+</span><span class="s2">(&#39;egon&#39;,&#39;female&#39;,48,201),
+</span><span class="s2">(&#39;kevin&#39;,&#39;male&#39;,18,201),
+</span><span class="s2">(&#39;nick&#39;,&#39;male&#39;,28,202),
+</span><span class="s2">(&#39;owen&#39;,&#39;male&#39;,18,203),
+</span><span class="s2">(&#39;jerry&#39;,&#39;female&#39;,18,204);
+</span><span class="s2">
+</span><span class="s2">    
+</span><span class="s2">    1、查询所有的课程的名称以及对应的任课老师姓名
+</span><span class="s2">  SELECT
+</span><span class="s2">  	teacher.tname,
+</span><span class="s2">  	course.cname 
+</span><span class="s2">  FROM
+</span><span class="s2">  	teacher
+</span><span class="s2">  	INNER JOIN course ON teacher.tid = course.teacher_id;
+</span><span class="s2">  SELECT
+</span><span class="s2">  	teacher.tname,
+</span><span class="s2">  	course.cname 
+</span><span class="s2">  FROM
+</span><span class="s2">  	teacher
+</span><span class="s2">  	INNER JOIN course ON teacher.tid = course.teacher_id;
+</span><span class="s2">
+</span><span class="s2">
+</span><span class="s2">
+</span><span class="s2">  2.查询平均成绩大于八十分的同学的姓名和平均成绩
+</span><span class="s2">  先算出学生的平均成绩 选择大于80的
+</span><span class="s2">  SELECT
+</span><span class="s2">  	student.sname,
+</span><span class="s2">  	t1.avg_num 
+</span><span class="s2">  FROM
+</span><span class="s2">  	student
+</span><span class="s2">  	INNER JOIN (
+</span><span class="s2">  SELECT
+</span><span class="s2">  	student_id,
+</span><span class="s2">  	avg( score.num ) AS avg_num 
+</span><span class="s2">  FROM
+</span><span class="s2">  	score 
+</span><span class="s2">  GROUP BY
+</span><span class="s2">  	score.student_id 
+</span><span class="s2">  HAVING
+</span><span class="s2">  	avg( score.num ) &gt; 80 
+</span><span class="s2">  	) AS t1 ON student.sid = t1.student_id;
+</span><span class="s2">
+</span><span class="s2">
+</span><span class="s2">
+</span><span class="s2">
+</span><span class="s2">  3.查询没有报李平老师课的学生姓名
+</span><span class="s2">  SELECT
+</span><span class="s2">  	student.sname 
+</span><span class="s2">  FROM
+</span><span class="s2">  	student 
+</span><span class="s2">  WHERE
+</span><span class="s2">  	student.sid NOT IN (
+</span><span class="s2">  SELECT DISTINCT
+</span><span class="s2">  	score.student_id 
+</span><span class="s2">  FROM
+</span><span class="s2">  	score 
+</span><span class="s2">  WHERE
+</span><span class="s2">  	score.course_id IN (
+</span><span class="s2">  SELECT
+</span><span class="s2">  	t1.cid 
+</span><span class="s2">  FROM
+</span><span class="s2">  	( SELECT * FROM course INNER JOIN teacher ON course.teacher_id = teacher.tid ) AS t1 
+</span><span class="s2">  WHERE
+</span><span class="s2">  	t1.tname = &#39;李平老师&#39; 
+</span><span class="s2">  	) 
+</span><span class="s2">  	);
+</span><span class="s2">  
+</span><span class="s2">
+</span><span class="s2">4、查询没有同时选修物理课程和体育课程的学生姓名
+</span><span class="s2">  SELECT
+</span><span class="s2">  	student.sname 
+</span><span class="s2">  FROM
+</span><span class="s2">  	student 
+</span><span class="s2">  WHERE
+</span><span class="s2">  	student.sid IN (
+</span><span class="s2">  	SELECT
+</span><span class="s2">  		score.student_id 
+</span><span class="s2">  	FROM
+</span><span class="s2">  		score 
+</span><span class="s2">  	WHERE
+</span><span class="s2">  		score.course_id IN ( SELECT course.cid FROM course WHERE course.cname IN ( &#39;物理&#39;, &#39;体育&#39; ) ) 
+</span><span class="s2">  	GROUP BY
+</span><span class="s2">  		score.student_id 
+</span><span class="s2">  	HAVING
+</span><span class="s2">  	count( score.course_id ) = 1 
+</span><span class="s2">  	);
+</span><span class="s2">
+</span><span class="s2">    
+</span><span class="s2">5.找出挂科两门以上的学生姓名及班级
+</span><span class="s2">INNER JOIN class ON student.class_id = class.cid 
+</span><span class="s2">WHERE
+</span><span class="s2">	student.sid IN (
+</span><span class="s2">SELECT
+</span><span class="s2">	score.student_id 
+</span><span class="s2">FROM
+</span><span class="s2">	score 
+</span><span class="s2">WHERE
+</span><span class="s2">	score.num &lt;= 60 GROUP BY score.student_id HAVING count( score.student_id ) &gt;= 2 
+</span><span class="s2">	);
+</span><span class="s2">	
+</span><span class="s2">	
+</span><span class="s2">	
+</span><span class="s2">基于11.11的表格
+</span><span class="s2">查询平均年龄在25岁以上的部门名
+</span><span class="s2">
+</span><span class="s2">SELECT post FROM emp GROUP BY post HAVING avg(age)&gt;25;
+</span><span class="s2">
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></div>
+			</div>
+			<hr class="post-end">
+			<footer class="post-info">
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>Eddy Zhang</p>
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://Eddy-622.github.io/tags/mysql">MySQL</a></span><span class="tag"><a href="https://Eddy-622.github.io/tags/%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2">多表查询</a></span><span class="tag"><a href="https://Eddy-622.github.io/tags/%E8%BF%9E%E6%8E%A5%E8%A1%A8">连接表</a></span><span class="tag"><a href="https://Eddy-622.github.io/tags/%E5%AD%90%E6%9F%A5%E8%AF%A2">子查询</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>572 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-11-12 08:00 &#43;0800</p>
+			</footer>
+		</article>
+		<div class="post-nav thin">
+			<a class="prev-post" href="https://Eddy-622.github.io/posts/mysql%E5%8D%95%E8%A1%A8%E6%9F%A5%E8%AF%A2%E5%85%B3%E9%94%AE%E5%AD%97%E5%AD%97%E6%AE%B5%E4%BF%AE%E6%94%B9/">
+				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>MySQL单表查询，关键字，字段修改</span>
+			</a>
+		</div>
+		<div id="comments" class="thin">
+</div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p>&copy; 2020 <a href="https://Eddy-622.github.io">Eddy Zhang</a></p>
+		<p>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://Eddy-622.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+		</p>
+	</footer>
+
+
+
+	<script src="https://Eddy-622.github.io/js/bundle.min.4a9a0ac3d2217822c7865b4161e6c2a71de1d70492264337755427898dd718f6.js" integrity="sha256-SpoKw9IheCLHhltBYebCpx3h1wSSJkM3dVQniY3XGPY=" crossorigin="anonymous"></script>
+	
+
+</body>
+
+</html>

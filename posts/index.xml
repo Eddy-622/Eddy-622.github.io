@@ -6,8 +6,1337 @@
 		<generator>Hugo -- gohugo.io</generator>
 		<language>zh-CN</language>
 		<copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-		<lastBuildDate>Fri, 06 Nov 2020 00:00:00 +0000</lastBuildDate>
+		<lastBuildDate>Thu, 12 Nov 2020 00:00:00 +0000</lastBuildDate>
 		<atom:link href="https://Eddy-622.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>MySQL多表查询、连接表、子查询、Nevicat</title>
+			<link>https://Eddy-622.github.io/posts/mysql%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2%E5%AD%90%E6%9F%A5%E8%AF%A2%E8%BF%9E%E6%8E%A5%E8%A1%A8/</link>
+			<pubDate>Thu, 12 Nov 2020 00:00:00 +0000</pubDate>
+			
+			<guid>https://Eddy-622.github.io/posts/mysql%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2%E5%AD%90%E6%9F%A5%E8%AF%A2%E8%BF%9E%E6%8E%A5%E8%A1%A8/</guid>
+			<description>今日内容概要   多表操作的两大方法
+  Navicat软件的使用
+能够让你通过鼠标点点点的操作，来完成对数据库的增删改查
+  多表查询练习题(课上一起写五道练习题)
+  python如何操作MySQL
+  今日内容详细 多表操作的两大方法 &amp;#34;&amp;#34;&amp;#34;我们需要的数据可能来自于多张表 数据准备 &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;建表 create table dep( id int primary key auto_increment, name varchar(20) ); create table emp( id int primary key auto_increment, name varchar(20), sex enum(&amp;#39;male&amp;#39;,&amp;#39;female&amp;#39;) not null default &amp;#39;male&amp;#39;, age int, dep_id int ); &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;插入数据 insert into dep values (200,&amp;#39;技术&amp;#39;), (201,&amp;#39;人力资源&amp;#39;), (202,&amp;#39;销售&amp;#39;), (203,&amp;#39;运营&amp;#39;), (205,&amp;#39;财务&amp;#39;) ; insert into emp(name,sex,age,dep_id) values (&amp;#39;jason&amp;#39;,&amp;#39;male&amp;#39;,18,200), (&amp;#39;egon&amp;#39;,&amp;#39;female&amp;#39;,48,201), (&amp;#39;kevin&amp;#39;,&amp;#39;male&amp;#39;,18,201), (&amp;#39;nick&amp;#39;,&amp;#39;male&amp;#39;,28,202), (&amp;#39;owen&amp;#39;,&amp;#39;male&amp;#39;,18,203), (&amp;#39;jerry&amp;#39;,&amp;#39;female&amp;#39;,18,204);&amp;#34;&amp;#34;&amp;#34; 连接表的概念 &amp;#34;&amp;#34;&amp;#34;select * from dep,emp; &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; 结果是一个笛卡尔积(了解) &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; 我们要的不是全部对应一遍，而是按照相同的条件做对应关系 select * from dep,emp where dep.</description>
+			<content type="html"><![CDATA[<h1 id="今日内容概要">今日内容概要</h1>
+<ul>
+<li>
+<p>多表操作的两大方法</p>
+</li>
+<li>
+<p>Navicat软件的使用</p>
+<p>能够让你通过鼠标点点点的操作，来完成对数据库的增删改查</p>
+</li>
+<li>
+<p>多表查询练习题(课上一起写五道练习题)</p>
+</li>
+<li>
+<p>python如何操作MySQL</p>
+</li>
+</ul>
+<h1 id="今日内容详细">今日内容详细</h1>
+<h3 id="多表操作的两大方法">多表操作的两大方法</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;我们需要的数据可能来自于多张表
+</span><span class="s2">
+</span><span class="s2">数据准备
+</span><span class="s2">&gt;&gt;&gt;&gt;&gt;建表
+</span><span class="s2">create table dep(
+</span><span class="s2">id int primary key auto_increment,
+</span><span class="s2">name varchar(20) 
+</span><span class="s2">);
+</span><span class="s2">
+</span><span class="s2">create table emp(
+</span><span class="s2">id int primary key auto_increment,
+</span><span class="s2">name varchar(20),
+</span><span class="s2">sex enum(&#39;male&#39;,&#39;female&#39;) not null default &#39;male&#39;,
+</span><span class="s2">age int,
+</span><span class="s2">dep_id int
+</span><span class="s2">);
+</span><span class="s2">
+</span><span class="s2">&gt;&gt;&gt;&gt;&gt;插入数据
+</span><span class="s2">insert into dep values
+</span><span class="s2">(200,&#39;技术&#39;),
+</span><span class="s2">(201,&#39;人力资源&#39;),
+</span><span class="s2">(202,&#39;销售&#39;),
+</span><span class="s2">(203,&#39;运营&#39;),
+</span><span class="s2">(205,&#39;财务&#39;)
+</span><span class="s2">;
+</span><span class="s2">
+</span><span class="s2">insert into emp(name,sex,age,dep_id) values
+</span><span class="s2">(&#39;jason&#39;,&#39;male&#39;,18,200),
+</span><span class="s2">(&#39;egon&#39;,&#39;female&#39;,48,201),
+</span><span class="s2">(&#39;kevin&#39;,&#39;male&#39;,18,201),
+</span><span class="s2">(&#39;nick&#39;,&#39;male&#39;,28,202),
+</span><span class="s2">(&#39;owen&#39;,&#39;male&#39;,18,203),
+</span><span class="s2">(&#39;jerry&#39;,&#39;female&#39;,18,204);&#34;&#34;&#34;</span>
+
+</code></pre></div><h3 id="连接表的概念">连接表的概念</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;select * from dep,emp;
+</span><span class="s2">&gt;&gt;&gt;&gt;&gt; 结果是一个笛卡尔积(了解)
+</span><span class="s2">
+</span><span class="s2">&gt;&gt;&gt;&gt;&gt; 我们要的不是全部对应一遍，而是按照相同的条件做对应关系
+</span><span class="s2">select * from dep,emp where dep.id = emp.dep_id;
+</span><span class="s2">&#34;&#34;&#34;</span>
+<span class="err">设计到多表操作的情况，非常容易出现两张表字段相同的情况</span>
+<span class="err">这个时候我们都会习惯性的在字段前面加上该字段所载的表名</span>
+<span class="err">来明确到底是哪张表的哪个字段</span>
+
+<span class="n">select</span> <span class="n">emp</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">dep</span><span class="o">.</span><span class="n">name</span> <span class="kn">from</span> <span class="nn">emp</span><span class="p">,</span><span class="n">dep</span> <span class="n">where</span> <span class="n">dep</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">emp</span><span class="o">.</span><span class="n">dep_id</span><span class="p">;</span><span class="s2">&#34;&#34;&#34;
+</span></code></pre></div><h3 id="多表查询方式1连接表">多表查询方式1:连接表</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;内连接
+</span><span class="s2">	inner join
+</span><span class="s2">	select * from emp inner join dep on dep.id = emp.dep_id;
+</span><span class="s2">
+</span><span class="s2">  inner join是连接表的关键字
+</span><span class="s2">  on后面跟的是连接表的连接条件
+</span><span class="s2">  
+</span><span class="s2">  inner join只会连接两张表都有的数据，两张表中没有对应关系的数据都会被直接剔除
+</span><span class="s2">
+</span><span class="s2">  
+</span><span class="s2">  
+</span><span class="s2">左连接
+</span><span class="s2">	left join
+</span><span class="s2">	select * from emp left join dep on dep.id = emp.dep_id;
+</span><span class="s2">
+</span><span class="s2">  以left join左边的表为基准，保留左边表中所有的数据
+</span><span class="s2">  如果没有对应项，则直接使用null填充
+</span><span class="s2">
+</span><span class="s2">  
+</span><span class="s2">右连接
+</span><span class="s2">	right join
+</span><span class="s2">  select * from emp right join dep on dep.id = emp.dep_id;
+</span><span class="s2">
+</span><span class="s2">	以right join右边的表为基准，保留右边表中所有的数据
+</span><span class="s2">  如果没有对应项，则直接使用null填充
+</span><span class="s2">
+</span><span class="s2">  
+</span><span class="s2">全连接(了解)
+</span><span class="s2">	union
+</span><span class="s2">  select * from emp left join dep on dep.id = emp.dep_id
+</span><span class="s2">  union
+</span><span class="s2">  select * from emp right join dep on dep.id = emp.dep_id;
+</span><span class="s2">  
+</span><span class="s2">总结:
+</span><span class="s2">  学习完上述方法之后，其实我们就已经掌握了连接N多张表的方法
+</span><span class="s2">  先连接两张表然后将两张表的结果当做一张表再去连接其他表，依次往复其实我们就可以连接N多张表&#34;&#34;&#34;</span>
+</code></pre></div><h3 id="多表查询方式2子查询">多表查询方式2:子查询</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">子查询其实就是我们日常生活中解决问题的最基本的方法即:分步操作
+</span><span class="s2">在MySQL中子查询的定义:将一张表的查询结果当做另外一条SQL语句的查询条件
+</span><span class="s2">
+</span><span class="s2">比如:我们想查员工jason所在的部门名称
+</span><span class="s2">	1.先去员工表中查询出jason对应的部门id
+</span><span class="s2">	2.拿着部门id去部门表中查询部门名称
+</span><span class="s2">&#34;&#34;&#34;</span>
+<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">select emp.dep_id from emp where emp.name=&#39;jason&#39;;
+</span><span class="s2">select dep.name from dep where dep.id = 200;
+</span><span class="s2">
+</span><span class="s2">&gt;&gt;&gt;&gt;&gt; 一旦一条sql语句需要被当做条件那么只需要在该sql语句前后加上括号即可
+</span><span class="s2">select dep.name from dep 
+</span><span class="s2">					where dep.id = (select emp.dep_id from emp where emp.name=&#39;jason&#39;);
+</span><span class="s2">&#39;&#39;&#39;
+</span><span class="s2">当子查询的条件是多个的情况下上述的等号我们习惯用in来代替即可
+</span><span class="s2">&#39;&#39;&#39;
+</span><span class="s2">
+</span><span class="s2">&gt;&gt;&gt;&gt;&gt; 2.每个部门最新入职的员工(依据昨天的员工表18条数据的) 了解
+</span><span class="s2">&gt;&gt;&gt;&gt;&gt; 思路：先查每个部门最新入职的员工，再按部门对应上联表查询
+</span><span class="s2">select t1.id,t1.name,t1.hire_date,t1.post,t2.* from emp as t1
+</span><span class="s2">inner join
+</span><span class="s2">(select post,max(hire_date) as max_date from emp group by post) as t2
+</span><span class="s2">on t1.post = t2.post
+</span><span class="s2">where t1.hire_date = t2.max_date
+</span><span class="s2">;&#34;&#34;&#34;</span>
+</code></pre></div><h3 id="总结">总结</h3>
+<pre><code class="language-PYTHO" data-lang="PYTHO">'''设计到多表查询，往往可能都要连接表操作和子查询配合使用'''
+</code></pre><h3 id="补充">补充</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">group_concat
+</span><span class="s1">	select group_concat(name,&#34;:&#34;,age) from emp group by id;
+</span><span class="s1">concat
+</span><span class="s1">	select concat(name,&#39;:&#39;,sex,&#39;:&#39;,age,&#39;:&#39;,dep_id) from emp;
+</span><span class="s1">concat_ws
+</span><span class="s1">	当连接多个字段信息的连接符一致的时候，我们可以使用concat_ws节省书写量
+</span><span class="s1">  select concat_ws(&#39;:&#39;,name,sex,age,dep_id) from emp;
+</span><span class="s1">  
+</span><span class="s1">&gt;&gt;&gt;&gt;&gt;exists(了解)
+</span><span class="s1">EXISTS关字键字表示存在。在使用EXISTS关键字时，内层查询语句不返回查询的记录，
+</span><span class="s1">而是返回一个真假值，True或False。
+</span><span class="s1">当返回True时，外层查询语句将进行查询
+</span><span class="s1">当返回值为False时，外层查询语句不进行查询。
+</span><span class="s1">select * from emp
+</span><span class="s1">    where exists
+</span><span class="s1">    (select id from dep where id &gt; 3);
+</span><span class="s1">
+</span><span class="s1">select * from emp
+</span><span class="s1">    where exists
+</span><span class="s1">    (select id from dep where id &gt; 250);&#39;&#39;&#39;</span>
+</code></pre></div><h3 id="navicat使用">Navicat使用</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">可以充当很多数据库软件的客户端
+</span><span class="s2">并且提供了很多简便的用于操作数据库的方法(鼠标点点点)
+</span><span class="s2">
+</span><span class="s2">下载与安装
+</span><span class="s2">	https://www.cr173.com/soft/126934.html
+</span><span class="s2">推荐参考:
+</span><span class="s2">	https://www.cnblogs.com/Kathrine/p/12844846.html
+</span><span class="s2">    
+</span><span class="s2">直接点击next安装即可，无需额外的设置
+</span><span class="s2">
+</span><span class="s2">使用特点
+</span><span class="s2">	讲很多sql语句的操作给你封装成了点点点的操作
+</span><span class="s2">  但是你需要知道的是虽然你用的是点点点，但是软件内部其实是自动帮你书写了对应的sql语句发送给了服务端执行
+</span><span class="s2">  
+</span><span class="s2">*********************************************************
+</span><span class="s2">在使用该软件的时候我们除了可以鼠标点点点之外，也可以自己修改sql语句
+</span><span class="s2">*********************************************************
+</span><span class="s2">
+</span><span class="s2">*********************************************************
+</span><span class="s2">MySQL中的注释
+</span><span class="s2">第一种
+</span><span class="s2">	&gt;&gt;&gt;&gt;&gt; 注释
+</span><span class="s2">第二种
+</span><span class="s2">	-- 注释
+</span><span class="s2">**********************************************************
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></div><h3 id="作业多表查询练习">作业：多表查询练习</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">数据准备
+</span><span class="s2">  &gt;&gt;&gt;建表
+</span><span class="s2">create table dep(
+</span><span class="s2">id int primary key auto_increment,
+</span><span class="s2">name varchar(20) 
+</span><span class="s2">);
+</span><span class="s2">
+</span><span class="s2">create table emp(
+</span><span class="s2">id int primary key auto_increment,
+</span><span class="s2">name varchar(20),
+</span><span class="s2">sex enum(&#39;male&#39;,&#39;female&#39;) not null default &#39;male&#39;,
+</span><span class="s2">age int,
+</span><span class="s2">dep_id int
+</span><span class="s2">);
+</span><span class="s2">
+</span><span class="s2">  &gt;&gt;&gt;插入数据
+</span><span class="s2">insert into dep values
+</span><span class="s2">(200,&#39;技术&#39;),
+</span><span class="s2">(201,&#39;人力资源&#39;),
+</span><span class="s2">(202,&#39;销售&#39;),
+</span><span class="s2">(203,&#39;运营&#39;),
+</span><span class="s2">(205,&#39;财务&#39;)
+</span><span class="s2">;
+</span><span class="s2">
+</span><span class="s2">insert into emp(name,sex,age,dep_id) values
+</span><span class="s2">(&#39;jason&#39;,&#39;male&#39;,18,200),
+</span><span class="s2">(&#39;egon&#39;,&#39;female&#39;,48,201),
+</span><span class="s2">(&#39;kevin&#39;,&#39;male&#39;,18,201),
+</span><span class="s2">(&#39;nick&#39;,&#39;male&#39;,28,202),
+</span><span class="s2">(&#39;owen&#39;,&#39;male&#39;,18,203),
+</span><span class="s2">(&#39;jerry&#39;,&#39;female&#39;,18,204);
+</span><span class="s2">
+</span><span class="s2">    
+</span><span class="s2">    1、查询所有的课程的名称以及对应的任课老师姓名
+</span><span class="s2">  SELECT
+</span><span class="s2">  	teacher.tname,
+</span><span class="s2">  	course.cname 
+</span><span class="s2">  FROM
+</span><span class="s2">  	teacher
+</span><span class="s2">  	INNER JOIN course ON teacher.tid = course.teacher_id;
+</span><span class="s2">  SELECT
+</span><span class="s2">  	teacher.tname,
+</span><span class="s2">  	course.cname 
+</span><span class="s2">  FROM
+</span><span class="s2">  	teacher
+</span><span class="s2">  	INNER JOIN course ON teacher.tid = course.teacher_id;
+</span><span class="s2">
+</span><span class="s2">
+</span><span class="s2">
+</span><span class="s2">  2.查询平均成绩大于八十分的同学的姓名和平均成绩
+</span><span class="s2">  先算出学生的平均成绩 选择大于80的
+</span><span class="s2">  SELECT
+</span><span class="s2">  	student.sname,
+</span><span class="s2">  	t1.avg_num 
+</span><span class="s2">  FROM
+</span><span class="s2">  	student
+</span><span class="s2">  	INNER JOIN (
+</span><span class="s2">  SELECT
+</span><span class="s2">  	student_id,
+</span><span class="s2">  	avg( score.num ) AS avg_num 
+</span><span class="s2">  FROM
+</span><span class="s2">  	score 
+</span><span class="s2">  GROUP BY
+</span><span class="s2">  	score.student_id 
+</span><span class="s2">  HAVING
+</span><span class="s2">  	avg( score.num ) &gt; 80 
+</span><span class="s2">  	) AS t1 ON student.sid = t1.student_id;
+</span><span class="s2">
+</span><span class="s2">
+</span><span class="s2">
+</span><span class="s2">
+</span><span class="s2">  3.查询没有报李平老师课的学生姓名
+</span><span class="s2">  SELECT
+</span><span class="s2">  	student.sname 
+</span><span class="s2">  FROM
+</span><span class="s2">  	student 
+</span><span class="s2">  WHERE
+</span><span class="s2">  	student.sid NOT IN (
+</span><span class="s2">  SELECT DISTINCT
+</span><span class="s2">  	score.student_id 
+</span><span class="s2">  FROM
+</span><span class="s2">  	score 
+</span><span class="s2">  WHERE
+</span><span class="s2">  	score.course_id IN (
+</span><span class="s2">  SELECT
+</span><span class="s2">  	t1.cid 
+</span><span class="s2">  FROM
+</span><span class="s2">  	( SELECT * FROM course INNER JOIN teacher ON course.teacher_id = teacher.tid ) AS t1 
+</span><span class="s2">  WHERE
+</span><span class="s2">  	t1.tname = &#39;李平老师&#39; 
+</span><span class="s2">  	) 
+</span><span class="s2">  	);
+</span><span class="s2">  
+</span><span class="s2">
+</span><span class="s2">4、查询没有同时选修物理课程和体育课程的学生姓名
+</span><span class="s2">  SELECT
+</span><span class="s2">  	student.sname 
+</span><span class="s2">  FROM
+</span><span class="s2">  	student 
+</span><span class="s2">  WHERE
+</span><span class="s2">  	student.sid IN (
+</span><span class="s2">  	SELECT
+</span><span class="s2">  		score.student_id 
+</span><span class="s2">  	FROM
+</span><span class="s2">  		score 
+</span><span class="s2">  	WHERE
+</span><span class="s2">  		score.course_id IN ( SELECT course.cid FROM course WHERE course.cname IN ( &#39;物理&#39;, &#39;体育&#39; ) ) 
+</span><span class="s2">  	GROUP BY
+</span><span class="s2">  		score.student_id 
+</span><span class="s2">  	HAVING
+</span><span class="s2">  	count( score.course_id ) = 1 
+</span><span class="s2">  	);
+</span><span class="s2">
+</span><span class="s2">    
+</span><span class="s2">5.找出挂科两门以上的学生姓名及班级
+</span><span class="s2">INNER JOIN class ON student.class_id = class.cid 
+</span><span class="s2">WHERE
+</span><span class="s2">	student.sid IN (
+</span><span class="s2">SELECT
+</span><span class="s2">	score.student_id 
+</span><span class="s2">FROM
+</span><span class="s2">	score 
+</span><span class="s2">WHERE
+</span><span class="s2">	score.num &lt;= 60 GROUP BY score.student_id HAVING count( score.student_id ) &gt;= 2 
+</span><span class="s2">	);
+</span><span class="s2">	
+</span><span class="s2">	
+</span><span class="s2">	
+</span><span class="s2">基于11.11的表格
+</span><span class="s2">查询平均年龄在25岁以上的部门名
+</span><span class="s2">
+</span><span class="s2">SELECT post FROM emp GROUP BY post HAVING avg(age)&gt;25;
+</span><span class="s2">
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></div>]]></content>
+		</item>
+		
+		<item>
+			<title>MySQL单表查询，关键字，字段修改</title>
+			<link>https://Eddy-622.github.io/posts/mysql%E5%8D%95%E8%A1%A8%E6%9F%A5%E8%AF%A2%E5%85%B3%E9%94%AE%E5%AD%97%E5%AD%97%E6%AE%B5%E4%BF%AE%E6%94%B9/</link>
+			<pubDate>Wed, 11 Nov 2020 00:00:00 +0000</pubDate>
+			
+			<guid>https://Eddy-622.github.io/posts/mysql%E5%8D%95%E8%A1%A8%E6%9F%A5%E8%AF%A2%E5%85%B3%E9%94%AE%E5%AD%97%E5%AD%97%E6%AE%B5%E4%BF%AE%E6%94%B9/</guid>
+			<description>昨日内容回顾   创建表的完整语法
+&amp;#39;&amp;#39;&amp;#39;create table 表名(字段名1 字段类型(数字) 约束条件1 约束条件2,字段名2 字段类型(数字) 约束条件1 约束条件2,字段名3 字段类型(数字) 约束条件1 约束条件2);&amp;#39;&amp;#39;&amp;#39;  约束条件
+&amp;#39;&amp;#39;&amp;#39;unsignedzerofillnot nulldefaultunique单列唯一联合唯一primary key单一主键联合主键auto_increment自增&amp;#39;&amp;#39;&amp;#39;  外键
+&amp;#39;&amp;#39;&amp;#39;外键就是用来建立表与表之间的关系表与表之间关系一对多多对多一对一如何判断表关系&amp;#34;换位思考&amp;#34;换位思考之后如果得出的结论是一方可以一方不可以那么表关系就是&amp;#34;一对多&amp;#34;换位思考之后如果得出的结论是双方都可以那么表关系就是&amp;#34;多对多&amp;#34;换位思考之后如果得出的结论是双方都不可以那么表关系就是&amp;#34;一对一&amp;#34;或者&amp;#34;没有关系&amp;#34;针对不同的表关系外键字段的创建位置也不同1.针对一对多外键字段建在多的一方2.针对多对多外键字段建在第三张关系表中3.针对一对一外键字段建在任何一方都可以但是建议你建在查询频率较高的表中&amp;#39;&amp;#39;&amp;#39;  SQL实现
+&amp;#39;&amp;#39;&amp;#39;create table emp(...dep_id int,foreign key(dep_id) references dep(id)on update cascade &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; 同步更新on delete cascade &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; 同步删除)&amp;#39;&amp;#39;&amp;#39;  作业</description>
+			<content type="html"><![CDATA[<h1 id="昨日内容回顾">昨日内容回顾</h1>
+<ul>
+<li>
+<p>创建表的完整语法</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="s1">&#39;&#39;&#39;create table 表名(
+</span><span class="s1">  字段名1 字段类型(数字) 约束条件1 约束条件2,
+</span><span class="s1">    字段名2 字段类型(数字) 约束条件1 约束条件2,
+</span><span class="s1">    字段名3 字段类型(数字) 约束条件1 约束条件2
+</span><span class="s1">);&#39;&#39;&#39;</span>
+</code></pre></div></li>
+<li>
+<p>约束条件</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;unsigned
+</span><span class="s1">zerofill
+</span><span class="s1">not null
+</span><span class="s1">default
+</span><span class="s1">unique
+</span><span class="s1">  单列唯一
+</span><span class="s1">    联合唯一
+</span><span class="s1">primary key
+</span><span class="s1">  单一主键
+</span><span class="s1">    联合主键
+</span><span class="s1">auto_increment
+</span><span class="s1">  自增&#39;&#39;&#39;</span>
+</code></pre></div></li>
+<li>
+<p>外键</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;外键就是用来建立表与表之间的关系
+</span><span class="s1">  
+</span><span class="s1">表与表之间关系
+</span><span class="s1">  一对多
+</span><span class="s1">    多对多
+</span><span class="s1">    一对一
+</span><span class="s1">   
+</span><span class="s1">如何判断表关系
+</span><span class="s1">  &#34;换位思考&#34;
+</span><span class="s1">      
+</span><span class="s1">换位思考之后如果得出的结论是一方可以一方不可以那么表关系就是&#34;一对多&#34;
+</span><span class="s1">换位思考之后如果得出的结论是双方都可以那么表关系就是&#34;多对多&#34;
+</span><span class="s1">换位思考之后如果得出的结论是双方都不可以那么表关系就是&#34;一对一&#34;或者&#34;没有关系&#34;
+</span><span class="s1">  
+</span><span class="s1">针对不同的表关系外键字段的创建位置也不同
+</span><span class="s1">  1.针对一对多
+</span><span class="s1">      外键字段建在多的一方
+</span><span class="s1">    2.针对多对多
+</span><span class="s1">      外键字段建在第三张关系表中
+</span><span class="s1">    3.针对一对一
+</span><span class="s1">      外键字段建在任何一方都可以但是建议你建在查询频率较高的表中&#39;&#39;&#39;</span>
+</code></pre></div></li>
+<li>
+<p>SQL实现</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;create table emp(
+</span><span class="s1">  ...
+</span><span class="s1">    dep_id int,
+</span><span class="s1">    foreign key(dep_id) references dep(id)
+</span><span class="s1">    on update cascade  &gt;&gt;&gt;&gt;&gt; 同步更新
+</span><span class="s1">    on delete cascade  &gt;&gt;&gt;&gt;&gt; 同步删除
+</span><span class="s1">)&#39;&#39;&#39;</span>
+</code></pre></div></li>
+<li>
+<p>作业</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">1.书籍与出版社
+</span><span class="s2">  要求版权严格一些
+</span><span class="s2">    一对多的关系
+</span><span class="s2">2.学生和班级
+</span><span class="s2">  一对多
+</span><span class="s2">3.老师和课程
+</span><span class="s2">  多对多
+</span><span class="s2">  
+</span><span class="s2">有一些表关系并不是那么明确，需要你结合实际需求和具体的业务需要
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></div></li>
+</ul>
+<h1 id="今日内容概要">今日内容概要</h1>
+<ul>
+<li>
+<p>表关系判断之一对一</p>
+</li>
+<li>
+<p>修改表的SQL语句补充</p>
+</li>
+<li>
+<p>复制表(了解)</p>
+</li>
+<li>
+<p>单表查询关键字的使用</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">select</span>
+<span class="kn">from</span> 
+<span class="nn">where</span>
+<span class="n">group</span> <span class="n">by</span>
+<span class="n">having</span>
+<span class="n">distinct</span>
+<span class="n">limit</span>
+<span class="n">order</span> <span class="n">by</span>
+<span class="n">regexp</span>
+</code></pre></div></li>
+<li>
+<p>多表查询</p>
+</li>
+</ul>
+<h1 id="今日内容详细">今日内容详细</h1>
+<h3 id="表关系判断之一对一">表关系判断之一对一</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">1.qq用户表
+</span><span class="s2">2.客户表和学生表
+</span><span class="s2">
+</span><span class="s2">
+</span><span class="s2">
+</span><span class="s2">有时候一张表里面的数据量太多并且有大部分数据不是经常需要使用的，这个时候我们可以基于表关系的知识将一张表拆分为两张表，然后绑定表关系
+</span><span class="s2">
+</span><span class="s2">以用户表和用户详情表为例
+</span><span class="s2">	1.先站在用户表的基础上
+</span><span class="s2">    	问一个用户能否对应多个用户详情信息
+</span><span class="s2">        	不可以
+</span><span class="s2">    2.再站在用户详情表的基础上
+</span><span class="s2">    	问一个用户详情能否对应多个用户信息
+</span><span class="s2">        	不可以
+</span><span class="s2">结论:双方都不可以，那么表关系就是&#34;一对一&#34;或者&#34;没有关系&#34;
+</span><span class="s2">针对一对一
+</span><span class="s2">    	外键字段建在任何一方都可以但是建议你建在查询频率较高的表中
+</span><span class="s2">    
+</span><span class="s2">    
+</span><span class="s2">SQL语句实现
+</span><span class="s2">create table user(
+</span><span class="s2">	id int primary key auto_increment,
+</span><span class="s2">    name varchar(32),
+</span><span class="s2">    age int,
+</span><span class="s2">    detail_id int unqiue,
+</span><span class="s2">    foreign key(detail_id) references userDetail(id)
+</span><span class="s2">);
+</span><span class="s2">create table userDetail(
+</span><span class="s2">	id int primary key auto_increment,
+</span><span class="s2">    addr varchar(32),
+</span><span class="s2">    phone int
+</span><span class="s2">)&#34;&#34;&#34;</span>
+</code></pre></div><h3 id="表关系的总结">表关系的总结</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">我们学习了如何判断表关系以及如何建立表关系，但是在实际工作中
+</span><span class="s2">遇到有关系的表不一定非要用外键去建立表关系
+</span><span class="s2">因为当表特别多的时候，如果频繁的使用外键会导致表关系非常的复杂，操作起来关联性太强耦合程度太高
+</span><span class="s2">我们可以在sql语句层面建立表与表之间的逻辑关系
+</span><span class="s2">	比如:在修改用户表的时候房屋表也要跟着改，那么我们只需要将
+</span><span class="s2">        修改用户表的sql语句和修改房屋表的sql语句放在一起执行&#34;&#34;&#34;</span>
+</code></pre></div><h3 id="修改表的sql语句补充">修改表的SQL语句补充</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">1.修改表的表名
+</span><span class="s2">	alter table t1 rename t2;
+</span><span class="s2">2.修改表的字段类型
+</span><span class="s2">	alter table t1 modify id varchar(32);
+</span><span class="s2">3.修改表的字段名
+</span><span class="s2">	alter table t1 change id nid int;
+</span><span class="s2">4.添加额外的字段  &gt;&gt;&gt;&gt;&gt; 默认在尾部追加字段
+</span><span class="s2">	alter table t1 add password int;
+</span><span class="s2">5.添加额外的字段  &gt;&gt;&gt;&gt;&gt; 自定义位置
+</span><span class="s2">	alter table t1 add gender enum(&#39;male&#39;,&#39;female&#39;) after name;
+</span><span class="s2">6.添加额外的字段  &gt;&gt;&gt;&gt;&gt; 直接在表的开头
+</span><span class="s2">	alter table t1 add fid int first;
+</span><span class="s2">7.删除字段
+</span><span class="s2">	alter table t1 drop fid;
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></div><h3 id="复制表了解">复制表（了解）</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">sql语句的查询结果其实我们可以看成是一张存在于内存中的虚拟表
+</span><span class="s2">
+</span><span class="s2">create table t789 select * from dep;  &gt;&gt;&gt;&gt;&gt; 将后面表的查询结果直接作为新表的数据
+</span><span class="s2">&gt;&gt;&gt;&gt;&gt; 上述复制表的语法只复制表数据不复制表结构
+</span><span class="s2">
+</span><span class="s2">create table t999 like dep;  &gt;&gt;&gt;&gt;&gt; 复制表结构不要表数据
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></div><h3 id="单表查询">单表查询</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">create table emp(
+</span><span class="s2">  id int primary key auto_increment,
+</span><span class="s2">  name varchar(20) not null,
+</span><span class="s2">  sex enum(&#39;male&#39;,&#39;female&#39;) not null default &#39;male&#39;, &gt;&gt;&gt;&gt;&gt;大部分是男的
+</span><span class="s2">  age int(3) unsigned not null default 28,
+</span><span class="s2">  hire_date date not null,
+</span><span class="s2">  post varchar(50),
+</span><span class="s2">  post_comment varchar(100),
+</span><span class="s2">  salary double(15,2),
+</span><span class="s2">  office int, &gt;&gt;&gt;&gt;&gt;一个部门一个屋子
+</span><span class="s2">  depart_id int
+</span><span class="s2">);
+</span><span class="s2">
+</span><span class="s2">&gt;&gt;&gt;&gt;&gt;插入记录
+</span><span class="s2">&gt;&gt;&gt;&gt;&gt;三个部门：教学，销售，运营
+</span><span class="s2">insert into emp(name,sex,age,hire_date,post,salary,office,depart_id) values
+</span><span class="s2">(&#39;jason&#39;,&#39;male&#39;,18,&#39;20170301&#39;,&#39;张江第一帅形象代言&#39;,7300.33,401,1), &gt;&gt;&gt;&gt;&gt;以下是教学部
+</span><span class="s2">(&#39;tom&#39;,&#39;male&#39;,78,&#39;20150302&#39;,&#39;teacher&#39;,1000000.31,401,1),
+</span><span class="s2">(&#39;kevin&#39;,&#39;male&#39;,81,&#39;20130305&#39;,&#39;teacher&#39;,8300,401,1),
+</span><span class="s2">(&#39;tony&#39;,&#39;male&#39;,73,&#39;20140701&#39;,&#39;teacher&#39;,3500,401,1),
+</span><span class="s2">(&#39;owen&#39;,&#39;male&#39;,28,&#39;20121101&#39;,&#39;teacher&#39;,2100,401,1),
+</span><span class="s2">(&#39;jack&#39;,&#39;female&#39;,18,&#39;20110211&#39;,&#39;teacher&#39;,9000,401,1),
+</span><span class="s2">(&#39;jenny&#39;,&#39;male&#39;,18,&#39;19000301&#39;,&#39;teacher&#39;,30000,401,1),
+</span><span class="s2">(&#39;sank&#39;,&#39;male&#39;,48,&#39;20101111&#39;,&#39;teacher&#39;,10000,401,1),
+</span><span class="s2">(&#39;哈哈&#39;,&#39;female&#39;,48,&#39;20150311&#39;,&#39;sale&#39;,3000.13,402,2),&gt;&gt;&gt;&gt;&gt;以下是销售部门
+</span><span class="s2">(&#39;呵呵&#39;,&#39;female&#39;,38,&#39;20101101&#39;,&#39;sale&#39;,2000.35,402,2),
+</span><span class="s2">(&#39;西西&#39;,&#39;female&#39;,18,&#39;20110312&#39;,&#39;sale&#39;,1000.37,402,2),
+</span><span class="s2">(&#39;乐乐&#39;,&#39;female&#39;,18,&#39;20160513&#39;,&#39;sale&#39;,3000.29,402,2),
+</span><span class="s2">(&#39;拉拉&#39;,&#39;female&#39;,28,&#39;20170127&#39;,&#39;sale&#39;,4000.33,402,2),
+</span><span class="s2">(&#39;僧龙&#39;,&#39;male&#39;,28,&#39;20160311&#39;,&#39;operation&#39;,10000.13,403,3), &gt;&gt;&gt;&gt;&gt;以下是运营部门
+</span><span class="s2">(&#39;程咬金&#39;,&#39;male&#39;,18,&#39;19970312&#39;,&#39;operation&#39;,20000,403,3),
+</span><span class="s2">(&#39;程咬银&#39;,&#39;female&#39;,18,&#39;20130311&#39;,&#39;operation&#39;,19000,403,3),
+</span><span class="s2">(&#39;程咬铜&#39;,&#39;male&#39;,18,&#39;20150411&#39;,&#39;operation&#39;,18000,403,3),
+</span><span class="s2">(&#39;程咬铁&#39;,&#39;female&#39;,18,&#39;20140512&#39;,&#39;operation&#39;,17000,403,3);
+</span><span class="s2">
+</span><span class="s2">&gt;&gt;&gt;&gt;&gt;ps：如果在windows系统中，插入中文字符，select的结果为空白，可以将所有字符编码统一设置成gbk&#34;&#34;&#34;</span>
+</code></pre></div><h3 id="查询语句的书写顺序和执行顺序">查询语句的书写顺序和执行顺序</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">select * from emp where id&gt;3;
+</span><span class="s2">
+</span><span class="s2">关键字的书写顺序
+</span><span class="s2">select
+</span><span class="s2">from
+</span><span class="s2">where
+</span><span class="s2">
+</span><span class="s2">关键字的执行顺序
+</span><span class="s2">from
+</span><span class="s2">where
+</span><span class="s2">select
+</span><span class="s2">
+</span><span class="s2">&gt;&gt;&gt;&gt;&gt; 书写顺序和执行顺序不需要刻意的去记忆，你就按照书写的习惯从左往右书写即可
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></div><h3 id="查询关键字之where筛选">查询关键字之where(筛选)</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">where是用来做数据的筛选操作
+</span><span class="s2">&gt;&gt;&gt;&gt;&gt; 1.查询id大于等于3小于等于6的数据
+</span><span class="s2">select id,name from emp where id &gt;= 3 and id &lt;= 6;
+</span><span class="s2">select *  from emp where id between 3 and 6;  
+</span><span class="s2">
+</span><span class="s2">&gt;&gt;&gt;&gt;&gt; 2.查询薪资是20000或者18000或者17000的数据
+</span><span class="s2">select * from emp where salary=20000 or salary=18000 or salary=17000;
+</span><span class="s2">select * from emp where salary in (20000,18000,17000);
+</span><span class="s2">
+</span><span class="s2">&gt;&gt;&gt;&gt;&gt; 3.查询员工姓名中包含字母o的员工的姓名和薪资
+</span><span class="s2">
+</span><span class="s2">模糊查询
+</span><span class="s2">	关键字 like
+</span><span class="s2">	关键符号
+</span><span class="s2">		%:匹配任意个数的任意字符
+</span><span class="s2">			eg:
+</span><span class="s2">				%j只要字符串末尾是j的都能匹配到
+</span><span class="s2">				%j%只要有j的都能匹配到
+</span><span class="s2">				
+</span><span class="s2">		_:匹配单个个数的任意字符
+</span><span class="s2">			eg:
+</span><span class="s2">				_j只能匹配尾部是j的两位字符
+</span><span class="s2">				_j_只能匹配中间是j的三位字符
+</span><span class="s2">
+</span><span class="s2">select name,salary from emp where name like &#39;</span><span class="si">%o</span><span class="s2">%&#39;;
+</span><span class="s2">
+</span><span class="s2">&gt;&gt;&gt;&gt;&gt; 4.查询员工姓名是由四个字符组成的员工姓名和薪资
+</span><span class="s2">select name,salary from emp where name like &#39;____&#39;;
+</span><span class="s2">select name,salary from emp where char_length(name) = 4;
+</span><span class="s2">
+</span><span class="s2">&gt;&gt;&gt;&gt;&gt; 5.查询id小于3或者大于6的数据
+</span><span class="s2">select * from emp where id&lt;3 or id&gt;6;
+</span><span class="s2">select *  from emp where id not between 3 and 6; 
+</span><span class="s2">
+</span><span class="s2">&gt;&gt;&gt;&gt;&gt; 6.查询岗位描述为空的员工的姓名和岗位名称
+</span><span class="s2">select name,post from emp where post_comment=null;  &gt;&gt;&gt;&gt;&gt; 不行
+</span><span class="s2">select name,post from emp where post_comment is NULL;  &gt;&gt;&gt;&gt;&gt; 可以
+</span><span class="s2">&#39;&#39;&#39;针对null不能用等号需要用is&#39;&#39;&#39;
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></div><h3 id="查询关键字之group-by分组">查询关键字之group by(分组)</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">分组
+</span><span class="s2">	将单个单个的数据按照一定的条件分门别类，之后以分类之后的整体作为运算集
+</span><span class="s2">1.按照部门进行分组
+</span><span class="s2">select * from emp group by post;
+</span><span class="s2">
+</span><span class="s2">需要注意的是在MySQL5.6版本及之前的版本上述语法不会报错
+</span><span class="s2">但是真正情况下分组之后不能够再获取到分组内单个数据的信息，只能拿到分组的依据不能直接再获取到单个数据信息
+</span><span class="s2">MySQL5.7及之后的版本会直接报错
+</span><span class="s2">
+</span><span class="s2">我们需要设置严格模式，让它符合分组之后的规律
+</span><span class="s2">
+</span><span class="s2">set global sql_mode = &#39;STRICT_TRANS_TABLES,ONLY_FULL_GROUP_BY&#39;;
+</span><span class="s2">select post from emp group by post;
+</span><span class="s2">
+</span><span class="s2">2.获取每个部门的最高工资
+</span><span class="s2">select post,max(salary) from emp group by post;
+</span><span class="s2">
+</span><span class="s2">3.获取每个部门的最低工资
+</span><span class="s2">select post,min(salary) from emp group by post;
+</span><span class="s2">
+</span><span class="s2">4.获取每个部门的平均工资
+</span><span class="s2">select post,avg(salary) from emp group by post;
+</span><span class="s2">
+</span><span class="s2">5.获取每个部门的总和工资
+</span><span class="s2">select post,sum(salary) from emp group by post;
+</span><span class="s2">
+</span><span class="s2">6.获取每个部门的人数
+</span><span class="s2">select post,count(id) from emp group by post;
+</span><span class="s2">
+</span><span class="s2">7.查询按照部门分组之后的每个部门名称和每个部门下员工姓名
+</span><span class="s2">select post,group_concat(name) from emp group by post;
+</span><span class="s2">
+</span><span class="s2">group_concat用于分组之后获取非分组依据的其他字段数据
+</span><span class="s2">括号里面可以接受多个数据 展示的时候会自动帮你拼接到一起展示出来
+</span><span class="s2">
+</span><span class="s2">8.查询按照部门分组之后的每个部门名称和每个部门下员工姓名和薪资
+</span><span class="s2">select post,group_concat(name,&#39;:&#39;,salary) from emp group by post;
+</span><span class="s2">select post,group_concat(name,&#39;_NB&#39;) from emp group by post;
+</span><span class="s2">
+</span><span class="s2">
+</span><span class="s2">concat功能跟group_concat是一致的 
+</span><span class="s2">只不过concat只能用于分组之前
+</span><span class="s2">group_concat用于分组之后
+</span><span class="s2">
+</span><span class="s2">&gt;&gt;&gt;&gt;&gt; 查询每个人的年薪
+</span><span class="s2">select name,salary*12 as annual_salary from emp;
+</span><span class="s2">select name,salary*12 annual_salary from emp;  &gt;&gt;&gt;&gt;&gt; as可以省略
+</span><span class="s2">
+</span><span class="s2">9.统计各部门年龄在30岁以上的员工平均工资
+</span><span class="s2">	1.先筛选出年龄在30岁以上的员工
+</span><span class="s2">    2.再按照部门分组运算即可
+</span><span class="s2">select post,avg(salary) from emp where age&gt;30 group by post;
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></div><h3 id="查询关键之having过滤">查询关键之having(过滤)</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">where是分组之前用于数据的筛选
+</span><span class="s2">having是分组之后用于数据的筛选
+</span><span class="s2">&#34;&#34;&#34;</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1">1.统计各部门年龄在30岁以上的员工平均工资，并且保留平均工资大于10000的部门
+</span><span class="s1">select post,avg(salary) from emp 
+</span><span class="s1">			where age&gt;30 
+</span><span class="s1">    		group by post 
+</span><span class="s1">        	having avg(salary) &gt; 10000;
+</span><span class="s1">&#39;&#39;&#39;</span>
+</code></pre></div><h3 id="查询关键字之distinct去重">查询关键字之distinct(去重)</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">去重的前提是数据必须是一模一样的才可以去重
+</span><span class="s1">
+</span><span class="s1">select distinct post from emp;
+</span><span class="s1">&#39;&#39;&#39;</span>
+</code></pre></div><h3 id="查询关键字之order-by排序">查询关键字之order by(排序)</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">select * from emp order by salary  &gt;&gt;&gt;&gt;&gt; 默认是升序
+</span><span class="s2">select * from emp order by salary asc;  &gt;&gt;&gt;&gt;&gt; asc升序的意思 默认可以不写
+</span><span class="s2">select * from emp order by salary desc;  &gt;&gt;&gt;&gt;&gt; 降序
+</span><span class="s2">
+</span><span class="s2">排序的时候如果出现了相同值的情况 那么我们可以指定多个排序规则
+</span><span class="s2">select * from emp order by age asc,salary desc;
+</span><span class="s2">&gt;&gt;&gt;&gt;&gt; 先按照年龄升序排序 如果年龄相同再按照薪资降序排序
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></div><h3 id="查询关键字之limit限制数据条数">查询关键字之limit(限制数据条数)</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">
+</span><span class="s2">limit的使用场景最常见的就是数据的分页展示
+</span><span class="s2">select * from emp limit 5;  &gt;&gt;&gt;&gt;&gt; 只获取前五条数据
+</span><span class="s2">select * from emp limit 5,5;  &gt;&gt;&gt;&gt;&gt; 第一个数字表示起始位置 第二个数字表示数据个数
+</span><span class="s2">
+</span><span class="s2">&gt;&gt;&gt;&gt;&gt; 求薪资最高的用户的用户名和薪资
+</span><span class="s2">	1.选按照薪资降序排序
+</span><span class="s2">    2.再利用limit只取第一条
+</span><span class="s2">select name,salary from emp order by salary desc limit 1;
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></div><h3 id="查询关键字之regexp正则表达式">查询关键字之regexp(正则表达式)</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">正则表达式
+</span><span class="s2">	通过一些符合的组合从字符串中筛选出你想要的内容
+</span><span class="s2">爬虫的时候再具体讲解
+</span><span class="s2">&#34;&#34;&#34;</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1">select * from emp where name regexp &#39;^j.*(n|y)$&#39;;
+</span><span class="s1">^j.*(n|y)$ 
+</span><span class="s1">	&gt;&gt;&gt;&gt;&gt; 匹配字符串
+</span><span class="s1">    1.必须是以字母j开头
+</span><span class="s1">    2.必须是以字母n或者y结尾
+</span><span class="s1">    3.中间可以是任意个数任意字符
+</span><span class="s1">
+</span><span class="s1">补充:正则表达式是一门独立的语言，任何学科任何语言都可以学习使用，规律是一模一样的不受其他语言的影响
+</span><span class="s1">参考书籍:《正则指引》&#39;&#39;&#39;</span>
+</code></pre></div><h3 id="聚合函数">聚合函数</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">聚合函数是在分组之后使用的
+</span><span class="s1">max		最大值
+</span><span class="s1">min		最小值
+</span><span class="s1">count	计数
+</span><span class="s1">avg		平均值
+</span><span class="s1">sum		求和
+</span><span class="s1">&#39;&#39;&#39;</span>
+</code></pre></div><h3 id="修改展示字段">修改展示字段</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">&gt;&gt;&gt;&gt;&gt; 关键字as可以给字段起别名 用于展示的时候显示出来给用户看
+</span><span class="s1">select post as &#39;部门&#39;,max(salary) as &#39;最高薪资&#39; from emp group by post;
+</span><span class="s1">&gt;&gt;&gt;&gt;&gt; 并且as可以省略不写  但是建议你不要省略(容易造成混淆)
+</span><span class="s1">select post &#39;部门&#39;,max(salary) &#39;最高薪资&#39; from emp group by post;
+</span><span class="s1">&#39;&#39;&#39;</span>
+</code></pre></div><h3 id="作业">作业</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">&gt;&gt;&gt;&gt;&gt; 刚开始查询表，一定要按照最基本的步骤，先确定是哪张表，再确定查这张表有没有限制条件，再确定是否需要分类，最后再确定需要什么字段对应的信息
+</span><span class="s2">1. 查询岗位名以及岗位包含的所有员工名字
+</span><span class="s2">2. 查询岗位名以及各岗位内包含的员工个数
+</span><span class="s2">3. 查询公司内男员工和女员工的个数
+</span><span class="s2">4. 查询岗位名以及各岗位的平均薪资
+</span><span class="s2">5. 查询岗位名以及各岗位的最高薪资
+</span><span class="s2">6. 查询岗位名以及各岗位的最低薪资
+</span><span class="s2">7. 查询男员工与男员工的平均薪资，女员工与女员工的平均薪资&#34;&#34;&#34;</span>
+</code></pre></div>]]></content>
+		</item>
+		
+		<item>
+			<title>MySQL完整语法、外键、约束条件</title>
+			<link>https://Eddy-622.github.io/posts/mysql%E5%AE%8C%E6%95%B4%E8%AF%AD%E6%B3%95%E4%B8%BB%E9%94%AE%E5%A4%96%E9%94%AE/</link>
+			<pubDate>Tue, 10 Nov 2020 00:00:00 +0000</pubDate>
+			
+			<guid>https://Eddy-622.github.io/posts/mysql%E5%AE%8C%E6%95%B4%E8%AF%AD%E6%B3%95%E4%B8%BB%E9%94%AE%E5%A4%96%E9%94%AE/</guid>
+			<description>昨日内容回顾   存储引擎
+&amp;#39;&amp;#39;&amp;#39;查看存储引擎show engines;InnoDBMyISAMMemoryBlackHolecreate table t1(id int) engine=memory;&amp;#39;&amp;#39;&amp;#39;  基本SQL语句
+&amp;#39;&amp;#39;&amp;#39;针对库show databases;show create database db1;create database db1;alter database db1 charset=&amp;#39;gbk&amp;#39;;drop database db1;针对表select database();use db1;show tables;show create table t1;describe t1;desc t1;create table t1(id int);alter table t1 modify id tinyiny;alter table t1 change id nid int;alter table t1 rename t2;drop table t1;针对记录select * from t1;select id,username from t1;select User,Hostname from mysql.</description>
+			<content type="html"><![CDATA[<h1 id="昨日内容回顾">昨日内容回顾</h1>
+<ul>
+<li>
+<p>存储引擎</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">查看存储引擎
+</span><span class="s1">show engines;
+</span><span class="s1">  
+</span><span class="s1">  
+</span><span class="s1">InnoDB
+</span><span class="s1">MyISAM
+</span><span class="s1">Memory
+</span><span class="s1">BlackHole
+</span><span class="s1">  
+</span><span class="s1">create table t1(id int) engine=memory;
+</span><span class="s1">&#39;&#39;&#39;</span>
+</code></pre></div></li>
+<li>
+<p>基本SQL语句</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;针对库
+</span><span class="s1">show databases;
+</span><span class="s1">show create database db1;
+</span><span class="s1">create database db1;
+</span><span class="s1">alter database db1 charset=&#39;gbk&#39;;
+</span><span class="s1">drop database db1;
+</span><span class="s1">  
+</span><span class="s1"> 针对表
+</span><span class="s1">select database();
+</span><span class="s1">use db1;
+</span><span class="s1">show tables;
+</span><span class="s1">show create table t1;
+</span><span class="s1">describe t1;
+</span><span class="s1">desc t1;
+</span><span class="s1">create table t1(id int);
+</span><span class="s1">alter table t1 modify id tinyiny;
+</span><span class="s1">alter table t1 change id nid int;
+</span><span class="s1">alter table t1 rename t2;
+</span><span class="s1">drop table t1;
+</span><span class="s1">  
+</span><span class="s1"> 针对记录
+</span><span class="s1">select * from t1;
+</span><span class="s1">select id,username from t1;
+</span><span class="s1">select User,Hostname from mysql.user;
+</span><span class="s1">insert into t1 values(1,&#39;jason&#39;);
+</span><span class="s1">insert into t1(id,username) values(1,&#39;jasonNB&#39;);
+</span><span class="s1">insert into t1 values(1,&#39;jason&#39;),(...),(...);
+</span><span class="s1">update t1 set username=&#39;egon&#39; where username=&#39;jason&#39;;
+</span><span class="s1">delete from t1 where id=1;&#39;&#39;&#39;</span>
+</code></pre></div></li>
+<li>
+<p>数据类型</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;整型
+</span><span class="s1">  tinyint
+</span><span class="s1">    smallint
+</span><span class="s1">    int
+</span><span class="s1">    bigint
+</span><span class="s1">    默认都是带正负号，你也可以在创建表的时候规定不带
+</span><span class="s1">    create table t1(id int unsigned);
+</span><span class="s1">     整型后面括号里面的数字其实没有限制作用...定义整型的时候不需要你自己书写后面的数字
+</span><span class="s1">      
+</span><span class="s1">浮点型
+</span><span class="s1">  float(255,30)
+</span><span class="s1">    double(255,30)
+</span><span class="s1">    decimal(65,30)
+</span><span class="s1">     精确度不一致
+</span><span class="s1">    &#39;&#39;&#39;</span><span class="err">日常开发中很多看似需要用数字存储的数据其实都可以使用字符串来存储</span><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">  
+</span><span class="s1">字符类型
+</span><span class="s1">  char定长
+</span><span class="s1">    varchar不定长
+</span><span class="s1">     char_length()统计数据长度
+</span><span class="s1">  
+</span><span class="s1">日期类型
+</span><span class="s1">  datetime
+</span><span class="s1">    date
+</span><span class="s1">    year
+</span><span class="s1">    time
+</span><span class="s1">  
+</span><span class="s1">枚举与集合类型
+</span><span class="s1">  enum
+</span><span class="s1">    set&#39;&#39;&#39;</span>
+</code></pre></div></li>
+<li>
+<p>sql_mode严格模式</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39; 查看sql_mode
+</span><span class="s1">show variables like &#39;%mode%&#39;;
+</span><span class="s1"> 修改
+</span><span class="s1">set global sql_mode = &#34;STRICT_TRANS_TABLES&#34;;
+</span><span class="s1">set global sql_mode = &#34;PAD_CHAR_TO_FULL_LENGTH&#34;;&#39;&#39;&#39;</span>
+</code></pre></div></li>
+</ul>
+<h1 id="今日内容概要">今日内容概要</h1>
+<ul>
+<li>
+<p>创建表的完整语法</p>
+</li>
+<li>
+<p>字段的约束条件</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">unsigned  &gt;&gt;&gt;&gt;去正负号
+</span><span class="s1">zerofill  &gt;&gt;&gt;&gt;空值用0填充
+</span><span class="s1">  
+</span><span class="s1">not null    &gt;&gt;&gt;&gt;&gt; 非空
+</span><span class="s1">default       &gt;&gt;&gt;&gt; 默认值
+</span><span class="s1">unique       &gt;&gt;&gt;&gt;唯一
+</span><span class="s1">primary key(重要) &gt;&gt;&gt;&gt; 主键 
+</span><span class="s1">auto_increment &gt;&gt;&gt;&gt;&gt;  自增&#39;&#39;&#39;</span>
+</code></pre></div></li>
+<li>
+<p>外键(创建表与表之间的关系)</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">一对多
+</span><span class="s1">多对多
+</span><span class="s1">一对一
+</span><span class="s1">没有关系&#39;&#39;&#39;</span>
+</code></pre></div></li>
+</ul>
+<h1 id="今日内容详细">今日内容详细</h1>
+<h3 id="创建表的完整语法">创建表的完整语法</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;create table 表名(
+</span><span class="s1">	字段名1 字段类型(数字) 约束条件 约束条件,
+</span><span class="s1">    字段名2 字段类型(数字) 约束条件 约束条件,
+</span><span class="s1">    字段名3 字段类型(数字) 约束条件 约束条件
+</span><span class="s1">);
+</span><span class="s1">
+</span><span class="s1">1.数字和约束条件是可选的,而字段名和字段类型则是必需的
+</span><span class="s1">2.最后一行字段定义不要加逗号
+</span><span class="s1">
+</span><span class="s1">create table t1(
+</span><span class="s1">	id int unsigned,
+</span><span class="s1">    name char(4)
+</span><span class="s1">);&#39;&#39;&#39;</span>
+</code></pre></div><h3 id="约束条件">约束条件</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34; 
+</span><span class="s2">not null非空
+</span><span class="s2">create table t2(
+</span><span class="s2">	id int,
+</span><span class="s2">    name varchar(32) not null
+</span><span class="s2">);
+</span><span class="s2">insert into t2(name) values(null);
+</span><span class="s2">
+</span><span class="s2">
+</span><span class="s2"> default默认值
+</span><span class="s2">create table t3(
+</span><span class="s2">	id int,
+</span><span class="s2">    name varchar(32) default &#39;jasonNB&#39;,
+</span><span class="s2">    gender enum(&#39;male&#39;,&#39;female&#39;,&#39;others&#39;) default &#39;male&#39;
+</span><span class="s2">);
+</span><span class="s2">
+</span><span class="s2"> unique唯一
+</span><span class="s2"> 单列唯一
+</span><span class="s2">create table t4(
+</span><span class="s2">	id int,
+</span><span class="s2">    name varchar(32) unique
+</span><span class="s2">);
+</span><span class="s2"> 联合唯一
+</span><span class="s2">create table t5(
+</span><span class="s2">	id int,
+</span><span class="s2">    host varchar(32),
+</span><span class="s2">    port int,
+</span><span class="s2">    unique(host,port)
+</span><span class="s2">);
+</span><span class="s2">
+</span><span class="s2"> primary key主键
+</span><span class="s2">
+</span><span class="s2">1.在约束条件上相等于not null + unique非空且唯一
+</span><span class="s2">
+</span><span class="s2">create table t6(
+</span><span class="s2">	id int primary key
+</span><span class="s2">);
+</span><span class="s2">
+</span><span class="s2">2.在创建表的时候InnoDB引擎规定了一张表必须有且只有一个主键
+</span><span class="s2">	2.1 如果你没有primary key但是有非空且唯一的字段(not null unique)
+</span><span class="s2">		它会从上往下将第一个非空且唯一的字段自动升级为主键
+</span><span class="s2">	2.2 如果你没有任何的主键和其他键字段，那么InnoDB会采用内部隐藏的一个字段作为你表的主键，但是这个隐藏字段你在查询数据的时候是无法使用的
+</span><span class="s2">
+</span><span class="s2">补充:主键可以加快数据的查询速度，类似于书的目录
+</span><span class="s2">
+</span><span class="s2">create table t12(
+</span><span class="s2">	  id int,
+</span><span class="s2">      name char(16),
+</span><span class="s2">      age int not null unique,   自动升级为主键
+</span><span class="s2">      addr char(16) not null unique
+</span><span class="s2">);
+</span><span class="s2">
+</span><span class="s2"> 联合主键(了解)
+</span><span class="s2">create table t13(
+</span><span class="s2">	  ip char(16),
+</span><span class="s2">      port int,
+</span><span class="s2">      primary key(ip,port)
+</span><span class="s2">);
+</span><span class="s2">&#39;&#39;&#39;总结:主键字段一般都用id字段(nid sid uid)&#39;&#39;&#39;
+</span><span class="s2">
+</span><span class="s2">
+</span><span class="s2"> auto_increment自增
+</span><span class="s2">create table t14(
+</span><span class="s2">	id int primary key auto_increment,
+</span><span class="s2">    name varchar(32)
+</span><span class="s2">);
+</span><span class="s2">&#39;&#39;&#39;auto_increment不能给普通的整型字段使用 一般都是直接给主键使用的&#39;&#39;&#39;
+</span><span class="s2">
+</span><span class="s2">总结:
+</span><span class="s2">    以后我们使用SQL语句创建表的时候针对主键字段就是下面的固定写法
+</span><span class="s2">    id int primary key auto_increment
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></div><h3 id="主键的补充">主键的补充</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">1.主键的递增不会因为删除数据而变化
+</span><span class="s1">	delete from 
+</span><span class="s1">2.如果你真的想让主键从头开始计数
+</span><span class="s1">	truncate t1&#39;&#39;&#39;</span>
+</code></pre></div><h3 id="外键">外键</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39; 
+</span><span class="s1">创建一张员工表
+</span><span class="s1">id   name   age   dep_name   dep_desc
+</span><span class="s1">
+</span><span class="s1"> 上述表的缺点
+</span><span class="s1">1.结构不清晰(重点是员工还是部门)
+</span><span class="s1">2.浪费存储空间
+</span><span class="s1">3.数据的扩展性极差
+</span><span class="s1">
+</span><span class="s1"> 如何解决上述问题
+</span><span class="s1">将表进行拆分
+</span><span class="s1">id   name   age
+</span><span class="s1">
+</span><span class="s1">id    dep_name   dep_desc
+</span><span class="s1">
+</span><span class="s1"> 数据之间的对应关系
+</span><span class="s1">外键字段
+</span><span class="s1">	建立表与表之间的关系&#39;&#39;&#39;</span>
+</code></pre></div><h3 id="小技巧">小技巧</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;判断表与表之间的关系只需要
+</span><span class="s1">换位思考
+</span><span class="s1">站在双方的角度思考问题&#39;&#39;&#39;</span>
+</code></pre></div><h3 id="一对多">一对多</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">1.先站在员工表
+</span><span class="s2">	员工表里面的一条数据能否对应部门表里面的多条数据
+</span><span class="s2">     翻译:一个员工能否对应多个部门
+</span><span class="s2">  	结论:不可以
+</span><span class="s2">2.在站在部门表
+</span><span class="s2">	部门表里面的一条数据能否对应员工表里面的多条数据
+</span><span class="s2">    翻译:一个部门能否有多个员工
+</span><span class="s2">     结论:可以
+</span><span class="s2">换位思考之后发现结论是:一个可以一个不可以
+</span><span class="s2">那么员工表与部门表之间的关系就是&#34;一对多&#34;
+</span><span class="s2">
+</span><span class="s2"> 先定义出基表
+</span><span class="s2"> 再添加外键
+</span><span class="s2">create table emp(
+</span><span class="s2">	id int primary key auto_increment,
+</span><span class="s2">    name varchar(32),
+</span><span class="s2">    age int,
+</span><span class="s2">    dep_id int,
+</span><span class="s2">    foreign key(dep_id) references dep(id) 
+</span><span class="s2">); 声明emp表里面的dep_id字段是外键字段 并且跟dep表里的id字段关联
+</span><span class="s2">create table dep(
+</span><span class="s2">	id int primary key auto_increment,
+</span><span class="s2">    dep_name varchar(32),
+</span><span class="s2">    dep_desc varchar(255)
+</span><span class="s2">);
+</span><span class="s2">
+</span><span class="s2">************************************************
+</span><span class="s2">针对一对多的外键关系，外键字段建在多的一方
+</span><span class="s2">************************************************
+</span><span class="s2">
+</span><span class="s2">insert into dep(dep_name,dep_desc) values(&#39;外交部&#39;,&#39;搞外交&#39;),(&#39;讲师部&#39;,&#39;教书育人&#39;),(&#39;技术部&#39;,&#39;技术能力有限部门&#39;);
+</span><span class="s2">insert into emp(name,age,dep_id) values(&#39;jason&#39;,18,1);
+</span><span class="s2">insert into emp(name,age,dep_id) values(&#39;egon&#39;,73,4);&#34;&#34;&#34;</span>
+</code></pre></div><h3 id="外键字段的约束">外键字段的约束</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">1.在创建表的时候一定要先创建被关联表
+</span><span class="s1">2.在录入数据的时候一定要先保证被关联表里面有数据
+</span><span class="s1">3.外键字段的值只能是被关联表字段里面出现过的值
+</span><span class="s1">&#39;&#39;&#39;</span>
+</code></pre></div><h3 id="级联更新级联删除">级联更新级联删除</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">1.修改被关联表的被关联字段(不可以)
+</span><span class="s2">	update dep set id=200 where id=1;
+</span><span class="s2">2.删除被关联表里面的数据项(不可以)
+</span><span class="s2">	delete from dep where id=1;
+</span><span class="s2">    
+</span><span class="s2"> create table emp1(
+</span><span class="s2">	id int primary key auto_increment,
+</span><span class="s2">    name varchar(32),
+</span><span class="s2">    age int,
+</span><span class="s2">    dep_id int,
+</span><span class="s2">    foreign key(dep_id) references dep1(id) 
+</span><span class="s2">    on update cascade 
+</span><span class="s2">    on delete cascade
+</span><span class="s2">);
+</span><span class="s2"> 声明emp表里面的dep_id字段是外键字段 并且跟dep表里的id字段关联
+</span><span class="s2">create table dep1(
+</span><span class="s2">	id int primary key auto_increment,
+</span><span class="s2">    dep_name varchar(32),
+</span><span class="s2">    dep_desc varchar(255)
+</span><span class="s2">);&#34;&#34;&#34;</span>
+</code></pre></div><h3 id="多对多">多对多</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">以书籍表与作者表为例
+</span><span class="s2">1.先站在书籍表
+</span><span class="s2">	一本书能否对应多个作者
+</span><span class="s2">    	可以
+</span><span class="s2">2.再站在作者表
+</span><span class="s2">	一个作者能否写多本书
+</span><span class="s2">    	可以
+</span><span class="s2">结论:如果换位思考之后结论是两个都可以
+</span><span class="s2">     那么表关系就是多对多
+</span><span class="s2"> 
+</span><span class="s2">create table book(
+</span><span class="s2">	id int primary key auto_increment,
+</span><span class="s2">    title varchar(32),
+</span><span class="s2">    price float(18,2),
+</span><span class="s2">    author_id int,
+</span><span class="s2">    foreign key(author_id) references author(id)
+</span><span class="s2">    on update cascade
+</span><span class="s2">    on delete cascade
+</span><span class="s2">);
+</span><span class="s2">
+</span><span class="s2">create table author(
+</span><span class="s2">	id int primary key auto_increment,
+</span><span class="s2">    name varchar(32),
+</span><span class="s2">    phone int,
+</span><span class="s2">    book_id int,
+</span><span class="s2">    foreign key(book_id) references book(id)
+</span><span class="s2">    on update cascade
+</span><span class="s2">    on delete cascade
+</span><span class="s2">);
+</span><span class="s2">&#34;&#34;&#34;</span>
+<span class="o">*********************************************</span>
+<span class="err">多对多外键字段需要你重新创建一张表来专门记录表关系</span>
+<span class="o">*********************************************</span>
+
+
+<span class="n">create</span> <span class="n">table</span> <span class="n">book</span><span class="p">(</span>
+	<span class="nb">id</span> <span class="nb">int</span> <span class="n">primary</span> <span class="n">key</span> <span class="n">auto_increment</span><span class="p">,</span>
+    <span class="n">title</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">32</span><span class="p">),</span>
+    <span class="n">price</span> <span class="nb">float</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="n">create</span> <span class="n">table</span> <span class="n">author</span><span class="p">(</span>
+	<span class="nb">id</span> <span class="nb">int</span> <span class="n">primary</span> <span class="n">key</span> <span class="n">auto_increment</span><span class="p">,</span>
+    <span class="n">name</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">32</span><span class="p">),</span>
+    <span class="n">phone</span> <span class="nb">int</span>
+<span class="p">);</span>
+<span class="n">create</span> <span class="n">table</span> <span class="n">book2author</span><span class="p">(</span>
+	<span class="nb">id</span> <span class="nb">int</span> <span class="n">primary</span> <span class="n">key</span> <span class="n">auto_increment</span><span class="p">,</span>
+    <span class="n">book_id</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">author_id</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">foreign</span> <span class="n">key</span><span class="p">(</span><span class="n">author_id</span><span class="p">)</span> <span class="n">references</span> <span class="n">author</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+    <span class="n">on</span> <span class="n">update</span> <span class="n">cascade</span>
+    <span class="n">on</span> <span class="n">delete</span> <span class="n">cascade</span><span class="p">,</span>
+    <span class="n">foreign</span> <span class="n">key</span><span class="p">(</span><span class="n">book_id</span><span class="p">)</span> <span class="n">references</span> <span class="n">book</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+    <span class="n">on</span> <span class="n">update</span> <span class="n">cascade</span>
+    <span class="n">on</span> <span class="n">delete</span> <span class="n">cascade</span>
+<span class="p">);</span>
+<span class="err">注意事项</span>
+<span class="mf">1.</span><span class="err">两张关系表自身不需要做任何的外键字段</span>
+<span class="mf">2.</span><span class="err">在录入数据的时候也不需要考虑先录入后录入的问题</span>
+<span class="mf">3.</span><span class="err">在针对第三张关系表的时候需要注意约束</span>
+<span class="s2">&#34;&#34;&#34;
+</span></code></pre></div>]]></content>
+		</item>
+		
+		<item>
+			<title>MySQL基本语句，数据类型</title>
+			<link>https://Eddy-622.github.io/posts/mysql%E5%9F%BA%E6%9C%AC%E8%AF%AD%E5%8F%A5%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</link>
+			<pubDate>Mon, 09 Nov 2020 00:00:00 +0000</pubDate>
+			
+			<guid>https://Eddy-622.github.io/posts/mysql%E5%9F%BA%E6%9C%AC%E8%AF%AD%E5%8F%A5%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</guid>
+			<description>今日内容概要   基本的SQL的语句
+对数据库的增删改查
+对表的增删改查
+对记录的增删改查
+  数据库存储引擎
+  MySQL中的数据类型
+  今日内容详细 基本的SQL语句
+&amp;#34;&amp;#34;&amp;#34;针对数据库的增删改查查看show databases; &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;查看所有的数据库show create database 数据库名字； &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;单独查指定的数据库create database 数据库名字； &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;创建数据库alter database 数据库名字 charset=&amp;#39;gbk&amp;#39;; &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;更改数据库的字符编码drop database 数据库名字; &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;删除数据库针对表的增删改查如何查看当前在哪个库下select database();切换数据库use 数据库名；查看show tables; .&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;查看当前库下的所有表show create table 表名； &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;查看指定的表信息describe 表明; &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;查看指定表结构desc 表名；增create table 表名(字段名 字段类型); &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;新建表格改alter table 表名 modify 字段名 字段的数据类型; &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;更改字段的数据类型alter table 表名 change 字段名 新字段名 字段类型;	&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;改字段名alter table 表名 rename 新表名; &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;改表名删drop table 表名;针对记录的增删改查select * from 表名;	&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;查看指定表的所有数据select * from 库名.</description>
+			<content type="html"><![CDATA[<h1 id="今日内容概要">今日内容概要</h1>
+<ul>
+<li>
+<p>基本的SQL的语句</p>
+<p>对数据库的增删改查</p>
+<p>对表的增删改查</p>
+<p>对记录的增删改查</p>
+</li>
+<li>
+<p>数据库存储引擎</p>
+</li>
+<li>
+<p>MySQL中的数据类型</p>
+</li>
+</ul>
+<h1 id="今日内容详细">今日内容详细</h1>
+<p>基本的SQL语句</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">针对数据库的增删改查
+</span><span class="s2">查看
+</span><span class="s2">show databases;   				&gt;&gt;&gt;&gt;&gt;查看所有的数据库
+</span><span class="s2">show create database 数据库名字； &gt;&gt;&gt;&gt;&gt;单独查指定的数据库
+</span><span class="s2">create database 数据库名字；      &gt;&gt;&gt;&gt;&gt;创建数据库
+</span><span class="s2">alter database 数据库名字 charset=&#39;gbk&#39;; 	&gt;&gt;&gt;&gt;&gt;更改数据库的字符编码
+</span><span class="s2">drop database 数据库名字;  		&gt;&gt;&gt;&gt;&gt;删除数据库
+</span><span class="s2">
+</span><span class="s2">
+</span><span class="s2">针对表的增删改查
+</span><span class="s2">如何查看当前在哪个库下
+</span><span class="s2">	select database();
+</span><span class="s2">切换数据库
+</span><span class="s2">	use 数据库名；
+</span><span class="s2">
+</span><span class="s2">查看
+</span><span class="s2">show tables; 			.&gt;&gt;&gt;&gt;&gt;查看当前库下的所有表
+</span><span class="s2">show create table 表名；  &gt;&gt;&gt;&gt;&gt;查看指定的表信息
+</span><span class="s2">describe 表明;           &gt;&gt;&gt;&gt;&gt;查看指定表结构
+</span><span class="s2">desc 表名；
+</span><span class="s2">
+</span><span class="s2">增
+</span><span class="s2">create table 表名(字段名 字段类型);  &gt;&gt;&gt;&gt;&gt;新建表格
+</span><span class="s2">
+</span><span class="s2">改
+</span><span class="s2">alter table 表名 modify 字段名 字段的数据类型; 			&gt;&gt;&gt;&gt;&gt;更改字段的数据类型
+</span><span class="s2">alter table 表名 change 字段名 新字段名 字段类型;		&gt;&gt;&gt;&gt;&gt;改字段名
+</span><span class="s2">alter table 表名 rename 新表名; 						&gt;&gt;&gt;&gt;&gt;改表名
+</span><span class="s2">
+</span><span class="s2">删
+</span><span class="s2">drop table 表名;
+</span><span class="s2">
+</span><span class="s2">
+</span><span class="s2">针对记录的增删改查
+</span><span class="s2">select * from 表名;			&gt;&gt;&gt;&gt;&gt;查看指定表的所有数据
+</span><span class="s2">
+</span><span class="s2">select * from 库名.表名; 		&gt;&gt;&gt;&gt;&gt;查看其它库下的表数据
+</span><span class="s2">
+</span><span class="s2">增
+</span><span class="s2">insert into 表名 values(数据1，数据2);		&gt;&gt;&gt;&gt;&gt;按照字段顺序给表增数据
+</span><span class="s2">insert into 表名(字段名1，字段名2，字段名3)values(数据1，数据2，数据3)；
+</span><span class="s2">						&gt;&gt;&gt;&gt;&gt;自定字段顺序给表增数据
+</span><span class="s2">    
+</span><span class="s2">nsert into 表名 values(数据1,数据2),(数据1,数据2),(数据1,数据2),(数据1,数据2);
+</span><span class="s2">						&gt;&gt;&gt;&gt;&gt;增加多条数据
+</span><span class="s2">
+</span><span class="s2">改
+</span><span class="s2">update 表名 set username=&#39;jasonNB&#39; where username=&#39;jason&#39;;
+</span><span class="s2">&#39;&#39;&#39;将表里面username字段是jason的数据修改为jasonNB&#39;&#39;&#39;
+</span><span class="s2">
+</span><span class="s2">删
+</span><span class="s2">delete from 表名 where id=1;  		&gt;&gt;&gt;&gt;&gt;将id等于1的数据删除
+</span><span class="s2">delete from 表名;  					&gt;&gt;&gt;&gt;&gt;将整个表里面的数据全部删除
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></div><h4 id="mysql中的数据类型">Mysql中的数据类型</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">整型
+</span><span class="s2">tinyint
+</span><span class="s2">smallint
+</span><span class="s2">int
+</span><span class="s2">bigint
+</span><span class="s2">不同的整型类型能够储存的数字最大范围不同，并且数字带有正负号，需要牺牲一位来存储正负号
+</span><span class="s2">验证整型默认都是带正负号还是不带
+</span><span class="s2">create table t1 (id tinyint);
+</span><span class="s2">insert into t1 values(256);
+</span><span class="s2">验证查看结果志存到了127 说明默认是带正负号的
+</span><span class="s2">
+</span><span class="s2">☆规定整型不带正负号
+</span><span class="s2">create table t1(id tinyint unsigned);
+</span><span class="s2">
+</span><span class="s2">整型的括号里数字意义表示的为展示的长度
+</span><span class="s2">不够位数默认的是用空格填充
+</span><span class="s2">设置使用不够用0填充
+</span><span class="s2">☆create table t1 (id int zerofill);
+</span><span class="s2">
+</span><span class="s2">总结：
+</span><span class="s2">	整型括号的数字其实我们不需要在意，直接使用默认的即可，不需要自己指定数字，完全没有意义。
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></div><h4 id="浮点型">浮点型</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">float (255,30)  &gt;&gt;&gt;&gt;总共255位，小数占30位
+</span><span class="s2">double(255,30)	&gt;&gt;&gt;&gt;总共255位，小数占30位		
+</span><span class="s2">decimal(65,30)	&gt;&gt;&gt;&gt;总共65位，小数占30位
+</span><span class="s2">
+</span><span class="s2">三者的区别在于精确度不同
+</span><span class="s2">decimal&gt;double&gt;float
+</span><span class="s2">
+</span><span class="s2">讨论：结合实际情况采用不同精确度的数据类型
+</span><span class="s2">补充：
+</span><span class="s2">	生活中看似有很多需要使用整型或者浮点型的数据
+</span><span class="s2">    其实内部又可能都是直接存的字符串
+</span><span class="s2">    在取出来的时候手动转型，操作完毕之后再转会字符串存入
+</span><span class="s2">    
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></div><h4 id="字符类型">字符类型</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">char(4)  &gt;&gt;&gt;&gt;&gt; 最多只能存4个字符 少了用空格填充至四个，多了直接报错
+</span><span class="s2">varchar(4) &gt;&gt;&gt;&gt;&gt;  最多只能存4个字符 少了有几个存几个，多了直接报错
+</span><span class="s2">&#39;&#39;&#39;针对字符类型括号后面的数组表示的就是存储限制&#39;&#39;&#39;
+</span><span class="s2">create table t10(username char(4));
+</span><span class="s2">create table t11(username varchar(4));
+</span><span class="s2">
+</span><span class="s2">&#39;&#39;&#39;验证char在存储数据的时候是固定长度的&#39;&#39;&#39;
+</span><span class="s2">char_length() &gt;&gt;&gt;&gt;&gt;用来统计字符的个数
+</span><span class="s2">我们在使用上述方法去统计char字段长度的时候发现无法得出正确的结论
+</span><span class="s2">因为MySQL内部在存储的时候确实是按照固定长度存储的，但是在取出来的时候回自动帮你把填充的空格移除，如果你不想让MySQL做自动的处理需要再加一个严格模式配置
+</span><span class="s2">set global sql_mode=&#39;STRICT_TRANS_TABLES,PAD_CHAR_TO_FULL_LENGTH&#39;;
+</span><span class="s2">
+</span><span class="s2">&#39;&#39;&#39;验证varchar在存储数据的时候长度不是固定的&#39;&#39;&#39;
+</span><span class="s2">
+</span><span class="s2">&#39;&#39;&#39;讨论char与varchar优缺点&#39;&#39;&#39;
+</span><span class="s2">char
+</span><span class="s2">	优点:整存整取  存取数据的速度快
+</span><span class="s2">     缺点:浪费存储空间
+</span><span class="s2">     jasonegon kevintony wusiralex 
+</span><span class="s2">   	 存的五位五位的存取得时候五位五位的取
+</span><span class="s2">varchar
+</span><span class="s2">	优点:节省存储空间
+</span><span class="s2">     缺点:存取数据的速度没有char快
+</span><span class="s2">     1bytes+jason1bytes+egon1bytes+kevin1bytes+tony1bytes+wusir1bytes+alex  
+</span><span class="s2">     存的时候需要给数据生成一个报头，取得时候先读报头再读取真实数据长度
+</span><span class="s2">我们以后是用char还是varchar？
+</span><span class="s2">	结合实际情况
+</span><span class="s2">    目前比较推荐使用varchar
+</span><span class="s2">    以前基本上使用的都是char
+</span><span class="s2">&#34;&#34;&#34;</span>
+    
+</code></pre></div><h4 id="严格模式">严格模式</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">我们应该做到数据如果不符合要求，不让存储直接报错
+</span><span class="s2">如果你的MySQL版本是5.6及以下需要你自己设置
+</span><span class="s2">如果你的MySQL版本是5.7及以上则不需要自己设置
+</span><span class="s2">
+</span><span class="s2">如何查看SQL_MODEL
+</span><span class="s2">show variables like &#39;%mode%&#39;;
+</span><span class="s2">
+</span><span class="s2">修改严格模式
+</span><span class="s2">set global sql_mode=&#39;STRICT_TRANS_TABLES&#39;;
+</span><span class="s2">&#39;&#39;&#39;一定要退出客户端重新进入&#39;&#39;&#39;
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></div><h4 id="时间类型">时间类型</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">datetime</span>  <span class="err">年月日时分秒</span>
+<span class="n">date</span>	<span class="err">年月日</span>
+<span class="n">year</span>	<span class="err">年</span>
+<span class="n">time</span>	<span class="err">时分秒</span>
+<span class="n">create</span> <span class="n">table</span> <span class="n">t1</span><span class="p">(</span>
+	<span class="nb">id</span> <span class="nb">int</span><span class="p">,</span>
+	<span class="n">username</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">22</span><span class="p">),</span>
+	<span class="n">register_time</span> <span class="n">datatime</span><span class="p">,</span>
+	<span class="n">birthday</span> <span class="n">date</span><span class="p">,</span>
+	<span class="n">work_time</span> <span class="n">year</span>
+<span class="p">);</span>
+
+</code></pre></div><h4 id="枚举与集合">枚举与集合</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">枚举  		enum
+</span><span class="s2">	多选一
+</span><span class="s2">create table t12(
+</span><span class="s2">	id int,
+</span><span class="s2">	username varchar(22),
+</span><span class="s2">	gender enum(&#39;男&#39;，’女)
+</span><span class="s2">);
+</span><span class="s2">
+</span><span class="s2">集合			set
+</span><span class="s2">	多选多（支持多选一）
+</span><span class="s2">create table t13(
+</span><span class="s2">	id int,
+</span><span class="s2">	username varchar(33),
+</span><span class="s2">	hobby set(&#39;music&#39;,&#39;video&#39;,&#39;play&#39;)
+</span><span class="s2">);&#34;&#34;&#34;</span>
+</code></pre></div><p>当一张表的字段特别多造成cmd窗口展示不全出现混乱的情况</p>
+<p>在查询语句的末尾加上\G</p>
+<p>select * from mysql.user \G;</p>
+]]></content>
+		</item>
 		
 		<item>
 			<title>MySQL下载安装</title>
@@ -282,10 +1611,10 @@
 		
 		<item>
 			<title>常用模块，面向对象，类</title>
-			<link>https://Eddy-622.github.io/posts/%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%B1%BB/</link>
+			<link>https://Eddy-622.github.io/posts/python%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97%E9%9D%A2%E5%90%91%E5%AF%B9%E7%B1%BB/</link>
 			<pubDate>Thu, 05 Nov 2020 00:00:00 +0000</pubDate>
 			
-			<guid>https://Eddy-622.github.io/posts/%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%B1%BB/</guid>
+			<guid>https://Eddy-622.github.io/posts/python%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97%E9%9D%A2%E5%90%91%E5%AF%B9%E7%B1%BB/</guid>
 			<description>今日内容   常用模块
 random模块、时间模块、hashlib模块
   面向对象
@@ -799,10 +2128,10 @@ random模块、时间模块、hashlib模块
 		
 		<item>
 			<title>函数分类，形参实参，结构，模块</title>
-			<link>https://Eddy-622.github.io/posts/%E5%87%BD%E6%95%B0%E5%88%86%E7%B1%BB%E5%BD%A2%E5%8F%82%E5%AE%9E%E5%8F%82%E7%BB%93%E6%9E%84%E6%A8%A1%E5%9D%97/</link>
+			<link>https://Eddy-622.github.io/posts/python%E5%87%BD%E6%95%B0%E5%88%86%E7%B1%BB%E5%BD%A2%E5%8F%82%E5%AE%9E%E5%8F%82%E7%BB%93%E6%9E%84%E6%A8%A1%E5%9D%97/</link>
 			<pubDate>Wed, 04 Nov 2020 00:00:00 +0000</pubDate>
 			
-			<guid>https://Eddy-622.github.io/posts/%E5%87%BD%E6%95%B0%E5%88%86%E7%B1%BB%E5%BD%A2%E5%8F%82%E5%AE%9E%E5%8F%82%E7%BB%93%E6%9E%84%E6%A8%A1%E5%9D%97/</guid>
+			<guid>https://Eddy-622.github.io/posts/python%E5%87%BD%E6%95%B0%E5%88%86%E7%B1%BB%E5%BD%A2%E5%8F%82%E5%AE%9E%E5%8F%82%E7%BB%93%E6%9E%84%E6%A8%A1%E5%9D%97/</guid>
 			<description>今日内容概要   函数
 认识学会基本的函数定义，基本的函数使用
   模块
@@ -1165,10 +2494,10 @@ get_user()
 		
 		<item>
 			<title>字符编码，字符处理，文件处理，文件操作</title>
-			<link>https://Eddy-622.github.io/posts/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E5%AD%97%E7%AC%A6%E5%A4%84%E7%90%86%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/</link>
+			<link>https://Eddy-622.github.io/posts/python%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E5%AD%97%E7%AC%A6%E5%A4%84%E7%90%86%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/</link>
 			<pubDate>Tue, 03 Nov 2020 00:00:00 +0000</pubDate>
 			
-			<guid>https://Eddy-622.github.io/posts/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E5%AD%97%E7%AC%A6%E5%A4%84%E7%90%86%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/</guid>
+			<guid>https://Eddy-622.github.io/posts/python%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E5%AD%97%E7%AC%A6%E5%A4%84%E7%90%86%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/</guid>
 			<description>今日内容概要   字符编码的概念
   文件处理
 用python代码来操作文件的创建、书写、修改
@@ -1489,10 +2818,10 @@ python本质就是一门面向对象的编程语言
 		
 		<item>
 			<title>While循环，for循环，嵌套，数据类型的内置</title>
-			<link>https://Eddy-622.github.io/posts/while%E5%BE%AA%E7%8E%AFfor%E5%BE%AA%E7%8E%AF%E5%B5%8C%E5%A5%97%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%86%85%E7%BD%AE/</link>
+			<link>https://Eddy-622.github.io/posts/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%86%85%E7%BD%AEwhile%E5%BE%AA%E7%8E%AFfor%E5%BE%AA%E7%8E%AF/</link>
 			<pubDate>Mon, 02 Nov 2020 00:00:00 +0000</pubDate>
 			
-			<guid>https://Eddy-622.github.io/posts/while%E5%BE%AA%E7%8E%AFfor%E5%BE%AA%E7%8E%AF%E5%B5%8C%E5%A5%97%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%86%85%E7%BD%AE/</guid>
+			<guid>https://Eddy-622.github.io/posts/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%86%85%E7%BD%AEwhile%E5%BE%AA%E7%8E%AFfor%E5%BE%AA%E7%8E%AF/</guid>
 			<description>上周内容回顾 数据类型 &amp;#39;&amp;#39;&amp;#39;布尔值 bool布尔值的命名传统前面加上is_eg: is_deleteis_status元组 tuplet = (1,2,3,4,5)当容器类型里面只有一个元素的时候也应该将逗号加上集合 sets = {1,2,3,4,5}&amp;#39;&amp;#39;&amp;#39;可变类型与不可变类型 &amp;#39;&amp;#39;&amp;#39; 查询数值的内存地址id()可变类型（列表，字典）值改变内存地址不变不可变类型（整型，浮点型，字符串）值改变内存地址一定变&amp;#39;&amp;#39;&amp;#39;用户交互 &amp;#39;&amp;#39;&amp;#39;获取用户输入inputinput获取到的数据都是字符串类型输出结果print可以一次性输出多个元素，逗号隔开即可&amp;#39;&amp;#39;&amp;#39;格式化输出 &amp;#39;&amp;#39;&amp;#39;占位符 ： %s(可以给任意的数据类型占位)。d%(只能给数字占位)&amp;#39;my name is %sand my age is s%&amp;#39; (Eddy, 18)字符串里有几个占位符，后面给数据的时候就要给出几个真实数据&amp;#39;&amp;#39;&amp;#39;运算符 &amp;#39;&amp;#39;&amp;#39;基本运算符+-*/%**增量赋值x += 1x -= 1x *= 1x /= 1链式赋值a = b = c = 666交叉赋值m = 10n = 999交换m 和 n 的数值方式一利用中间变量tum = mm = n n = tum方式二交叉赋值m,n = n,m解压赋值l = [11,22,33]默认情况下左右两边的个数一定要相等有多少个值就要给多少个变量名a ,b,c = l利用*打破变量名数量的限制a,*_,b = l*_常用来表达无用的数据逻辑运算and or notand连接多个条件，且必须成立，输出结果才为True，有一个条件不成立直接结束，输出Flaseor与and恰恰相反，链接的结果只要一个成立，结果都为True。有一个成立则直接输出结果Truenot取反 not True = Flase身份运算is判断地址是否相等==判断值是否想同值相同内存地址可能不同内存地址相同值一定相同&amp;#39;&amp;#39;&amp;#39;代码的缩进 &amp;#39;&amp;#39;&amp;#39;python中利用代码的缩进来表示代码的从属关系并不是所有的代码都可以又子代码的权限属于同一个代码的多个子代码，子代码之间的缩进必须是相同的遇到冒号说明接下来的代码需要缩进&amp;#39;&amp;#39;&amp;#39;流程控制值if判断 &amp;#39;&amp;#39;&amp;#39;if的固定句式if 条件1:代码1代码2elif 条件2:代码1代码2elif 条件3:代码1代码2else :代码1代码2那个条件成立就会执行哪个条件的子代码其他的都不会被执行所有条件代码中只会被执行一个&amp;#39;&amp;#39;&amp;#39;今日内容 if 判断结束 循环结构值while循环 循环结构之for循环 数据类型的内置方法 字符编码 今日内容详细 if判断 &amp;#39;&amp;#39;&amp;#39;if的嵌套(代码的缩进以及子代码的从属关系)eg:如果女人的年龄小于28岁且定义为漂亮的则上去要微信如果成功则邀请看电影吃饭逛街不成功则 打扰了&amp;#39;&amp;#39;&amp;#39;age = 26is_beautiful = Trueis_success = Trueif age &amp;lt; 28 and is_beautifulprint(&amp;#39;小姐姐加个微信&amp;#39;)#二次判断 if is_success:print(&amp;#39;我们去吃饭看电影逛街吧&amp;#39;)else:print(&amp;#39;打扰了&amp;#39;)else:print(&amp;#39;不好意思认错人了&amp;#39;)循环结构之while循环 break 用于结束离他最近的while循环</description>
 			<content type="html"><![CDATA[<h1 id="上周内容回顾">上周内容回顾</h1>
 <h4 id="数据类型">数据类型</h4>
@@ -2029,10 +3358,10 @@ print(f2 - f1)  # {'kevin', 'tom'}&quot;&quot;&quot;
 		
 		<item>
 			<title>用户交互、格式化输出、运算符、流程控制</title>
-			<link>https://Eddy-622.github.io/posts/%E7%94%A8%E6%88%B7%E4%BA%A4%E4%BA%92%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA%E8%BF%90%E7%AE%97%E7%AC%A6%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6-/</link>
+			<link>https://Eddy-622.github.io/posts/python%E7%94%A8%E6%88%B7%E4%BA%A4%E4%BA%92%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA%E8%BF%90%E7%AE%97%E7%AC%A6%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6-/</link>
 			<pubDate>Fri, 30 Oct 2020 00:00:00 +0000</pubDate>
 			
-			<guid>https://Eddy-622.github.io/posts/%E7%94%A8%E6%88%B7%E4%BA%A4%E4%BA%92%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA%E8%BF%90%E7%AE%97%E7%AC%A6%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6-/</guid>
+			<guid>https://Eddy-622.github.io/posts/python%E7%94%A8%E6%88%B7%E4%BA%A4%E4%BA%92%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA%E8%BF%90%E7%AE%97%E7%AC%A6%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6-/</guid>
 			<description>10.29内容回顾   代码的注释
 &amp;#39;&amp;#39;&amp;#39;1.# 单行注释2.&amp;#39;&amp;#39;&amp;#39;&amp;#39;&amp;#39;&amp;#39;,&amp;#34;&amp;#34;&amp;#34;&amp;#34;&amp;#34;&amp;#34; 多行注释在pycharm中的快捷键ctrl+? 注释快捷键，再次激活取消注释&amp;#39;&amp;#39;&amp;#39;  变量
 &amp;#39;&amp;#39;&amp;#39;语法规范变量名 赋值符号 变量的值&amp;#39;&amp;#39;&amp;#39;name = &amp;#39;Eddy&amp;#39;&amp;#34;&amp;#34;&amp;#34;遇到赋值符号先看符号右边的再看符号左边的&amp;#34;&amp;#34;&amp;#34;# 情况1  name = &amp;#39;jason&amp;#39;name = &amp;#39;egon&amp;#39;name = &amp;#39;tony&amp;#39;&amp;#39;&amp;#39;&amp;#39;name依次被赋予 jason egon tony 三个值，但是最后只能指向一个值所有此时name对应的值为 tony&amp;#39;&amp;#39;&amp;#39;# 情况2 name = &amp;#39;jason&amp;#39;name1 = namename2 = name&amp;#39;&amp;#39;&amp;#39;name被赋予Jason，name1,name2 同时被赋予name的值所有 name1 = name2 = name = Jason&amp;#39;&amp;#39;&amp;#39;  变量的命名规范(必须遵守)

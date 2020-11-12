@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MySQL on Eddy&#39;s Boke</title>
+    <link>https://Eddy-622.github.io/tags/mysql/</link>
+    <description>Recent content in MySQL on Eddy&#39;s Boke</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Thu, 12 Nov 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://Eddy-622.github.io/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>MySQL多表查询、连接表、子查询、Nevicat</title>
+      <link>https://Eddy-622.github.io/posts/mysql%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2%E5%AD%90%E6%9F%A5%E8%AF%A2%E8%BF%9E%E6%8E%A5%E8%A1%A8/</link>
+      <pubDate>Thu, 12 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/posts/mysql%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2%E5%AD%90%E6%9F%A5%E8%AF%A2%E8%BF%9E%E6%8E%A5%E8%A1%A8/</guid>
+      <description>今日内容概要   多表操作的两大方法
+  Navicat软件的使用
+能够让你通过鼠标点点点的操作，来完成对数据库的增删改查
+  多表查询练习题(课上一起写五道练习题)
+  python如何操作MySQL
+  今日内容详细 多表操作的两大方法 &amp;#34;&amp;#34;&amp;#34;我们需要的数据可能来自于多张表 数据准备 &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;建表 create table dep( id int primary key auto_increment, name varchar(20) ); create table emp( id int primary key auto_increment, name varchar(20), sex enum(&amp;#39;male&amp;#39;,&amp;#39;female&amp;#39;) not null default &amp;#39;male&amp;#39;, age int, dep_id int ); &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;插入数据 insert into dep values (200,&amp;#39;技术&amp;#39;), (201,&amp;#39;人力资源&amp;#39;), (202,&amp;#39;销售&amp;#39;), (203,&amp;#39;运营&amp;#39;), (205,&amp;#39;财务&amp;#39;) ; insert into emp(name,sex,age,dep_id) values (&amp;#39;jason&amp;#39;,&amp;#39;male&amp;#39;,18,200), (&amp;#39;egon&amp;#39;,&amp;#39;female&amp;#39;,48,201), (&amp;#39;kevin&amp;#39;,&amp;#39;male&amp;#39;,18,201), (&amp;#39;nick&amp;#39;,&amp;#39;male&amp;#39;,28,202), (&amp;#39;owen&amp;#39;,&amp;#39;male&amp;#39;,18,203), (&amp;#39;jerry&amp;#39;,&amp;#39;female&amp;#39;,18,204);&amp;#34;&amp;#34;&amp;#34; 连接表的概念 &amp;#34;&amp;#34;&amp;#34;select * from dep,emp; &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; 结果是一个笛卡尔积(了解) &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; 我们要的不是全部对应一遍，而是按照相同的条件做对应关系 select * from dep,emp where dep.</description>
+    </item>
+    
+    <item>
+      <title>MySQL单表查询，关键字，字段修改</title>
+      <link>https://Eddy-622.github.io/posts/mysql%E5%8D%95%E8%A1%A8%E6%9F%A5%E8%AF%A2%E5%85%B3%E9%94%AE%E5%AD%97%E5%AD%97%E6%AE%B5%E4%BF%AE%E6%94%B9/</link>
+      <pubDate>Wed, 11 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/posts/mysql%E5%8D%95%E8%A1%A8%E6%9F%A5%E8%AF%A2%E5%85%B3%E9%94%AE%E5%AD%97%E5%AD%97%E6%AE%B5%E4%BF%AE%E6%94%B9/</guid>
+      <description>昨日内容回顾   创建表的完整语法
+&amp;#39;&amp;#39;&amp;#39;create table 表名(字段名1 字段类型(数字) 约束条件1 约束条件2,字段名2 字段类型(数字) 约束条件1 约束条件2,字段名3 字段类型(数字) 约束条件1 约束条件2);&amp;#39;&amp;#39;&amp;#39;  约束条件
+&amp;#39;&amp;#39;&amp;#39;unsignedzerofillnot nulldefaultunique单列唯一联合唯一primary key单一主键联合主键auto_increment自增&amp;#39;&amp;#39;&amp;#39;  外键
+&amp;#39;&amp;#39;&amp;#39;外键就是用来建立表与表之间的关系表与表之间关系一对多多对多一对一如何判断表关系&amp;#34;换位思考&amp;#34;换位思考之后如果得出的结论是一方可以一方不可以那么表关系就是&amp;#34;一对多&amp;#34;换位思考之后如果得出的结论是双方都可以那么表关系就是&amp;#34;多对多&amp;#34;换位思考之后如果得出的结论是双方都不可以那么表关系就是&amp;#34;一对一&amp;#34;或者&amp;#34;没有关系&amp;#34;针对不同的表关系外键字段的创建位置也不同1.针对一对多外键字段建在多的一方2.针对多对多外键字段建在第三张关系表中3.针对一对一外键字段建在任何一方都可以但是建议你建在查询频率较高的表中&amp;#39;&amp;#39;&amp;#39;  SQL实现
+&amp;#39;&amp;#39;&amp;#39;create table emp(...dep_id int,foreign key(dep_id) references dep(id)on update cascade &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; 同步更新on delete cascade &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; 同步删除)&amp;#39;&amp;#39;&amp;#39;  作业</description>
+    </item>
+    
+    <item>
+      <title>MySQL完整语法、外键、约束条件</title>
+      <link>https://Eddy-622.github.io/posts/mysql%E5%AE%8C%E6%95%B4%E8%AF%AD%E6%B3%95%E4%B8%BB%E9%94%AE%E5%A4%96%E9%94%AE/</link>
+      <pubDate>Tue, 10 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/posts/mysql%E5%AE%8C%E6%95%B4%E8%AF%AD%E6%B3%95%E4%B8%BB%E9%94%AE%E5%A4%96%E9%94%AE/</guid>
+      <description>昨日内容回顾   存储引擎
+&amp;#39;&amp;#39;&amp;#39;查看存储引擎show engines;InnoDBMyISAMMemoryBlackHolecreate table t1(id int) engine=memory;&amp;#39;&amp;#39;&amp;#39;  基本SQL语句
+&amp;#39;&amp;#39;&amp;#39;针对库show databases;show create database db1;create database db1;alter database db1 charset=&amp;#39;gbk&amp;#39;;drop database db1;针对表select database();use db1;show tables;show create table t1;describe t1;desc t1;create table t1(id int);alter table t1 modify id tinyiny;alter table t1 change id nid int;alter table t1 rename t2;drop table t1;针对记录select * from t1;select id,username from t1;select User,Hostname from mysql.</description>
+    </item>
+    
+    <item>
+      <title>MySQL基本语句，数据类型</title>
+      <link>https://Eddy-622.github.io/posts/mysql%E5%9F%BA%E6%9C%AC%E8%AF%AD%E5%8F%A5%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</link>
+      <pubDate>Mon, 09 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/posts/mysql%E5%9F%BA%E6%9C%AC%E8%AF%AD%E5%8F%A5%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</guid>
+      <description>今日内容概要   基本的SQL的语句
+对数据库的增删改查
+对表的增删改查
+对记录的增删改查
+  数据库存储引擎
+  MySQL中的数据类型
+  今日内容详细 基本的SQL语句
+&amp;#34;&amp;#34;&amp;#34;针对数据库的增删改查查看show databases; &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;查看所有的数据库show create database 数据库名字； &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;单独查指定的数据库create database 数据库名字； &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;创建数据库alter database 数据库名字 charset=&amp;#39;gbk&amp;#39;; &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;更改数据库的字符编码drop database 数据库名字; &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;删除数据库针对表的增删改查如何查看当前在哪个库下select database();切换数据库use 数据库名；查看show tables; .&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;查看当前库下的所有表show create table 表名； &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;查看指定的表信息describe 表明; &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;查看指定表结构desc 表名；增create table 表名(字段名 字段类型); &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;新建表格改alter table 表名 modify 字段名 字段的数据类型; &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;更改字段的数据类型alter table 表名 change 字段名 新字段名 字段类型;	&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;改字段名alter table 表名 rename 新表名; &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;改表名删drop table 表名;针对记录的增删改查select * from 表名;	&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;查看指定表的所有数据select * from 库名.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="theme-color" content="#494f5c">
+	<meta name="msapplication-TileColor" content="#494f5c">
+<meta itemprop="name" content="用户交互、格式化输出、运算符、流程控制">
+<meta itemprop="description" content="10.29内容回顾   代码的注释
+&#39;&#39;&#39;1.# 单行注释2.&#39;&#39;&#39;&#39;&#39;&#39;,&#34;&#34;&#34;&#34;&#34;&#34; 多行注释在pycharm中的快捷键ctrl&#43;? 注释快捷键，再次激活取消注释&#39;&#39;&#39;  变量
+&#39;&#39;&#39;语法规范变量名 赋值符号 变量的值&#39;&#39;&#39;name = &#39;Eddy&#39;&#34;&#34;&#34;遇到赋值符号先看符号右边的再看符号左边的&#34;&#34;&#34;# 情况1  name = &#39;jason&#39;name = &#39;egon&#39;name = &#39;tony&#39;&#39;&#39;&#39;name依次被赋予 jason egon tony 三个值，但是最后只能指向一个值所有此时name对应的值为 tony&#39;&#39;&#39;# 情况2 name = &#39;jason&#39;name1 = namename2 = name&#39;&#39;&#39;name被赋予Jason，name1,name2 同时被赋予name的值所有 name1 = name2 = name = Jason&#39;&#39;&#39;  变量的命名规范(必须遵守)
+&#39;&#39;&#39;1.只能包含数字、字母、下划线2.数字不能开头、下划线也尽量不要开头(隐藏变量)3.">
+<meta itemprop="datePublished" content="2020-10-30T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-10-30T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1098">
+
+
+
+<meta itemprop="keywords" content="用户交互,流程控制,格式化输出," /><meta property="og:title" content="用户交互、格式化输出、运算符、流程控制" />
+<meta property="og:description" content="10.29内容回顾   代码的注释
+&#39;&#39;&#39;1.# 单行注释2.&#39;&#39;&#39;&#39;&#39;&#39;,&#34;&#34;&#34;&#34;&#34;&#34; 多行注释在pycharm中的快捷键ctrl&#43;? 注释快捷键，再次激活取消注释&#39;&#39;&#39;  变量
+&#39;&#39;&#39;语法规范变量名 赋值符号 变量的值&#39;&#39;&#39;name = &#39;Eddy&#39;&#34;&#34;&#34;遇到赋值符号先看符号右边的再看符号左边的&#34;&#34;&#34;# 情况1  name = &#39;jason&#39;name = &#39;egon&#39;name = &#39;tony&#39;&#39;&#39;&#39;name依次被赋予 jason egon tony 三个值，但是最后只能指向一个值所有此时name对应的值为 tony&#39;&#39;&#39;# 情况2 name = &#39;jason&#39;name1 = namename2 = name&#39;&#39;&#39;name被赋予Jason，name1,name2 同时被赋予name的值所有 name1 = name2 = name = Jason&#39;&#39;&#39;  变量的命名规范(必须遵守)
+&#39;&#39;&#39;1.只能包含数字、字母、下划线2.数字不能开头、下划线也尽量不要开头(隐藏变量)3." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://Eddy-622.github.io/posts/python%E7%94%A8%E6%88%B7%E4%BA%A4%E4%BA%92%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA%E8%BF%90%E7%AE%97%E7%AC%A6%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6-/" />
+<meta property="article:published_time" content="2020-10-30T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-10-30T00:00:00+00:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="用户交互、格式化输出、运算符、流程控制"/>
+<meta name="twitter:description" content="10.29内容回顾   代码的注释
+&#39;&#39;&#39;1.# 单行注释2.&#39;&#39;&#39;&#39;&#39;&#39;,&#34;&#34;&#34;&#34;&#34;&#34; 多行注释在pycharm中的快捷键ctrl&#43;? 注释快捷键，再次激活取消注释&#39;&#39;&#39;  变量
+&#39;&#39;&#39;语法规范变量名 赋值符号 变量的值&#39;&#39;&#39;name = &#39;Eddy&#39;&#34;&#34;&#34;遇到赋值符号先看符号右边的再看符号左边的&#34;&#34;&#34;# 情况1  name = &#39;jason&#39;name = &#39;egon&#39;name = &#39;tony&#39;&#39;&#39;&#39;name依次被赋予 jason egon tony 三个值，但是最后只能指向一个值所有此时name对应的值为 tony&#39;&#39;&#39;# 情况2 name = &#39;jason&#39;name1 = namename2 = name&#39;&#39;&#39;name被赋予Jason，name1,name2 同时被赋予name的值所有 name1 = name2 = name = Jason&#39;&#39;&#39;  变量的命名规范(必须遵守)
+&#39;&#39;&#39;1.只能包含数字、字母、下划线2.数字不能开头、下划线也尽量不要开头(隐藏变量)3."/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="/favicon.ico">
+
+	<title>用户交互、格式化输出、运算符、流程控制</title>
+	<link rel="stylesheet" href="https://Eddy-622.github.io/css/style.min.657bcb7af31123e4156b1a3d2ff60a636717e54ead74f882136b5114cf72b55e.css" integrity="sha256-ZXvLevMRI+QVaxo9L/YKY2cX5U6tdPiCE2tRFM9ytV4=" crossorigin="anonymous">
+	
+</head>
+
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp faster">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="https://Eddy-622.github.io">Eddy&#39;s Boke</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					
+				<a href="https://Eddy-622.github.io/posts/">博客</a>
+				<a href="https://Eddy-622.github.io/about-hugo/">关于</a>
+
+				</nav>
+			</div>
+			<div class="hdr-right hdr-icons">
+				<span class="hdr-social hide-in-mobile"><a href="https://mobile.twitter.com/zhang_kea" target="_blank" rel="noopener me" title="Twitter"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a><a href="https://www.facebook.com/kea.zhang.92" target="_blank" rel="noopener me" title="Instagram"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line></svg></a><a href="https://github.com/Eddy-622" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></span><button id="menu-btn" class="hdr-btn" title="Menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast">
+		<ul>
+			<li><a href="https://Eddy-622.github.io/posts/">博客</a></li>
+			<li><a href="https://Eddy-622.github.io/about-hugo/">关于</a></li>
+		</ul>
+	</div>
+
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta"><span>Oct 30, 2020</span></div>
+				<h1>用户交互、格式化输出、运算符、流程控制</h1>
+			</header>
+			<div class="content">
+				<h1 id="1029内容回顾">10.29内容回顾<a href="#1029内容回顾" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<ul>
+<li>
+<p>代码的注释</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;1.#   单行注释
+</span><span class="s1">2.&#39;&#39;&#39;&#39;&#39;&#39;,&#34;&#34;&#34;&#34;&#34;&#34;  多行注释
+</span><span class="s1">在pycharm中的快捷键ctrl+?   注释快捷键，再次激活取消注释&#39;&#39;&#39;</span>
+</code></pre></div></li>
+<li>
+<p>变量</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;语法规范
+</span><span class="s1">变量名 赋值符号 变量的值&#39;&#39;&#39;</span>
+<span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Eddy&#39;</span>
+<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">遇到赋值符号先看符号右边的
+</span><span class="s2">再看符号左边的
+</span><span class="s2">&#34;&#34;&#34;</span>
+<span class="c1"># 情况1 </span>
+<span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;jason&#39;</span>
+<span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;egon&#39;</span>
+<span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;tony&#39;</span>
+<span class="s1">&#39;&#39;&#39;name依次被赋予 jason  egon tony 三个值，但是最后只能指向一个值
+</span><span class="s1">所有此时name对应的值为 tony&#39;&#39;&#39;</span>
+<span class="c1"># 情况2</span>
+<span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;jason&#39;</span>
+<span class="n">name1</span> <span class="o">=</span> <span class="n">name</span>
+<span class="n">name2</span> <span class="o">=</span> <span class="n">name</span>
+<span class="s1">&#39;&#39;&#39;name被赋予Jason，name1,name2 同时被赋予name的值
+</span><span class="s1">所有 name1 = name2 = name = Jason&#39;&#39;&#39;</span>
+</code></pre></div></li>
+<li>
+<p>变量的命名规范(必须遵守)</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;1.只能包含数字、字母、下划线
+</span><span class="s1">2.数字不能开头、下划线也尽量不要开头(隐藏变量)
+</span><span class="s1">3.变量名一定要做到见名知意
+</span><span class="s1">4.变量名不能跟python里面的关键字冲突&#39;&#39;&#39;</span>
+  
+<span class="k">print</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+<span class="k">print</span> <span class="o">=</span> <span class="s1">&#39;hello world&#39;</span>  <span class="c1"># 不能使用关键字作为变量名</span>
+<span class="k">print</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+<span class="s1">&#39;&#39;&#39;print被作为变量名赋值之后则他会失去原本打印的功能，所有
+</span><span class="s1">变量名不可以是关键字字符&#39;&#39;&#39;</span>
+</code></pre></div></li>
+<li>
+<p>变量的命名风格</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;1.下划线
+</span><span class="s1">  user_name = &#39;jason&#39;
+</span><span class="s1">2.驼峰体
+</span><span class="s1">  userName = &#39;jason&#39;
+</span><span class="s1">    UserName = &#39;jason&#39;&#39;&#39;&#39;</span>
+<span class="s1">&#39;&#39;&#39;python推荐使用下划线，Js推荐使用驼峰体&#39;&#39;&#39;</span>
+</code></pre></div></li>
+<li>
+<p>常量</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;在python中没有真正意义上的常量，我们墨守成规的将全大写的变量名看成是常量
+</span><span class="s1">HOST = &#39;127.0.0.1&#39;
+</span><span class="s1">PORT = 6379
+</span><span class="s1">在其他编程语言中如js是有真正意义上的常量的(定义之后就无法修改了)&#39;&#39;&#39;</span>
+</code></pre></div></li>
+<li>
+<p>PEP8规范</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">1.赋值符号左右两边都应该有空格
+</span><span class="s1">2.逗号后面应该有空格
+</span><span class="s1">3.注释符号与文字之间应该有空格
+</span><span class="s1">4.注释和代码在一行的情况下注释符号需要与代码之间空两格
+</span><span class="s1">&#39;&#39;&#39;</span>
+  
+<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">先在pycharm中书写代码，你可以不考虑规范
+</span><span class="s2">然后利用pycharm自动格式化代码的功能，学习它帮你格式化了哪些地方
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></div></li>
+<li>
+<p>查看数据类型</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">type</span><span class="p">()</span>
+</code></pre></div></li>
+<li>
+<p>数据类型</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">整型int
+</span><span class="s1">age = 18
+</span><span class="s1">  
+</span><span class="s1">浮点型float
+</span><span class="s1">salary = 11.11
+</span><span class="s1">  
+</span><span class="s1">字符串str
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;jason&#39;</span>
+<span class="n">name1</span> <span class="o">=</span> <span class="s2">&#34;jason1&#34;</span>
+<span class="n">name2</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;jason2&#39;&#39;&#39;</span>
+<span class="n">name3</span> <span class="o">=</span> <span class="s2">&#34;&#34;&#34;jason3&#34;&#34;&#34;</span>
+<span class="c1"># 小操作</span>
+<span class="n">name</span> <span class="o">+</span> <span class="n">name1</span> 
+<span class="n">name</span> <span class="o">*</span> <span class="mi">10</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1">列表list
+</span><span class="s1">l1 = [&#39;jason&#39;, 123, 11.11, [1, 2, 3]]
+</span><span class="s1"># 索引(index)取值:在IT行业索引都是从0开始的
+</span><span class="s1">l1[0]
+</span><span class="s1"># 针对嵌套问题
+</span><span class="s1">l1[0][2][1]
+</span><span class="s1">  
+</span><span class="s1">字典dict
+</span><span class="s1">字典的key一般情况下都是字符串，字典的value可以是任意数据类型
+</span><span class="s1">d = {
+</span><span class="s1">    &#39;name&#39;:&#39;jason&#39;,
+</span><span class="s1">    &#39;age&#39;:123,
+</span><span class="s1">    &#39;hobby&#39;:[1, 2, 3]
+</span><span class="s1">}
+</span><span class="s1"># 字典的取值
+</span><span class="s1">d[&#39;name&#39;]
+</span><span class="s1">d.get(&#39;name&#39;)
+</span><span class="s1">&#39;&#39;&#39;</span>
+</code></pre></div></li>
+</ul>
+<h1 id="今日内容概要">今日内容概要<a href="#今日内容概要" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<ul>
+<li>数据类型之布尔值</li>
+<li>数据类型之元组</li>
+<li>数据类型之集合</li>
+<li>与用户交互及运算符</li>
+<li>数据类型的内置方法</li>
+<li>流程控制</li>
+</ul>
+<h1 id="今日内容详细">今日内容详细<a href="#今日内容详细" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<h3 id="数据类型之布尔值bool">数据类型之布尔值bool<a href="#数据类型之布尔值bool" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">布尔值总共就两种情况
+</span><span class="s1">True
+</span><span class="s1">False
+</span><span class="s1">在逻辑运算中用来判断事物的对错和是否可行
+</span><span class="s1">(流程控制中会学习)
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1">在python中，如果一个变量的值是布尔值
+</span><span class="s1">那么我们会习惯性的将变量名起名为is开头
+</span><span class="s1">is_right = True
+</span><span class="s1">is_status = True
+</span><span class="s1">is_delete = True
+</span><span class="s1">&#39;&#39;&#39;</span>
+</code></pre></div><h3 id="数据类型之元组tuple">数据类型之元组tuple<a href="#数据类型之元组tuple" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<p>符号：（）</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">元组与列表类似，也是可以存多个任意类型的元素，
+</span><span class="s1">不同之处在于元组的元素不能修改，
+</span><span class="s1">即元组相当于不可变的列表，
+</span><span class="s1">用于记录多个固定不允许修改的值，单纯用于取
+</span><span class="s1">目前你只需要知道元组就相当于不可变的列表
+</span><span class="s1">元组的符号是()
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="n">name</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">元组的小坑
+</span><span class="s2">
+</span><span class="s2"># t = (1)
+</span><span class="s2"># print(type(t))  # &lt;class &#39;int&#39;&gt;
+</span><span class="s2"># t1 = (&#39;jason&#39;)
+</span><span class="s2"># print(type(t1))  # &lt;class &#39;str&#39;&gt;
+</span><span class="s2"># 如果元组里面只有一个元素，那么你也需要将逗号加上
+</span><span class="s2">t = (1,)
+</span><span class="s2">print(type(t))  # &lt;class &#39;tuple&#39;&gt;
+</span><span class="s2">t1 = (&#39;jason&#39;,)
+</span><span class="s2">print(type(t1))  # &lt;class &#39;tuple&#39;&gt;
+</span><span class="s2">&#39;&#39;&#39;
+</span><span class="s2">容器类型:能够存储多个数据的数据类型,eg:list、tuple、dict
+</span><span class="s2">针对容器类型，如果里面只有一个元素
+</span><span class="s2">我们也推荐你将逗号加上
+</span><span class="s2">&#39;&#39;&#39;
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></div><h3 id="数据类型之集合set">数据类型之集合set<a href="#数据类型之集合set" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<p>符号：{}</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">集合主要是用来做以下两种需求
+</span><span class="s1">1.去重
+</span><span class="s1">	去掉重复的元素
+</span><span class="s1">2.关系运算
+</span><span class="s1">	共同好友、共同关注
+</span><span class="s1">集合也可以存放多个数据，数据与数据之间逗号隔开，数据必须是不可变类型
+</span><span class="s1">集合的符号也是{}
+</span><span class="s1">s = {1, 2, 3, 4, 5, 6}
+</span><span class="s1">print(type(s))
+</span><span class="s1">&#39;&#39;&#39;</span>
+</code></pre></div><h3 id="可变类型与不可变类型">可变类型与不可变类型<a href="#可变类型与不可变类型" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">可变类型
+</span><span class="s1">	值改变内存地址不变			列表
+</span><span class="s1">
+</span><span class="s1">不可变类型
+</span><span class="s1">	值改变内存地址肯定变		   整型 浮点型 字符串
+</span><span class="s1">&#39;&#39;&#39;</span>
+
+<span class="c1"># 如何查看值的内存地址</span>
+
+<span class="nb">id</span><span class="p">()</span> 
+<span class="c1"># 返回一串数字，该数字你可以直接看成是内存地址</span>
+<span class="c1"># name = &#39;jason&#39;</span>
+<span class="c1"># print(id(name))  # 2134060606104</span>
+<span class="c1"># name = &#39;jasonDSB&#39;</span>
+<span class="c1"># print(id(name))  # 2134061440944</span>
+
+<span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">l</span><span class="p">))</span>
+<span class="c1"># 修改列表元素数值的方式</span>
+<span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">666</span>  <span class="c1"># 将列表索引0的位置的值修改为666</span>
+<span class="k">print</span><span class="p">(</span><span class="mi">1</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">===&gt;</span>  <span class="mi">666</span>
+</code></pre></div><h3 id="与用户交互">与用户交互<a href="#与用户交互" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">输入信息
+</span><span class="s1">输出信息
+</span><span class="s1">
+</span><span class="s1">获取用户输入
+</span><span class="s1">	input()
+</span><span class="s1">输出结果
+</span><span class="s1">	print()
+</span><span class="s1">    
+</span><span class="s1">input(&#39;请输入您的用户名&gt;&gt;&gt;:&#39;)
+</span><span class="s1">将input获取到的用户输入赋值给变量name
+</span><span class="s1">
+</span><span class="s1">name = input(&#39;请输入您的用户名&gt;&gt;&gt;:&#39;)
+</span><span class="s1">
+</span><span class="s1">print(type(name))  ===&gt; str&#39;&#39;&#39;</span>
+<span class="s1">&#39;&#39;&#39;注意input获取到的用户输入都是字符串类型&#39;&#39;&#39;</span>
+
+
+<span class="c1"># 输出单个数据</span>
+<span class="k">print</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+<span class="c1"># 输出多个数据</span>
+<span class="c1"># print(&#39;jason&#39;, &#39;egon&#39;, &#39;kevin&#39;)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;jason&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;egon&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;kevin&#39;</span><span class="p">)</span>
+<span class="c1"># print(&#34;aaaa&#34;,end=&#39;&#39;)</span>
+<span class="c1"># print(&#34;bbbb&#34;,end=&#39;&amp;&#39;)</span>
+<span class="c1"># print(&#34;cccc&#34;,end=&#39;@&#39;)</span>
+</code></pre></div><h3 id="格式化输出">格式化输出<a href="#格式化输出" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">一段文本当中，针对后续可能被替换的部分，我们在定义该字符串的时候需要提前先用占位符占位
+</span><span class="s1">占位符:</span><span class="si">%s</span><span class="s1">(任意数据类型均可)、</span><span class="si">%d</span><span class="s1">(只能给数字占位)
+</span><span class="s1">&#39;&#39;&#39;</span>
+
+<span class="c1"># 字符串里面有几个%s就表示后续可以替换几个文本</span>
+<span class="n">info</span> <span class="o">=</span> <span class="s1">&#39;亲爱的</span><span class="si">%s</span><span class="s1">你好！你</span><span class="si">%s</span><span class="s1">月的话费是</span><span class="si">%s</span><span class="s1">，余额是</span><span class="si">%s</span><span class="s1">&#39;</span>
+<span class="c1"># 将字符串格式化之后的结果赋值给变量res</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">info</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39;jason&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100000000000000</span><span class="p">)</span>
+<span class="n">res1</span> <span class="o">=</span> <span class="n">info</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39;egon&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="o">-</span><span class="mi">11110</span><span class="p">)</span>
+<span class="s1">&#39;&#39;&#39;注意</span><span class="si">%s</span><span class="s1">的使用 字符串里面事先有几个</span><span class="si">%s</span><span class="s1">后续在替换的时候就需要给几个内容&#39;&#39;&#39;</span>
+</code></pre></div><h3 id="运算符">运算符<a href="#运算符" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2"># 算数运算符
+</span><span class="s2">	+
+</span><span class="s2">    -
+</span><span class="s2">    *
+</span><span class="s2">    /
+</span><span class="s2">    **
+</span><span class="s2">    
+</span><span class="s2"># 比较运算符
+</span><span class="s2">	&gt;
+</span><span class="s2">    &lt;
+</span><span class="s2">    &gt;=
+</span><span class="s2">    &lt;=
+</span><span class="s2">    print(1 &lt;= 2)  # True  表示判断正确
+</span><span class="s2">	print(1 &gt; 5)  # False  表示判断错误
+</span><span class="s2"> 
+</span><span class="s2"># 赋值运算符
+</span><span class="s2">	name = &#39;jason&#39;
+</span><span class="s2"> 
+</span><span class="s2"># 增量赋值(掌握)
+</span><span class="s2">	# 增量赋值
+</span><span class="s2">    x += 1  # x = x + 1
+</span><span class="s2">    x += 100  # x = x + 100
+</span><span class="s2">    x -= 1  # x = x - 1
+</span><span class="s2">    x *= 1  # x = x * 1
+</span><span class="s2">    x /= 1  # x = x / 1
+</span><span class="s2">  
+</span><span class="s2"># 链式赋值(掌握)
+</span><span class="s2">	# name = &#39;jason&#39;
+</span><span class="s2">    # name1 = name
+</span><span class="s2">    # name2 = name
+</span><span class="s2">    # 链式赋值
+</span><span class="s2">    name = name1 = name2 = &#39;jason&#39;
+</span><span class="s2">    print(name,name1,name2)
+</span><span class="s2">    
+</span><span class="s2"># 交叉赋值(掌握)
+</span><span class="s2">	m = 111
+</span><span class="s2">    n = 999
+</span><span class="s2">    # 将m和n互换
+</span><span class="s2">    # m = n
+</span><span class="s2">    # n = m
+</span><span class="s2">    # print(m,n)  # 错误示范
+</span><span class="s2">
+</span><span class="s2">    # 方式1:通过中间变量
+</span><span class="s2">    # tmp = m
+</span><span class="s2">    # m = n
+</span><span class="s2">    # n = tmp
+</span><span class="s2">    # print(m,n)
+</span><span class="s2">     &#39;&#39;&#39;交叉赋值
+</span><span class="s2">    m, n = n, m
+</span><span class="s2">    print(m, n)&#39;&#39;&#39;
+</span><span class="s2">   
+</span><span class="s2"># 解压赋值(重要)
+</span><span class="s2">	name_list = [&#39;jason&#39;, &#39;egon&#39;, &#39;kevin&#39;, &#39;tony&#39;]
+</span><span class="s2">    # 将列表中所有的名字取出分别赋值给不同的变量
+</span><span class="s2">    # name1 = name_list[0]
+</span><span class="s2">    # name2 = name_list[1]
+</span><span class="s2">    # name3 = name_list[2]
+</span><span class="s2">    # name4 = name_list[3]
+</span><span class="s2">    # print(name1,name2,name3,name4)
+</span><span class="s2">    # 解压赋值
+</span><span class="s2">    # name1, name2, name3, name4 = name_list
+</span><span class="s2">    # print(name1, name2, name3, name4)
+</span><span class="s2">    # 扩展知识点 了解即可
+</span><span class="s2">&#34;&#34;&#34;</span>    <span class="s1">&#39;&#39;&#39;
+</span><span class="s1">    注意事项
+</span><span class="s1">    1.解压赋值默认情况下左右变量的变量名和变量的值个数要相等
+</span><span class="s1">    2.可以借助于符号*来打破相等的限制
+</span><span class="s1">    &#39;&#39;&#39;</span>
+    <span class="c1"># *会将多余没有被解压的元素统一组织成列表的形式赋值给*后面的变量名</span>
+   <span class="s1">&#39;&#39;&#39;
+</span><span class="s1">    eg： 
+</span><span class="s1">     name, *arg = name_list
+</span><span class="s1">     print(name, arg)  # jason [&#39;egon&#39;, &#39;kevin&#39;, &#39;tony&#39;]
+</span><span class="s1">     name, *_, name1 = name_list
+</span><span class="s1">     print(name, _, name1)  # jason [&#39;egon&#39;, &#39;kevin&#39;] tony
+</span><span class="s1">    &#39;&#39;&#39;</span>
+
+
+<span class="c1"># 逻辑运算符(重要)</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1">and、or和not
+</span><span class="s1">        and的意思为“而且”，所以and运算符会链接两个布尔值，如果两个布尔值
+</span><span class="s1">        都是True，那么运算结果也为True；两边分布有一个False，那么结果就是false
+</span><span class="s1">        所以当and表达式左边结果为FALSE的时候，右边的表达式不论是什么运算结果都
+</span><span class="s1">        将是false，运算时右边的值将会被跳过，根本不会被执行（短路处理）。
+</span><span class="s1">        or的意思为或者，所以or连接的的也会是两个布尔值，如果两个布尔值有任意一个是
+</span><span class="s1">        true，那么运算结果就是true，当然or也有短路功能，当左边为true的情况下右边的
+</span><span class="s1">        表达式根本不会被执行。
+</span><span class="s1">        not运算符的右边会跟一个布尔值，他的作用是得到与该布尔值相反的值，
+</span><span class="s1">        也就是说当not后面的布尔值是 TRUE,那么运算结果就是FALSE,相反同理。
+</span><span class="s1"> &#39;&#39;&#39;</span>
+        
+    <span class="s1">&#39;&#39;&#39; 
+</span><span class="s1">    !=  不等于
+</span><span class="s1">    res = 2 &gt; 1 and 1 != 1 and True and 3 &gt; 2
+</span><span class="s1">    print(res)  # False
+</span><span class="s1">    如果一个判断语句里面都是and，那么判断起来其实很方便
+</span><span class="s1">    你只需要从前往后一个个看，只要遇到一个不成立的后面就不用看了
+</span><span class="s1">    &#39;&#39;&#39;</span>
+    
+    
+    <span class="n">res</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="mi">1</span> <span class="o">!=</span> <span class="mi">1</span> <span class="ow">or</span> <span class="bp">True</span> <span class="ow">or</span> <span class="mi">3</span> <span class="o">&gt;</span> <span class="mi">2</span> 
+	<span class="k">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>  <span class="c1"># True</span>
+    
+    <span class="k">print</span><span class="p">(</span><span class="ow">not</span> <span class="n">res</span><span class="p">)</span>  <span class="c1"># False</span>
+    
+    <span class="s1">&#39;&#39;&#39;
+</span><span class="s1">    注意上述三个运算符在混合使用的时候是有优先级的
+</span><span class="s1">    但是我们不应该将优先级的判断交给用户，而应该使用括号的形式
+</span><span class="s1">    将优先级在代码层面就区分开，这样的话我们在判断的时候也会更加的方便
+</span><span class="s1">    &#39;&#39;&#39;</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span> <span class="o">&gt;</span> <span class="mi">4</span> <span class="ow">and</span> <span class="mi">4</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">)</span> <span class="ow">or</span> <span class="p">((</span><span class="mi">1</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="s1">&#39;x&#39;</span> <span class="o">==</span> <span class="s1">&#39;x&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="mi">3</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>  <span class="c1"># False</span>
+    
+<span class="c1"># 成员运算  in</span>
+	<span class="s1">&#39;&#39;&#39;
+</span><span class="s1">	判断某个个体在不在某个整体内
+</span><span class="s1">    eg:判断李强在不在我们班级学生名单中
+</span><span class="s1">    name_list1 = [&#39;jason&#39;,&#39;egon&#39;,&#39;tony&#39;,&#39;kevin&#39;]
+</span><span class="s1">    # 判断tom在不在列表内
+</span><span class="s1">    print(&#39;tom&#39; in name_list1)  # False
+</span><span class="s1">    # 取反
+</span><span class="s1">    print(&#39;tom&#39; not in name_list1)  # True
+</span><span class="s1">    s1 = &#39;hello world&#39;
+</span><span class="s1">    print(&#39;h&#39; in s1)  # True
+</span><span class="s1">    &#39;&#39;&#39;</span>
+ 
+<span class="c1"># 身份运算</span>
+	<span class="s1">&#39;&#39;&#39;
+</span><span class="s1">	is	判断两者内存地址是否一样
+</span><span class="s1">    ==  判断两者值是否一样
+</span><span class="s1">   	值相同内存地址可能不同，内存地址相同值肯定相同
+</span><span class="s1">    
+</span><span class="s1">    l1 = [&#39;jason&#39;,&#39;egon&#39;,&#39;kevin&#39;]
+</span><span class="s1">    l2 = [&#39;jason&#39;,&#39;egon&#39;,&#39;kevin&#39;]
+</span><span class="s1">    # print(id(l1),id(l2))  # 2455183599432 2455183600136 值相同，地址不同
+</span><span class="s1">    &#39;&#39;&#39;</span>
+    
+    
+    <span class="c1"># 判断值是否相等</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">l1</span> <span class="o">==</span> <span class="n">l2</span><span class="p">)</span>  <span class="c1"># True</span>
+    <span class="c1"># 判断地址是否相等</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">l1</span> <span class="ow">is</span> <span class="n">l2</span><span class="p">)</span>  <span class="c1"># False</span>
+</code></pre></div><h3 id="流程控制">流程控制<a href="#流程控制" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<p><strong>关键字 ： if</strong>       判断条件是否满足</p>
+<p>​				<strong>elif</strong>     当不满足if条件是流程进入elif</p>
+<p>​				<strong>else</strong>   以上都不满足条件时就走else，兜底的</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">流程控制即控制流程，具体指控制程序的执行流程，而程序的执行流程分为三种结构：
+</span><span class="s1">	顺序结构（之前我们写的代码都是顺序结构）
+</span><span class="s1">    	从上到下执行你写的代码
+</span><span class="s1">        
+</span><span class="s1">    分支结构（用到if判断）
+</span><span class="s1">    	根据条件的不同执行不同的操作
+</span><span class="s1">        
+</span><span class="s1">    循环结构（用到while与for）
+</span><span class="s1">    	重复执行某一段代码(操作)
+</span><span class="s1">        
+</span><span class="s1">   
+</span><span class="s1">分支结构（用到if判断）
+</span><span class="s1">    	根据条件的不同执行不同的操作
+</span><span class="s1">&#39;&#39;&#39;</span>
+    
+<span class="c1"># 如果女人的年龄大于40岁 叫阿姨</span>
+<span class="c1"># age = 28</span>
+<span class="c1"># if age &gt; 40:  # 遇到冒号 说明后面的代码需要缩进(默认是4格)</span>
+<span class="c1">#     print(&#39;阿姨好&#39;)</span>
+<span class="c1">#     # print子代码只有在if后面的条件成立的情况下才会执行</span>
+
+<span class="c1"># 如果女人的年龄大于40岁叫阿姨否则叫小姐姐</span>
+<span class="c1"># age = 45</span>
+<span class="c1"># if age &gt; 40:</span>
+<span class="c1">#     print(&#39;阿姨好&#39;)</span>
+<span class="c1"># else:</span>
+<span class="c1">#     print(&#39;小姐姐 加个微信吧&#39;)</span>
+    <span class="c1"># 当if条件不成立的时候就会走else</span>
+<span class="s1">&#39;&#39;&#39;if和else连用的情况下 两者只会执行一个
+</span><span class="s1">走了if肯定不走else
+</span><span class="s1">走了else说明if不成立
+</span><span class="s1">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># 如果：成绩&gt;=90，那么：优秀</span>
+<span class="c1"># 如果成绩&gt;=80且&lt;90,那么：良好</span>
+<span class="c1"># 如果成绩&gt;=70且&lt;80,那么：普通</span>
+<span class="c1"># 其他情况：很差</span>
+<span class="n">score</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;score&gt;&gt;&gt;:&#39;</span><span class="p">)</span>
+<span class="n">score</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>  <span class="c1"># 忽略</span>
+<span class="k">if</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;优秀&#39;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">80</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;良好&#39;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">70</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;普通&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;你不行！！！&#39;</span><span class="p">)</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1">if...elif...else
+</span><span class="s1">三者连用 也是只会走一个
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1">语法结构
+</span><span class="s1">if 条件1:   # 如果条件1的结果为True，就依次执行：代码1、代码2，......
+</span><span class="s1">  　代码1
+</span><span class="s1">    代码2
+</span><span class="s1">    ......
+</span><span class="s1">elif 条件2: # 如果条件2的结果为True，就依次执行：代码3、代码4，......
+</span><span class="s1">  　代码3
+</span><span class="s1">    代码4
+</span><span class="s1">    ......
+</span><span class="s1">elif 条件3: # 如果条件3的结果为True，就依次执行：代码5、代码6，......
+</span><span class="s1">  　代码5
+</span><span class="s1">    代码6
+</span><span class="s1">    ......
+</span><span class="s1">else:　　   # 其它情况，就依次执行：代码7、代码8，......
+</span><span class="s1">    代码7
+</span><span class="s1">    代码8
+</span><span class="s1">    ......
+</span><span class="s1">&#39;&#39;&#39;</span>
+
+</code></pre></div><h3 id="python中的缩进">python中的缩进<a href="#python中的缩进" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<p><strong>遇到冒号就缩进！</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;在python中用缩进来表示代码的从属关系
+</span><span class="s1">如果一行代码下面的代码缩进了说明下面的代码属于上面的代码&#39;&#39;&#39;</span>
+<span class="k">if</span> <span class="n">age</span> <span class="o">&gt;</span> <span class="mi">40</span><span class="p">:</span>  <span class="c1"># 遇到冒号 说明后面的代码需要缩进(默认是4格)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;阿姨好&#39;</span><span class="p">)</span>
+    <span class="c1"># 此处print就属于if的子代码</span>
+ 
+<span class="s1">&#39;&#39;&#39;并不是所有的代码都可以有子代码的权限
+</span><span class="s1">截止目前为止 唯一可以有子代码的关键字就是if
+</span><span class="s1">
+</span><span class="s1">属于同一个的代码的多个子代码一定要保证相同的缩进量，python中推荐缩进4个空格(在windows中tab键刚好就是4个空格)
+</span><span class="s1">
+</span><span class="s1">小技巧:你可以看代码后面有没有冒号 如果有 下面的代码肯定要缩进  &#39;&#39;&#39;</span>
+</code></pre></div><h3 id="作业">作业<a href="#作业" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 练习1：接收用户输入的用户名密码，打印成指定格式</span>
+
+<span class="n">info</span> <span class="o">=</span> <span class="s1">&#39;亲爱的用户</span><span class="si">%s</span><span class="s1">!您的账户密码已设置为</span><span class="si">%s</span><span class="s1">&#39;</span>
+<span class="n">user1</span> <span class="o">=</span> <span class="n">info</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39;Eddy&#39;</span><span class="p">,</span> <span class="mi">521</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">user1</span><span class="p">)</span>
+
+        
+    
+<span class="s1">&#39;&#39;&#39;# 练习2：用户输入姓名、年龄、工作、爱好 ，然后打印成以下格式
+</span><span class="s1">------------ info of Tony -----------
+</span><span class="s1">Name  : Tony
+</span><span class="s1">Age   : 22
+</span><span class="s1">Sex   : male
+</span><span class="s1">Job   : Teacher 
+</span><span class="s1">------------- end -----------------&#39;&#39;&#39;</span>
+
+<span class="c1">#解2：</span>
+<span class="n">name</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;姓名:&#39;</span><span class="p">)</span>
+<span class="n">age</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;年龄:&#39;</span><span class="p">)</span>
+<span class="n">sex</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;性别:&#39;</span><span class="p">)</span>
+<span class="n">job</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;工作:&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;--------info of&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="s1">&#39;--------&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Name: &#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Age: &#39;</span><span class="p">,</span> <span class="n">age</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Sex: &#39;</span><span class="p">,</span> <span class="n">sex</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Job: &#39;</span><span class="p">,</span> <span class="n">job</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;---------end------------------&#39;</span><span class="p">)</span>
+
+
+
+<span class="c1"># 练习3:使用if判断尝试着编写一个用户登录功能</span>
+<span class="c1">#思路:获取用户的用户名和密码 然后判断是否正确(jason 123)</span>
+    
+<span class="c1">#解3</span>
+<span class="c1">#用户名密码校验题目  校验输入的用户名密码为(Eddy,521)</span>
+<span class="n">username</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;用户名:  &#39;</span><span class="p">)</span>
+<span class="n">password</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;密码: &#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">username</span> <span class="o">==</span> <span class="s1">&#39;Eddy&#39;</span> <span class="ow">and</span> <span class="n">password</span> <span class="o">==</span> <span class="s1">&#39;521&#39;</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;欢迎帅哥~&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;你个冒牌货!&#39;</span><span class="p">)</span>
+    
+    
+<span class="s1">&#39;&#39;&#39; 练习4:成绩评判系统(照着我写的好好理解)
+</span><span class="s1">评判规则：&gt;=95 S
+</span><span class="s1">		&gt;=90 A+
+</span><span class="s1">    	&gt;=85 A
+</span><span class="s1">        &gt;=80 A
+</span><span class="s1">        &gt;=75 B
+</span><span class="s1">        &gt;=70 C
+</span><span class="s1">        &lt;70  D
+</span><span class="s1">解4               &#39;&#39;&#39;</span>
+<span class="n">grade</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;您的学分:&#39;</span><span class="p">)</span>
+<span class="n">grade</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">grade</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">grade</span> <span class="o">&gt;=</span> <span class="mi">95</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;S&#39;</span><span class="p">,</span> <span class="n">grade</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">grade</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;A+&#39;</span><span class="p">,</span> <span class="n">grade</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">grade</span> <span class="o">&gt;=</span> <span class="mi">85</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">grade</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">grade</span> <span class="o">&gt;=</span> <span class="mi">80</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="n">grade</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">grade</span> <span class="o">&gt;=</span> <span class="mi">75</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="n">grade</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="n">grade</span><span class="p">)</span>
+
+
+</code></pre></div><h3 id="jason老湿送的一句话">Jason老湿送的一句话<a href="#jason老湿送的一句话" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;我们每一次的进步都是一次赶鸭子上架的过程&#39;&#39;&#39;</span>
+</code></pre></div>
+			</div>
+			<hr class="post-end">
+			<footer class="post-info">
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>Eddy Zhang</p>
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://Eddy-622.github.io/tags/%E7%94%A8%E6%88%B7%E4%BA%A4%E4%BA%92">用户交互</a></span><span class="tag"><a href="https://Eddy-622.github.io/tags/%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6">流程控制</a></span><span class="tag"><a href="https://Eddy-622.github.io/tags/%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA">格式化输出</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1098 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-10-30 08:00 &#43;0800</p>
+			</footer>
+		</article>
+		<div class="post-nav thin">
+			<a class="next-post" href="https://Eddy-622.github.io/posts/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%86%85%E7%BD%AEwhile%E5%BE%AA%E7%8E%AFfor%E5%BE%AA%E7%8E%AF/">
+				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>While循环，for循环，嵌套，数据类型的内置</span>
+			</a>
+			<a class="prev-post" href="https://Eddy-622.github.io/posts/python%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
+				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>初识Python</span>
+			</a>
+		</div>
+		<div id="comments" class="thin">
+</div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p>&copy; 2020 <a href="https://Eddy-622.github.io">Eddy Zhang</a></p>
+		<p>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://Eddy-622.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+		</p>
+	</footer>
+
+
+
+	<script src="https://Eddy-622.github.io/js/bundle.min.4a9a0ac3d2217822c7865b4161e6c2a71de1d70492264337755427898dd718f6.js" integrity="sha256-SpoKw9IheCLHhltBYebCpx3h1wSSJkM3dVQniY3XGPY=" crossorigin="anonymous"></script>
+	
+
+</body>
+
+</html>

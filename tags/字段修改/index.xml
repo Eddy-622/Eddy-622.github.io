@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>字段修改 on Eddy&#39;s Boke</title>
+    <link>https://Eddy-622.github.io/tags/%E5%AD%97%E6%AE%B5%E4%BF%AE%E6%94%B9/</link>
+    <description>Recent content in 字段修改 on Eddy&#39;s Boke</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Wed, 11 Nov 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://Eddy-622.github.io/tags/%E5%AD%97%E6%AE%B5%E4%BF%AE%E6%94%B9/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>MySQL单表查询，关键字，字段修改</title>
+      <link>https://Eddy-622.github.io/posts/mysql%E5%8D%95%E8%A1%A8%E6%9F%A5%E8%AF%A2%E5%85%B3%E9%94%AE%E5%AD%97%E5%AD%97%E6%AE%B5%E4%BF%AE%E6%94%B9/</link>
+      <pubDate>Wed, 11 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/posts/mysql%E5%8D%95%E8%A1%A8%E6%9F%A5%E8%AF%A2%E5%85%B3%E9%94%AE%E5%AD%97%E5%AD%97%E6%AE%B5%E4%BF%AE%E6%94%B9/</guid>
+      <description>昨日内容回顾   创建表的完整语法
+&amp;#39;&amp;#39;&amp;#39;create table 表名(字段名1 字段类型(数字) 约束条件1 约束条件2,字段名2 字段类型(数字) 约束条件1 约束条件2,字段名3 字段类型(数字) 约束条件1 约束条件2);&amp;#39;&amp;#39;&amp;#39;  约束条件
+&amp;#39;&amp;#39;&amp;#39;unsignedzerofillnot nulldefaultunique单列唯一联合唯一primary key单一主键联合主键auto_increment自增&amp;#39;&amp;#39;&amp;#39;  外键
+&amp;#39;&amp;#39;&amp;#39;外键就是用来建立表与表之间的关系表与表之间关系一对多多对多一对一如何判断表关系&amp;#34;换位思考&amp;#34;换位思考之后如果得出的结论是一方可以一方不可以那么表关系就是&amp;#34;一对多&amp;#34;换位思考之后如果得出的结论是双方都可以那么表关系就是&amp;#34;多对多&amp;#34;换位思考之后如果得出的结论是双方都不可以那么表关系就是&amp;#34;一对一&amp;#34;或者&amp;#34;没有关系&amp;#34;针对不同的表关系外键字段的创建位置也不同1.针对一对多外键字段建在多的一方2.针对多对多外键字段建在第三张关系表中3.针对一对一外键字段建在任何一方都可以但是建议你建在查询频率较高的表中&amp;#39;&amp;#39;&amp;#39;  SQL实现
+&amp;#39;&amp;#39;&amp;#39;create table emp(...dep_id int,foreign key(dep_id) references dep(id)on update cascade &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; 同步更新on delete cascade &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; 同步删除)&amp;#39;&amp;#39;&amp;#39;  作业</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="theme-color" content="#494f5c">
+	<meta name="msapplication-TileColor" content="#494f5c">
+<meta itemprop="name" content="字符编码，字符处理，文件处理，文件操作">
+<meta itemprop="description" content="今日内容概要   字符编码的概念
+  文件处理
+用python代码来操作文件的创建、书写、修改
+  函数
+  模块
+  面向对象
+python本质就是一门面向对象的编程语言
+  今日内容详细 知识补充
+​	布尔值为False的情况有哪些
+​	0 、None 、 &#39;&rsquo; 、[ ] 、 { }
+字符编码 &#39;&#39;&#39;有时候当我们打开一个文件的时候发现展示的内容是一段乱码，这种情况是如何产生的，以及如何解决字符编码的研究只针对文本文件，视频音频文件没有字符一说，不在研究范围之内知识回顾1、软件运行前，软件的代码及其相关数据都是存放于硬盘中的2、任何软件的启动都是将数据从硬盘中读入内存，然后cpu从内存中取出指令并执行3、软件运行过程中产生的数据最先都是存放于内存中的，若想永久保存软件产生的数据，则需要将数据由内存写入硬盘普通的文本编辑器阶段1、启动一个文件编辑器（文本编辑器如nodepad&#43;&#43;，pycharm，word）阶段2、文件编辑器会将文件内容从硬盘读入内存阶段3、文本编辑器会将刚刚读入内存中的内容显示到屏幕上python解释器阶段1、启动python解释器，此时就相当于启动了一个文本编辑器阶段2、python解释器相当于文本编辑器，从硬盘上将test.py的内容读入到内存中阶段3、python解释器解释执行刚刚读入的内存的内容，开始识别python语法 文本编辑器和python解释器的异同点1、相同点：前两个阶段二者完全一致，都是将硬盘中文件的内容读入内存，详解如下python解释器是解释执行文件内容的，因而python解释器具备读py文件的功能，这一点与文本编辑器一样2、不同点：在阶段3时，针对内存中读入的内容处理方式不同，详解如下文本编辑器将文件内容读入内存后，是为了显示或者编辑，根本不去理会python的语法，而python解释器将文件内容读入内存后，可不是为了给你瞅一眼python代码写的啥，而是为了执行python代码、会识别python语法）计算机由于是基于电工作的，只能识别识别010101二进制数据，但是我们人在使用计算机的时候却可以使用各式各样的文字语言人类的字符	转换过程	二进制数字&#39;&#39;&#39;字符编码发展史 &#39;&#39;&#39;计算机起源于美国美国人用的是英文，而计算机只认识二进制，美国人需要解决英文字符和二进制之间的转换关系(ASCII码)&#34;&#34;&#34;8bit = 1bytes1024bytes = 1KB1024KB = 1MB1024MB = 1GB&#34;&#34;&#34;一家独大ASCII码记录了英文字符和数字之间的转换关系用8位来来表示一个英文字符2**8(其实2的7次方足以表示所有的英文字符，但是考虑到后续可能会出现新的语言，所以留了一位备用)群雄割据自己得开发一套自己的字符编码表中国人GBK编码表记录了中文字符、英文字符跟数字的对应关系用16位来表示一个中文字符，针对英文字符还是用8位(针对生僻字我们可能会使用更高位数来表示)韩国人Euc_kr编码表记录了韩文、英文跟数字的对应关系日本人shift_JIS编码表记录了日文、英文跟数字的对应关系# 每个国家自己使用自己的编码，无法实现国家之间数据的交互&#34;&#34;&#34;在中国电脑上使用GBK编写的文件基于网络发送给日本人打开的时候使用的是shift_JIS编码表，会造成文件乱码现象&#34;&#34;&#34;天下一统为了解决群雄割据的局面，实现数据的统一思想unicode编码表	万国码兼容所有国家的所有编码统一使用16位即2bytes表示数据(针对生僻字会采用更多的位数)我们现在之所以能够在一台计算机上敲出各个国家的文字就是因为我们计算机内存中使用的是unicode编码表unicode的弊端，针对纯英文的文件存储空间会翻倍，随之而来的等待时间也会翻倍这个是我们无法容忍的utf8 万国码的转换格式它是存在与硬盘中的(内存使用unicode硬盘使用utf8)针对中文使用3bytes英文使用1bytes当我们书写文件的时候编码默认使用utf8即可，目前绝大多数的软件使用的都是utf8&#39;&#39;&#39;字符编码和要掌握的内容 变量名.">
+<meta itemprop="datePublished" content="2020-11-03T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-11-03T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="490">
+
+
+
+<meta itemprop="keywords" content="字符编码,字符处理,文件处理,文件操作," /><meta property="og:title" content="字符编码，字符处理，文件处理，文件操作" />
+<meta property="og:description" content="今日内容概要   字符编码的概念
+  文件处理
+用python代码来操作文件的创建、书写、修改
+  函数
+  模块
+  面向对象
+python本质就是一门面向对象的编程语言
+  今日内容详细 知识补充
+​	布尔值为False的情况有哪些
+​	0 、None 、 &#39;&rsquo; 、[ ] 、 { }
+字符编码 &#39;&#39;&#39;有时候当我们打开一个文件的时候发现展示的内容是一段乱码，这种情况是如何产生的，以及如何解决字符编码的研究只针对文本文件，视频音频文件没有字符一说，不在研究范围之内知识回顾1、软件运行前，软件的代码及其相关数据都是存放于硬盘中的2、任何软件的启动都是将数据从硬盘中读入内存，然后cpu从内存中取出指令并执行3、软件运行过程中产生的数据最先都是存放于内存中的，若想永久保存软件产生的数据，则需要将数据由内存写入硬盘普通的文本编辑器阶段1、启动一个文件编辑器（文本编辑器如nodepad&#43;&#43;，pycharm，word）阶段2、文件编辑器会将文件内容从硬盘读入内存阶段3、文本编辑器会将刚刚读入内存中的内容显示到屏幕上python解释器阶段1、启动python解释器，此时就相当于启动了一个文本编辑器阶段2、python解释器相当于文本编辑器，从硬盘上将test.py的内容读入到内存中阶段3、python解释器解释执行刚刚读入的内存的内容，开始识别python语法 文本编辑器和python解释器的异同点1、相同点：前两个阶段二者完全一致，都是将硬盘中文件的内容读入内存，详解如下python解释器是解释执行文件内容的，因而python解释器具备读py文件的功能，这一点与文本编辑器一样2、不同点：在阶段3时，针对内存中读入的内容处理方式不同，详解如下文本编辑器将文件内容读入内存后，是为了显示或者编辑，根本不去理会python的语法，而python解释器将文件内容读入内存后，可不是为了给你瞅一眼python代码写的啥，而是为了执行python代码、会识别python语法）计算机由于是基于电工作的，只能识别识别010101二进制数据，但是我们人在使用计算机的时候却可以使用各式各样的文字语言人类的字符	转换过程	二进制数字&#39;&#39;&#39;字符编码发展史 &#39;&#39;&#39;计算机起源于美国美国人用的是英文，而计算机只认识二进制，美国人需要解决英文字符和二进制之间的转换关系(ASCII码)&#34;&#34;&#34;8bit = 1bytes1024bytes = 1KB1024KB = 1MB1024MB = 1GB&#34;&#34;&#34;一家独大ASCII码记录了英文字符和数字之间的转换关系用8位来来表示一个英文字符2**8(其实2的7次方足以表示所有的英文字符，但是考虑到后续可能会出现新的语言，所以留了一位备用)群雄割据自己得开发一套自己的字符编码表中国人GBK编码表记录了中文字符、英文字符跟数字的对应关系用16位来表示一个中文字符，针对英文字符还是用8位(针对生僻字我们可能会使用更高位数来表示)韩国人Euc_kr编码表记录了韩文、英文跟数字的对应关系日本人shift_JIS编码表记录了日文、英文跟数字的对应关系# 每个国家自己使用自己的编码，无法实现国家之间数据的交互&#34;&#34;&#34;在中国电脑上使用GBK编写的文件基于网络发送给日本人打开的时候使用的是shift_JIS编码表，会造成文件乱码现象&#34;&#34;&#34;天下一统为了解决群雄割据的局面，实现数据的统一思想unicode编码表	万国码兼容所有国家的所有编码统一使用16位即2bytes表示数据(针对生僻字会采用更多的位数)我们现在之所以能够在一台计算机上敲出各个国家的文字就是因为我们计算机内存中使用的是unicode编码表unicode的弊端，针对纯英文的文件存储空间会翻倍，随之而来的等待时间也会翻倍这个是我们无法容忍的utf8 万国码的转换格式它是存在与硬盘中的(内存使用unicode硬盘使用utf8)针对中文使用3bytes英文使用1bytes当我们书写文件的时候编码默认使用utf8即可，目前绝大多数的软件使用的都是utf8&#39;&#39;&#39;字符编码和要掌握的内容 变量名." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://Eddy-622.github.io/posts/python%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E5%AD%97%E7%AC%A6%E5%A4%84%E7%90%86%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" />
+<meta property="article:published_time" content="2020-11-03T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-11-03T00:00:00+00:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="字符编码，字符处理，文件处理，文件操作"/>
+<meta name="twitter:description" content="今日内容概要   字符编码的概念
+  文件处理
+用python代码来操作文件的创建、书写、修改
+  函数
+  模块
+  面向对象
+python本质就是一门面向对象的编程语言
+  今日内容详细 知识补充
+​	布尔值为False的情况有哪些
+​	0 、None 、 &#39;&rsquo; 、[ ] 、 { }
+字符编码 &#39;&#39;&#39;有时候当我们打开一个文件的时候发现展示的内容是一段乱码，这种情况是如何产生的，以及如何解决字符编码的研究只针对文本文件，视频音频文件没有字符一说，不在研究范围之内知识回顾1、软件运行前，软件的代码及其相关数据都是存放于硬盘中的2、任何软件的启动都是将数据从硬盘中读入内存，然后cpu从内存中取出指令并执行3、软件运行过程中产生的数据最先都是存放于内存中的，若想永久保存软件产生的数据，则需要将数据由内存写入硬盘普通的文本编辑器阶段1、启动一个文件编辑器（文本编辑器如nodepad&#43;&#43;，pycharm，word）阶段2、文件编辑器会将文件内容从硬盘读入内存阶段3、文本编辑器会将刚刚读入内存中的内容显示到屏幕上python解释器阶段1、启动python解释器，此时就相当于启动了一个文本编辑器阶段2、python解释器相当于文本编辑器，从硬盘上将test.py的内容读入到内存中阶段3、python解释器解释执行刚刚读入的内存的内容，开始识别python语法 文本编辑器和python解释器的异同点1、相同点：前两个阶段二者完全一致，都是将硬盘中文件的内容读入内存，详解如下python解释器是解释执行文件内容的，因而python解释器具备读py文件的功能，这一点与文本编辑器一样2、不同点：在阶段3时，针对内存中读入的内容处理方式不同，详解如下文本编辑器将文件内容读入内存后，是为了显示或者编辑，根本不去理会python的语法，而python解释器将文件内容读入内存后，可不是为了给你瞅一眼python代码写的啥，而是为了执行python代码、会识别python语法）计算机由于是基于电工作的，只能识别识别010101二进制数据，但是我们人在使用计算机的时候却可以使用各式各样的文字语言人类的字符	转换过程	二进制数字&#39;&#39;&#39;字符编码发展史 &#39;&#39;&#39;计算机起源于美国美国人用的是英文，而计算机只认识二进制，美国人需要解决英文字符和二进制之间的转换关系(ASCII码)&#34;&#34;&#34;8bit = 1bytes1024bytes = 1KB1024KB = 1MB1024MB = 1GB&#34;&#34;&#34;一家独大ASCII码记录了英文字符和数字之间的转换关系用8位来来表示一个英文字符2**8(其实2的7次方足以表示所有的英文字符，但是考虑到后续可能会出现新的语言，所以留了一位备用)群雄割据自己得开发一套自己的字符编码表中国人GBK编码表记录了中文字符、英文字符跟数字的对应关系用16位来表示一个中文字符，针对英文字符还是用8位(针对生僻字我们可能会使用更高位数来表示)韩国人Euc_kr编码表记录了韩文、英文跟数字的对应关系日本人shift_JIS编码表记录了日文、英文跟数字的对应关系# 每个国家自己使用自己的编码，无法实现国家之间数据的交互&#34;&#34;&#34;在中国电脑上使用GBK编写的文件基于网络发送给日本人打开的时候使用的是shift_JIS编码表，会造成文件乱码现象&#34;&#34;&#34;天下一统为了解决群雄割据的局面，实现数据的统一思想unicode编码表	万国码兼容所有国家的所有编码统一使用16位即2bytes表示数据(针对生僻字会采用更多的位数)我们现在之所以能够在一台计算机上敲出各个国家的文字就是因为我们计算机内存中使用的是unicode编码表unicode的弊端，针对纯英文的文件存储空间会翻倍，随之而来的等待时间也会翻倍这个是我们无法容忍的utf8 万国码的转换格式它是存在与硬盘中的(内存使用unicode硬盘使用utf8)针对中文使用3bytes英文使用1bytes当我们书写文件的时候编码默认使用utf8即可，目前绝大多数的软件使用的都是utf8&#39;&#39;&#39;字符编码和要掌握的内容 变量名."/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="/favicon.ico">
+
+	<title>字符编码，字符处理，文件处理，文件操作</title>
+	<link rel="stylesheet" href="https://Eddy-622.github.io/css/style.min.657bcb7af31123e4156b1a3d2ff60a636717e54ead74f882136b5114cf72b55e.css" integrity="sha256-ZXvLevMRI+QVaxo9L/YKY2cX5U6tdPiCE2tRFM9ytV4=" crossorigin="anonymous">
+	
+</head>
+
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp faster">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="https://Eddy-622.github.io">Eddy&#39;s Boke</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					
+				<a href="https://Eddy-622.github.io/posts/">博客</a>
+				<a href="https://Eddy-622.github.io/about-hugo/">关于</a>
+
+				</nav>
+			</div>
+			<div class="hdr-right hdr-icons">
+				<span class="hdr-social hide-in-mobile"><a href="https://mobile.twitter.com/zhang_kea" target="_blank" rel="noopener me" title="Twitter"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a><a href="https://www.facebook.com/kea.zhang.92" target="_blank" rel="noopener me" title="Instagram"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line></svg></a><a href="https://github.com/Eddy-622" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></span><button id="menu-btn" class="hdr-btn" title="Menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast">
+		<ul>
+			<li><a href="https://Eddy-622.github.io/posts/">博客</a></li>
+			<li><a href="https://Eddy-622.github.io/about-hugo/">关于</a></li>
+		</ul>
+	</div>
+
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta"><span>Nov 3, 2020</span></div>
+				<h1>字符编码，字符处理，文件处理，文件操作</h1>
+			</header>
+			<div class="content">
+				<h1 id="今日内容概要">今日内容概要<a href="#今日内容概要" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<ul>
+<li>
+<p>字符编码的概念</p>
+</li>
+<li>
+<p>文件处理</p>
+<p>用python代码来操作文件的创建、书写、修改</p>
+</li>
+<li>
+<p>函数</p>
+</li>
+<li>
+<p>模块</p>
+</li>
+<li>
+<p>面向对象</p>
+<p>python本质就是一门面向对象的编程语言</p>
+</li>
+</ul>
+<h1 id="今日内容详细">今日内容详细<a href="#今日内容详细" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<p>知识补充</p>
+<p>​	布尔值为False的情况有哪些</p>
+<p>​		0 、None 、 '&rsquo;   、[  ]   、 { }</p>
+<h3 id="字符编码">字符编码<a href="#字符编码" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;有时候当我们打开一个文件的时候发现展示的内容是一段乱码，这种情况是如何产生的，以及如何解决
+</span><span class="s1">
+</span><span class="s1">字符编码的研究只针对文本文件，视频音频文件没有字符一说，不在研究范围之内
+</span><span class="s1">
+</span><span class="s1">知识回顾
+</span><span class="s1">1、软件运行前，软件的代码及其相关数据都是存放于硬盘中的
+</span><span class="s1">2、任何软件的启动都是将数据从硬盘中读入内存，然后cpu从内存中取出指令并执行
+</span><span class="s1">3、软件运行过程中产生的数据最先都是存放于内存中的，若想永久保存软件产生的数据，则需要将数据由内存写入硬盘
+</span><span class="s1">
+</span><span class="s1">
+</span><span class="s1">普通的文本编辑器
+</span><span class="s1">阶段1、启动一个文件编辑器（文本编辑器如nodepad++，pycharm，word）
+</span><span class="s1">阶段2、文件编辑器会将文件内容从硬盘读入内存
+</span><span class="s1">阶段3、文本编辑器会将刚刚读入内存中的内容显示到屏幕上
+</span><span class="s1">python解释器
+</span><span class="s1">阶段1、启动python解释器，此时就相当于启动了一个文本编辑器
+</span><span class="s1">阶段2、python解释器相当于文本编辑器，从硬盘上将test.py的内容读入到内存中
+</span><span class="s1">阶段3、python解释器解释执行刚刚读入的内存的内容，开始识别python语法 
+</span><span class="s1">
+</span><span class="s1">
+</span><span class="s1">文本编辑器和python解释器的异同点
+</span><span class="s1">1、相同点：前两个阶段二者完全一致，都是将硬盘中文件的内容读入内存，详解如下
+</span><span class="s1">python解释器是解释执行文件内容的，因而python解释器具备读py文件的功能，这一点与文本编辑器一样
+</span><span class="s1">2、不同点：在阶段3时，针对内存中读入的内容处理方式不同，详解如下
+</span><span class="s1">文本编辑器将文件内容读入内存后，是为了显示或者编辑，根本不去理会python的语法，而python解释器将文件内容读入内存后，可不是为了给你瞅一眼python代码写的啥，而是为了执行python代码、会识别python语法）
+</span><span class="s1">
+</span><span class="s1">
+</span><span class="s1">计算机由于是基于电工作的，只能识别识别010101二进制数据，但是我们人在使用计算机的时候却可以使用各式各样的文字语言
+</span><span class="s1">	人类的字符			转换过程				二进制数字&#39;&#39;&#39;</span>
+</code></pre></div><h4 id="字符编码发展史">字符编码发展史<a href="#字符编码发展史" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;计算机起源于美国
+</span><span class="s1">	美国人用的是英文，而计算机只认识二进制，美国人需要解决英文字符和二进制之间的转换关系(ASCII码)
+</span><span class="s1">&#34;&#34;&#34;
+</span><span class="s1">8bit = 1bytes
+</span><span class="s1">1024bytes = 1KB
+</span><span class="s1">1024KB = 1MB
+</span><span class="s1">1024MB = 1GB
+</span><span class="s1">&#34;&#34;&#34;
+</span><span class="s1">    
+</span><span class="s1">    
+</span><span class="s1">一家独大
+</span><span class="s1">	ASCII码
+</span><span class="s1">    	记录了英文字符和数字之间的转换关系
+</span><span class="s1">        	用8位来来表示一个英文字符
+</span><span class="s1">            	2**8(其实2的7次方足以表示所有的英文字符，但是考虑到后续可能会出现新的语言，所以留了一位备用)
+</span><span class="s1">		
+</span><span class="s1">群雄割据
+</span><span class="s1">	自己得开发一套自己的字符编码表
+</span><span class="s1">	中国人
+</span><span class="s1">    	GBK编码表
+</span><span class="s1">        记录了中文字符、英文字符跟数字的对应关系
+</span><span class="s1">        	用16位来表示一个中文字符，针对英文字符还是用8位
+</span><span class="s1">        	(针对生僻字我们可能会使用更高位数来表示)
+</span><span class="s1">    韩国人
+</span><span class="s1">    	Euc_kr编码表
+</span><span class="s1">        记录了韩文、英文跟数字的对应关系
+</span><span class="s1">    日本人
+</span><span class="s1">    	shift_JIS编码表
+</span><span class="s1">        记录了日文、英文跟数字的对应关系
+</span><span class="s1">	# 每个国家自己使用自己的编码，无法实现国家之间数据的交互
+</span><span class="s1">    &#34;&#34;&#34;在中国电脑上使用GBK编写的文件基于网络发送给日本人
+</span><span class="s1">    打开的时候使用的是shift_JIS编码表，会造成文件乱码现象
+</span><span class="s1">    &#34;&#34;&#34;
+</span><span class="s1">    
+</span><span class="s1">天下一统
+</span><span class="s1">	为了解决群雄割据的局面，实现数据的统一思想
+</span><span class="s1">    unicode编码表		万国码
+</span><span class="s1">    	兼容所有国家的所有编码
+</span><span class="s1">       	统一使用16位即2bytes表示数据(针对生僻字会采用更多的位数)
+</span><span class="s1">    我们现在之所以能够在一台计算机上敲出各个国家的文字就是因为我们计算机内存中使用的是unicode编码表
+</span><span class="s1">    
+</span><span class="s1">    unicode的弊端，针对纯英文的文件存储空间会翻倍，随之而来的等待时间也会翻倍这个是我们无法容忍的
+</span><span class="s1">    
+</span><span class="s1">    utf8 万国码的转换格式
+</span><span class="s1">    	它是存在与硬盘中的
+</span><span class="s1">        (内存使用unicode硬盘使用utf8)
+</span><span class="s1">        	针对中文使用3bytes英文使用1bytes
+</span><span class="s1">            
+</span><span class="s1">当我们书写文件的时候编码默认使用utf8即可，目前绝大多数的软件使用的都是utf8&#39;&#39;&#39;</span>
+</code></pre></div><h4 id="字符编码和要掌握的内容">字符编码和要掌握的内容<a href="#字符编码和要掌握的内容" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<p><strong>变量名.encode(&lsquo;utf-8&rsquo;)  &raquo;&raquo;&raquo;   使用utf8格式编码</strong></p>
+<p><strong>变量名.decode(&lsquo;utf-8&rsquo;)  &raquo;&raquo;&raquo;  使用utf-8 格式解码</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;1.解决乱码的核心就是在于用什么编码编的就用什么码来解
+</span><span class="s2">2.代码层面如何用数据进行编码与解码
+</span><span class="s2">	基于网络传输数据，数据必须是bytes格式（二进制格式）
+</span><span class="s2">    
+</span><span class="s2">eg： info = &#39;这是一段字符串&#39;
+</span><span class="s2">	把字符串按照指定的编码编成bytes格式
+</span><span class="s2">    res = info.encoude(&#39;utf-8&#39;)
+</span><span class="s2">    print(res)   &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;此时res所待变的则就是经过utf8转码后的二进制码
+</span><span class="s2">    
+</span><span class="s2">    在python中如果字符串有一个b，则说明该数据类型为bytes类型
+</span><span class="s2">    python中的bytes类型你可以直接看成是二进制数据
+</span><span class="s2">	
+</span><span class="s2">    将bytes类型的数据按照指定的编码解析成人类可读的数据
+</span><span class="s2">    res1 = res.decode(&#39;utf_8&#39;)
+</span><span class="s2">    print(res1)
+</span><span class="s2">    
+</span><span class="s2">3.python2版本和python3版本默认的字符编码是不一致的
+</span><span class="s2">	python2版本出来的时候还没有unicode，python2内部采用的是ASCII
+</span><span class="s2">    python3版本默认的则为utf8
+</span><span class="s2">    
+</span><span class="s2">    针对python2我们在书写字符串的时候会采用
+</span><span class="s2">    1.文件头的形式
+</span><span class="s2">    	coding:utf8
+</span><span class="s2">    2.在所有的字符串前面加上字母u
+</span><span class="s2">    	info = u&#39;这是一段字符串&#39;&#34;&#34;&#34;</span>
+</code></pre></div><h4 id="文件处理">文件处理<a href="#文件处理" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<div class="highlight"><pre class="chroma"><code class="language-PYTHON" data-lang="PYTHON"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">什么是文件？
+</span><span class="s2">	文件就是用来帮助我们保存数据的
+</span><span class="s2">    文件的本质其实就是操作系统给我们封装的一个用来操作计算机硬盘的快捷工具
+</span><span class="s2">    
+</span><span class="s2">文件的操作
+</span><span class="s2">（了解）
+</span><span class="s2">file = open(r&#39;a.txt&#39;,&#39;r&#39;,encoding=&#39;utf-8&#39;)  &gt;&gt;&gt;&gt;&gt;&gt; 此处的r作用为防止路径中的\与字母                &gt;&gt;&gt;打开文件                被解释为特殊含义，从而出现代码错误。
+</span><span class="s2">file.close()   &gt;&gt;&gt;&gt;关闭文件
+</span><span class="s2">
+</span><span class="s2">with   上下文管理
+</span><span class="s2">with open(r&#39;a.txt&#39;,&#39;r&#39;,encoding=&#39;utf-8&#39;) as f: 
+</span><span class="s2">       							  &gt;&gt;&gt;&gt;&gt;这里的f就是一个变量名用来指代open的结果
+</span><span class="s2">     res = f.read()
+</span><span class="s2">     print(res)
+</span><span class="s2">固定句式
+</span><span class="s2">with open(r&#39;文件路径&#39;(必需),&#39;读写模式&#39;(必需),encoding(不是必需的)) as 变量名:
+</span><span class="s2">    缩进的代码用于操作文件
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></div><h4 id="文件的打开方式">文件的打开方式<a href="#文件的打开方式" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<p>​	r	 	只读模式</p>
+<p>​	w		只写模式</p>
+<p>​	a		只追加写模式</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">r 模式打开文件的时候若输入的文件名不存在则直接报错
+</span><span class="s2">witn open(r&#39;b.txt&#39;, &#39;r&#39;, encoding=&#39;utf8&#39;) as f:
+</span><span class="s2">    pass      &gt;&gt;&gt;&gt;&gt;&gt;此处pass的本身没有任何意义，用来补全代码结构
+</span><span class="s2">文件名存在：r模式会以只读的形式打开文件
+</span><span class="s2">with open(r&#39;a.txt&#39;, &#39;r&#39;, encoding= &#39;utf8&#39;) as = f:
+</span><span class="s2">    data = f.read()			&gt;&gt;&gt;&gt;&gt;读取文件内的所有数据
+</span><span class="s2">    print(data)
+</span><span class="s2">    
+</span><span class="s2">w 模式
+</span><span class="s2">若输入的文件名不存在， w 模式会自动帮你创建新文件并重命名
+</span><span class="s2">with open(r &#39;b.txt&#39;, &#39;w&#39;, encoding= &#39;utf8&#39;) as = f:
+</span><span class="s2">    pass   &gt;&gt;&gt;&gt;&gt;补全代码
+</span><span class="s2"> 文件名存在:w模式会以只写的形式打开文件(先清空文件再写入容)
+</span><span class="s2"> with open(r&#39;a.txt&#39;, &#39;w&#39;, encoding=&#39;utf8&#39;) as f:
+</span><span class="s2">     f.write(&#39;哈哈哈哈</span><span class="se">\n</span><span class="s2">&#39;)
+</span><span class="s2">     f.write(&#39;哈哈哈哈</span><span class="se">\n</span><span class="s2">&#39;)
+</span><span class="s2">     f.write(&#39;哈哈哈哈&#39;)
+</span><span class="s2">        
+</span><span class="s2">       
+</span><span class="s2">a模式
+</span><span class="s2">文件名不存在，a模式会帮你创建文件
+</span><span class="s2">with open(r &#39;c.txt&#39;, &#39;a&#39;, encoding=&#39;utf8&#39;) as = f:
+</span><span class="s2">    pass
+</span><span class="s2">文件名存在，a模式会以只追加写的形式打开文件（不会清空原文件的内容）
+</span><span class="s2"> with open(r&#39;a.txt&#39;, &#39;a&#39;, encoding=&#39;utf8&#39;) as f:
+</span><span class="s2">	 f.write(&#39;嘿嘿嘿&#39;)&#34;&#34;&#34;</span>
+</code></pre></div><h4 id="文件操作的常用方法">文件操作的常用方法<a href="#文件操作的常用方法" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">read()    &gt;&gt;&gt;&gt;&gt;&gt;读取文件操作
+</span><span class="s1">	1.执行完read方法之后光标会停留在文件末尾，再次读取时就没有内容了
+</span><span class="s1">    2.当文件特别大的时候，执行read可能会造成内存溢出（撑爆了）
+</span><span class="s1">    	推荐
+</span><span class="s1">        	for循环文件对象
+</span><span class="s1">write()    &gt;&gt;&gt;&gt;&gt;&gt;&gt;写入文件内容
+</span><span class="s1">readable()  &gt;&gt;&gt;&gt;&gt;&gt;判断文件是否可读
+</span><span class="s1">f.writable() &gt;&gt;&gt;&gt;&gt;判断文件是否可写
+</span><span class="s1">f.readline() &gt;&gt;&gt;&gt;&gt;&gt;只读一行数据
+</span><span class="s1">f.readlines()  &gt;&gt;&gt;&gt;&gt;将文件内容全部读取出来并且组织成列表的形式
+</span><span class="s1">f.writelines([]) &gt;&gt;&gt;&gt;&gt;一次性将列表多个元素全部写入文件
+</span><span class="s1">f.flush()   &gt;&gt;&gt;&gt;&gt;&gt;&gt;将内存中的数据立刻刷到硬盘上
+</span><span class="s1">&#39;&#39;&#39;</span>
+</code></pre></div><h4 id="文件的操作模式">文件的操作模式<a href="#文件的操作模式" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">t    文本模式
+</span><span class="s1">		该模式也是默认的模式
+</span><span class="s1">    r   rt
+</span><span class="s1">    w   wt
+</span><span class="s1">    a   at
+</span><span class="s1">  1.该模式只能用于文本文件
+</span><span class="s1">  2，该模式读写都市以字符串为单位
+</span><span class="s1">  3.该模式必须要有encoding参数
+</span><span class="s1">
+</span><span class="s1">b    二进制（bytes）模式
+</span><span class="s1">	1.该模式可以用于任意的文件
+</span><span class="s1">    2.该模式读写都是以butes为单位
+</span><span class="s1">    3.该模式不一定要有encoding参数
+</span><span class="s1">&#39;&#39;&#39;</span>
+</code></pre></div><h4 id="控制光标的移动">控制光标的移动<a href="#控制光标的移动" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">f.seek(offset,whence)
+</span><span class="s2">	offset:移动量
+</span><span class="s2">    whence:模式
+</span><span class="s2">        	0:可以在t和b使用(相对于文件开头)
+</span><span class="s2">            1:只能在b模式使用(相对于光标所在的位置)
+</span><span class="s2">            2:只能在b模式使用(相对于文件末尾)
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></div><h4 id="文件的修改">文件的修改<a href="#文件的修改" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">eg:   文件 b.txt  内容为  my name is egon ，my age is 18.
+</span><span class="s2">    将文件中的egon修敢为jason
+</span><span class="s2">    with open(r &#39;b.txt&#39;,&#39;r&#39;,encoding=&#39;utf8&#39;) as = f: 
+</span><span class="s2">         &gt;&gt;&gt;&gt;&gt;&gt;以只读模式打开文件b.txt并赋值在变量f上
+</span><span class="s2">        data = f.read()   &gt;&gt;&gt;&gt;&gt;读取文件的内容并赋值给变量data
+</span><span class="s2">    with open(r &#39;b.txt&#39;,&#39;w&#39;,encoding = &#39;utf8&#39;) as = f:
+</span><span class="s2">           &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;以只写模式打开b.txt文件并赋值在变量f上
+</span><span class="s2">        res = data.replace(&#39;egon&#39;,&#39;jason&#39;)   &gt;&gt;&gt;&gt;&gt;&gt;字符串的替换（替换数据）
+</span><span class="s2">        f.write(res)     &gt;&gt;&gt;&gt;&gt;&gt;&gt;写入数据   
+</span><span class="s2">        
+</span><span class="s2">        
+</span><span class="s2">方式二：
+</span><span class="s2">先创建一个新文件，将老文件内容写入新文件
+</span><span class="s2">将老文件删除并重命名新文件名为老文件名
+</span><span class="s2">import os
+</span><span class="s2">
+</span><span class="s2">with open(r&#39;b.txt&#39;, &#39;r&#39;, encoding=&#39;utf-8&#39;) as read_f, \
+</span><span class="s2">        open(r&#39;b_backend.txt&#39;, &#39;w&#39;, encoding=&#39;utf-8&#39;) as write_f:
+</span><span class="s2">    for line in read_f:
+</span><span class="s2">        write_f.write(line.replace(&#39;jason&#39;, &#39;jasonDSB&#39;))
+</span><span class="s2">
+</span><span class="s2">        
+</span><span class="s2">os.remove (&#39;b.txt&#39;)   &gt;&gt;&gt;&gt;将原文件删除
+</span><span class="s2">os.rename(&#39;b_backend.txt , &#39;b.txt)   &gt;&gt;&gt;&gt;&gt;重命名
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></div><h4 id="作业">作业<a href="#作业" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;1.基于做题作业的第二道题扩展新功能(思考)
+</span><span class="s1">	当用户输错三次之后，提示用户是否继续尝试
+</span><span class="s1">    (y/n),用户如果想继续尝试则再给用户三次机会
+</span><span class="s1">    不想尝试则退出程序&#39;&#39;&#39;</span>
+    
+    <span class="n">user_name</span> <span class="o">=</span> <span class="s1">&#39;Eddy&#39;</span>
+<span class="n">pass_word</span> <span class="o">=</span> <span class="s1">&#39;123&#39;</span>
+<span class="n">num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">num1</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="n">user_name</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;user_name&gt;&gt;&gt;:&#39;</span><span class="p">)</span>
+    <span class="n">pass_word</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;pass_word&gt;&gt;&gt;:&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">user_name</span> <span class="o">==</span> <span class="s1">&#39;Eddy&#39;</span> <span class="ow">and</span> <span class="n">pass_word</span> <span class="o">==</span> <span class="s1">&#39;123&#39;</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;登录成功&#39;</span><span class="p">)</span>
+        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="k">break</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;用户名或密码错误&#34;</span><span class="p">)</span>
+        <span class="n">num</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;剩余输入次数&#39;</span><span class="p">,</span> <span class="mi">3</span> <span class="o">-</span> <span class="n">num</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;失败次数过多，是否继续尝试，三次机会！&#39;</span><span class="p">)</span>
+            <span class="n">rest</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;失败次数过多，是否继续尝试:[y/n]&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">rest</span> <span class="ow">is</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span>
+                <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+                    <span class="n">user_name</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;user_name&gt;&gt;&gt;:&#39;</span><span class="p">)</span>
+                    <span class="n">pass_word</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;pass_word&gt;&gt;&gt;:&#39;</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">user_name</span> <span class="o">==</span> <span class="s1">&#39;Eddy&#39;</span> <span class="ow">and</span> <span class="n">pass_word</span> <span class="o">==</span> <span class="s1">&#39;123&#39;</span><span class="p">:</span>
+                        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;登录成功&#39;</span><span class="p">)</span>
+                        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+                            <span class="k">break</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;用户名或密码错误&#34;</span><span class="p">)</span>
+                        <span class="n">num1</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;剩余输入次数&#39;</span><span class="p">,</span> <span class="mi">3</span> <span class="o">-</span> <span class="n">num1</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">num1</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;死去吧&#39;</span><span class="p">)</span>
+                        <span class="k">break</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="k">break</span>
+
+    
+    
+<span class="s1">&#39;&#39;&#39;2.参考代码完善功能(拔高题)
+</span><span class="s1">	# 拷贝数据
+</span><span class="s1">	with open(r&#39;111.jpg&#39;,&#39;rb&#39;) as rf,open(r&#39;222.jpg&#39;,&#39;wb&#39;) as wf:
+</span><span class="s1">    # 读取111.jpg数据写入222.jpg
+</span><span class="s1">    for line in rf:
+</span><span class="s1">        wf.write(line)
+</span><span class="s1">   1.针对拷贝出来的文件存放位置，用户可以自定义
+</span><span class="s1">   2.针对被拷贝文件也让用户自定义选择(思考即可)&#39;&#39;&#39;</span>
+
+</code></pre></div>
+			</div>
+			<hr class="post-end">
+			<footer class="post-info">
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>Eddy Zhang</p>
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://Eddy-622.github.io/tags/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81">字符编码</a></span><span class="tag"><a href="https://Eddy-622.github.io/tags/%E5%AD%97%E7%AC%A6%E5%A4%84%E7%90%86">字符处理</a></span><span class="tag"><a href="https://Eddy-622.github.io/tags/%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86">文件处理</a></span><span class="tag"><a href="https://Eddy-622.github.io/tags/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C">文件操作</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>490 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-11-03 08:00 &#43;0800</p>
+			</footer>
+		</article>
+		<div class="post-nav thin">
+			<a class="next-post" href="https://Eddy-622.github.io/posts/python%E5%87%BD%E6%95%B0%E5%88%86%E7%B1%BB%E5%BD%A2%E5%8F%82%E5%AE%9E%E5%8F%82%E7%BB%93%E6%9E%84%E6%A8%A1%E5%9D%97/">
+				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>函数分类，形参实参，结构，模块</span>
+			</a>
+			<a class="prev-post" href="https://Eddy-622.github.io/posts/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%86%85%E7%BD%AEwhile%E5%BE%AA%E7%8E%AFfor%E5%BE%AA%E7%8E%AF/">
+				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>While循环，for循环，嵌套，数据类型的内置</span>
+			</a>
+		</div>
+		<div id="comments" class="thin">
+</div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p>&copy; 2020 <a href="https://Eddy-622.github.io">Eddy Zhang</a></p>
+		<p>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://Eddy-622.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+		</p>
+	</footer>
+
+
+
+	<script src="https://Eddy-622.github.io/js/bundle.min.4a9a0ac3d2217822c7865b4161e6c2a71de1d70492264337755427898dd718f6.js" integrity="sha256-SpoKw9IheCLHhltBYebCpx3h1wSSJkM3dVQniY3XGPY=" crossorigin="anonymous"></script>
+	
+
+</body>
+
+</html>
