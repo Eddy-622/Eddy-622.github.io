@@ -16,7 +16,7 @@
   今日内容详细 多表操作的两大方法 &#34;&#34;&#34;我们需要的数据可能来自于多张表 数据准备 &gt;&gt;&gt;&gt;&gt;建表 create table dep( id int primary key auto_increment, name varchar(20) ); create table emp( id int primary key auto_increment, name varchar(20), sex enum(&#39;male&#39;,&#39;female&#39;) not null default &#39;male&#39;, age int, dep_id int ); &gt;&gt;&gt;&gt;&gt;插入数据 insert into dep values (200,&#39;技术&#39;), (201,&#39;人力资源&#39;), (202,&#39;销售&#39;), (203,&#39;运营&#39;), (205,&#39;财务&#39;) ; insert into emp(name,sex,age,dep_id) values (&#39;jason&#39;,&#39;male&#39;,18,200), (&#39;egon&#39;,&#39;female&#39;,48,201), (&#39;kevin&#39;,&#39;male&#39;,18,201), (&#39;nick&#39;,&#39;male&#39;,28,202), (&#39;owen&#39;,&#39;male&#39;,18,203), (&#39;jerry&#39;,&#39;female&#39;,18,204);&#34;&#34;&#34; 连接表的概念 &#34;&#34;&#34;select * from dep,emp; &gt;&gt;&gt;&gt;&gt; 结果是一个笛卡尔积(了解) &gt;&gt;&gt;&gt;&gt; 我们要的不是全部对应一遍，而是按照相同的条件做对应关系 select * from dep,emp where dep.">
 <meta itemprop="datePublished" content="2020-11-12T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-11-12T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="572">
+<meta itemprop="wordCount" content="574">
 
 
 
@@ -146,12 +146,15 @@
 </span><span class="s2">&gt;&gt;&gt;&gt;&gt; 我们要的不是全部对应一遍，而是按照相同的条件做对应关系
 </span><span class="s2">select * from dep,emp where dep.id = emp.dep_id;
 </span><span class="s2">&#34;&#34;&#34;</span>
-<span class="err">设计到多表操作的情况，非常容易出现两张表字段相同的情况</span>
-<span class="err">这个时候我们都会习惯性的在字段前面加上该字段所载的表名</span>
-<span class="err">来明确到底是哪张表的哪个字段</span>
 
-<span class="n">select</span> <span class="n">emp</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">dep</span><span class="o">.</span><span class="n">name</span> <span class="kn">from</span> <span class="nn">emp</span><span class="p">,</span><span class="n">dep</span> <span class="n">where</span> <span class="n">dep</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">emp</span><span class="o">.</span><span class="n">dep_id</span><span class="p">;</span><span class="s2">&#34;&#34;&#34;
-</span></code></pre></div><h3 id="多表查询方式1连接表">多表查询方式1:连接表<a href="#多表查询方式1连接表" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">设计到多表操作的情况，非常容易出现两张表字段相同的情况
+</span><span class="s2">这个时候我们都会习惯性的在字段前面加上该字段所载的表名
+</span><span class="s2">来明确到底是哪张表的哪个字段
+</span><span class="s2">
+</span><span class="s2">select emp.name,dep.name from emp,dep where dep.id = emp.dep_id;
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></div><h3 id="多表查询方式1连接表">多表查询方式1:连接表<a href="#多表查询方式1连接表" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;内连接
 </span><span class="s2">	inner join
 </span><span class="s2">	select * from emp inner join dep on dep.id = emp.dep_id;
@@ -412,11 +415,14 @@
 				<p>
 					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://Eddy-622.github.io/tags/mysql">MySQL</a></span><span class="tag"><a href="https://Eddy-622.github.io/tags/%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2">多表查询</a></span><span class="tag"><a href="https://Eddy-622.github.io/tags/%E8%BF%9E%E6%8E%A5%E8%A1%A8">连接表</a></span><span class="tag"><a href="https://Eddy-622.github.io/tags/%E5%AD%90%E6%9F%A5%E8%AF%A2">子查询</a></span>
 				</p>
-				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>572 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>574 Words</p>
 				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-11-12 08:00 &#43;0800</p>
 			</footer>
 		</article>
 		<div class="post-nav thin">
+			<a class="next-post" href="https://Eddy-622.github.io/posts/mysql%E4%B9%8B%E9%93%BE%E6%8E%A5python%E6%93%8D%E4%BD%9Csql%E6%B3%A8%E5%85%A5%E9%97%AE%E9%A2%98/">
+				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>MySQL之链接Python操作、SQL注入问题</span>
+			</a>
 			<a class="prev-post" href="https://Eddy-622.github.io/posts/mysql%E5%8D%95%E8%A1%A8%E6%9F%A5%E8%AF%A2%E5%85%B3%E9%94%AE%E5%AD%97%E5%AD%97%E6%AE%B5%E4%BF%AE%E6%94%B9/">
 				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>MySQL之单表查询，关键字，字段修改</span>
 			</a>

@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="theme-color" content="#494f5c">
+	<meta name="msapplication-TileColor" content="#494f5c">
+<meta itemprop="name" content="MySQL之链接Python操作、SQL注入问题">
+<meta itemprop="description" content="昨日内容回顾   连表操作
+&#34;&#34;&#34;由于在实际应用中，我们需要的数据很有可能是来自于多张表 这个时候我们可以采用多表查询的方式1:连表操作 连表操作的本质就是先将多张表拼接成一张表，然后基于这张拼接之后的表做单表查询 &gt;&gt;&gt; 笛卡尔积 select * from emp,dep; &#34;&#34;&#34; 在涉及到多表查询SQL语句的编写过程中，为了避免字段冲突的问题 我们一般都会加上表名来做明确的区分，否则可能会报错 &#34;&#34;&#34; &gt;&gt;&gt; 连表操作 inner join 将两张表都有对应关系的数据按照指定的条件拼接到一起 select * from emp inner join dep on emp.dep_id = dep.id; left join 以关键字left join左边的表为基准，展示左表所有的记录，没有的null填充 select * from emp left join dep on emp.dep_id = dep.id; right join 以关键字right join右边的表为基准，展示右表所有的记录，没有的null填充 select * from emp right join dep on emp.dep_id = dep.id; union 两张表所有的技术全部展示出来，各自没有对应的全部用null填充 select * from emp left join dep on emp.">
+<meta itemprop="datePublished" content="2020-11-13T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-11-13T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="925">
+
+
+
+<meta itemprop="keywords" content="MySQL,Python解释器链接操作,SQL注入,事务," /><meta property="og:title" content="MySQL之链接Python操作、SQL注入问题" />
+<meta property="og:description" content="昨日内容回顾   连表操作
+&#34;&#34;&#34;由于在实际应用中，我们需要的数据很有可能是来自于多张表 这个时候我们可以采用多表查询的方式1:连表操作 连表操作的本质就是先将多张表拼接成一张表，然后基于这张拼接之后的表做单表查询 &gt;&gt;&gt; 笛卡尔积 select * from emp,dep; &#34;&#34;&#34; 在涉及到多表查询SQL语句的编写过程中，为了避免字段冲突的问题 我们一般都会加上表名来做明确的区分，否则可能会报错 &#34;&#34;&#34; &gt;&gt;&gt; 连表操作 inner join 将两张表都有对应关系的数据按照指定的条件拼接到一起 select * from emp inner join dep on emp.dep_id = dep.id; left join 以关键字left join左边的表为基准，展示左表所有的记录，没有的null填充 select * from emp left join dep on emp.dep_id = dep.id; right join 以关键字right join右边的表为基准，展示右表所有的记录，没有的null填充 select * from emp right join dep on emp.dep_id = dep.id; union 两张表所有的技术全部展示出来，各自没有对应的全部用null填充 select * from emp left join dep on emp." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://Eddy-622.github.io/posts/mysql%E4%B9%8B%E9%93%BE%E6%8E%A5python%E6%93%8D%E4%BD%9Csql%E6%B3%A8%E5%85%A5%E9%97%AE%E9%A2%98/" />
+<meta property="article:published_time" content="2020-11-13T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-11-13T00:00:00+00:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="MySQL之链接Python操作、SQL注入问题"/>
+<meta name="twitter:description" content="昨日内容回顾   连表操作
+&#34;&#34;&#34;由于在实际应用中，我们需要的数据很有可能是来自于多张表 这个时候我们可以采用多表查询的方式1:连表操作 连表操作的本质就是先将多张表拼接成一张表，然后基于这张拼接之后的表做单表查询 &gt;&gt;&gt; 笛卡尔积 select * from emp,dep; &#34;&#34;&#34; 在涉及到多表查询SQL语句的编写过程中，为了避免字段冲突的问题 我们一般都会加上表名来做明确的区分，否则可能会报错 &#34;&#34;&#34; &gt;&gt;&gt; 连表操作 inner join 将两张表都有对应关系的数据按照指定的条件拼接到一起 select * from emp inner join dep on emp.dep_id = dep.id; left join 以关键字left join左边的表为基准，展示左表所有的记录，没有的null填充 select * from emp left join dep on emp.dep_id = dep.id; right join 以关键字right join右边的表为基准，展示右表所有的记录，没有的null填充 select * from emp right join dep on emp.dep_id = dep.id; union 两张表所有的技术全部展示出来，各自没有对应的全部用null填充 select * from emp left join dep on emp."/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="/favicon.ico">
+
+	<title>MySQL之链接Python操作、SQL注入问题</title>
+	<link rel="stylesheet" href="https://Eddy-622.github.io/css/style.min.657bcb7af31123e4156b1a3d2ff60a636717e54ead74f882136b5114cf72b55e.css" integrity="sha256-ZXvLevMRI+QVaxo9L/YKY2cX5U6tdPiCE2tRFM9ytV4=" crossorigin="anonymous">
+	
+</head>
+
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp faster">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="https://Eddy-622.github.io">Eddy&#39;s Boke</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					
+				<a href="https://Eddy-622.github.io/posts/">博客</a>
+				<a href="https://Eddy-622.github.io/about-hugo/">关于</a>
+
+				</nav>
+			</div>
+			<div class="hdr-right hdr-icons">
+				<span class="hdr-social hide-in-mobile"><a href="https://mobile.twitter.com/zhang_kea" target="_blank" rel="noopener me" title="Twitter"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a><a href="https://www.facebook.com/kea.zhang.92" target="_blank" rel="noopener me" title="Instagram"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line></svg></a><a href="https://github.com/Eddy-622" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></span><button id="menu-btn" class="hdr-btn" title="Menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast">
+		<ul>
+			<li><a href="https://Eddy-622.github.io/posts/">博客</a></li>
+			<li><a href="https://Eddy-622.github.io/about-hugo/">关于</a></li>
+		</ul>
+	</div>
+
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta"><span>Nov 13, 2020</span></div>
+				<h1>MySQL之链接Python操作、SQL注入问题</h1>
+			</header>
+			<div class="content">
+				<h1 id="昨日内容回顾">昨日内容回顾<a href="#昨日内容回顾" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<ul>
+<li>
+<p>连表操作</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;由于在实际应用中，我们需要的数据很有可能是来自于多张表
+</span><span class="s2">这个时候我们可以采用多表查询的方式1:连表操作
+</span><span class="s2">连表操作的本质就是先将多张表拼接成一张表，然后基于这张拼接之后的表做单表查询
+</span><span class="s2">  
+</span><span class="s2">&gt;&gt;&gt; 笛卡尔积
+</span><span class="s2">select * from emp,dep;
+</span><span class="s2">&#34;&#34;&#34;</span>
+<span class="err">在涉及到多表查询</span><span class="n">SQL语句的编写过程中</span><span class="err">，为了避免字段冲突的问题</span>
+<span class="err">我们一般都会加上表名来做明确的区分，否则可能会报错</span>
+<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">&gt;&gt;&gt; 连表操作
+</span><span class="s2">inner join
+</span><span class="s2">  将两张表都有对应关系的数据按照指定的条件拼接到一起
+</span><span class="s2">  select * from emp inner join dep on emp.dep_id = dep.id;
+</span><span class="s2">    
+</span><span class="s2">left join
+</span><span class="s2">  以关键字left join左边的表为基准，展示左表所有的记录，没有的null填充
+</span><span class="s2">  select * from emp left join dep on emp.dep_id = dep.id;
+</span><span class="s2">  
+</span><span class="s2">right join
+</span><span class="s2">  以关键字right join右边的表为基准，展示右表所有的记录，没有的null填充
+</span><span class="s2">  select * from emp right join dep on emp.dep_id = dep.id;
+</span><span class="s2">  
+</span><span class="s2">union
+</span><span class="s2">  两张表所有的技术全部展示出来，各自没有对应的全部用null填充
+</span><span class="s2">  select * from emp left join dep on emp.dep_id = dep.id
+</span><span class="s2">  union
+</span><span class="s2">  select * from emp right join dep on emp.dep_id = dep.id;&#34;&#34;&#34;</span>
+</code></pre></div></li>
+<li>
+<p>子查询</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;将一张表的查询结果用括号括起来当做另外一条sql语句的查询条件，子查询其实就是我们实际生活中常见的解决问题的思路:分步操作
+</span><span class="s2">eg:
+</span><span class="s2">  select * from dep where dep.id = (
+</span><span class="s2">      select emp.dep_id from emp where emp.name = &#39;jason&#39;
+</span><span class="s2">  );&#34;&#34;&#34;</span>
+</code></pre></div></li>
+<li>
+<p>多表查询总结</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;有时候在查询一些比较复杂的问题，可能需要将连表操作和子查询结合使用&#39;&#39;&#39;</span>
+</code></pre></div></li>
+<li>
+<p>多表查询练习题</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;在书写较为复杂的sql语句的时候不要想着一步到位
+</span><span class="s1">  
+</span><span class="s1">在书写sql的时候针对关键字select后面写什么，我们一般都是先用*号占位，最后再回来修改*对应的具体内容
+</span><span class="s1">  
+</span><span class="s1">不要上来就写sql语句，可以先用中文将大致思路先写出来
+</span><span class="s1">  
+</span><span class="s1"> 9、查询挂科超过两门(包括两门)的学生姓名和班级
+</span><span class="s1">&gt;&gt;&gt; 1.先明确学生成绩在哪张表
+</span><span class="s1">-- 	select * from score;
+</span><span class="s1">&gt;&gt;&gt; 2.先筛选出所有分数小于60分的数据
+</span><span class="s1">-- select * from score where score.num &lt; 60;
+</span><span class="s1">&gt;&gt;&gt; 3.按照学生分组统计每个学生挂科的数量 筛选出超过两门(包括两门)
+</span><span class="s1">-- select score.student_id from score where score.num &lt; 60 
+</span><span class="s1">-- 	GROUP BY score.student_id
+</span><span class="s1">-- 	HAVING COUNT(score.num) &gt;= 2;
+</span><span class="s1">&gt;&gt;&gt; 4.确认姓名和班级不属于一张表 所以先将学生和班级表凭借起来
+</span><span class="s1">-- select * from student INNER JOIN class on student.class_id = class.cid;
+</span><span class="s1">&gt;&gt;&gt; 5.根据我们获取到的学生id号去拼接之后的表中筛选出我们需要的数据
+</span><span class="s1">SELECT
+</span><span class="s1">  student.sname,
+</span><span class="s1">  class.caption 
+</span><span class="s1">FROM
+</span><span class="s1">  student
+</span><span class="s1">  INNER JOIN class ON student.class_id = class.cid 
+</span><span class="s1">WHERE
+</span><span class="s1">  student.sid IN ( 
+</span><span class="s1">      SELECT score.student_id 
+</span><span class="s1">      FROM score 
+</span><span class="s1">      WHERE score.num &lt; 60 
+</span><span class="s1">      GROUP BY score.student_id 
+</span><span class="s1">      HAVING COUNT( score.num ) &gt;= 2 );&#39;&#39;&#39;</span>
+</code></pre></div></li>
+</ul>
+<h1 id="今日内容概要">今日内容概要<a href="#今日内容概要" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<ul>
+<li>python如何链接MySQL并操作</li>
+<li>SQL注入问题及解决方案</li>
+<li>尝试着书写注册登录功能(以MySQL作为数据库不再以文件)</li>
+<li>视图</li>
+<li>触发器</li>
+<li>存储过程</li>
+<li>事务(重要)</li>
+<li>流程控制</li>
+<li>索引(概念)</li>
+</ul>
+<h1 id="今日内容详细">今日内容详细<a href="#今日内容详细" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<h3 id="python如何链接mysql并操作">python如何链接MySQL并操作<a href="#python如何链接mysql并操作" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;我们在使用python的时候，一定要知道这个家伙背后有很多很多功能模块
+</span><span class="s2">几乎能够涵盖你所有的业务需求，你只需要找到对应的模块并学习使用即可
+</span><span class="s2">最多是站在巨人的肩膀上稍微修改修改即可
+</span><span class="s2">
+</span><span class="s2">如果我们想用python来充当mysql的客户端需要下载一个第三方模块
+</span><span class="s2">
+</span><span class="s2">下载
+</span><span class="s2">pip3 install pymysql
+</span><span class="s2">
+</span><span class="s2">基本使用
+</span><span class="s2">
+</span><span class="s2">***********************************
+</span><span class="s2">在给py文件起名字的时候一定不要跟模块名冲突
+</span><span class="s2">***********************************
+</span><span class="s2">
+</span><span class="s2">
+</span><span class="s2">&gt;&gt;&gt; coding:utf8
+</span><span class="s2">&gt;&gt;&gt; author:jason
+</span><span class="s2">
+</span><span class="s2">import pymysql
+</span><span class="s2">
+</span><span class="s2">&gt;&gt;&gt; 1.创建链接对象
+</span><span class="s2">conn = pymysql.connect(
+</span><span class="s2">    &gt;&gt;&gt; 数据库的ip地址
+</span><span class="s2">    host=&#39;127.0.0.1&#39;,
+</span><span class="s2">    &gt;&gt;&gt; 数据库的port号
+</span><span class="s2">    port=3306,  &gt;&gt;&gt; MySQL默认的端口号就是3306
+</span><span class="s2">    &gt;&gt;&gt; 用户名
+</span><span class="s2">    user=&#39;root&#39;,
+</span><span class="s2">    &gt;&gt;&gt; 密码
+</span><span class="s2">    password=&#39;admin123&#39;,
+</span><span class="s2">    &gt;&gt;&gt; 一定要指定你要操作哪个库
+</span><span class="s2">    database=&#39;s3_02&#39;,
+</span><span class="s2">    &gt;&gt;&gt; 字符编码
+</span><span class="s2">    charset=&#39;utf8&#39;  &gt;&gt;&gt; 这里的编码不要加横杠utf-8
+</span><span class="s2">)
+</span><span class="s2">&gt;&gt;&gt; 2.生成游标对象(类似于终端里面的光标 等待你输入sql)
+</span><span class="s2">cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)
+</span><span class="s2">&gt;&gt;&gt; 3.自己编写sql语句借助于模块发送给服务端
+</span><span class="s2">sql = &#39;select * from course;&#39;
+</span><span class="s2">&gt;&gt;&gt; 4.将sql语句发送给服务端执行
+</span><span class="s2">affect_rows = cursor.execute(sql)  &gt;&gt;&gt; 返回值是执行该sql所影响的数据行数
+</span><span class="s2">&gt;&gt;&gt; 5.获取sql语句的查询结果
+</span><span class="s2">res = cursor.fetchall()
+</span><span class="s2">print(res)
+</span><span class="s2">&gt;&gt;&gt; 数据描述不够明确((1, &#39;生物&#39;, 1), (2, &#39;物理&#39;, 2), (3, &#39;体育&#39;, 3), (4, &#39;美术&#39;, 2))
+</span><span class="s2">&gt;&gt;&gt; 如果能够组织成字典的形式返回就完美了  只需要加一个配置即可cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)
+</span><span class="s2">&gt;&gt;&gt; [{&#39;cid&#39;: 1, &#39;cname&#39;: &#39;生物&#39;, &#39;teacher_id&#39;: 1}, 
+</span><span class="s2">&gt;&gt;&gt; {&#39;cid&#39;: 2, &#39;cname&#39;: &#39;物理&#39;, &#39;teacher_id&#39;: 2}, 
+</span><span class="s2">&gt;&gt;&gt; {&#39;cid&#39;: 3, &#39;cname&#39;: &#39;体育&#39;, &#39;teacher_id&#39;: 3}, 
+</span><span class="s2">&gt;&gt;&gt; {&#39;cid&#39;: 4, &#39;cname&#39;: &#39;美术&#39;, &#39;teacher_id&#39;: 2}]&#34;&#34;&#34;</span>
+</code></pre></div><h3 id="sql注入">SQL注入<a href="#sql注入" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">&gt;&gt;&gt; coding:utf8
+</span><span class="s1">&gt;&gt;&gt; author:jason
+</span><span class="s1">
+</span><span class="s1">import pymysql
+</span><span class="s1">
+</span><span class="s1">&gt;&gt;&gt; 1.创建链接对象
+</span><span class="s1">conn = pymysql.connect(
+</span><span class="s1">    &gt;&gt;&gt; 数据库的ip地址
+</span><span class="s1">    host=&#39;127.0.0.1&#39;,
+</span><span class="s1">    &gt;&gt;&gt; 数据库的port号
+</span><span class="s1">    port=3306,  &gt;&gt;&gt; MySQL默认的端口号就是3306
+</span><span class="s1">    &gt;&gt;&gt; 用户名
+</span><span class="s1">    user=&#39;root&#39;,
+</span><span class="s1">    &gt;&gt;&gt; 密码
+</span><span class="s1">    password=&#39;admin123&#39;,
+</span><span class="s1">    &gt;&gt;&gt; 一定要指定你要操作哪个库
+</span><span class="s1">    database=&#39;s3_03&#39;,
+</span><span class="s1">    &gt;&gt;&gt; 字符编码
+</span><span class="s1">    charset=&#39;utf8&#39;  &gt;&gt;&gt; 这里的编码不要加横杠utf-8
+</span><span class="s1">)
+</span><span class="s1">&gt;&gt;&gt; 2.生成游标对象(类似于终端里面的光标 等待你输入sql)
+</span><span class="s1">cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)
+</span><span class="s1">
+</span><span class="s1">&gt;&gt;&gt; 结合MySQL实现用户的登录功能
+</span><span class="s1">&gt;&gt;&gt; 3.先获取用户的用户名和密码
+</span><span class="s1">name = input(&#39;name&gt;&gt;&gt;:&#39;)
+</span><span class="s1">password = input(&#39;password&gt;&gt;&gt;:&#39;)
+</span><span class="s1">&gt;&gt;&gt; 4.拼接SQL语句并发送给服务端执行
+</span><span class="s1">sql = &#34;select * from userinfo where name=&#39;</span><span class="si">%s</span><span class="s1">&#39; and password=&#39;</span><span class="si">%s</span><span class="s1">&#39;;&#34;%(name,password)
+</span><span class="s1">print(sql)
+</span><span class="s1">cursor.execute(sql)
+</span><span class="s1">&gt;&gt;&gt; 5.判断结果展示相应提示信息
+</span><span class="s1">res = cursor.fetchall()
+</span><span class="s1">print(res)
+</span><span class="s1">if res:
+</span><span class="s1">    print(&#39;登录成功&#39;)
+</span><span class="s1">else:
+</span><span class="s1">    print(&#39;用户名或密码错误&#39;)
+</span><span class="s1">
+</span><span class="s1">神奇的现象1:
+</span><span class="s1">    只需要知道用户名就可以直接登录
+</span><span class="s1">    利用了MySQL的注释
+</span><span class="s1">    select * from userinfo where name=&#39;jason&#39; -- asjdklaj&#39; and password=&#39;&#39;;
+</span><span class="s1">神奇的现象2:
+</span><span class="s1">    select * from userinfo where name=&#39;xxx&#39; or 1=1 -- hasdjalsdj&#39; and password=&#39;&#39;;
+</span><span class="s1">    利用了MySQL的注释和逻辑运算
+</span><span class="s1">    不需要用户名和密码居然也能通过校验
+</span><span class="s1">    
+</span><span class="s1">总结:这种现象就叫做SQL注入
+</span><span class="s1">    就是利用一些特殊符号的组合达到特殊含义情况下混淆正常的语句执行
+</span><span class="s1">
+</span><span class="s1">在我们的实际生活中其实处处都在解决SQL注入的问题
+</span><span class="s1">比如当你在注册一个账号的时候经常会被提示不能使用特殊符号
+</span><span class="s1">&#39;&#39;&#39;</span>
+</code></pre></div><h3 id="注册功能">注册功能<a href="#注册功能" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;&gt;&gt;&gt; coding:utf8
+</span><span class="s1">&gt;&gt;&gt; author:jason
+</span><span class="s1">
+</span><span class="s1">import pymysql
+</span><span class="s1">
+</span><span class="s1">&gt;&gt;&gt; 1.创建链接对象
+</span><span class="s1">conn = pymysql.connect(
+</span><span class="s1">    &gt;&gt;&gt; 数据库的ip地址
+</span><span class="s1">    host=&#39;127.0.0.1&#39;,
+</span><span class="s1">    &gt;&gt;&gt; 数据库的port号
+</span><span class="s1">    port=3306,  &gt;&gt;&gt; MySQL默认的端口号就是3306
+</span><span class="s1">    &gt;&gt;&gt; 用户名
+</span><span class="s1">    user=&#39;root&#39;,
+</span><span class="s1">    &gt;&gt;&gt; 密码
+</span><span class="s1">    password=&#39;admin123&#39;,
+</span><span class="s1">    &gt;&gt;&gt; 一定要指定你要操作哪个库
+</span><span class="s1">    database=&#39;s3_03&#39;,
+</span><span class="s1">    &gt;&gt;&gt; 字符编码
+</span><span class="s1">    charset=&#39;utf8&#39;  &gt;&gt;&gt; 这里的编码不要加横杠utf-8
+</span><span class="s1">)
+</span><span class="s1">&gt;&gt;&gt; 2.生成游标对象(类似于终端里面的光标 等待你输入sql)
+</span><span class="s1">cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)
+</span><span class="s1">
+</span><span class="s1">&gt;&gt;&gt; 3.获取用户的用户名和密码
+</span><span class="s1">username = input(&#39;username&gt;&gt;&gt;:&#39;).strip()
+</span><span class="s1">password = input(&#39;password&gt;&gt;&gt;:&#39;).strip()
+</span><span class="s1">
+</span><span class="s1">&gt;&gt;&gt; 4.校验当前用户名是否已存在
+</span><span class="s1">sql = &#39;select * from userinfo where name=</span><span class="si">%s</span><span class="s1">&#39;
+</span><span class="s1">cursor.execute(sql,username)
+</span><span class="s1">res = cursor.fetchall()
+</span><span class="s1">if not res:
+</span><span class="s1">    &gt;&gt;&gt; 5.写入数据库
+</span><span class="s1">    sql = &#39;insert into userinfo(name,password) values(</span><span class="si">%s</span><span class="s1">,</span><span class="si">%s</span><span class="s1">)&#39;
+</span><span class="s1">    cursor.execute(sql,(username,password))
+</span><span class="s1">    conn.commit()  &gt;&gt;&gt; 确认此次操作可执行
+</span><span class="s1">    print(&#39;注册成功&#39;)
+</span><span class="s1">else:
+</span><span class="s1">    print(&#39;用户名已存在&#39;)
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">当你对数据库进行 新增 编辑 删除操作的时候都需要二次确认
+</span><span class="s2">只有查询操作可以直接执行
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></div><h3 id="pymysql方法补充">pymysql方法补充<a href="#pymysql方法补充" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">&gt;&gt;&gt; 由于针对表的 插入数据 编辑数据 删除数据每次都需要确认操作，代码书写太过繁琐
+</span><span class="s1">&gt;&gt;&gt; 1.创建链接对象
+</span><span class="s1">conn = pymysql.connect(
+</span><span class="s1">    ...
+</span><span class="s1">    &gt;&gt;&gt; 自动确认
+</span><span class="s1">    autocommit=True
+</span><span class="s1">)
+</span><span class="s1">
+</span><span class="s1">
+</span><span class="s1">&#34;&#34;&#34;
+</span><span class="s1">针对获取sql语句查询的结果三个方法 其实内部都有一个类似于指针的概念
+</span><span class="s1">我们也可以控制指针的移动
+</span><span class="s1">&#34;&#34;&#34;
+</span><span class="s1">res = cursor.fetchall()  &gt;&gt;&gt; [{&#39;id&#39;: 1, &#39;name&#39;: &#39;jasonNB&#39;, &#39;password&#39;: &#39;123&#39;}, {&#39;id&#39;: 2, &#39;name&#39;: &#39;tony&#39;, &#39;password&#39;: &#39;123&#39;}, {&#39;id&#39;: 3, &#39;name&#39;: &#39;kevin&#39;, &#39;password&#39;: &#39;123&#39;}, {&#39;id&#39;: 7, &#39;name&#39;: &#39;tom&#39;, &#39;password&#39;: &#39;123&#39;}]
+</span><span class="s1">print(res)
+</span><span class="s1">&gt;&gt;&gt; cursor.scroll(-2,&#39;relative&#39;)  &gt;&gt;&gt; 相对于指针当前位置 前后移动 正数就是往右 负数就是往左
+</span><span class="s1">cursor.scroll(1,&#39;absolute&#39;)  &gt;&gt;&gt; 相对于数据开头 前后移动 正数就是往右 负数就是往左
+</span><span class="s1">res = cursor.fetchall() 
+</span><span class="s1">print(res)  &gt;&gt;&gt; [{&#39;id&#39;: 3, &#39;name&#39;: &#39;kevin&#39;, &#39;password&#39;: &#39;123&#39;}, {&#39;id&#39;: 7, &#39;name&#39;: &#39;tom&#39;, &#39;password&#39;: &#39;123&#39;}]
+</span><span class="s1">
+</span><span class="s1">
+</span><span class="s1">一次性插入多条数据可以使用
+</span><span class="s1">sql = &#39;insert into userinfo(name,password) values(</span><span class="si">%s</span><span class="s1">,</span><span class="si">%s</span><span class="s1">)&#39;
+</span><span class="s1">user_list = [(&#39;egon&#39;,&#39;123&#39;),(&#39;oscar&#39;,&#39;123&#39;),(&#39;owen&#39;,&#39;123&#39;),(&#39;jerry&#39;,&#39;123&#39;)]
+</span><span class="s1">cursor.executemany(sql,user_list)
+</span><span class="s1">&#39;&#39;&#39;</span>
+</code></pre></div><h3 id="视图">视图<a href="#视图" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">我们之前已经学过了一张表的查询结果可以看成是存在内存中的虚拟表
+</span><span class="s1">那么视图的意思就是将该虚拟表存储起来方便以后使用
+</span><span class="s1">
+</span><span class="s1">create view student2class as
+</span><span class="s1">(select * from student inner join class on student.class_id = class.cid);
+</span><span class="s1">
+</span><span class="s1">创建出来的视图表是没有键，只有数据，视图使用的频率不高，我们只需要了解即可&#39;&#39;&#39;</span>
+</code></pre></div><h3 id="触发器">触发器<a href="#触发器" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;在满足对某张表数据的增、删、改的情况下，自动触发的功能称之为触发器
+</span><span class="s1">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; 为何要用触发器
+</span><span class="s1">    触发器专门针对我们对某一张表数据增insert、删delete、改update的行为，这类行为一旦执行
+</span><span class="s1">    就会触发触发器的执行，即自动运行另外一段sql代码
+</span><span class="s1">
+</span><span class="s1">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; 创建触发器语法
+</span><span class="s1">create trigger 触发器的名字 before/after insert/update/delete on 表名 for each row
+</span><span class="s1">begin
+</span><span class="s1">	sql语句  &gt;&gt;&gt; 触发器触发之后自动执行sql语句
+</span><span class="s1">end
+</span><span class="s1">&#34;&#34;&#34;
+</span><span class="s1">触发器总共有六种情况可以触发
+</span><span class="s1">	1.在对表数据进行新增之前
+</span><span class="s1">	2.在对表数据进行新增之后
+</span><span class="s1">	3.在对表数据进行修改之前
+</span><span class="s1">	4.在对表数据进行修改之后
+</span><span class="s1">	5.在对表数据进行删除之前
+</span><span class="s1">	6.在对表数据进行删除之后
+</span><span class="s1">&#34;&#34;&#34;
+</span><span class="s1">
+</span><span class="s1">&gt;&gt;&gt; 案例
+</span><span class="s1">CREATE TABLE cmd (
+</span><span class="s1">    id INT PRIMARY KEY auto_increment,
+</span><span class="s1">    USER CHAR (32),
+</span><span class="s1">    priv CHAR (10),
+</span><span class="s1">    cmd CHAR (64),
+</span><span class="s1">    sub_time datetime, &gt;&gt;&gt;提交时间
+</span><span class="s1">    success enum (&#39;yes&#39;, &#39;no&#39;) &gt;&gt;&gt;0代表执行失败
+</span><span class="s1">);
+</span><span class="s1">
+</span><span class="s1">CREATE TABLE errlog (
+</span><span class="s1">    id INT PRIMARY KEY auto_increment,
+</span><span class="s1">    err_cmd CHAR (64),
+</span><span class="s1">    err_time datetime
+</span><span class="s1">);
+</span><span class="s1">
+</span><span class="s1">delimiter $$  &gt;&gt;&gt; 将mysql默认的结束符由;换成$$
+</span><span class="s1">create trigger tri_after_insert_cmd after insert on cmd for each row
+</span><span class="s1">begin
+</span><span class="s1">    if NEW.success = &#39;no&#39; then  &gt;&gt;&gt; 新记录都会被MySQL封装成NEW对象
+</span><span class="s1">        insert into errlog(err_cmd,err_time) values(NEW.cmd,NEW.sub_time);
+</span><span class="s1">    end if;
+</span><span class="s1">end $$
+</span><span class="s1">delimiter ;  &gt;&gt;&gt; 结束之后记得再改回来，不然后面结束符就都是$$了
+</span><span class="s1">
+</span><span class="s1">&gt;&gt;&gt;往表cmd中插入记录，触发触发器，根据IF的条件决定是否插入错误日志
+</span><span class="s1">INSERT INTO cmd (
+</span><span class="s1">    USER,
+</span><span class="s1">    priv,
+</span><span class="s1">    cmd,
+</span><span class="s1">    sub_time,
+</span><span class="s1">    success
+</span><span class="s1">)
+</span><span class="s1">VALUES
+</span><span class="s1">    (&#39;egon&#39;,&#39;0755&#39;,&#39;ls -l /etc&#39;,NOW(),&#39;yes&#39;),
+</span><span class="s1">    (&#39;egon&#39;,&#39;0755&#39;,&#39;cat /etc/passwd&#39;,NOW(),&#39;no&#39;),
+</span><span class="s1">    (&#39;egon&#39;,&#39;0755&#39;,&#39;useradd xxx&#39;,NOW(),&#39;no&#39;),
+</span><span class="s1">    (&#39;egon&#39;,&#39;0755&#39;,&#39;ps aux&#39;,NOW(),&#39;yes&#39;);
+</span><span class="s1">
+</span><span class="s1">&gt;&gt;&gt; 查询errlog表记录
+</span><span class="s1">select * from errlog;
+</span><span class="s1">&gt;&gt;&gt; 查看触发器
+</span><span class="s1">show triggers;
+</span><span class="s1">&gt;&gt;&gt; 删除触发器
+</span><span class="s1">drop trigger tri_after_insert_cmd;&#39;&#39;&#39;</span>
+</code></pre></div><h3 id="sql语句结束符补充">SQL语句结束符补充<a href="#sql语句结束符补充" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;我们都知道sql语句的结束符是分号，但是我们有时候需要修改sql语句的结束符
+</span><span class="s1">默认情况下
+</span><span class="s1">	;
+</span><span class="s1">也可以修改
+</span><span class="s1">	delimiter $$  &gt;&gt;&gt; 将sql语句的结束符修改为$$  只在当前窗口临时生效&#39;&#39;&#39;</span>
+</code></pre></div><h3 id="事务重要">事务(重要)<a href="#事务重要" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;事务有四大特性(ACID)
+</span><span class="s1">	A原子性:一个事务是一个不可分割的工作单位，事务中包括的诸操作要么都做，要么都不做
+</span><span class="s1">  C一致性:事务必须是使数据库从一个一致性状态变到另一个一致性状态。一致性与原子性是密切相关的
+</span><span class="s1">  I隔离性:一个事务的执行不能被其他事务干扰。即一个事务内部的操作及使用的数据对并发的其他事务是隔离的，并发执行的各个事务之间不能互相干扰
+</span><span class="s1">  D持久性:持久性也称永久性（permanence），指一个事务一旦提交，它对数据库中数据的改变就应该是永久性的。接下来的其他操作或故障不应该对其有任何影响
+</span><span class="s1">    
+</span><span class="s1">案例:
+</span><span class="s1">  jason需要给egon还钱，但是jason用的交通银行卡，旁边有一台招商银行的ATM，egon用的是中国银行卡
+</span><span class="s1">  现在jason需要用招商银行的ATM扣交通银行的钱还给中国银行卡
+</span><span class="s1">  	1.招商银行ATM机器给交通银行发送请求扣除jason账户的钱
+</span><span class="s1">    2.中国银行发送请求增加egon账户的钱
+</span><span class="s1">特殊情况:
+</span><span class="s1">  	当刚好把jason的钱扣了，突然断网了服务器奔溃了总之就是给中国银行发送的请求丢失了，导致jason钱没了，egon没收到钱
+</span><span class="s1"> 
+</span><span class="s1">基于上述问题，为了保证数据操作过程中的安全性，我们引入了事务的概念
+</span><span class="s1">	将扣钱和加钱操作放入一个事务中，两者要么都成功要么一个都别成功
+</span><span class="s1">  即不成功的情况下全部回退到执行操作之前的状态
+</span><span class="s1">  
+</span><span class="s1">事务的使用
+</span><span class="s1">start transaction
+</span><span class="s1">sql语句  &gt;&gt;&gt; 这些sql语句就属于同一个事务
+</span><span class="s1">&gt;&gt;&gt; 如果不成功或者想回退
+</span><span class="s1">rollback;  &gt;&gt;&gt; 回退到执行事务之前的状态
+</span><span class="s1">&gt;&gt;&gt; 如果事务执行完没有任何问题 需要确认成功
+</span><span class="s1">commit;  &gt;&gt;&gt; commit确认之后就无法回退了&#39;&#39;&#39;</span>
+</code></pre></div><h3 id="存储过程">存储过程<a href="#存储过程" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;MySQL中的存储过程类似于我们python里面学习的自定义函数
+</span><span class="s1">
+</span><span class="s1">语法结构
+</span><span class="s1">&gt;&gt;&gt; 定义
+</span><span class="s1">delimiter $$
+</span><span class="s1">create procedure p1()
+</span><span class="s1">begin
+</span><span class="s1">	select * from dep;
+</span><span class="s1">end $$
+</span><span class="s1">delimiter ;
+</span><span class="s1">
+</span><span class="s1">&gt;&gt;&gt; 调用
+</span><span class="s1">call p1()
+</span><span class="s1">
+</span><span class="s1">
+</span><span class="s1">&gt;&gt;&gt; 简单使用(无参函数)
+</span><span class="s1">delimiter $$
+</span><span class="s1">create procedure p1()
+</span><span class="s1">begin
+</span><span class="s1">	select * from user;
+</span><span class="s1">end $$
+</span><span class="s1">delimiter ;
+</span><span class="s1">
+</span><span class="s1">&gt;&gt;&gt; 复杂使用(有参函数)
+</span><span class="s1">delimiter $$
+</span><span class="s1">create procedure p2(
+</span><span class="s1">    in m int,  &gt;&gt;&gt; in表示这个参数必须只能是传入不能被返回出去
+</span><span class="s1">    in n int,  
+</span><span class="s1">    out res int  &gt;&gt;&gt; out表示这个参数可以被返回出去，还有一个inout表示即可以传入也可以被返回出去
+</span><span class="s1">)
+</span><span class="s1">begin
+</span><span class="s1">    select * from user where id &gt; m and id &lt; n;
+</span><span class="s1">    set res=0;  &gt;&gt;&gt; 用来标志存储过程是否执行
+</span><span class="s1">end $$
+</span><span class="s1">delimiter ;
+</span><span class="s1">
+</span><span class="s1">定义一个变量
+</span><span class="s1">set @res=10
+</span><span class="s1">查看变量对应的值
+</span><span class="s1">select @res;
+</span><span class="s1">调用存储过程
+</span><span class="s1">call p1(0,3,@res)&#39;&#39;&#39;</span>
+</code></pre></div>
+			</div>
+			<hr class="post-end">
+			<footer class="post-info">
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>Eddy Zhang</p>
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://Eddy-622.github.io/tags/mysql">MySQL</a></span><span class="tag"><a href="https://Eddy-622.github.io/tags/python%E8%A7%A3%E9%87%8A%E5%99%A8%E9%93%BE%E6%8E%A5%E6%93%8D%E4%BD%9C">Python解释器链接操作</a></span><span class="tag"><a href="https://Eddy-622.github.io/tags/sql%E6%B3%A8%E5%85%A5">SQL注入</a></span><span class="tag"><a href="https://Eddy-622.github.io/tags/%E4%BA%8B%E5%8A%A1">事务</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>925 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-11-13 08:00 &#43;0800</p>
+			</footer>
+		</article>
+		<div class="post-nav thin">
+			<a class="next-post" href="https://Eddy-622.github.io/posts/mysql%E8%BF%9E%E8%A1%A8%E6%9F%A5%E8%AF%A2%E7%BB%83%E4%B9%A0%E9%A2%98/">
+				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>MySQL连表查询练习题</span>
+			</a>
+			<a class="prev-post" href="https://Eddy-622.github.io/posts/mysql%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2%E5%AD%90%E6%9F%A5%E8%AF%A2%E8%BF%9E%E6%8E%A5%E8%A1%A8/">
+				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>MySQL之多表查询、连接表、子查询、Nevicat</span>
+			</a>
+		</div>
+		<div id="comments" class="thin">
+</div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p>&copy; 2020 <a href="https://Eddy-622.github.io">Eddy Zhang</a></p>
+		<p>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://Eddy-622.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+		</p>
+	</footer>
+
+
+
+	<script src="https://Eddy-622.github.io/js/bundle.min.4a9a0ac3d2217822c7865b4161e6c2a71de1d70492264337755427898dd718f6.js" integrity="sha256-SpoKw9IheCLHhltBYebCpx3h1wSSJkM3dVQniY3XGPY=" crossorigin="anonymous"></script>
+	
+
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>爬虫 on Eddy&#39;s Boke</title>
+    <link>https://Eddy-622.github.io/tags/%E7%88%AC%E8%99%AB/</link>
+    <description>Recent content in 爬虫 on Eddy&#39;s Boke</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Wed, 18 Nov 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://Eddy-622.github.io/tags/%E7%88%AC%E8%99%AB/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>爬虫之requests模块、cookie与session、json格式数据</title>
+      <link>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Brequests%E6%A8%A1%E5%9D%97cookie%E4%B8%8Esessionjson%E6%A0%BC%E5%BC%8F%E6%95%B0%E6%8D%AE/</link>
+      <pubDate>Wed, 18 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Brequests%E6%A8%A1%E5%9D%97cookie%E4%B8%8Esessionjson%E6%A0%BC%E5%BC%8F%E6%95%B0%E6%8D%AE/</guid>
+      <description>今日内容概要  requests模块 cookie与session requests爬取网址数据实战演练 json格式数据  今日内容详细 requests模块 &amp;#34;&amp;#34;&amp;#34;get请求携带参数在url中携带 url？username=jason&amp;amp;hobby=readrequestes模块携带参数import requestsres = requests.get(&amp;#39;https://www.baidu.com/s&amp;#39;,params={&amp;#39;wd&amp;#39;: &amp;#39;美女&amp;#39;},headers={&amp;#39;User-Agent&amp;#39;: &amp;#39;Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.76 Mobile Safari/537.36&amp;#39;,})with open(r&amp;#39;mn1.html&amp;#39;, &amp;#39;wb&amp;#39;) as f:f.write(res.content)&amp;#34;&amp;#34;&amp;#34;总结:大部分网址基本上都会校验你是否是个浏览器，所以我们以后在发送请求的时候最后将User-agent携带着&amp;#34;&amp;#34;&amp;#34;res = requests.get(&amp;#39;url&amp;#39;),params={字典形式携带的参数}headers={浏览器校验头，防止一般的简单网站防爬}&amp;#34;&amp;#34;&amp;#34;cookie与session &amp;#34;&amp;#34;&amp;#34;cookie与session都是用来记录当前用户状态的二者产生的原因在于HTTP协议是无状态的 &amp;gt;&amp;gt;&amp;gt; HTTP协议不记录用户信息但是网站需要记录用户的状态，登录信息等，cookie 和 session 便是分别负责在服务端与客户端进行身份识别cookie的由来就是保存在浏览器上面的k:v键值对session的由来就是保存在服务端上面的数据&amp;#39;&amp;#39;&amp;#39;在互联网中没有绝对意义上的安全&amp;#39;&amp;#39;&amp;#39;两者工作机制session的工作需要依赖于cookie总结:只要是需要保存用户状态的网址，都需要借助于cookie浏览器可以选择保存cookie也可以选择拒绝一旦浏览器拒绝保存cookie，那么所有网址的登录都无法进行知识扩展:https://www.</description>
+    </item>
+    
+    <item>
+      <title>爬虫之requests模块、正则表达式</title>
+      <link>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Brequests%E6%A8%A1%E5%9D%97%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</link>
+      <pubDate>Tue, 17 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Brequests%E6%A8%A1%E5%9D%97%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</guid>
+      <description>今日内容概要   正则表达式是
+用一些特殊符号的组合去字符串里筛选出符合符号特征的内容
+专门在爬虫中帮助我们从网页上筛选我们想要的内容
+  爬虫模块
+requests模块
+requets-html模块
+bs4模块
+  今日内容详细 正则表达式 &amp;#39;&amp;#39;&amp;#39;它是一门独立的学科，不属于任何的其他知识点所有的编程语言都可以使用正则表达式如果我们想在python中使用正则表达式需要借助于re模块(爬虫相关模块)用一些特殊符号的组合去字符串里面筛选出符合符号特征的内容&amp;#39;&amp;#39;&amp;#39;前戏 &amp;#34;&amp;#34;&amp;#34;校验手机号1.校验手机号的开头2.校验手机号的位数3.校验必须是纯数字使用python代码实现&amp;#39;&amp;#39;&amp;#39;用python逻辑代码实现&amp;#39;&amp;#39;&amp;#39;&amp;gt;&amp;gt;&amp;gt; 获取用户输入的手机号phone = input(&amp;#39;please input your number&amp;gt;&amp;gt;&amp;gt;:&amp;#39;).strip()&amp;gt;&amp;gt;&amp;gt; 1.是否是纯数字if phone.isdigit(): &amp;gt;&amp;gt;&amp;gt; 字符串里面如果是纯数字就返回True不是返回False&amp;gt;&amp;gt;&amp;gt; 2.判断位数if len(phone) == 11:&amp;gt;&amp;gt;&amp;gt; 3.判断手机号开头 11 13 14 15 18if phone.startswith(&amp;#39;11&amp;#39;) or \phone.startswith(&amp;#39;13&amp;#39;) or \phone.startswith(&amp;#39;14&amp;#39;) or \phone.startswith(&amp;#39;15&amp;#39;) or \phone.startswith(&amp;#39;18&amp;#39;):print(&amp;#39;手机号正确&amp;#39;)else:print(&amp;#39;手机号格式错误&amp;#39;)else:print(&amp;#39;手机号必须是11位&amp;#39;)else:print(&amp;#39;手机号只能是数字&amp;#39;)&amp;#39;&amp;#39;&amp;#39;用正则表达式书写&amp;#39;&amp;#39;&amp;#39;import rephone_number = input(&amp;#39;please input your phone number ： &amp;#39;)if re.</description>
+    </item>
+    
+    <item>
+      <title>初识爬虫、概念、HTML</title>
+      <link>https://Eddy-622.github.io/posts/%E5%88%9D%E8%AF%86%E7%88%AC%E8%99%AB%E6%A6%82%E5%BF%B5html/</link>
+      <pubDate>Mon, 16 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/posts/%E5%88%9D%E8%AF%86%E7%88%AC%E8%99%AB%E6%A6%82%E5%BF%B5html/</guid>
+      <description>今日内容概要  爬虫的概念 前端之HTML 正则表达式  今日内容详细 爬虫的概念 &amp;#39;&amp;#39;&amp;#39;互联网所有的计算机彼此互联，形成一张无形的大网联网目的实现数据的彼此传递什么是上网通过浏览器发送请求获取相应的数据（数据通过互联网传输的都是二进制格式）什么是爬虫通过代码模拟浏览器发送请求获取相应的数据兵器过滤出自己想要的存储到数据库中比喻我们把互联网当成一张很大的蜘蛛网，每台计算机上的数据便是蜘蛛的一个猎物，而爬虫程序就是一个小蜘蛛，沿着蜘蛛网抓取自己想要的猎物/数据价值 互联网最有价值的便是数据，往往谁能掌控行业的一手数据便能成为行业的主宰，这些数据代表着行业的真金白银，而爬虫就是使用工具高效的挖掘这些真金白银注意由于爬虫是有一点擦变性性质的，不要什么数据都去爬银行账户信息之类的&amp;#39;&amp;#39;&amp;#39;爬虫流程 &amp;#39;&amp;#39;&amp;#39;1. 通过代码模拟浏览器发送请求2. 必须要通过对方的校验才能获取到数据3. 解析获取到的二进制数据4、提取我们需要的保存到数据库cs架构与bs架构bs架构的本身也是cs架构通过一个浏览器访问多个服务端&amp;#39;&amp;#39;&amp;#39;HTTP协议 &amp;#39;&amp;#39;&amp;#39;HTTP协议：超文本传输协议规定了浏览器与服务端之间数据交互的格式四大特性：1、基与请求响应2、基于TCP/IP作用于应用层之上的协议3、无状态不保存用户状态4无连接（短链接）彼此交互完数据之后再无瓜葛数据格式请求格式请求首行（请求方法，HTTP协议版本）请求头（一大堆k：v键值对）请求体（post携带的请求数据会携带在请求体内）响应格式响应首行响应头响应体响应状态码用一串数字来表达信息1XX：服务端已经接受到了你的请求，正在处理你可以继续提交数据2XX：服务端应景成功的响应了对应的数据（200）3XX：重定向（原本访问A重定向到了B）4XX：404请求资源不存在，403请求不符合条件5XX：服务器内部错误（500）&amp;#39;&amp;#39;&amp;#39;请求方法 &amp;#39;&amp;#39;&amp;#39;1、get请求向别人要数据eg:1.浏览器地址栏里面输入www.baidu.com朝百度服务端要百度首页的数据2.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -6,8 +6,1265 @@
 		<generator>Hugo -- gohugo.io</generator>
 		<language>zh-CN</language>
 		<copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-		<lastBuildDate>Thu, 12 Nov 2020 00:00:00 +0000</lastBuildDate>
+		<lastBuildDate>Wed, 18 Nov 2020 00:00:00 +0000</lastBuildDate>
 		<atom:link href="https://Eddy-622.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>爬虫之requests模块、cookie与session、json格式数据</title>
+			<link>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Brequests%E6%A8%A1%E5%9D%97cookie%E4%B8%8Esessionjson%E6%A0%BC%E5%BC%8F%E6%95%B0%E6%8D%AE/</link>
+			<pubDate>Wed, 18 Nov 2020 00:00:00 +0000</pubDate>
+			
+			<guid>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Brequests%E6%A8%A1%E5%9D%97cookie%E4%B8%8Esessionjson%E6%A0%BC%E5%BC%8F%E6%95%B0%E6%8D%AE/</guid>
+			<description>今日内容概要  requests模块 cookie与session requests爬取网址数据实战演练 json格式数据  今日内容详细 requests模块 &amp;#34;&amp;#34;&amp;#34;get请求携带参数在url中携带 url？username=jason&amp;amp;hobby=readrequestes模块携带参数import requestsres = requests.get(&amp;#39;https://www.baidu.com/s&amp;#39;,params={&amp;#39;wd&amp;#39;: &amp;#39;美女&amp;#39;},headers={&amp;#39;User-Agent&amp;#39;: &amp;#39;Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.76 Mobile Safari/537.36&amp;#39;,})with open(r&amp;#39;mn1.html&amp;#39;, &amp;#39;wb&amp;#39;) as f:f.write(res.content)&amp;#34;&amp;#34;&amp;#34;总结:大部分网址基本上都会校验你是否是个浏览器，所以我们以后在发送请求的时候最后将User-agent携带着&amp;#34;&amp;#34;&amp;#34;res = requests.get(&amp;#39;url&amp;#39;),params={字典形式携带的参数}headers={浏览器校验头，防止一般的简单网站防爬}&amp;#34;&amp;#34;&amp;#34;cookie与session &amp;#34;&amp;#34;&amp;#34;cookie与session都是用来记录当前用户状态的二者产生的原因在于HTTP协议是无状态的 &amp;gt;&amp;gt;&amp;gt; HTTP协议不记录用户信息但是网站需要记录用户的状态，登录信息等，cookie 和 session 便是分别负责在服务端与客户端进行身份识别cookie的由来就是保存在浏览器上面的k:v键值对session的由来就是保存在服务端上面的数据&amp;#39;&amp;#39;&amp;#39;在互联网中没有绝对意义上的安全&amp;#39;&amp;#39;&amp;#39;两者工作机制session的工作需要依赖于cookie总结:只要是需要保存用户状态的网址，都需要借助于cookie浏览器可以选择保存cookie也可以选择拒绝一旦浏览器拒绝保存cookie，那么所有网址的登录都无法进行知识扩展:https://www.</description>
+			<content type="html"><![CDATA[<h1 id="今日内容概要">今日内容概要</h1>
+<ul>
+<li>requests模块</li>
+<li>cookie与session</li>
+<li>requests爬取网址数据实战演练</li>
+<li>json格式数据</li>
+</ul>
+<h1 id="今日内容详细">今日内容详细</h1>
+<h4 id="requests模块">requests模块</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;get请求携带参数
+</span><span class="s2">	在url中携带 url？username=jason&amp;hobby=read
+</span><span class="s2">requestes模块携带参数
+</span><span class="s2">	import requests
+</span><span class="s2">    
+</span><span class="s2">    res = requests.get(&#39;https://www.baidu.com/s&#39;,
+</span><span class="s2">                   params={
+</span><span class="s2">                       &#39;wd&#39;: &#39;美女&#39;
+</span><span class="s2">                   },
+</span><span class="s2">                   headers={
+</span><span class="s2">                       &#39;User-Agent&#39;: &#39;Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.76 Mobile Safari/537.36&#39;,
+</span><span class="s2">                   }
+</span><span class="s2">                   )
+</span><span class="s2">with open(r&#39;mn1.html&#39;, &#39;wb&#39;) as f:
+</span><span class="s2">    f.write(res.content)
+</span><span class="s2">&#34;&#34;&#34;</span>
+<span class="err">总结</span><span class="p">:</span><span class="err">大部分网址基本上都会校验你是否是个浏览器，所以我们以后在发送请求的时候最后将</span><span class="n">User</span><span class="o">-</span><span class="n">agent携带着</span>
+<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">		res = requests.get(&#39;url&#39;),
+</span><span class="s2">    			params={
+</span><span class="s2">                    字典形式携带的参数
+</span><span class="s2">                }
+</span><span class="s2">        		headers={
+</span><span class="s2">                    浏览器校验头，防止一般的简单网站防爬
+</span><span class="s2">                }
+</span><span class="s2">            
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></div><h4 id="cookie与session">cookie与session</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;cookie与session都是用来记录当前用户状态的
+</span><span class="s2">二者产生的原因在于HTTP协议是无状态的    
+</span><span class="s2">
+</span><span class="s2">&gt;&gt;&gt; HTTP协议不记录用户信息但是网站需要记录用户的状态，登录信息等，cookie 和 session 便是分别负责在服务端与客户端进行身份识别
+</span><span class="s2">
+</span><span class="s2">cookie的由来
+</span><span class="s2">	就是保存在浏览器上面的k:v键值对
+</span><span class="s2">
+</span><span class="s2">session的由来
+</span><span class="s2">	就是保存在服务端上面的数据
+</span><span class="s2">&#39;&#39;&#39;
+</span><span class="s2">在互联网中没有绝对意义上的安全
+</span><span class="s2">&#39;&#39;&#39;
+</span><span class="s2">两者工作机制
+</span><span class="s2">	session的工作需要依赖于cookie
+</span><span class="s2">    
+</span><span class="s2">总结:
+</span><span class="s2">    只要是需要保存用户状态的网址，都需要借助于cookie
+</span><span class="s2">    浏览器可以选择保存cookie也可以选择拒绝
+</span><span class="s2">    一旦浏览器拒绝保存cookie，那么所有网址的登录都无法进行
+</span><span class="s2">
+</span><span class="s2">知识扩展:https://www.cnblogs.com/Dominic-Ji/p/10886902.html&#34;&#34;&#34;</span>
+</code></pre></div><h4 id="携带cookie">携带cookie</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;句型：
+</span><span class="s2">	res = requests.get/post/...(
+</span><span class="s2">	url=&#39;&#39;,
+</span><span class="s2">    headers={},
+</span><span class="s2">    params={},
+</span><span class="s2">    cookies={}
+</span><span class="s2">)
+</span><span class="s2">
+</span><span class="s2">    案例:华华手机登录  http://www.aa7a.cn/user.php
+</span><span class="s2">&#39;&#39;&#39;
+</span><span class="s2">验证是否登录 我们可以采用返回界面数据右上角是否含有用户名
+</span><span class="s2">&#39;&#39;&#39;
+</span><span class="s2">1.先研究登录请求发送的地址和数据格式
+</span><span class="s2">2.找到请求体数据格式 直接拿走
+</span><span class="s2">	username: weqeqw
+</span><span class="s2">    password: wqewqewqe
+</span><span class="s2">    captcha: CA3V
+</span><span class="s2">    remember: 1
+</span><span class="s2">    ref: http://www.aa7a.cn
+</span><span class="s2">    act: act_login
+</span><span class="s2">3.自己模拟post请求发送
+</span><span class="s2">4.如果用户名和密码正确 服务端就会给你返回标识你身份的cookie信息
+</span><span class="s2">	我们只需要获取到服务端给我们返回的cookie数据以后就可以拿着cookie无限制登录访问
+</span><span class="s2"> 
+</span><span class="s2">import requests
+</span><span class="s2">
+</span><span class="s2">headers = {
+</span><span class="s2">    &#39;User-Agent&#39;: &#39;Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.76 Mobile Safari/537.36&#39;,
+</span><span class="s2">}
+</span><span class="s2">
+</span><span class="s2">res = requests.post(&#39;http://www.aa7a.cn/user.php&#39;,
+</span><span class="s2">                    headers=headers,
+</span><span class="s2">                    # post请求携带数据需要使用data参数
+</span><span class="s2">                    data={
+</span><span class="s2">                        &#39;username&#39;: &#39;616564099@qq.com&#39;,
+</span><span class="s2">                        &#39;password&#39;: &#39;lqz123&#39;,
+</span><span class="s2">                        &#39;captcha&#39;: &#39;CA3V&#39;,
+</span><span class="s2">                        &#39;remember&#39;: &#39;1&#39;,
+</span><span class="s2">                        &#39;ref&#39;: &#39;http://www.aa7a.cn&#39;,
+</span><span class="s2">                        &#39;act&#39;: &#39;act_login&#39;
+</span><span class="s2">                    }
+</span><span class="s2">                    )
+</span><span class="s2"># 获取服务端返回的cookie数据
+</span><span class="s2">cookie=res.cookies.get_dict()
+</span><span class="s2">
+</span><span class="s2"># 携带着cookie访问网址首页 验证是否是登录状态
+</span><span class="s2">res = requests.get(&#39;http://www.aa7a.cn/user.php&#39;,
+</span><span class="s2">                   headers=headers,
+</span><span class="s2">                   cookies=cookie
+</span><span class="s2">                   )
+</span><span class="s2">if &#39;616564099@qq.com&#39; in res.text:
+</span><span class="s2">    print(&#39;登录成功&#39;)
+</span><span class="s2">else:
+</span><span class="s2">    print(&#39;用户名或密码错误&#39;)&#34;&#34;&#34;</span>
+</code></pre></div><h4 id="当爬取下来的数据过大">当爬取下来的数据过大</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;#stream参数:一点一点的取,比如下载视频时,如果视频100G,用response.content然后一下子写到文件中是不合理的
+</span><span class="s2">
+</span><span class="s2">import requests
+</span><span class="s2">
+</span><span class="s2">response=requests.get(&#39;https://gss3.baidu.com/6LZ0ej3k1Qd3ote6lo7D0j9wehsv/tieba-smallvideo-transcode/1767502_56ec685f9c7ec542eeaf6eac93a65dc7_6fe25cd1347c_3.mp4&#39;,
+</span><span class="s2">                      stream=True)
+</span><span class="s2">
+</span><span class="s2">with open(&#39;b.mp4&#39;,&#39;wb&#39;) as f:
+</span><span class="s2">    for line in response.iter_content():
+</span><span class="s2">        f.write(line)&#34;&#34;&#34;</span>
+</code></pre></div><h4 id="json格式数据">json格式数据</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;json格式数据是前端和后端通用的一种格式，用来打破语言限制实现无障碍数据沟通交流&#39;&#39;&#39;</span>
+<span class="s2">&#34;&#34;&#34;json格式的数据跟我们python里面的字典长得非常的像
+</span><span class="s2">只不过json格式引号都是双引号
+</span><span class="s2">双引号是json格式数据的标识
+</span><span class="s2">
+</span><span class="s2"># import json
+</span><span class="s2">d = {&#39;username&#39;:&#39;jason&#39;,&#39;password&#39;:&#39;123&#39;}
+</span><span class="s2"># 将数据转换成json格式(想给别人发数据)
+</span><span class="s2">res = json.dumps(d)   # 将字段转换成json格式的字符串
+</span><span class="s2">print(res,type(res))
+</span><span class="s2"># 将json格式数据转换成python数据(别人给你发数据)
+</span><span class="s2">res1 = json.loads(res)  # 将json格式字符串转换成字典
+</span><span class="s2">print(res1,type(res1))&#34;&#34;&#34;</span>
+</code></pre></div><h4 id="ip代理池cookie池">IP代理池、Cookie池</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">IP代理池
+</span><span class="s2">
+</span><span class="s2">防爬措施
+</span><span class="s2">1.服务端可以获取到每个客户端的IP地址
+</span><span class="s2">	规定一个IP地址在一定的时间范围内不得访问超出规定次数的请求
+</span><span class="s2">    如果超出了直接对该IP地址做访问限制(一定时间内，终身封禁)
+</span><span class="s2">破解措施
+</span><span class="s2">使用IP代理池
+</span><span class="s2">	给你提供很多IP每次从中随机获取一个去访问服务端，避过次数校验
+</span><span class="s2">#代理设置:先发送请求给代理,然后由代理帮忙发送(封ip是常见的事情)
+</span><span class="s2">import requests
+</span><span class="s2">proxies={
+</span><span class="s2">    &#39;http&#39;:&#39;183.166.161.14:4226&#39;,
+</span><span class="s2">    &#39;http&#39;:&#39;115.209.120.210:4226&#39;,
+</span><span class="s2">    &#39;http&#39;:&#39;119.178.168.138:4245&#39;,
+</span><span class="s2">}
+</span><span class="s2">respone=requests.get(&#39;https://www.12306.cn&#39;,
+</span><span class="s2">                     proxies=proxies)
+</span><span class="s2">
+</span><span class="s2">print(respone.status_code)
+</span><span class="s2">
+</span><span class="s2">Cookie池
+</span><span class="s2">规定一个Cookie在一定的时间范围内不得访问超出规定次数的请求
+</span><span class="s2">    如果超出了直接对该Cookie做访问限制(一定时间内，终身封禁)
+</span><span class="s2">破解措施
+</span><span class="s2">使用Cookie代理池
+</span><span class="s2">	给你提供很多Cookie每次从中随机获取一个去访问服务端，避过次数校验
+</span><span class="s2">    
+</span><span class="s2">先在某一个网址用很多用户名和密码登录获取每一次的cookie
+</span><span class="s2">然后存储到一个文件中
+</span><span class="s2">之后访问该网址随机从文件中获取一个cookie去访问&#34;&#34;&#34;</span>
+</code></pre></div><h4 id="上传文件">上传文件</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">files</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;file&#39;</span><span class="p">:</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;a.jpg&#39;</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)}</span>
+<span class="n">respone</span><span class="o">=</span><span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;http://httpbin.org/post&#39;</span><span class="p">,</span>
+                      <span class="n">files</span><span class="o">=</span><span class="n">files</span>
+                     <span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">respone</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+</code></pre></div>]]></content>
+		</item>
+		
+		<item>
+			<title>爬虫之requests模块、正则表达式</title>
+			<link>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Brequests%E6%A8%A1%E5%9D%97%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</link>
+			<pubDate>Tue, 17 Nov 2020 00:00:00 +0000</pubDate>
+			
+			<guid>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Brequests%E6%A8%A1%E5%9D%97%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</guid>
+			<description>今日内容概要   正则表达式是
+用一些特殊符号的组合去字符串里筛选出符合符号特征的内容
+专门在爬虫中帮助我们从网页上筛选我们想要的内容
+  爬虫模块
+requests模块
+requets-html模块
+bs4模块
+  今日内容详细 正则表达式 &amp;#39;&amp;#39;&amp;#39;它是一门独立的学科，不属于任何的其他知识点所有的编程语言都可以使用正则表达式如果我们想在python中使用正则表达式需要借助于re模块(爬虫相关模块)用一些特殊符号的组合去字符串里面筛选出符合符号特征的内容&amp;#39;&amp;#39;&amp;#39;前戏 &amp;#34;&amp;#34;&amp;#34;校验手机号1.校验手机号的开头2.校验手机号的位数3.校验必须是纯数字使用python代码实现&amp;#39;&amp;#39;&amp;#39;用python逻辑代码实现&amp;#39;&amp;#39;&amp;#39;&amp;gt;&amp;gt;&amp;gt; 获取用户输入的手机号phone = input(&amp;#39;please input your number&amp;gt;&amp;gt;&amp;gt;:&amp;#39;).strip()&amp;gt;&amp;gt;&amp;gt; 1.是否是纯数字if phone.isdigit(): &amp;gt;&amp;gt;&amp;gt; 字符串里面如果是纯数字就返回True不是返回False&amp;gt;&amp;gt;&amp;gt; 2.判断位数if len(phone) == 11:&amp;gt;&amp;gt;&amp;gt; 3.判断手机号开头 11 13 14 15 18if phone.startswith(&amp;#39;11&amp;#39;) or \phone.startswith(&amp;#39;13&amp;#39;) or \phone.startswith(&amp;#39;14&amp;#39;) or \phone.startswith(&amp;#39;15&amp;#39;) or \phone.startswith(&amp;#39;18&amp;#39;):print(&amp;#39;手机号正确&amp;#39;)else:print(&amp;#39;手机号格式错误&amp;#39;)else:print(&amp;#39;手机号必须是11位&amp;#39;)else:print(&amp;#39;手机号只能是数字&amp;#39;)&amp;#39;&amp;#39;&amp;#39;用正则表达式书写&amp;#39;&amp;#39;&amp;#39;import rephone_number = input(&amp;#39;please input your phone number ： &amp;#39;)if re.</description>
+			<content type="html"><![CDATA[<h1 id="今日内容概要">今日内容概要</h1>
+<ul>
+<li>
+<p>正则表达式是</p>
+<p>用一些特殊符号的组合去字符串里筛选出符合符号特征的内容</p>
+<p>专门在爬虫中帮助我们从网页上筛选我们想要的内容</p>
+</li>
+<li>
+<p>爬虫模块</p>
+<p>requests模块</p>
+<p>requets-html模块</p>
+<p>bs4模块</p>
+</li>
+</ul>
+<h1 id="今日内容详细">今日内容详细</h1>
+<h4 id="正则表达式">正则表达式</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">它是一门独立的学科，不属于任何的其他知识点
+</span><span class="s1">所有的编程语言都可以使用正则表达式
+</span><span class="s1">
+</span><span class="s1">如果我们想在python中使用正则表达式需要借助于re模块(爬虫相关模块)
+</span><span class="s1">
+</span><span class="s1">用一些特殊符号的组合去字符串里面筛选出符合符号特征的内容&#39;&#39;&#39;</span>
+</code></pre></div><h4 id="前戏">前戏</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">校验手机号
+</span><span class="s2">1.校验手机号的开头
+</span><span class="s2">2.校验手机号的位数
+</span><span class="s2">3.校验必须是纯数字
+</span><span class="s2">
+</span><span class="s2">使用python代码实现
+</span><span class="s2">&#39;&#39;&#39;用python逻辑代码实现&#39;&#39;&#39;
+</span><span class="s2">&gt;&gt;&gt; 获取用户输入的手机号
+</span><span class="s2">phone = input(&#39;please input your number&gt;&gt;&gt;:&#39;).strip()
+</span><span class="s2">&gt;&gt;&gt; 1.是否是纯数字
+</span><span class="s2">if phone.isdigit():  &gt;&gt;&gt; 字符串里面如果是纯数字就返回True不是返回False
+</span><span class="s2">    &gt;&gt;&gt; 2.判断位数
+</span><span class="s2">    if len(phone) == 11:
+</span><span class="s2">        &gt;&gt;&gt; 3.判断手机号开头 11 13 14 15 18
+</span><span class="s2">        if phone.startswith(&#39;11&#39;) or \
+</span><span class="s2">                phone.startswith(&#39;13&#39;) or \
+</span><span class="s2">                phone.startswith(&#39;14&#39;) or \
+</span><span class="s2">                phone.startswith(&#39;15&#39;) or \
+</span><span class="s2">                phone.startswith(&#39;18&#39;):
+</span><span class="s2">            print(&#39;手机号正确&#39;)
+</span><span class="s2">        else:
+</span><span class="s2">            print(&#39;手机号格式错误&#39;)
+</span><span class="s2">    else:
+</span><span class="s2">        print(&#39;手机号必须是11位&#39;)
+</span><span class="s2">else:
+</span><span class="s2">    print(&#39;手机号只能是数字&#39;)
+</span><span class="s2">    
+</span><span class="s2">&#39;&#39;&#39;用正则表达式书写&#39;&#39;&#39;
+</span><span class="s2">import re
+</span><span class="s2">phone_number = input(&#39;please input your phone number ： &#39;)
+</span><span class="s2">if re.match(&#39;^(13|14|15|18)[0-9]{9}$&#39;,phone_number):
+</span><span class="s2">        print(&#39;是合法的手机号码&#39;)
+</span><span class="s2">else:
+</span><span class="s2">        print(&#39;不是合法的手机号码&#39;)&#34;&#34;&#34;</span>
+</code></pre></div><h4 id="字符组">字符组</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">[0-9]  &gt;&gt;&gt; 匹配数字
+</span><span class="s2">[a-z]  &gt;&gt;&gt; 匹配小写字母
+</span><span class="s2">&#39;&#39;&#39;
+</span><span class="s2">字符组在匹配的时候是单个单个字符依次匹配
+</span><span class="s2">&#39;&#39;&#39;
+</span><span class="s2">字符组:[字符组]
+</span><span class="s2">在同一个位置可能出现的各种字符组成了一个字符组，在正则表达式中用[]表示
+</span><span class="s2">字符分为很多类，比如数字、字母、标点等等。
+</span><span class="s2">假如你现在要求一个位置&#34;只能出现一个数字&#34;,那么这个位置上的字符只能是0、1、2...9这10个数之一。
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></div><h4 id="字符">字符</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">特殊符号
+</span><span class="s2">.		匹配换行符意外的任意字符
+</span><span class="s2">\d      匹配数字
+</span><span class="s2">^		匹配字符串的开头
+</span><span class="s2">		^a  匹配字母a但是这个a必须位于字符串的开头
+</span><span class="s2">$		匹配字符串的结尾
+</span><span class="s2">		a$  匹配字符a但是这个a必须位于字符串的结尾
+</span><span class="s2">|		或
+</span><span class="s2">		a|b 匹配字符a或者字符b
+</span><span class="s2">()		给正则表达式组成一个组 不影响匹配
+</span><span class="s2">[^]		取反操作
+</span><span class="s2">		[a-z]匹配所有的小写字母
+</span><span class="s2">    	[^a-z]匹配除了小写字母意外的任意字符
+</span><span class="s2">
+</span><span class="s2">^与$连用可以明确的限制待匹配的字符
+</span><span class="s2">^jason$  这个字符串必须仅仅是jason才可以
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></div><h4 id="量词">量词</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;量词的出现能够是我们的正则表达式一次性匹配多个字符
+</span><span class="s1">*			重复零次或更多次
+</span><span class="s1">+			重复一次或更多次
+</span><span class="s1">?			重复零次或一次
+</span><span class="s1">{n}			重复n次
+</span><span class="s1">{n,}		重复n次或更多次
+</span><span class="s1">{n,m}		重复n到m次
+</span><span class="s1">&#34;&#34;&#34;
+</span><span class="s1">正则表达式默认都是贪婪匹配(尽可能往多的匹配)
+</span><span class="s1">&#34;&#34;&#34;
+</span><span class="s1">
+</span><span class="s1">量词不能单独使用，一定要配合正则符号&#39;&#39;&#39;</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;eg:
+</span><span class="s1">海.			海燕海娇海东	 海燕
+</span><span class="s1">						 海娇
+</span><span class="s1">    					 海东	  		 匹配所有&#34;海.&#34;的字符
+</span><span class="s1">^海.			海燕海娇海东	海燕			只从开头匹配&#34;海.&#34;
+</span><span class="s1">海.$	  		海燕海娇海东	海东			只匹配结尾的&#34;海.$&#34;
+</span><span class="s1">
+</span><span class="s1">
+</span><span class="s1">李.?			李杰和李莲英和李二棍子			李杰
+</span><span class="s1">										李莲
+</span><span class="s1">										李二
+</span><span class="s1">
+</span><span class="s1">李.*			李杰和李莲英和李二棍子			李杰和李莲英和李二棍子
+</span><span class="s1">李.+			李杰和李莲英和李二棍子			李杰和李莲英和李二棍子
+</span><span class="s1">李.{1,2}		李杰和李莲英和李二棍子			李杰和
+</span><span class="s1">                                        李莲英
+</span><span class="s1">                                        李二棍	
+</span><span class="s1">\d+			 hj213hj312h3j				213
+</span><span class="s1">										312
+</span><span class="s1">    									3&#39;&#39;&#39;</span>
+</code></pre></div><h4 id="-贪婪匹配与非贪婪匹配">★ 贪婪匹配与非贪婪匹配</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;待匹配的字符串
+</span><span class="s1">&lt;script&gt;hello world&lt;/script&gt;
+</span><span class="s1">***************************************************
+</span><span class="s1">&gt;&gt;&gt; 正则1	贪婪匹配
+</span><span class="s1">&lt;.*&gt;
+</span><span class="s1">&#34;&#34;&#34;
+</span><span class="s1">贪婪匹配会一直往后查找
+</span><span class="s1">&lt;script&gt;hello world&lt;/script&gt;
+</span><span class="s1">&#34;&#34;&#34;
+</span><span class="s1">
+</span><span class="s1">&gt;&gt;&gt; 正则2	非贪婪匹配(在量词的后面加上一个问号就会由贪婪变成非贪婪)
+</span><span class="s1">^&lt;.*?&gt;
+</span><span class="s1">&#34;&#34;&#34;
+</span><span class="s1">&lt;script&gt;
+</span><span class="s1">&#34;&#34;&#34;
+</span><span class="s1">***************************************************&#39;&#39;&#39;</span>
+</code></pre></div><h4 id="复杂的正则匹配">复杂的正则匹配</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;^[1-9]\d{13,16}[0-9x]$
+</span><span class="s1">	字符串必须是数字1-9开头
+</span><span class="s1">    后面可以出现13位到16位的数字
+</span><span class="s1">    必须是以数字0-9或者字母x结尾	
+</span><span class="s1">^[1-9]\d{14}(\d{2}[0-9x])?$
+</span><span class="s1">	字符串必须是数字1-9开头
+</span><span class="s1">    后面必须再跟14位数字
+</span><span class="s1">    再跟两位数字
+</span><span class="s1">    最后一位数字或者字母x结尾
+</span><span class="s1">
+</span><span class="s1">我们以后遇到复杂的正则表达式不一定自己手写，直接百度即可
+</span><span class="s1">http://tool.chinaz.com/regex/
+</span><span class="s1">&#39;&#39;&#39;</span>
+</code></pre></div><h4 id="转义符">转义符</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;由于斜杠和一些字母的组合有特殊的含义，但是我们有时候并不需要这些特殊含义就是写什么就是什么
+</span><span class="s1"></span><span class="se">\n</span><span class="s1">	 并不能匹配到字符 </span><span class="se">\n</span><span class="s1">
+</span><span class="s1"></span><span class="se">\\</span><span class="s1">n  才能匹配正常的字符 </span><span class="se">\n</span><span class="s1">
+</span><span class="s1">
+</span><span class="s1">在python中我们习惯用字母r来取消特殊含义&#39;&#39;&#39;</span>
+</code></pre></div><h4 id="re模块">re模块</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">re</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;www.(baidu|oldboy).com&#39;</span><span class="p">,</span> <span class="s1">&#39;www.oldboy.com&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
+<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">findall分组优先展示
+</span><span class="s2">    (baidu|oldboy)
+</span><span class="s2">    会优先展示出括号内正则表达式匹配到的内容
+</span><span class="s2">取消分组优先展示
+</span><span class="s2">    (?:baidu|oldboy)
+</span><span class="s2">&#34;&#34;&#34;</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">res</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;jason egon alex&#39;</span><span class="p">)</span>
+<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">只要找到一个符合正则的字符 就立刻结束
+</span><span class="s2">&#34;&#34;&#34;</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">res</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;jason egon alex&#39;</span><span class="p">)</span>
+<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">会从字符串的开头找 如果不符合后面直接不找了
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></div><h4 id="requests模块">requests模块</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">该模块可以通过代码模拟浏览器发送请求
+</span><span class="s1">
+</span><span class="s1">下载
+</span><span class="s1">pip3 install requests
+</span><span class="s1">
+</span><span class="s1">基本使用
+</span><span class="s1">import requests
+</span><span class="s1">&gt;&gt;&gt; 朝目标网址发送get请求获取数据
+</span><span class="s1">res = requests.get(&#39;https://www.baidu.com&#39;)
+</span><span class="s1">&gt;&gt;&gt; print(res)  &gt;&gt;&gt; &lt;Response [200]&gt;
+</span><span class="s1">&gt;&gt;&gt; print(res.status_code)  &gt;&gt;&gt; 200  两者都是用来查看响应状态
+</span><span class="s1">&gt;&gt;&gt; print(res.text)  &gt;&gt;&gt; 获取get请求响应的页面内容(字符串)
+</span><span class="s1">
+</span><span class="s1">print(res.content)  &gt;&gt;&gt; 获取get请求响应的页面内容(二进制)
+</span><span class="s1">with open(r&#39;a.html&#39;,&#39;wb&#39;) as f:
+</span><span class="s1">    f.write(res.content)&#39;&#39;&#39;</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1">requests模块可以模拟很多请求方法
+</span><span class="s1">	requests.get()
+</span><span class="s1">	requests.post()
+</span><span class="s1">	...
+</span><span class="s1">&#39;&#39;&#39;</span>
+</code></pre></div><h4 id="防爬措施">防爬措施</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;1.最简单的
+</span><span class="s1">	校验你是不是一个浏览器
+</span><span class="s1">    &gt;&gt;&gt; 就是去你的请求头里面查看有没有一个键值对
+</span><span class="s1">    User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36
+</span><span class="s1">    &#39;&#39;&#39;</span><span class="err">上述键值对是专门用来标识你是否是一个浏览器</span><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">    
+</span><span class="s1">破解方式
+</span><span class="s1">	在你的请求头里面加上上述键值对即可
+</span><span class="s1">    import requests
+</span><span class="s1">
+</span><span class="s1">res = requests.get(&#39;https://dig.chouti.com/&#39;,
+</span><span class="s1">                   headers={
+</span><span class="s1">                       &#34;User-Agent&#34;: &#34;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36&#34;
+</span><span class="s1">                   }
+</span><span class="s1">                   )
+</span><span class="s1">with open(r&#39;b.html&#39;,&#39;wb&#39;) as f:
+</span><span class="s1">    f.write(res.content)  &gt;&gt;&gt; 只能拿到HTML代码 CSS和JS我们无法直接获取和执行&#39;&#39;&#39;</span>
+</code></pre></div>]]></content>
+		</item>
+		
+		<item>
+			<title>初识爬虫、概念、HTML</title>
+			<link>https://Eddy-622.github.io/posts/%E5%88%9D%E8%AF%86%E7%88%AC%E8%99%AB%E6%A6%82%E5%BF%B5html/</link>
+			<pubDate>Mon, 16 Nov 2020 00:00:00 +0000</pubDate>
+			
+			<guid>https://Eddy-622.github.io/posts/%E5%88%9D%E8%AF%86%E7%88%AC%E8%99%AB%E6%A6%82%E5%BF%B5html/</guid>
+			<description>今日内容概要  爬虫的概念 前端之HTML 正则表达式  今日内容详细 爬虫的概念 &amp;#39;&amp;#39;&amp;#39;互联网所有的计算机彼此互联，形成一张无形的大网联网目的实现数据的彼此传递什么是上网通过浏览器发送请求获取相应的数据（数据通过互联网传输的都是二进制格式）什么是爬虫通过代码模拟浏览器发送请求获取相应的数据兵器过滤出自己想要的存储到数据库中比喻我们把互联网当成一张很大的蜘蛛网，每台计算机上的数据便是蜘蛛的一个猎物，而爬虫程序就是一个小蜘蛛，沿着蜘蛛网抓取自己想要的猎物/数据价值 互联网最有价值的便是数据，往往谁能掌控行业的一手数据便能成为行业的主宰，这些数据代表着行业的真金白银，而爬虫就是使用工具高效的挖掘这些真金白银注意由于爬虫是有一点擦变性性质的，不要什么数据都去爬银行账户信息之类的&amp;#39;&amp;#39;&amp;#39;爬虫流程 &amp;#39;&amp;#39;&amp;#39;1. 通过代码模拟浏览器发送请求2. 必须要通过对方的校验才能获取到数据3. 解析获取到的二进制数据4、提取我们需要的保存到数据库cs架构与bs架构bs架构的本身也是cs架构通过一个浏览器访问多个服务端&amp;#39;&amp;#39;&amp;#39;HTTP协议 &amp;#39;&amp;#39;&amp;#39;HTTP协议：超文本传输协议规定了浏览器与服务端之间数据交互的格式四大特性：1、基与请求响应2、基于TCP/IP作用于应用层之上的协议3、无状态不保存用户状态4无连接（短链接）彼此交互完数据之后再无瓜葛数据格式请求格式请求首行（请求方法，HTTP协议版本）请求头（一大堆k：v键值对）请求体（post携带的请求数据会携带在请求体内）响应格式响应首行响应头响应体响应状态码用一串数字来表达信息1XX：服务端已经接受到了你的请求，正在处理你可以继续提交数据2XX：服务端应景成功的响应了对应的数据（200）3XX：重定向（原本访问A重定向到了B）4XX：404请求资源不存在，403请求不符合条件5XX：服务器内部错误（500）&amp;#39;&amp;#39;&amp;#39;请求方法 &amp;#39;&amp;#39;&amp;#39;1、get请求向别人要数据eg:1.浏览器地址栏里面输入www.baidu.com朝百度服务端要百度首页的数据2.</description>
+			<content type="html"><![CDATA[<h2 id="今日内容概要">今日内容概要</h2>
+<ul>
+<li>爬虫的概念</li>
+<li>前端之HTML</li>
+<li>正则表达式</li>
+</ul>
+<h2 id="今日内容详细">今日内容详细</h2>
+<h4 id="爬虫的概念">爬虫的概念</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">互联网
+</span><span class="s1">	所有的计算机彼此互联，形成一张无形的大网
+</span><span class="s1">联网目的
+</span><span class="s1">	实现数据的彼此传递
+</span><span class="s1">什么是上网
+</span><span class="s1">	通过浏览器发送请求获取相应的数据
+</span><span class="s1">    （数据通过互联网传输的都是二进制格式）
+</span><span class="s1">什么是爬虫
+</span><span class="s1">	通过代码模拟浏览器发送请求
+</span><span class="s1">    获取相应的数据兵器过滤出自己想要的
+</span><span class="s1">    存储到数据库中
+</span><span class="s1">    
+</span><span class="s1">    
+</span><span class="s1">比喻
+</span><span class="s1">	我们把互联网当成一张很大的蜘蛛网，每台计算机上的数据便是蜘蛛的一个猎物，而爬虫程序就是一个小蜘蛛，沿着蜘蛛网抓取自己想要的猎物/数据
+</span><span class="s1">    
+</span><span class="s1">价值 	
+</span><span class="s1">	互联网最有价值的便是数据，往往谁能掌控行业的一手数据便能成为行业的主宰，这些数据代表着行业的真金白银，而爬虫就是使用工具高效的挖掘这些真金白银
+</span><span class="s1">    
+</span><span class="s1">注意
+</span><span class="s1">	由于爬虫是有一点擦变性性质的，不要什么数据都去爬
+</span><span class="s1">    银行账户信息之类的&#39;&#39;&#39;</span>
+    
+</code></pre></div><h4 id="爬虫流程">爬虫流程</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;1. 通过代码模拟浏览器发送请求
+</span><span class="s1">
+</span><span class="s1">2. 必须要通过对方的校验才能获取到数据
+</span><span class="s1">
+</span><span class="s1">3. 解析获取到的二进制数据
+</span><span class="s1">
+</span><span class="s1">4、提取我们需要的保存到数据库
+</span><span class="s1">
+</span><span class="s1">cs架构与bs架构
+</span><span class="s1">bs架构的本身也是cs架构
+</span><span class="s1">
+</span><span class="s1">通过一个浏览器访问多个服务端&#39;&#39;&#39;</span>
+
+</code></pre></div><h4 id="http协议">HTTP协议</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;HTTP协议：超文本传输协议
+</span><span class="s1">规定了浏览器与服务端之间数据交互的格式
+</span><span class="s1">
+</span><span class="s1">四大特性：
+</span><span class="s1">	1、基与请求响应
+</span><span class="s1">    2、基于TCP/IP作用于应用层之上的协议
+</span><span class="s1">    3、无状态
+</span><span class="s1">    	不保存用户状态
+</span><span class="s1">    4无连接（短链接）
+</span><span class="s1">    	彼此交互完数据之后再无瓜葛
+</span><span class="s1">        
+</span><span class="s1">数据格式
+</span><span class="s1">	请求格式
+</span><span class="s1">    	请求首行（请求方法，HTTP协议版本）
+</span><span class="s1">        请求头（一大堆k：v键值对）
+</span><span class="s1">        
+</span><span class="s1">        请求体（post携带的请求数据会携带在请求体内）
+</span><span class="s1">        
+</span><span class="s1">	响应格式
+</span><span class="s1">    	响应首行
+</span><span class="s1">        响应头
+</span><span class="s1">        	
+</span><span class="s1">        响应体
+</span><span class="s1">
+</span><span class="s1">响应状态码
+</span><span class="s1">	用一串数字来表达信息
+</span><span class="s1">    1XX：服务端已经接受到了你的请求，正在处理你可以继续提交数据
+</span><span class="s1">    2XX：服务端应景成功的响应了对应的数据（200）
+</span><span class="s1">    3XX：重定向（原本访问A重定向到了B）
+</span><span class="s1">    4XX：404请求资源不存在，403请求不符合条件
+</span><span class="s1">    5XX：服务器内部错误（500）&#39;&#39;&#39;</span>
+</code></pre></div><h4 id="请求方法">请求方法</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">1、get请求
+</span><span class="s1">	向别人要数据
+</span><span class="s1">    eg:
+</span><span class="s1">        1.浏览器地址栏里面输入www.baidu.com朝百度服务端要百度首页的数据
+</span><span class="s1">        2.朝别人要数据的时候也可以携带额外的参数，比如获取某个岗位的招聘信息，那么我可以加上一些筛选条件:工作经验、学历...
+</span><span class="s1">    get请求携带数据是直接放在url的后面
+</span><span class="s1">    	url?username=jason&amp;password=123
+</span><span class="s1">        get请求只能携带不敏感的信息，并且大小有限制
+</span><span class="s1">
+</span><span class="s1">url统一资源定位符 你可以直接理解为是网址
+</span><span class="s1">
+</span><span class="s1">    
+</span><span class="s1">2.post请求
+</span><span class="s1">	朝别人提交数据
+</span><span class="s1">    eg:
+</span><span class="s1">        1.用户注册登录
+</span><span class="s1">        	将用户名和密码提交给服务端
+</span><span class="s1">       	post请求携带的数据都是放在请求体里面的 &#39;&#39;&#39;</span>
+</code></pre></div><h4 id="为什么要学http协议">为什么要学HTTP协议</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;因为爬虫是模拟浏览器朝服务端发送请求
+</span><span class="s1">而浏览器与服务端之间数据交互要遵循HTTP协议
+</span><span class="s1">所以我们写爬虫程序也得按照HTTP协议规范来写&#39;&#39;&#39;</span>
+</code></pre></div><h5 id="前端之html">前端之HTML</h5>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;浏览器之所以能够展示出华丽花哨的界面
+</span><span class="s1">那是因为服务端返回给浏览器的都是HTML文件
+</span><span class="s1">
+</span><span class="s1">HTML是构建网页的骨架，如果你想让你的服务端能够被浏览器正常的访问并且展示内容，你必须用HTML来书写网页
+</span><span class="s1">
+</span><span class="s1">简介
+</span><span class="s1">超文本标记语言，是用来构造网页骨架的
+</span><span class="s1">
+</span><span class="s1">虽然HTML很丑 但是浏览器会自动帮你按照一定的语法规则渲染成好看的界面&#39;&#39;&#39;</span>
+</code></pre></div><h5 id="为什么要学html">为什么要学HTML</h5>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;因为朝服务端要数据 本质其实就是服务端给了一堆HTML代码
+</span><span class="s1">而我们需要从HTML代码中筛选出我们需要的数据&#39;&#39;&#39;</span>
+</code></pre></div><h4 id="前端三剑客">前端三剑客</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">HTML 
+</span><span class="s1">	构建网页的骨架
+</span><span class="s1">CSS
+</span><span class="s1">	用来给HTML调节样式
+</span><span class="s1">JavaScript
+</span><span class="s1">	用来生成页面的动态效果&#39;&#39;&#39;</span>
+</code></pre></div><h4 id="html">HTML</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">文档结构
+</span><span class="s1">&lt;html&gt;
+</span><span class="s1">	&lt;head&gt;
+</span><span class="s1">    	放的基本都不是给人看的信息
+</span><span class="s1">    &lt;/head&gt;
+</span><span class="s1">    &lt;body&gt;
+</span><span class="s1">    	放的都是浏览器会直接展示给用户看的
+</span><span class="s1">    &lt;/body&gt;
+</span><span class="s1">&lt;/html&gt;&#39;&#39;&#39;</span>
+</code></pre></div><h4 id="head内常见标签">head内常见标签</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">title
+</span><span class="s1">	定义网页标题
+</span><span class="s1">script
+</span><span class="s1">	可以引入外部js文件
+</span><span class="s1">    也可以直接在改标题内部书写js代码
+</span><span class="s1">link
+</span><span class="s1">	引入外部js文件
+</span><span class="s1">style
+</span><span class="s1">	在内部可以直接书写css代码&#39;&#39;&#39;</span>
+</code></pre></div><h4 id="body内常见标签">body内常见标签</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">h1~h6	标题标签（一节标题到六级标题）
+</span><span class="s1">a		链接标签（点击即跳转到对应链接地址）
+</span><span class="s1">img 	图片标签（展示图片）
+</span><span class="s1">div		页面布局（用div划分区域）
+</span><span class="s1">span	文本标签（普通文本）
+</span><span class="s1">form表单	
+</span><span class="s1">		能够获取用户数据并且发送给后端
+</span><span class="s1">    	action
+</span><span class="s1">        	控制提交给哪个后端
+</span><span class="s1">        method
+</span><span class="s1">        	控制请求方式 默认get请求
+</span><span class="s1">&#39;&#39;&#39;</span>
+</code></pre></div><h4 id="学会利用chrome快速开发">学会利用chrome快速开发</h4>
+]]></content>
+		</item>
+		
+		<item>
+			<title>MySQL连表查询练习题</title>
+			<link>https://Eddy-622.github.io/posts/mysql%E8%BF%9E%E8%A1%A8%E6%9F%A5%E8%AF%A2%E7%BB%83%E4%B9%A0%E9%A2%98/</link>
+			<pubDate>Sun, 15 Nov 2020 00:00:00 +0000</pubDate>
+			
+			<guid>https://Eddy-622.github.io/posts/mysql%E8%BF%9E%E8%A1%A8%E6%9F%A5%E8%AF%A2%E7%BB%83%E4%B9%A0%E9%A2%98/</guid>
+			<description>作业 1、查询所有的课程的名称以及对应的任课老师姓名
+SELECT course.cname,teacher.tname FROM course INNER JOIN teacher on course.teacher_id=teacher.tid;2、查询学生表中男女生各有多少人
+SELECT gender as &amp;#39;性别&amp;#39;,count(gender) as &amp;#39;人数&amp;#39; FROM student GROUP BY gender ;3、查询物理成绩等于100的学生的姓名
+SELECTscore.num,student.sname FROMscoreINNER JOIN student ON score.student_id = student.sid WHEREscore.course_id IN ( SELECT course.cid FROM course WHERE course.cname = &amp;#39;物理&amp;#39; ) HAVINGscore.num = 100;4、查询平均成绩大于八十分的同学的姓名和平均成绩
+SELECTstudent.sname AS &amp;#39;姓名&amp;#39;,avg( score.num ) AS &amp;#39;平均成绩&amp;#39; FROMscoreRIGHT JOIN student ON score.</description>
+			<content type="html"><![CDATA[<h1 id="作业">作业</h1>
+<p>1、查询所有的课程的名称以及对应的任课老师姓名</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">SELECT</span> <span class="n">course</span><span class="p">.</span><span class="n">cname</span><span class="p">,</span><span class="n">teacher</span><span class="p">.</span><span class="n">tname</span> <span class="k">FROM</span> <span class="n">course</span> <span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">teacher</span> <span class="k">on</span> <span class="n">course</span><span class="p">.</span><span class="n">teacher_id</span><span class="o">=</span><span class="n">teacher</span><span class="p">.</span><span class="n">tid</span><span class="p">;</span>
+</code></pre></div><p>2、查询学生表中男女生各有多少人</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">SELECT</span> <span class="n">gender</span> <span class="k">as</span> <span class="s1">&#39;性别&#39;</span><span class="p">,</span><span class="nf">count</span><span class="p">(</span><span class="n">gender</span><span class="p">)</span> <span class="k">as</span> <span class="s1">&#39;人数&#39;</span> <span class="k">FROM</span> <span class="n">student</span> <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">gender</span> <span class="p">;</span>
+</code></pre></div><p>3、查询物理成绩等于100的学生的姓名</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">SELECT</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">num</span><span class="p">,</span>
+	<span class="n">student</span><span class="p">.</span><span class="n">sname</span> 
+<span class="k">FROM</span>
+	<span class="n">score</span>
+	<span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">student</span> <span class="k">ON</span> <span class="n">score</span><span class="p">.</span><span class="n">student_id</span> <span class="o">=</span> <span class="n">student</span><span class="p">.</span><span class="n">sid</span> 
+<span class="k">WHERE</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">course_id</span> <span class="k">IN</span> <span class="p">(</span> <span class="k">SELECT</span> <span class="n">course</span><span class="p">.</span><span class="n">cid</span> <span class="k">FROM</span> <span class="n">course</span> <span class="k">WHERE</span> <span class="n">course</span><span class="p">.</span><span class="n">cname</span> <span class="o">=</span> <span class="s1">&#39;物理&#39;</span> <span class="p">)</span> 
+<span class="k">HAVING</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">num</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+</code></pre></div><p>4、查询平均成绩大于八十分的同学的姓名和平均成绩</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">SELECT</span>
+	<span class="n">student</span><span class="p">.</span><span class="n">sname</span> <span class="k">AS</span> <span class="s1">&#39;姓名&#39;</span><span class="p">,</span>
+	<span class="nf">avg</span><span class="p">(</span> <span class="n">score</span><span class="p">.</span><span class="n">num</span> <span class="p">)</span> <span class="k">AS</span> <span class="s1">&#39;平均成绩&#39;</span> 
+<span class="k">FROM</span>
+	<span class="n">score</span>
+	<span class="k">RIGHT</span> <span class="k">JOIN</span> <span class="n">student</span> <span class="k">ON</span> <span class="n">score</span><span class="p">.</span><span class="n">student_id</span> <span class="o">=</span> <span class="n">student</span><span class="p">.</span><span class="n">sid</span> 
+<span class="k">GROUP</span> <span class="k">BY</span>
+	<span class="n">student</span><span class="p">.</span><span class="n">sid</span> 
+<span class="k">HAVING</span>
+	<span class="nf">avg</span><span class="p">(</span> <span class="n">score</span><span class="p">.</span><span class="n">num</span> <span class="p">)</span> <span class="o">&gt;</span> <span class="mi">80</span><span class="p">;</span>
+</code></pre></div><p>5、查询所有学生的学号，姓名，选课数，总成绩</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">SELECT</span>
+	<span class="n">student</span><span class="p">.</span><span class="n">sname</span><span class="p">,</span>
+	<span class="n">t1</span><span class="p">.</span><span class="n">sum_num</span><span class="p">,</span>
+	<span class="n">t1</span><span class="p">.</span><span class="n">count_cid</span> 
+<span class="k">FROM</span>
+	<span class="n">student</span>
+	<span class="k">INNER</span> <span class="k">JOIN</span> <span class="p">(</span>
+<span class="k">SELECT</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">student_id</span><span class="p">,</span>
+	<span class="nf">sum</span><span class="p">(</span> <span class="n">score</span><span class="p">.</span><span class="n">num</span> <span class="p">)</span> <span class="k">AS</span> <span class="n">sum_num</span><span class="p">,</span>
+	<span class="nf">count</span><span class="p">(</span> <span class="n">course</span><span class="p">.</span><span class="n">cid</span> <span class="p">)</span> <span class="k">AS</span> <span class="n">count_cid</span> 
+<span class="k">FROM</span>
+	<span class="n">course</span>
+	<span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">score</span> <span class="k">ON</span> <span class="n">course</span><span class="p">.</span><span class="n">cid</span> <span class="o">=</span> <span class="n">score</span><span class="p">.</span><span class="n">course_id</span> 
+<span class="k">GROUP</span> <span class="k">BY</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">student_id</span> 
+	<span class="p">)</span> <span class="k">AS</span> <span class="n">t1</span> <span class="k">ON</span> <span class="n">student</span><span class="p">.</span><span class="n">sid</span> <span class="o">=</span> <span class="n">t1</span><span class="p">.</span><span class="n">student_id</span><span class="p">;</span>
+</code></pre></div><p>6、 查询姓李老师的个数</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">SELECT</span>
+	<span class="nf">count</span><span class="p">(</span> <span class="n">teacher</span><span class="p">.</span><span class="n">tname</span> <span class="p">)</span> 
+<span class="k">FROM</span>
+	<span class="n">teacher</span> 
+<span class="k">WHERE</span>
+	<span class="n">teacher</span><span class="p">.</span><span class="n">tname</span> <span class="k">LIKE</span> <span class="s1">&#39;李%&#39;</span><span class="p">;</span>
+</code></pre></div><p>7、 查询没有报李平老师课的学生姓名</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">SELECT</span>
+	<span class="n">student</span><span class="p">.</span><span class="n">sname</span> 
+<span class="k">FROM</span>
+	<span class="n">student</span> 
+<span class="k">WHERE</span>
+	<span class="n">student</span><span class="p">.</span><span class="n">sid</span> <span class="k">NOT</span> <span class="k">IN</span> <span class="p">(</span>
+<span class="k">SELECT</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">student_id</span> 
+<span class="k">FROM</span>
+	<span class="n">score</span> 
+<span class="k">WHERE</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">course_id</span> <span class="k">IN</span> <span class="p">(</span> <span class="k">SELECT</span> <span class="n">course</span><span class="p">.</span><span class="n">cid</span> <span class="k">FROM</span> <span class="n">course</span> <span class="k">WHERE</span> <span class="n">course</span><span class="p">.</span><span class="n">teacher_id</span> <span class="k">IN</span> <span class="p">(</span> <span class="k">SELECT</span> <span class="n">teacher</span><span class="p">.</span><span class="n">tid</span> <span class="k">FROM</span> <span class="n">teacher</span> <span class="k">WHERE</span> <span class="n">teacher</span><span class="p">.</span><span class="n">tname</span> <span class="o">=</span> <span class="s1">&#39;李平老师&#39;</span> <span class="p">)</span> <span class="p">)</span> 
+	<span class="p">);</span>
+</code></pre></div><p>8、 查询物理课程比生物课程高的学生的学号</p>
+<p>9、 查询没有同时选修物理课程和体育课程的学生姓名</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">SELECT</span>
+	<span class="n">student</span><span class="p">.</span><span class="n">sname</span> 
+<span class="k">FROM</span>
+	<span class="n">student</span> 
+<span class="k">WHERE</span>
+	<span class="n">student</span><span class="p">.</span><span class="n">sid</span> <span class="k">NOT</span> <span class="k">IN</span> <span class="p">(</span>
+<span class="k">SELECT</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">student_id</span> 
+<span class="k">FROM</span>
+	<span class="n">score</span> 
+<span class="k">WHERE</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">course_id</span> <span class="k">IN</span> <span class="p">(</span> <span class="k">SELECT</span> <span class="n">course</span><span class="p">.</span><span class="n">cid</span> <span class="k">FROM</span> <span class="n">course</span> <span class="k">WHERE</span> <span class="n">course</span><span class="p">.</span><span class="n">cname</span> <span class="o">=</span> <span class="s1">&#39;物理&#39;</span> <span class="k">OR</span> <span class="n">course</span><span class="p">.</span><span class="n">cname</span> <span class="o">=</span> <span class="s1">&#39;体育&#39;</span> <span class="p">)</span> 
+<span class="k">GROUP</span> <span class="k">BY</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">student_id</span> 
+<span class="k">HAVING</span>
+	<span class="nf">count</span><span class="p">(</span> <span class="n">score</span><span class="p">.</span><span class="n">student_id</span> <span class="p">)</span> <span class="o">=</span> <span class="mi">1</span> 
+	<span class="p">);</span>
+</code></pre></div><p>10、查询挂科超过两门(包括两门)的学生姓名和班级</p>
+<div class="highlight"><pre class="chroma"><code class="language-MYSQL" data-lang="MYSQL"><span class="k">SELECT</span>
+	<span class="n">student</span><span class="p">.</span><span class="n">sname</span><span class="p">,</span>
+	<span class="n">class</span><span class="p">.</span><span class="n">caption</span> 
+<span class="k">FROM</span>
+	<span class="n">student</span>
+	<span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">class</span> <span class="k">ON</span> <span class="n">student</span><span class="p">.</span><span class="n">class_id</span> <span class="o">=</span> <span class="n">class</span><span class="p">.</span><span class="n">cid</span> 
+<span class="k">WHERE</span>
+	<span class="n">student</span><span class="p">.</span><span class="n">sid</span> <span class="k">IN</span> <span class="p">(</span> <span class="k">SELECT</span> <span class="n">score</span><span class="p">.</span><span class="n">student_id</span> <span class="k">FROM</span> <span class="n">score</span> <span class="k">WHERE</span> <span class="n">score</span><span class="p">.</span><span class="n">num</span> <span class="o">&lt;</span> <span class="mi">60</span> <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">score</span><span class="p">.</span><span class="n">student_id</span> <span class="k">HAVING</span> <span class="nf">count</span><span class="p">(</span> <span class="n">student_id</span> <span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="p">);</span>
+</code></pre></div><p>11、查询选修了所有课程的学生姓名</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">SELECT</span>
+	<span class="n">student</span><span class="p">.</span><span class="n">sname</span> 
+<span class="k">FROM</span>
+	<span class="n">student</span> 
+<span class="k">WHERE</span>
+	<span class="n">student</span><span class="p">.</span><span class="n">sid</span> <span class="k">IN</span> <span class="p">(</span>
+<span class="k">SELECT</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">student_id</span> 
+<span class="k">FROM</span>
+	<span class="n">score</span> 
+<span class="k">WHERE</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">course_id</span> <span class="k">IN</span> <span class="p">(</span> <span class="k">SELECT</span> <span class="n">course</span><span class="p">.</span><span class="n">cid</span> <span class="k">FROM</span> <span class="n">course</span> <span class="p">)</span> 
+<span class="k">GROUP</span> <span class="k">BY</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">student_id</span> 
+<span class="k">HAVING</span>
+	<span class="nf">count</span><span class="p">(</span> <span class="n">score</span><span class="p">.</span><span class="n">student_id</span> <span class="p">)</span> <span class="o">=</span> <span class="mi">4</span> 
+	<span class="p">)</span> <span class="p">;</span>
+</code></pre></div><p>12、查询李平老师教的课程的所有成绩记录</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">SELECT</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">num</span> <span class="k">AS</span> <span class="s1">&#39;成绩&#39;</span> 
+<span class="k">FROM</span>
+	<span class="n">score</span> 
+<span class="k">WHERE</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">course_id</span> <span class="k">IN</span> <span class="p">(</span> <span class="k">SELECT</span> <span class="n">course</span><span class="p">.</span><span class="n">cid</span> <span class="k">FROM</span> <span class="n">course</span> <span class="k">WHERE</span> <span class="n">course</span><span class="p">.</span><span class="n">teacher_id</span> <span class="k">IN</span> <span class="p">(</span> <span class="k">SELECT</span> <span class="n">teacher</span><span class="p">.</span><span class="n">tid</span> <span class="k">FROM</span> <span class="n">teacher</span> <span class="k">WHERE</span> <span class="n">teacher</span><span class="p">.</span><span class="n">tname</span> <span class="o">=</span> <span class="s1">&#39;李平老师&#39;</span> <span class="p">)</span> <span class="p">);</span>
+</code></pre></div><p>13、查询全部学生都选修了的课程号和课程名</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">SELECT</span>
+	<span class="n">student</span><span class="p">.</span><span class="n">sname</span> <span class="k">AS</span> <span class="s1">&#39;学生姓名&#39;</span><span class="p">,</span>
+	<span class="n">t1</span><span class="p">.</span><span class="n">course_id</span> <span class="k">AS</span> <span class="s1">&#39;课程编号&#39;</span><span class="p">,</span>
+	<span class="n">t1</span><span class="p">.</span><span class="n">cname</span> <span class="k">AS</span> <span class="s1">&#39;课程名称&#39;</span> 
+<span class="k">FROM</span>
+	<span class="n">student</span>
+	<span class="k">INNER</span> <span class="k">JOIN</span> <span class="p">(</span> <span class="k">SELECT</span> <span class="n">score</span><span class="p">.</span><span class="n">student_id</span><span class="p">,</span> <span class="n">score</span><span class="p">.</span><span class="n">course_id</span><span class="p">,</span> <span class="n">course</span><span class="p">.</span><span class="n">cname</span> <span class="k">FROM</span> <span class="n">score</span> <span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">course</span> <span class="k">ON</span> <span class="n">score</span><span class="p">.</span><span class="n">course_id</span> <span class="o">=</span> <span class="n">course</span><span class="p">.</span><span class="n">cid</span> <span class="p">)</span> <span class="k">AS</span> <span class="n">t1</span> <span class="k">ON</span> <span class="n">student</span><span class="p">.</span><span class="n">sid</span> <span class="o">=</span> <span class="n">t1</span><span class="p">.</span><span class="n">student_id</span><span class="p">;</span>
+</code></pre></div><p>14、查询每门课程被选修的次数</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">SELECT</span>
+	<span class="n">course</span><span class="p">.</span><span class="n">cname</span> <span class="k">AS</span> <span class="s1">&#39;课程名称&#39;</span><span class="p">,</span>
+	<span class="n">t1</span><span class="p">.</span><span class="n">t2</span> <span class="k">AS</span> <span class="s1">&#39;选修次数&#39;</span> 
+<span class="k">FROM</span>
+	<span class="n">course</span>
+	<span class="k">INNER</span> <span class="k">JOIN</span> <span class="p">(</span> <span class="k">SELECT</span> <span class="n">score</span><span class="p">.</span><span class="n">course_id</span><span class="p">,</span> <span class="nf">count</span><span class="p">(</span> <span class="n">score</span><span class="p">.</span><span class="n">course_id</span> <span class="p">)</span> <span class="k">AS</span> <span class="n">t2</span> <span class="k">FROM</span> <span class="n">score</span> <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">score</span><span class="p">.</span><span class="n">course_id</span> <span class="p">)</span> <span class="k">AS</span> <span class="n">t1</span> <span class="k">ON</span> <span class="n">course</span><span class="p">.</span><span class="n">cid</span> <span class="o">=</span> <span class="n">t1</span><span class="p">.</span><span class="n">course_id</span><span class="p">;</span>
+</code></pre></div><p>15、查询之选修了一门课程的学生姓名和学号</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">SELECT</span>
+	<span class="n">student</span><span class="p">.</span><span class="n">sname</span> <span class="k">AS</span> <span class="s1">&#39;学生姓名&#39;</span><span class="p">,</span>
+	<span class="n">student</span><span class="p">.</span><span class="n">sid</span> <span class="k">AS</span> <span class="s1">&#39;学号&#39;</span> 
+<span class="k">FROM</span>
+	<span class="n">student</span> 
+<span class="k">WHERE</span>
+	<span class="n">student</span><span class="p">.</span><span class="n">sid</span> <span class="k">IN</span> <span class="p">(</span> <span class="k">SELECT</span> <span class="n">score</span><span class="p">.</span><span class="n">student_id</span> <span class="k">FROM</span> <span class="n">score</span> <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">score</span><span class="p">.</span><span class="n">student_id</span> <span class="k">HAVING</span> <span class="nf">count</span><span class="p">(</span> <span class="n">score</span><span class="p">.</span><span class="n">student_id</span> <span class="p">)</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">);</span> 
+</code></pre></div><p>16、查询所有学生考出的成绩并按从高到低排序（成绩去重）</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">SELECT</span>
+	<span class="n">student</span><span class="p">.</span><span class="n">sname</span> <span class="k">AS</span> <span class="s1">&#39;姓名&#39;</span><span class="p">,</span>
+	<span class="n">t1</span><span class="p">.</span><span class="n">num</span> <span class="k">AS</span> <span class="s1">&#39;成绩&#39;</span> 
+<span class="k">FROM</span>
+	<span class="n">student</span>
+	<span class="k">INNER</span> <span class="k">JOIN</span> <span class="p">(</span> <span class="k">SELECT</span> <span class="k">DISTINCT</span> <span class="n">score</span><span class="p">.</span><span class="n">num</span><span class="p">,</span> <span class="n">score</span><span class="p">.</span><span class="n">student_id</span> <span class="k">AS</span> <span class="n">t2</span> <span class="k">FROM</span> <span class="n">score</span> <span class="p">)</span> <span class="k">AS</span> <span class="n">t1</span> <span class="k">ON</span> <span class="n">student</span><span class="p">.</span><span class="n">sid</span> <span class="o">=</span> <span class="n">t1</span><span class="p">.</span><span class="n">t2</span> 
+<span class="k">ORDER</span> <span class="k">BY</span>
+	<span class="n">t1</span><span class="p">.</span><span class="n">num</span> <span class="k">DESC</span><span class="p">;</span>
+</code></pre></div><p>17、查询平均成绩大于85的学生姓名和平均成绩</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">SELECT</span>
+	<span class="n">student</span><span class="p">.</span><span class="n">sname</span> <span class="k">AS</span> <span class="s1">&#39;姓名&#39;</span><span class="p">,</span>
+	<span class="n">t1</span><span class="p">.</span><span class="n">avgnum</span> <span class="k">AS</span> <span class="s1">&#39;平均成绩&#39;</span> 
+<span class="k">FROM</span>
+	<span class="n">student</span>
+	<span class="k">INNER</span> <span class="k">JOIN</span> <span class="p">(</span>
+<span class="k">SELECT</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">student_id</span> <span class="k">AS</span> <span class="n">sid1</span><span class="p">,</span>
+	<span class="nf">avg</span><span class="p">(</span> <span class="n">score</span><span class="p">.</span><span class="n">student_id</span> <span class="p">)</span> <span class="k">AS</span> <span class="n">avgnum</span> 
+<span class="k">FROM</span>
+	<span class="n">score</span> 
+<span class="k">GROUP</span> <span class="k">BY</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">student_id</span> 
+<span class="k">HAVING</span>
+	<span class="nf">avg</span><span class="p">(</span> <span class="n">score</span><span class="p">.</span><span class="n">num</span> <span class="p">)</span> <span class="o">&gt;</span> <span class="mi">85</span> 
+	<span class="p">)</span> <span class="k">AS</span> <span class="n">t1</span> <span class="k">ON</span> <span class="n">student</span><span class="p">.</span><span class="n">sid</span> <span class="o">=</span> <span class="n">t1</span><span class="p">.</span><span class="n">sid1</span><span class="p">;</span>
+</code></pre></div><p>18、查询生物成绩不及格的学生姓名和对应生物分数</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">SELECT</span>
+	<span class="n">student</span><span class="p">.</span><span class="n">sname</span> <span class="k">AS</span> <span class="s1">&#39;姓名&#39;</span><span class="p">,</span>
+	<span class="n">t1</span><span class="p">.</span><span class="n">num</span> <span class="k">AS</span> <span class="s1">&#39;成绩&#39;</span> 
+<span class="k">FROM</span>
+	<span class="n">student</span>
+	<span class="k">INNER</span> <span class="k">JOIN</span> <span class="p">(</span>
+<span class="k">SELECT</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">student_id</span><span class="p">,</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">num</span> 
+<span class="k">FROM</span>
+	<span class="n">score</span> 
+<span class="k">WHERE</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">course_id</span> <span class="k">IN</span> <span class="p">(</span> <span class="k">SELECT</span> <span class="n">course</span><span class="p">.</span><span class="n">cid</span> <span class="k">FROM</span> <span class="n">course</span> <span class="k">WHERE</span> <span class="n">course</span><span class="p">.</span><span class="n">cname</span> <span class="o">=</span> <span class="s1">&#39;生物&#39;</span> <span class="p">)</span> 
+	<span class="k">AND</span> <span class="n">score</span><span class="p">.</span><span class="n">num</span> <span class="o">&lt;</span> <span class="mi">60</span> 
+	<span class="p">)</span> <span class="k">AS</span> <span class="n">t1</span> <span class="k">ON</span> <span class="n">student</span><span class="p">.</span><span class="n">sid</span> <span class="o">=</span> <span class="n">t1</span><span class="p">.</span><span class="n">student_id</span><span class="p">;</span>
+</code></pre></div><p>19、查询在所有选修了李平老师课程的学生中，这些课程(李平老师的课程，不是所有课程)平均成绩最高的学生姓名</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">SELECT</span>
+	<span class="n">student</span><span class="p">.</span><span class="n">sname</span> <span class="k">AS</span> <span class="s1">&#39;姓名&#39;</span><span class="p">,</span>
+	<span class="n">t1</span><span class="p">.</span><span class="n">t2</span> <span class="k">AS</span> <span class="s1">&#39;成绩&#39;</span> 
+<span class="k">FROM</span>
+	<span class="n">student</span>
+	<span class="k">INNER</span> <span class="k">JOIN</span> <span class="p">(</span>
+<span class="k">SELECT</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">student_id</span><span class="p">,</span>
+	<span class="nf">avg</span><span class="p">(</span> <span class="n">score</span><span class="p">.</span><span class="n">num</span> <span class="p">)</span> <span class="k">AS</span> <span class="n">t2</span> 
+<span class="k">FROM</span>
+	<span class="n">score</span> 
+<span class="k">WHERE</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">course_id</span> <span class="k">IN</span> <span class="p">(</span> <span class="k">SELECT</span> <span class="n">course</span><span class="p">.</span><span class="n">cid</span> <span class="k">FROM</span> <span class="n">course</span> <span class="k">WHERE</span> <span class="n">course</span><span class="p">.</span><span class="n">teacher_id</span> <span class="k">IN</span> <span class="p">(</span> <span class="k">SELECT</span> <span class="n">teacher</span><span class="p">.</span><span class="n">tid</span> <span class="k">FROM</span> <span class="n">teacher</span> <span class="k">WHERE</span> <span class="n">teacher</span><span class="p">.</span><span class="n">tname</span> <span class="o">=</span> <span class="s1">&#39;李平老师&#39;</span> <span class="p">)</span> <span class="p">)</span> 
+<span class="k">GROUP</span> <span class="k">BY</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">student_id</span> 
+<span class="k">ORDER</span> <span class="k">BY</span>
+	<span class="nf">avg</span><span class="p">(</span> <span class="n">score</span><span class="p">.</span><span class="n">num</span> <span class="p">)</span> <span class="k">DESC</span> 
+	<span class="k">LIMIT</span> <span class="mi">1</span> 
+	<span class="p">)</span> <span class="k">AS</span> <span class="n">t1</span> <span class="k">ON</span> <span class="n">student</span><span class="p">.</span><span class="n">sid</span> <span class="o">=</span> <span class="n">t1</span><span class="p">.</span><span class="n">student_id</span><span class="p">;</span>
+</code></pre></div><p>20、查询每门课程成绩最好的前两名学生姓名</p>
+<p>21、查询不同课程但成绩相同的学号，课程号，成绩</p>
+<p>22、查询没学过“叶平”老师课程的学生姓名以及选修的课程名称；</p>
+<p>23、查询所有选修了学号为1的同学选修过的一门或者多门课程的同学学号和姓名；</p>
+<p>24、任课最多的老师中学生单科成绩最高的学生姓名</p>
+]]></content>
+		</item>
+		
+		<item>
+			<title>MySQL之链接Python操作、SQL注入问题</title>
+			<link>https://Eddy-622.github.io/posts/mysql%E4%B9%8B%E9%93%BE%E6%8E%A5python%E6%93%8D%E4%BD%9Csql%E6%B3%A8%E5%85%A5%E9%97%AE%E9%A2%98/</link>
+			<pubDate>Fri, 13 Nov 2020 00:00:00 +0000</pubDate>
+			
+			<guid>https://Eddy-622.github.io/posts/mysql%E4%B9%8B%E9%93%BE%E6%8E%A5python%E6%93%8D%E4%BD%9Csql%E6%B3%A8%E5%85%A5%E9%97%AE%E9%A2%98/</guid>
+			<description>昨日内容回顾   连表操作
+&amp;#34;&amp;#34;&amp;#34;由于在实际应用中，我们需要的数据很有可能是来自于多张表 这个时候我们可以采用多表查询的方式1:连表操作 连表操作的本质就是先将多张表拼接成一张表，然后基于这张拼接之后的表做单表查询 &amp;gt;&amp;gt;&amp;gt; 笛卡尔积 select * from emp,dep; &amp;#34;&amp;#34;&amp;#34; 在涉及到多表查询SQL语句的编写过程中，为了避免字段冲突的问题 我们一般都会加上表名来做明确的区分，否则可能会报错 &amp;#34;&amp;#34;&amp;#34; &amp;gt;&amp;gt;&amp;gt; 连表操作 inner join 将两张表都有对应关系的数据按照指定的条件拼接到一起 select * from emp inner join dep on emp.dep_id = dep.id; left join 以关键字left join左边的表为基准，展示左表所有的记录，没有的null填充 select * from emp left join dep on emp.dep_id = dep.id; right join 以关键字right join右边的表为基准，展示右表所有的记录，没有的null填充 select * from emp right join dep on emp.dep_id = dep.id; union 两张表所有的技术全部展示出来，各自没有对应的全部用null填充 select * from emp left join dep on emp.</description>
+			<content type="html"><![CDATA[<h1 id="昨日内容回顾">昨日内容回顾</h1>
+<ul>
+<li>
+<p>连表操作</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;由于在实际应用中，我们需要的数据很有可能是来自于多张表
+</span><span class="s2">这个时候我们可以采用多表查询的方式1:连表操作
+</span><span class="s2">连表操作的本质就是先将多张表拼接成一张表，然后基于这张拼接之后的表做单表查询
+</span><span class="s2">  
+</span><span class="s2">&gt;&gt;&gt; 笛卡尔积
+</span><span class="s2">select * from emp,dep;
+</span><span class="s2">&#34;&#34;&#34;</span>
+<span class="err">在涉及到多表查询</span><span class="n">SQL语句的编写过程中</span><span class="err">，为了避免字段冲突的问题</span>
+<span class="err">我们一般都会加上表名来做明确的区分，否则可能会报错</span>
+<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">&gt;&gt;&gt; 连表操作
+</span><span class="s2">inner join
+</span><span class="s2">  将两张表都有对应关系的数据按照指定的条件拼接到一起
+</span><span class="s2">  select * from emp inner join dep on emp.dep_id = dep.id;
+</span><span class="s2">    
+</span><span class="s2">left join
+</span><span class="s2">  以关键字left join左边的表为基准，展示左表所有的记录，没有的null填充
+</span><span class="s2">  select * from emp left join dep on emp.dep_id = dep.id;
+</span><span class="s2">  
+</span><span class="s2">right join
+</span><span class="s2">  以关键字right join右边的表为基准，展示右表所有的记录，没有的null填充
+</span><span class="s2">  select * from emp right join dep on emp.dep_id = dep.id;
+</span><span class="s2">  
+</span><span class="s2">union
+</span><span class="s2">  两张表所有的技术全部展示出来，各自没有对应的全部用null填充
+</span><span class="s2">  select * from emp left join dep on emp.dep_id = dep.id
+</span><span class="s2">  union
+</span><span class="s2">  select * from emp right join dep on emp.dep_id = dep.id;&#34;&#34;&#34;</span>
+</code></pre></div></li>
+<li>
+<p>子查询</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;将一张表的查询结果用括号括起来当做另外一条sql语句的查询条件，子查询其实就是我们实际生活中常见的解决问题的思路:分步操作
+</span><span class="s2">eg:
+</span><span class="s2">  select * from dep where dep.id = (
+</span><span class="s2">      select emp.dep_id from emp where emp.name = &#39;jason&#39;
+</span><span class="s2">  );&#34;&#34;&#34;</span>
+</code></pre></div></li>
+<li>
+<p>多表查询总结</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;有时候在查询一些比较复杂的问题，可能需要将连表操作和子查询结合使用&#39;&#39;&#39;</span>
+</code></pre></div></li>
+<li>
+<p>多表查询练习题</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;在书写较为复杂的sql语句的时候不要想着一步到位
+</span><span class="s1">  
+</span><span class="s1">在书写sql的时候针对关键字select后面写什么，我们一般都是先用*号占位，最后再回来修改*对应的具体内容
+</span><span class="s1">  
+</span><span class="s1">不要上来就写sql语句，可以先用中文将大致思路先写出来
+</span><span class="s1">  
+</span><span class="s1"> 9、查询挂科超过两门(包括两门)的学生姓名和班级
+</span><span class="s1">&gt;&gt;&gt; 1.先明确学生成绩在哪张表
+</span><span class="s1">-- 	select * from score;
+</span><span class="s1">&gt;&gt;&gt; 2.先筛选出所有分数小于60分的数据
+</span><span class="s1">-- select * from score where score.num &lt; 60;
+</span><span class="s1">&gt;&gt;&gt; 3.按照学生分组统计每个学生挂科的数量 筛选出超过两门(包括两门)
+</span><span class="s1">-- select score.student_id from score where score.num &lt; 60 
+</span><span class="s1">-- 	GROUP BY score.student_id
+</span><span class="s1">-- 	HAVING COUNT(score.num) &gt;= 2;
+</span><span class="s1">&gt;&gt;&gt; 4.确认姓名和班级不属于一张表 所以先将学生和班级表凭借起来
+</span><span class="s1">-- select * from student INNER JOIN class on student.class_id = class.cid;
+</span><span class="s1">&gt;&gt;&gt; 5.根据我们获取到的学生id号去拼接之后的表中筛选出我们需要的数据
+</span><span class="s1">SELECT
+</span><span class="s1">  student.sname,
+</span><span class="s1">  class.caption 
+</span><span class="s1">FROM
+</span><span class="s1">  student
+</span><span class="s1">  INNER JOIN class ON student.class_id = class.cid 
+</span><span class="s1">WHERE
+</span><span class="s1">  student.sid IN ( 
+</span><span class="s1">      SELECT score.student_id 
+</span><span class="s1">      FROM score 
+</span><span class="s1">      WHERE score.num &lt; 60 
+</span><span class="s1">      GROUP BY score.student_id 
+</span><span class="s1">      HAVING COUNT( score.num ) &gt;= 2 );&#39;&#39;&#39;</span>
+</code></pre></div></li>
+</ul>
+<h1 id="今日内容概要">今日内容概要</h1>
+<ul>
+<li>python如何链接MySQL并操作</li>
+<li>SQL注入问题及解决方案</li>
+<li>尝试着书写注册登录功能(以MySQL作为数据库不再以文件)</li>
+<li>视图</li>
+<li>触发器</li>
+<li>存储过程</li>
+<li>事务(重要)</li>
+<li>流程控制</li>
+<li>索引(概念)</li>
+</ul>
+<h1 id="今日内容详细">今日内容详细</h1>
+<h3 id="python如何链接mysql并操作">python如何链接MySQL并操作</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;我们在使用python的时候，一定要知道这个家伙背后有很多很多功能模块
+</span><span class="s2">几乎能够涵盖你所有的业务需求，你只需要找到对应的模块并学习使用即可
+</span><span class="s2">最多是站在巨人的肩膀上稍微修改修改即可
+</span><span class="s2">
+</span><span class="s2">如果我们想用python来充当mysql的客户端需要下载一个第三方模块
+</span><span class="s2">
+</span><span class="s2">下载
+</span><span class="s2">pip3 install pymysql
+</span><span class="s2">
+</span><span class="s2">基本使用
+</span><span class="s2">
+</span><span class="s2">***********************************
+</span><span class="s2">在给py文件起名字的时候一定不要跟模块名冲突
+</span><span class="s2">***********************************
+</span><span class="s2">
+</span><span class="s2">
+</span><span class="s2">&gt;&gt;&gt; coding:utf8
+</span><span class="s2">&gt;&gt;&gt; author:jason
+</span><span class="s2">
+</span><span class="s2">import pymysql
+</span><span class="s2">
+</span><span class="s2">&gt;&gt;&gt; 1.创建链接对象
+</span><span class="s2">conn = pymysql.connect(
+</span><span class="s2">    &gt;&gt;&gt; 数据库的ip地址
+</span><span class="s2">    host=&#39;127.0.0.1&#39;,
+</span><span class="s2">    &gt;&gt;&gt; 数据库的port号
+</span><span class="s2">    port=3306,  &gt;&gt;&gt; MySQL默认的端口号就是3306
+</span><span class="s2">    &gt;&gt;&gt; 用户名
+</span><span class="s2">    user=&#39;root&#39;,
+</span><span class="s2">    &gt;&gt;&gt; 密码
+</span><span class="s2">    password=&#39;admin123&#39;,
+</span><span class="s2">    &gt;&gt;&gt; 一定要指定你要操作哪个库
+</span><span class="s2">    database=&#39;s3_02&#39;,
+</span><span class="s2">    &gt;&gt;&gt; 字符编码
+</span><span class="s2">    charset=&#39;utf8&#39;  &gt;&gt;&gt; 这里的编码不要加横杠utf-8
+</span><span class="s2">)
+</span><span class="s2">&gt;&gt;&gt; 2.生成游标对象(类似于终端里面的光标 等待你输入sql)
+</span><span class="s2">cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)
+</span><span class="s2">&gt;&gt;&gt; 3.自己编写sql语句借助于模块发送给服务端
+</span><span class="s2">sql = &#39;select * from course;&#39;
+</span><span class="s2">&gt;&gt;&gt; 4.将sql语句发送给服务端执行
+</span><span class="s2">affect_rows = cursor.execute(sql)  &gt;&gt;&gt; 返回值是执行该sql所影响的数据行数
+</span><span class="s2">&gt;&gt;&gt; 5.获取sql语句的查询结果
+</span><span class="s2">res = cursor.fetchall()
+</span><span class="s2">print(res)
+</span><span class="s2">&gt;&gt;&gt; 数据描述不够明确((1, &#39;生物&#39;, 1), (2, &#39;物理&#39;, 2), (3, &#39;体育&#39;, 3), (4, &#39;美术&#39;, 2))
+</span><span class="s2">&gt;&gt;&gt; 如果能够组织成字典的形式返回就完美了  只需要加一个配置即可cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)
+</span><span class="s2">&gt;&gt;&gt; [{&#39;cid&#39;: 1, &#39;cname&#39;: &#39;生物&#39;, &#39;teacher_id&#39;: 1}, 
+</span><span class="s2">&gt;&gt;&gt; {&#39;cid&#39;: 2, &#39;cname&#39;: &#39;物理&#39;, &#39;teacher_id&#39;: 2}, 
+</span><span class="s2">&gt;&gt;&gt; {&#39;cid&#39;: 3, &#39;cname&#39;: &#39;体育&#39;, &#39;teacher_id&#39;: 3}, 
+</span><span class="s2">&gt;&gt;&gt; {&#39;cid&#39;: 4, &#39;cname&#39;: &#39;美术&#39;, &#39;teacher_id&#39;: 2}]&#34;&#34;&#34;</span>
+</code></pre></div><h3 id="sql注入">SQL注入</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">&gt;&gt;&gt; coding:utf8
+</span><span class="s1">&gt;&gt;&gt; author:jason
+</span><span class="s1">
+</span><span class="s1">import pymysql
+</span><span class="s1">
+</span><span class="s1">&gt;&gt;&gt; 1.创建链接对象
+</span><span class="s1">conn = pymysql.connect(
+</span><span class="s1">    &gt;&gt;&gt; 数据库的ip地址
+</span><span class="s1">    host=&#39;127.0.0.1&#39;,
+</span><span class="s1">    &gt;&gt;&gt; 数据库的port号
+</span><span class="s1">    port=3306,  &gt;&gt;&gt; MySQL默认的端口号就是3306
+</span><span class="s1">    &gt;&gt;&gt; 用户名
+</span><span class="s1">    user=&#39;root&#39;,
+</span><span class="s1">    &gt;&gt;&gt; 密码
+</span><span class="s1">    password=&#39;admin123&#39;,
+</span><span class="s1">    &gt;&gt;&gt; 一定要指定你要操作哪个库
+</span><span class="s1">    database=&#39;s3_03&#39;,
+</span><span class="s1">    &gt;&gt;&gt; 字符编码
+</span><span class="s1">    charset=&#39;utf8&#39;  &gt;&gt;&gt; 这里的编码不要加横杠utf-8
+</span><span class="s1">)
+</span><span class="s1">&gt;&gt;&gt; 2.生成游标对象(类似于终端里面的光标 等待你输入sql)
+</span><span class="s1">cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)
+</span><span class="s1">
+</span><span class="s1">&gt;&gt;&gt; 结合MySQL实现用户的登录功能
+</span><span class="s1">&gt;&gt;&gt; 3.先获取用户的用户名和密码
+</span><span class="s1">name = input(&#39;name&gt;&gt;&gt;:&#39;)
+</span><span class="s1">password = input(&#39;password&gt;&gt;&gt;:&#39;)
+</span><span class="s1">&gt;&gt;&gt; 4.拼接SQL语句并发送给服务端执行
+</span><span class="s1">sql = &#34;select * from userinfo where name=&#39;</span><span class="si">%s</span><span class="s1">&#39; and password=&#39;</span><span class="si">%s</span><span class="s1">&#39;;&#34;%(name,password)
+</span><span class="s1">print(sql)
+</span><span class="s1">cursor.execute(sql)
+</span><span class="s1">&gt;&gt;&gt; 5.判断结果展示相应提示信息
+</span><span class="s1">res = cursor.fetchall()
+</span><span class="s1">print(res)
+</span><span class="s1">if res:
+</span><span class="s1">    print(&#39;登录成功&#39;)
+</span><span class="s1">else:
+</span><span class="s1">    print(&#39;用户名或密码错误&#39;)
+</span><span class="s1">
+</span><span class="s1">神奇的现象1:
+</span><span class="s1">    只需要知道用户名就可以直接登录
+</span><span class="s1">    利用了MySQL的注释
+</span><span class="s1">    select * from userinfo where name=&#39;jason&#39; -- asjdklaj&#39; and password=&#39;&#39;;
+</span><span class="s1">神奇的现象2:
+</span><span class="s1">    select * from userinfo where name=&#39;xxx&#39; or 1=1 -- hasdjalsdj&#39; and password=&#39;&#39;;
+</span><span class="s1">    利用了MySQL的注释和逻辑运算
+</span><span class="s1">    不需要用户名和密码居然也能通过校验
+</span><span class="s1">    
+</span><span class="s1">总结:这种现象就叫做SQL注入
+</span><span class="s1">    就是利用一些特殊符号的组合达到特殊含义情况下混淆正常的语句执行
+</span><span class="s1">
+</span><span class="s1">在我们的实际生活中其实处处都在解决SQL注入的问题
+</span><span class="s1">比如当你在注册一个账号的时候经常会被提示不能使用特殊符号
+</span><span class="s1">&#39;&#39;&#39;</span>
+</code></pre></div><h3 id="注册功能">注册功能</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;&gt;&gt;&gt; coding:utf8
+</span><span class="s1">&gt;&gt;&gt; author:jason
+</span><span class="s1">
+</span><span class="s1">import pymysql
+</span><span class="s1">
+</span><span class="s1">&gt;&gt;&gt; 1.创建链接对象
+</span><span class="s1">conn = pymysql.connect(
+</span><span class="s1">    &gt;&gt;&gt; 数据库的ip地址
+</span><span class="s1">    host=&#39;127.0.0.1&#39;,
+</span><span class="s1">    &gt;&gt;&gt; 数据库的port号
+</span><span class="s1">    port=3306,  &gt;&gt;&gt; MySQL默认的端口号就是3306
+</span><span class="s1">    &gt;&gt;&gt; 用户名
+</span><span class="s1">    user=&#39;root&#39;,
+</span><span class="s1">    &gt;&gt;&gt; 密码
+</span><span class="s1">    password=&#39;admin123&#39;,
+</span><span class="s1">    &gt;&gt;&gt; 一定要指定你要操作哪个库
+</span><span class="s1">    database=&#39;s3_03&#39;,
+</span><span class="s1">    &gt;&gt;&gt; 字符编码
+</span><span class="s1">    charset=&#39;utf8&#39;  &gt;&gt;&gt; 这里的编码不要加横杠utf-8
+</span><span class="s1">)
+</span><span class="s1">&gt;&gt;&gt; 2.生成游标对象(类似于终端里面的光标 等待你输入sql)
+</span><span class="s1">cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)
+</span><span class="s1">
+</span><span class="s1">&gt;&gt;&gt; 3.获取用户的用户名和密码
+</span><span class="s1">username = input(&#39;username&gt;&gt;&gt;:&#39;).strip()
+</span><span class="s1">password = input(&#39;password&gt;&gt;&gt;:&#39;).strip()
+</span><span class="s1">
+</span><span class="s1">&gt;&gt;&gt; 4.校验当前用户名是否已存在
+</span><span class="s1">sql = &#39;select * from userinfo where name=</span><span class="si">%s</span><span class="s1">&#39;
+</span><span class="s1">cursor.execute(sql,username)
+</span><span class="s1">res = cursor.fetchall()
+</span><span class="s1">if not res:
+</span><span class="s1">    &gt;&gt;&gt; 5.写入数据库
+</span><span class="s1">    sql = &#39;insert into userinfo(name,password) values(</span><span class="si">%s</span><span class="s1">,</span><span class="si">%s</span><span class="s1">)&#39;
+</span><span class="s1">    cursor.execute(sql,(username,password))
+</span><span class="s1">    conn.commit()  &gt;&gt;&gt; 确认此次操作可执行
+</span><span class="s1">    print(&#39;注册成功&#39;)
+</span><span class="s1">else:
+</span><span class="s1">    print(&#39;用户名已存在&#39;)
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">当你对数据库进行 新增 编辑 删除操作的时候都需要二次确认
+</span><span class="s2">只有查询操作可以直接执行
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></div><h3 id="pymysql方法补充">pymysql方法补充</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">&gt;&gt;&gt; 由于针对表的 插入数据 编辑数据 删除数据每次都需要确认操作，代码书写太过繁琐
+</span><span class="s1">&gt;&gt;&gt; 1.创建链接对象
+</span><span class="s1">conn = pymysql.connect(
+</span><span class="s1">    ...
+</span><span class="s1">    &gt;&gt;&gt; 自动确认
+</span><span class="s1">    autocommit=True
+</span><span class="s1">)
+</span><span class="s1">
+</span><span class="s1">
+</span><span class="s1">&#34;&#34;&#34;
+</span><span class="s1">针对获取sql语句查询的结果三个方法 其实内部都有一个类似于指针的概念
+</span><span class="s1">我们也可以控制指针的移动
+</span><span class="s1">&#34;&#34;&#34;
+</span><span class="s1">res = cursor.fetchall()  &gt;&gt;&gt; [{&#39;id&#39;: 1, &#39;name&#39;: &#39;jasonNB&#39;, &#39;password&#39;: &#39;123&#39;}, {&#39;id&#39;: 2, &#39;name&#39;: &#39;tony&#39;, &#39;password&#39;: &#39;123&#39;}, {&#39;id&#39;: 3, &#39;name&#39;: &#39;kevin&#39;, &#39;password&#39;: &#39;123&#39;}, {&#39;id&#39;: 7, &#39;name&#39;: &#39;tom&#39;, &#39;password&#39;: &#39;123&#39;}]
+</span><span class="s1">print(res)
+</span><span class="s1">&gt;&gt;&gt; cursor.scroll(-2,&#39;relative&#39;)  &gt;&gt;&gt; 相对于指针当前位置 前后移动 正数就是往右 负数就是往左
+</span><span class="s1">cursor.scroll(1,&#39;absolute&#39;)  &gt;&gt;&gt; 相对于数据开头 前后移动 正数就是往右 负数就是往左
+</span><span class="s1">res = cursor.fetchall() 
+</span><span class="s1">print(res)  &gt;&gt;&gt; [{&#39;id&#39;: 3, &#39;name&#39;: &#39;kevin&#39;, &#39;password&#39;: &#39;123&#39;}, {&#39;id&#39;: 7, &#39;name&#39;: &#39;tom&#39;, &#39;password&#39;: &#39;123&#39;}]
+</span><span class="s1">
+</span><span class="s1">
+</span><span class="s1">一次性插入多条数据可以使用
+</span><span class="s1">sql = &#39;insert into userinfo(name,password) values(</span><span class="si">%s</span><span class="s1">,</span><span class="si">%s</span><span class="s1">)&#39;
+</span><span class="s1">user_list = [(&#39;egon&#39;,&#39;123&#39;),(&#39;oscar&#39;,&#39;123&#39;),(&#39;owen&#39;,&#39;123&#39;),(&#39;jerry&#39;,&#39;123&#39;)]
+</span><span class="s1">cursor.executemany(sql,user_list)
+</span><span class="s1">&#39;&#39;&#39;</span>
+</code></pre></div><h3 id="视图">视图</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">我们之前已经学过了一张表的查询结果可以看成是存在内存中的虚拟表
+</span><span class="s1">那么视图的意思就是将该虚拟表存储起来方便以后使用
+</span><span class="s1">
+</span><span class="s1">create view student2class as
+</span><span class="s1">(select * from student inner join class on student.class_id = class.cid);
+</span><span class="s1">
+</span><span class="s1">创建出来的视图表是没有键，只有数据，视图使用的频率不高，我们只需要了解即可&#39;&#39;&#39;</span>
+</code></pre></div><h3 id="触发器">触发器</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;在满足对某张表数据的增、删、改的情况下，自动触发的功能称之为触发器
+</span><span class="s1">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; 为何要用触发器
+</span><span class="s1">    触发器专门针对我们对某一张表数据增insert、删delete、改update的行为，这类行为一旦执行
+</span><span class="s1">    就会触发触发器的执行，即自动运行另外一段sql代码
+</span><span class="s1">
+</span><span class="s1">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; 创建触发器语法
+</span><span class="s1">create trigger 触发器的名字 before/after insert/update/delete on 表名 for each row
+</span><span class="s1">begin
+</span><span class="s1">	sql语句  &gt;&gt;&gt; 触发器触发之后自动执行sql语句
+</span><span class="s1">end
+</span><span class="s1">&#34;&#34;&#34;
+</span><span class="s1">触发器总共有六种情况可以触发
+</span><span class="s1">	1.在对表数据进行新增之前
+</span><span class="s1">	2.在对表数据进行新增之后
+</span><span class="s1">	3.在对表数据进行修改之前
+</span><span class="s1">	4.在对表数据进行修改之后
+</span><span class="s1">	5.在对表数据进行删除之前
+</span><span class="s1">	6.在对表数据进行删除之后
+</span><span class="s1">&#34;&#34;&#34;
+</span><span class="s1">
+</span><span class="s1">&gt;&gt;&gt; 案例
+</span><span class="s1">CREATE TABLE cmd (
+</span><span class="s1">    id INT PRIMARY KEY auto_increment,
+</span><span class="s1">    USER CHAR (32),
+</span><span class="s1">    priv CHAR (10),
+</span><span class="s1">    cmd CHAR (64),
+</span><span class="s1">    sub_time datetime, &gt;&gt;&gt;提交时间
+</span><span class="s1">    success enum (&#39;yes&#39;, &#39;no&#39;) &gt;&gt;&gt;0代表执行失败
+</span><span class="s1">);
+</span><span class="s1">
+</span><span class="s1">CREATE TABLE errlog (
+</span><span class="s1">    id INT PRIMARY KEY auto_increment,
+</span><span class="s1">    err_cmd CHAR (64),
+</span><span class="s1">    err_time datetime
+</span><span class="s1">);
+</span><span class="s1">
+</span><span class="s1">delimiter $$  &gt;&gt;&gt; 将mysql默认的结束符由;换成$$
+</span><span class="s1">create trigger tri_after_insert_cmd after insert on cmd for each row
+</span><span class="s1">begin
+</span><span class="s1">    if NEW.success = &#39;no&#39; then  &gt;&gt;&gt; 新记录都会被MySQL封装成NEW对象
+</span><span class="s1">        insert into errlog(err_cmd,err_time) values(NEW.cmd,NEW.sub_time);
+</span><span class="s1">    end if;
+</span><span class="s1">end $$
+</span><span class="s1">delimiter ;  &gt;&gt;&gt; 结束之后记得再改回来，不然后面结束符就都是$$了
+</span><span class="s1">
+</span><span class="s1">&gt;&gt;&gt;往表cmd中插入记录，触发触发器，根据IF的条件决定是否插入错误日志
+</span><span class="s1">INSERT INTO cmd (
+</span><span class="s1">    USER,
+</span><span class="s1">    priv,
+</span><span class="s1">    cmd,
+</span><span class="s1">    sub_time,
+</span><span class="s1">    success
+</span><span class="s1">)
+</span><span class="s1">VALUES
+</span><span class="s1">    (&#39;egon&#39;,&#39;0755&#39;,&#39;ls -l /etc&#39;,NOW(),&#39;yes&#39;),
+</span><span class="s1">    (&#39;egon&#39;,&#39;0755&#39;,&#39;cat /etc/passwd&#39;,NOW(),&#39;no&#39;),
+</span><span class="s1">    (&#39;egon&#39;,&#39;0755&#39;,&#39;useradd xxx&#39;,NOW(),&#39;no&#39;),
+</span><span class="s1">    (&#39;egon&#39;,&#39;0755&#39;,&#39;ps aux&#39;,NOW(),&#39;yes&#39;);
+</span><span class="s1">
+</span><span class="s1">&gt;&gt;&gt; 查询errlog表记录
+</span><span class="s1">select * from errlog;
+</span><span class="s1">&gt;&gt;&gt; 查看触发器
+</span><span class="s1">show triggers;
+</span><span class="s1">&gt;&gt;&gt; 删除触发器
+</span><span class="s1">drop trigger tri_after_insert_cmd;&#39;&#39;&#39;</span>
+</code></pre></div><h3 id="sql语句结束符补充">SQL语句结束符补充</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;我们都知道sql语句的结束符是分号，但是我们有时候需要修改sql语句的结束符
+</span><span class="s1">默认情况下
+</span><span class="s1">	;
+</span><span class="s1">也可以修改
+</span><span class="s1">	delimiter $$  &gt;&gt;&gt; 将sql语句的结束符修改为$$  只在当前窗口临时生效&#39;&#39;&#39;</span>
+</code></pre></div><h3 id="事务重要">事务(重要)</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;事务有四大特性(ACID)
+</span><span class="s1">	A原子性:一个事务是一个不可分割的工作单位，事务中包括的诸操作要么都做，要么都不做
+</span><span class="s1">  C一致性:事务必须是使数据库从一个一致性状态变到另一个一致性状态。一致性与原子性是密切相关的
+</span><span class="s1">  I隔离性:一个事务的执行不能被其他事务干扰。即一个事务内部的操作及使用的数据对并发的其他事务是隔离的，并发执行的各个事务之间不能互相干扰
+</span><span class="s1">  D持久性:持久性也称永久性（permanence），指一个事务一旦提交，它对数据库中数据的改变就应该是永久性的。接下来的其他操作或故障不应该对其有任何影响
+</span><span class="s1">    
+</span><span class="s1">案例:
+</span><span class="s1">  jason需要给egon还钱，但是jason用的交通银行卡，旁边有一台招商银行的ATM，egon用的是中国银行卡
+</span><span class="s1">  现在jason需要用招商银行的ATM扣交通银行的钱还给中国银行卡
+</span><span class="s1">  	1.招商银行ATM机器给交通银行发送请求扣除jason账户的钱
+</span><span class="s1">    2.中国银行发送请求增加egon账户的钱
+</span><span class="s1">特殊情况:
+</span><span class="s1">  	当刚好把jason的钱扣了，突然断网了服务器奔溃了总之就是给中国银行发送的请求丢失了，导致jason钱没了，egon没收到钱
+</span><span class="s1"> 
+</span><span class="s1">基于上述问题，为了保证数据操作过程中的安全性，我们引入了事务的概念
+</span><span class="s1">	将扣钱和加钱操作放入一个事务中，两者要么都成功要么一个都别成功
+</span><span class="s1">  即不成功的情况下全部回退到执行操作之前的状态
+</span><span class="s1">  
+</span><span class="s1">事务的使用
+</span><span class="s1">start transaction
+</span><span class="s1">sql语句  &gt;&gt;&gt; 这些sql语句就属于同一个事务
+</span><span class="s1">&gt;&gt;&gt; 如果不成功或者想回退
+</span><span class="s1">rollback;  &gt;&gt;&gt; 回退到执行事务之前的状态
+</span><span class="s1">&gt;&gt;&gt; 如果事务执行完没有任何问题 需要确认成功
+</span><span class="s1">commit;  &gt;&gt;&gt; commit确认之后就无法回退了&#39;&#39;&#39;</span>
+</code></pre></div><h3 id="存储过程">存储过程</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;MySQL中的存储过程类似于我们python里面学习的自定义函数
+</span><span class="s1">
+</span><span class="s1">语法结构
+</span><span class="s1">&gt;&gt;&gt; 定义
+</span><span class="s1">delimiter $$
+</span><span class="s1">create procedure p1()
+</span><span class="s1">begin
+</span><span class="s1">	select * from dep;
+</span><span class="s1">end $$
+</span><span class="s1">delimiter ;
+</span><span class="s1">
+</span><span class="s1">&gt;&gt;&gt; 调用
+</span><span class="s1">call p1()
+</span><span class="s1">
+</span><span class="s1">
+</span><span class="s1">&gt;&gt;&gt; 简单使用(无参函数)
+</span><span class="s1">delimiter $$
+</span><span class="s1">create procedure p1()
+</span><span class="s1">begin
+</span><span class="s1">	select * from user;
+</span><span class="s1">end $$
+</span><span class="s1">delimiter ;
+</span><span class="s1">
+</span><span class="s1">&gt;&gt;&gt; 复杂使用(有参函数)
+</span><span class="s1">delimiter $$
+</span><span class="s1">create procedure p2(
+</span><span class="s1">    in m int,  &gt;&gt;&gt; in表示这个参数必须只能是传入不能被返回出去
+</span><span class="s1">    in n int,  
+</span><span class="s1">    out res int  &gt;&gt;&gt; out表示这个参数可以被返回出去，还有一个inout表示即可以传入也可以被返回出去
+</span><span class="s1">)
+</span><span class="s1">begin
+</span><span class="s1">    select * from user where id &gt; m and id &lt; n;
+</span><span class="s1">    set res=0;  &gt;&gt;&gt; 用来标志存储过程是否执行
+</span><span class="s1">end $$
+</span><span class="s1">delimiter ;
+</span><span class="s1">
+</span><span class="s1">定义一个变量
+</span><span class="s1">set @res=10
+</span><span class="s1">查看变量对应的值
+</span><span class="s1">select @res;
+</span><span class="s1">调用存储过程
+</span><span class="s1">call p1(0,3,@res)&#39;&#39;&#39;</span>
+</code></pre></div>]]></content>
+		</item>
 		
 		<item>
 			<title>MySQL之多表查询、连接表、子查询、Nevicat</title>
@@ -80,12 +1337,15 @@
 </span><span class="s2">&gt;&gt;&gt;&gt;&gt; 我们要的不是全部对应一遍，而是按照相同的条件做对应关系
 </span><span class="s2">select * from dep,emp where dep.id = emp.dep_id;
 </span><span class="s2">&#34;&#34;&#34;</span>
-<span class="err">设计到多表操作的情况，非常容易出现两张表字段相同的情况</span>
-<span class="err">这个时候我们都会习惯性的在字段前面加上该字段所载的表名</span>
-<span class="err">来明确到底是哪张表的哪个字段</span>
 
-<span class="n">select</span> <span class="n">emp</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">dep</span><span class="o">.</span><span class="n">name</span> <span class="kn">from</span> <span class="nn">emp</span><span class="p">,</span><span class="n">dep</span> <span class="n">where</span> <span class="n">dep</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">emp</span><span class="o">.</span><span class="n">dep_id</span><span class="p">;</span><span class="s2">&#34;&#34;&#34;
-</span></code></pre></div><h3 id="多表查询方式1连接表">多表查询方式1:连接表</h3>
+<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">设计到多表操作的情况，非常容易出现两张表字段相同的情况
+</span><span class="s2">这个时候我们都会习惯性的在字段前面加上该字段所载的表名
+</span><span class="s2">来明确到底是哪张表的哪个字段
+</span><span class="s2">
+</span><span class="s2">select emp.name,dep.name from emp,dep where dep.id = emp.dep_id;
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></div><h3 id="多表查询方式1连接表">多表查询方式1:连接表</h3>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;内连接
 </span><span class="s2">	inner join
 </span><span class="s2">	select * from emp inner join dep on dep.id = emp.dep_id;

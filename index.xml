@@ -13,6 +13,63 @@
     
     
     <item>
+      <title>爬虫之requests模块、cookie与session、json格式数据</title>
+      <link>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Brequests%E6%A8%A1%E5%9D%97cookie%E4%B8%8Esessionjson%E6%A0%BC%E5%BC%8F%E6%95%B0%E6%8D%AE/</link>
+      <pubDate>Wed, 18 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Brequests%E6%A8%A1%E5%9D%97cookie%E4%B8%8Esessionjson%E6%A0%BC%E5%BC%8F%E6%95%B0%E6%8D%AE/</guid>
+      <description>今日内容概要  requests模块 cookie与session requests爬取网址数据实战演练 json格式数据  今日内容详细 requests模块 &amp;#34;&amp;#34;&amp;#34;get请求携带参数在url中携带 url？username=jason&amp;amp;hobby=readrequestes模块携带参数import requestsres = requests.get(&amp;#39;https://www.baidu.com/s&amp;#39;,params={&amp;#39;wd&amp;#39;: &amp;#39;美女&amp;#39;},headers={&amp;#39;User-Agent&amp;#39;: &amp;#39;Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.76 Mobile Safari/537.36&amp;#39;,})with open(r&amp;#39;mn1.html&amp;#39;, &amp;#39;wb&amp;#39;) as f:f.write(res.content)&amp;#34;&amp;#34;&amp;#34;总结:大部分网址基本上都会校验你是否是个浏览器，所以我们以后在发送请求的时候最后将User-agent携带着&amp;#34;&amp;#34;&amp;#34;res = requests.get(&amp;#39;url&amp;#39;),params={字典形式携带的参数}headers={浏览器校验头，防止一般的简单网站防爬}&amp;#34;&amp;#34;&amp;#34;cookie与session &amp;#34;&amp;#34;&amp;#34;cookie与session都是用来记录当前用户状态的二者产生的原因在于HTTP协议是无状态的 &amp;gt;&amp;gt;&amp;gt; HTTP协议不记录用户信息但是网站需要记录用户的状态，登录信息等，cookie 和 session 便是分别负责在服务端与客户端进行身份识别cookie的由来就是保存在浏览器上面的k:v键值对session的由来就是保存在服务端上面的数据&amp;#39;&amp;#39;&amp;#39;在互联网中没有绝对意义上的安全&amp;#39;&amp;#39;&amp;#39;两者工作机制session的工作需要依赖于cookie总结:只要是需要保存用户状态的网址，都需要借助于cookie浏览器可以选择保存cookie也可以选择拒绝一旦浏览器拒绝保存cookie，那么所有网址的登录都无法进行知识扩展:https://www.</description>
+    </item>
+    
+    <item>
+      <title>爬虫之requests模块、正则表达式</title>
+      <link>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Brequests%E6%A8%A1%E5%9D%97%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</link>
+      <pubDate>Tue, 17 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Brequests%E6%A8%A1%E5%9D%97%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</guid>
+      <description>今日内容概要   正则表达式是
+用一些特殊符号的组合去字符串里筛选出符合符号特征的内容
+专门在爬虫中帮助我们从网页上筛选我们想要的内容
+  爬虫模块
+requests模块
+requets-html模块
+bs4模块
+  今日内容详细 正则表达式 &amp;#39;&amp;#39;&amp;#39;它是一门独立的学科，不属于任何的其他知识点所有的编程语言都可以使用正则表达式如果我们想在python中使用正则表达式需要借助于re模块(爬虫相关模块)用一些特殊符号的组合去字符串里面筛选出符合符号特征的内容&amp;#39;&amp;#39;&amp;#39;前戏 &amp;#34;&amp;#34;&amp;#34;校验手机号1.校验手机号的开头2.校验手机号的位数3.校验必须是纯数字使用python代码实现&amp;#39;&amp;#39;&amp;#39;用python逻辑代码实现&amp;#39;&amp;#39;&amp;#39;&amp;gt;&amp;gt;&amp;gt; 获取用户输入的手机号phone = input(&amp;#39;please input your number&amp;gt;&amp;gt;&amp;gt;:&amp;#39;).strip()&amp;gt;&amp;gt;&amp;gt; 1.是否是纯数字if phone.isdigit(): &amp;gt;&amp;gt;&amp;gt; 字符串里面如果是纯数字就返回True不是返回False&amp;gt;&amp;gt;&amp;gt; 2.判断位数if len(phone) == 11:&amp;gt;&amp;gt;&amp;gt; 3.判断手机号开头 11 13 14 15 18if phone.startswith(&amp;#39;11&amp;#39;) or \phone.startswith(&amp;#39;13&amp;#39;) or \phone.startswith(&amp;#39;14&amp;#39;) or \phone.startswith(&amp;#39;15&amp;#39;) or \phone.startswith(&amp;#39;18&amp;#39;):print(&amp;#39;手机号正确&amp;#39;)else:print(&amp;#39;手机号格式错误&amp;#39;)else:print(&amp;#39;手机号必须是11位&amp;#39;)else:print(&amp;#39;手机号只能是数字&amp;#39;)&amp;#39;&amp;#39;&amp;#39;用正则表达式书写&amp;#39;&amp;#39;&amp;#39;import rephone_number = input(&amp;#39;please input your phone number ： &amp;#39;)if re.</description>
+    </item>
+    
+    <item>
+      <title>初识爬虫、概念、HTML</title>
+      <link>https://Eddy-622.github.io/posts/%E5%88%9D%E8%AF%86%E7%88%AC%E8%99%AB%E6%A6%82%E5%BF%B5html/</link>
+      <pubDate>Mon, 16 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/posts/%E5%88%9D%E8%AF%86%E7%88%AC%E8%99%AB%E6%A6%82%E5%BF%B5html/</guid>
+      <description>今日内容概要  爬虫的概念 前端之HTML 正则表达式  今日内容详细 爬虫的概念 &amp;#39;&amp;#39;&amp;#39;互联网所有的计算机彼此互联，形成一张无形的大网联网目的实现数据的彼此传递什么是上网通过浏览器发送请求获取相应的数据（数据通过互联网传输的都是二进制格式）什么是爬虫通过代码模拟浏览器发送请求获取相应的数据兵器过滤出自己想要的存储到数据库中比喻我们把互联网当成一张很大的蜘蛛网，每台计算机上的数据便是蜘蛛的一个猎物，而爬虫程序就是一个小蜘蛛，沿着蜘蛛网抓取自己想要的猎物/数据价值 互联网最有价值的便是数据，往往谁能掌控行业的一手数据便能成为行业的主宰，这些数据代表着行业的真金白银，而爬虫就是使用工具高效的挖掘这些真金白银注意由于爬虫是有一点擦变性性质的，不要什么数据都去爬银行账户信息之类的&amp;#39;&amp;#39;&amp;#39;爬虫流程 &amp;#39;&amp;#39;&amp;#39;1. 通过代码模拟浏览器发送请求2. 必须要通过对方的校验才能获取到数据3. 解析获取到的二进制数据4、提取我们需要的保存到数据库cs架构与bs架构bs架构的本身也是cs架构通过一个浏览器访问多个服务端&amp;#39;&amp;#39;&amp;#39;HTTP协议 &amp;#39;&amp;#39;&amp;#39;HTTP协议：超文本传输协议规定了浏览器与服务端之间数据交互的格式四大特性：1、基与请求响应2、基于TCP/IP作用于应用层之上的协议3、无状态不保存用户状态4无连接（短链接）彼此交互完数据之后再无瓜葛数据格式请求格式请求首行（请求方法，HTTP协议版本）请求头（一大堆k：v键值对）请求体（post携带的请求数据会携带在请求体内）响应格式响应首行响应头响应体响应状态码用一串数字来表达信息1XX：服务端已经接受到了你的请求，正在处理你可以继续提交数据2XX：服务端应景成功的响应了对应的数据（200）3XX：重定向（原本访问A重定向到了B）4XX：404请求资源不存在，403请求不符合条件5XX：服务器内部错误（500）&amp;#39;&amp;#39;&amp;#39;请求方法 &amp;#39;&amp;#39;&amp;#39;1、get请求向别人要数据eg:1.浏览器地址栏里面输入www.baidu.com朝百度服务端要百度首页的数据2.</description>
+    </item>
+    
+    <item>
+      <title>MySQL连表查询练习题</title>
+      <link>https://Eddy-622.github.io/posts/mysql%E8%BF%9E%E8%A1%A8%E6%9F%A5%E8%AF%A2%E7%BB%83%E4%B9%A0%E9%A2%98/</link>
+      <pubDate>Sun, 15 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/posts/mysql%E8%BF%9E%E8%A1%A8%E6%9F%A5%E8%AF%A2%E7%BB%83%E4%B9%A0%E9%A2%98/</guid>
+      <description>作业 1、查询所有的课程的名称以及对应的任课老师姓名
+SELECT course.cname,teacher.tname FROM course INNER JOIN teacher on course.teacher_id=teacher.tid;2、查询学生表中男女生各有多少人
+SELECT gender as &amp;#39;性别&amp;#39;,count(gender) as &amp;#39;人数&amp;#39; FROM student GROUP BY gender ;3、查询物理成绩等于100的学生的姓名
+SELECTscore.num,student.sname FROMscoreINNER JOIN student ON score.student_id = student.sid WHEREscore.course_id IN ( SELECT course.cid FROM course WHERE course.cname = &amp;#39;物理&amp;#39; ) HAVINGscore.num = 100;4、查询平均成绩大于八十分的同学的姓名和平均成绩
+SELECTstudent.sname AS &amp;#39;姓名&amp;#39;,avg( score.num ) AS &amp;#39;平均成绩&amp;#39; FROMscoreRIGHT JOIN student ON score.</description>
+    </item>
+    
+    <item>
+      <title>MySQL之链接Python操作、SQL注入问题</title>
+      <link>https://Eddy-622.github.io/posts/mysql%E4%B9%8B%E9%93%BE%E6%8E%A5python%E6%93%8D%E4%BD%9Csql%E6%B3%A8%E5%85%A5%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Fri, 13 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/posts/mysql%E4%B9%8B%E9%93%BE%E6%8E%A5python%E6%93%8D%E4%BD%9Csql%E6%B3%A8%E5%85%A5%E9%97%AE%E9%A2%98/</guid>
+      <description>昨日内容回顾   连表操作
+&amp;#34;&amp;#34;&amp;#34;由于在实际应用中，我们需要的数据很有可能是来自于多张表 这个时候我们可以采用多表查询的方式1:连表操作 连表操作的本质就是先将多张表拼接成一张表，然后基于这张拼接之后的表做单表查询 &amp;gt;&amp;gt;&amp;gt; 笛卡尔积 select * from emp,dep; &amp;#34;&amp;#34;&amp;#34; 在涉及到多表查询SQL语句的编写过程中，为了避免字段冲突的问题 我们一般都会加上表名来做明确的区分，否则可能会报错 &amp;#34;&amp;#34;&amp;#34; &amp;gt;&amp;gt;&amp;gt; 连表操作 inner join 将两张表都有对应关系的数据按照指定的条件拼接到一起 select * from emp inner join dep on emp.dep_id = dep.id; left join 以关键字left join左边的表为基准，展示左表所有的记录，没有的null填充 select * from emp left join dep on emp.dep_id = dep.id; right join 以关键字right join右边的表为基准，展示右表所有的记录，没有的null填充 select * from emp right join dep on emp.dep_id = dep.id; union 两张表所有的技术全部展示出来，各自没有对应的全部用null填充 select * from emp left join dep on emp.</description>
+    </item>
+    
+    <item>
       <title>MySQL之多表查询、连接表、子查询、Nevicat</title>
       <link>https://Eddy-622.github.io/posts/mysql%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2%E5%AD%90%E6%9F%A5%E8%AF%A2%E8%BF%9E%E6%8E%A5%E8%A1%A8/</link>
       <pubDate>Thu, 12 Nov 2020 00:00:00 +0000</pubDate>
@@ -79,74 +136,6 @@
 &amp;#39;&amp;#39;&amp;#39;用户Ajason:123用户Bjason|123用户Cjason~123每个人存储数据的格式是千差万别的，程序兼容性非常的差&amp;#39;&amp;#39;&amp;#39;按照数据类型的不同创建不同的文件夹处理
 &amp;#39;&amp;#39;&amp;#39;存储数据的文件一般情况下我们都会默认放在一个data文件夹内虽然没有解决数据格式的问题，但是统一了数据存储位置的问题&amp;#39;&amp;#39;&amp;#39;数据库软件
 &amp;#39;&amp;#39;&amp;#39;1.针对数据的存储有固定的格式2.针对数据的存储位置也做了限制(统一都存在数据库服务端)&amp;#39;&amp;#39;&amp;#39;数据库的分类 &amp;#39;&amp;#39;&amp;#39;1.关系型数据库MySQL、Oracle、PostgreSQL、MariaDB(跟MySQL很像)、DB2、SQL server、sqlite特点:1.存储数据基本上都是以表结构的形式(表结构 表字段 字段类型)2.表与表之间可以创建代码层面上的关系(后续课程会详细的讲)用户表房屋表虽然数据库软件有很多，但是内部原理的都是一样的，尤其是当你学会了MySQL之后，再去学其他的数据库软件非常的轻松2.</description>
-    </item>
-    
-    <item>
-      <title>Python之常用模块，面向对象，类</title>
-      <link>https://Eddy-622.github.io/posts/python%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97%E9%9D%A2%E5%90%91%E5%AF%B9%E7%B1%BB/</link>
-      <pubDate>Thu, 05 Nov 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://Eddy-622.github.io/posts/python%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97%E9%9D%A2%E5%90%91%E5%AF%B9%E7%B1%BB/</guid>
-      <description>今日内容   常用模块
-random模块、时间模块、hashlib模块
-  面向对象
-什么是对象，什么是类，如何创建类，如何创建对象，基本使用
-  今日内容详细 常用模块 python的精髓在于模块，不论是什么功能都可能已经有前人写好打包好的模块供我们使用，所以遇到问题应该先找一下有没有模块已经实现了我想要的功能或大致实现，以减少时间提高效率
-&amp;#34;&amp;#34;&amp;#34;利用random随机模块实现随机验证码五位随机验证码，每一位都可以是大写字母小写字母或者数字★ 必备基础知识点英文大小写26个字母与十进制的ASCII码表对应关系A-Z &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; 65-90a-z &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; 97-122★chr 通过数值表达式把数值转换编码表现的字符这里可以利用for循环 循环五次每一次循环产生三个数据，大写字母，小写字母和数字三个里面随机选取一位import random &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;导入random模块code = &amp;#39;&amp;#39; 将产生的数据拼接到字符串中for i in range(5): &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;for循环五次random_upper = chr(random.randint(65,90))&amp;gt;&amp;gt;&amp;gt;&amp;gt;从65-90数字中随机抽取并通过chr转换为数值表达式所表达的字符产生随机的大写字符random_lower = chr(random.randint(97,122))&amp;gt;&amp;gt;&amp;gt;&amp;gt;产生随机的小写字符random_int = str(random.randint(0,9))&amp;gt;&amp;gt;&amp;gt;&amp;gt;产生随机数字 并转换为字符串格式temp = random.choice([random_supper,random_lower,random_int])&amp;gt;&amp;gt;&amp;gt;&amp;gt;三个随机数字随机抽取一个赋值给tempcode += temp&amp;gt;&amp;gt;&amp;gt;&amp;gt; 五位随机数拼接到code中print(code)把封装成函数def get_code(n) &amp;gt;&amp;gt;&amp;gt;&amp;gt;需要产生n位的随机验证码，code = &amp;#39;&amp;#39; 将产生的数据拼接到字符串中for i in range(n): &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;for循环五次random_upper = chr(random.</description>
-    </item>
-    
-    <item>
-      <title>Python之函数分类，形参实参，结构，模块</title>
-      <link>https://Eddy-622.github.io/posts/python%E5%87%BD%E6%95%B0%E5%88%86%E7%B1%BB%E5%BD%A2%E5%8F%82%E5%AE%9E%E5%8F%82%E7%BB%93%E6%9E%84%E6%A8%A1%E5%9D%97/</link>
-      <pubDate>Wed, 04 Nov 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://Eddy-622.github.io/posts/python%E5%87%BD%E6%95%B0%E5%88%86%E7%B1%BB%E5%BD%A2%E5%8F%82%E5%AE%9E%E5%8F%82%E7%BB%93%E6%9E%84%E6%A8%A1%E5%9D%97/</guid>
-      <description>今日内容概要   函数
-认识学会基本的函数定义，基本的函数使用
-  模块
-  面向对象
-认识，学会如何定义类，如何产生对象，基本的面向对象概念，使用
-  今日内容详细 函数 &#39;&#39;&#39;函数相对于是工具，能够提前准备好之后在反复的使用，无需重复制造，可以大大的减少我们的工作时间，提高我们的工作效率在python中函数必须要先定义（创造）之后才能使用函数的定义★ 1.函数在定义阶段只检查语法不执行代码def get_user():username = input(&#39;username&amp;gt;&amp;gt;&amp;gt;:&#39;)password = input(&#39;password&amp;gt;&amp;gt;&amp;gt;:&#39;)print(&#39;%s:%s&#39;%(username,password))★2.函数的调用函数名+括号会执行函数体内部的代码get_user()&#39;&#39;&#39;函数的语法结构 &amp;#34;&amp;#34;&amp;#34;函数的语法结构def get_user():&amp;#39;&amp;#39;&amp;#39;注释&amp;#39;&amp;#39;&amp;#39;username = input(&amp;#39;username&amp;gt;&amp;gt;&amp;gt;:&amp;#39;)password = input(&amp;#39;password&amp;gt;&amp;gt;&amp;gt;:&amp;#39;)print(&amp;#39;%s:%s&amp;#39;(username,password))return &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;返回值1.def 是定义函数的关键字2.get_user 是函数名(类似于变量名，起的时候注意做到见名知意)3.(参数1，参数2) 括号里面可以放参数，意思是在调用函数的时候可以给函数的内部传输额外的数据4.参数 外界传递给函数内部的数据（不是必须的）5.函数的注释 用来解释该函数的功能、使用方式、注意事项6.函数体代码 函数真正的功能逻辑7.return 函数执行完毕之后返回给调用者的信息（该关键字也不是必须的）结构def 函数名 (参数1，参数2，...):&amp;#39;&amp;#39;&amp;#39;函数的注释&amp;#39;&amp;#39;&amp;#39;函数体代码return 返回值&amp;#34;&amp;#34;&amp;#34;函数的分类 &amp;#39;&amp;#39;&amp;#39;1.</description>
-    </item>
-    
-    <item>
-      <title>Python之字符编码，字符处理，文件处理，文件操作</title>
-      <link>https://Eddy-622.github.io/posts/python%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E5%AD%97%E7%AC%A6%E5%A4%84%E7%90%86%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/</link>
-      <pubDate>Tue, 03 Nov 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://Eddy-622.github.io/posts/python%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E5%AD%97%E7%AC%A6%E5%A4%84%E7%90%86%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/</guid>
-      <description>今日内容概要   字符编码的概念
-  文件处理
-用python代码来操作文件的创建、书写、修改
-  函数
-  模块
-  面向对象
-python本质就是一门面向对象的编程语言
-  今日内容详细 知识补充
-​	布尔值为False的情况有哪些
-​	0 、None 、 &#39;&amp;rsquo; 、[ ] 、 { }
-字符编码 &amp;#39;&amp;#39;&amp;#39;有时候当我们打开一个文件的时候发现展示的内容是一段乱码，这种情况是如何产生的，以及如何解决字符编码的研究只针对文本文件，视频音频文件没有字符一说，不在研究范围之内知识回顾1、软件运行前，软件的代码及其相关数据都是存放于硬盘中的2、任何软件的启动都是将数据从硬盘中读入内存，然后cpu从内存中取出指令并执行3、软件运行过程中产生的数据最先都是存放于内存中的，若想永久保存软件产生的数据，则需要将数据由内存写入硬盘普通的文本编辑器阶段1、启动一个文件编辑器（文本编辑器如nodepad++，pycharm，word）阶段2、文件编辑器会将文件内容从硬盘读入内存阶段3、文本编辑器会将刚刚读入内存中的内容显示到屏幕上python解释器阶段1、启动python解释器，此时就相当于启动了一个文本编辑器阶段2、python解释器相当于文本编辑器，从硬盘上将test.py的内容读入到内存中阶段3、python解释器解释执行刚刚读入的内存的内容，开始识别python语法 文本编辑器和python解释器的异同点1、相同点：前两个阶段二者完全一致，都是将硬盘中文件的内容读入内存，详解如下python解释器是解释执行文件内容的，因而python解释器具备读py文件的功能，这一点与文本编辑器一样2、不同点：在阶段3时，针对内存中读入的内容处理方式不同，详解如下文本编辑器将文件内容读入内存后，是为了显示或者编辑，根本不去理会python的语法，而python解释器将文件内容读入内存后，可不是为了给你瞅一眼python代码写的啥，而是为了执行python代码、会识别python语法）计算机由于是基于电工作的，只能识别识别010101二进制数据，但是我们人在使用计算机的时候却可以使用各式各样的文字语言人类的字符	转换过程	二进制数字&amp;#39;&amp;#39;&amp;#39;字符编码发展史 &amp;#39;&amp;#39;&amp;#39;计算机起源于美国美国人用的是英文，而计算机只认识二进制，美国人需要解决英文字符和二进制之间的转换关系(ASCII码)&amp;#34;&amp;#34;&amp;#34;8bit = 1bytes1024bytes = 1KB1024KB = 1MB1024MB = 1GB&amp;#34;&amp;#34;&amp;#34;一家独大ASCII码记录了英文字符和数字之间的转换关系用8位来来表示一个英文字符2**8(其实2的7次方足以表示所有的英文字符，但是考虑到后续可能会出现新的语言，所以留了一位备用)群雄割据自己得开发一套自己的字符编码表中国人GBK编码表记录了中文字符、英文字符跟数字的对应关系用16位来表示一个中文字符，针对英文字符还是用8位(针对生僻字我们可能会使用更高位数来表示)韩国人Euc_kr编码表记录了韩文、英文跟数字的对应关系日本人shift_JIS编码表记录了日文、英文跟数字的对应关系# 每个国家自己使用自己的编码，无法实现国家之间数据的交互&amp;#34;&amp;#34;&amp;#34;在中国电脑上使用GBK编写的文件基于网络发送给日本人打开的时候使用的是shift_JIS编码表，会造成文件乱码现象&amp;#34;&amp;#34;&amp;#34;天下一统为了解决群雄割据的局面，实现数据的统一思想unicode编码表	万国码兼容所有国家的所有编码统一使用16位即2bytes表示数据(针对生僻字会采用更多的位数)我们现在之所以能够在一台计算机上敲出各个国家的文字就是因为我们计算机内存中使用的是unicode编码表unicode的弊端，针对纯英文的文件存储空间会翻倍，随之而来的等待时间也会翻倍这个是我们无法容忍的utf8 万国码的转换格式它是存在与硬盘中的(内存使用unicode硬盘使用utf8)针对中文使用3bytes英文使用1bytes当我们书写文件的时候编码默认使用utf8即可，目前绝大多数的软件使用的都是utf8&amp;#39;&amp;#39;&amp;#39;字符编码和要掌握的内容 变量名.</description>
-    </item>
-    
-    <item>
-      <title>Python之While循环，for循环，嵌套，数据类型的内置</title>
-      <link>https://Eddy-622.github.io/posts/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%86%85%E7%BD%AEwhile%E5%BE%AA%E7%8E%AFfor%E5%BE%AA%E7%8E%AF/</link>
-      <pubDate>Mon, 02 Nov 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://Eddy-622.github.io/posts/python%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%86%85%E7%BD%AEwhile%E5%BE%AA%E7%8E%AFfor%E5%BE%AA%E7%8E%AF/</guid>
-      <description>上周内容回顾 数据类型 &amp;#39;&amp;#39;&amp;#39;布尔值 bool布尔值的命名传统前面加上is_eg: is_deleteis_status元组 tuplet = (1,2,3,4,5)当容器类型里面只有一个元素的时候也应该将逗号加上集合 sets = {1,2,3,4,5}&amp;#39;&amp;#39;&amp;#39;可变类型与不可变类型 &amp;#39;&amp;#39;&amp;#39; 查询数值的内存地址id()可变类型（列表，字典）值改变内存地址不变不可变类型（整型，浮点型，字符串）值改变内存地址一定变&amp;#39;&amp;#39;&amp;#39;用户交互 &amp;#39;&amp;#39;&amp;#39;获取用户输入inputinput获取到的数据都是字符串类型输出结果print可以一次性输出多个元素，逗号隔开即可&amp;#39;&amp;#39;&amp;#39;格式化输出 &amp;#39;&amp;#39;&amp;#39;占位符 ： %s(可以给任意的数据类型占位)。d%(只能给数字占位)&amp;#39;my name is %sand my age is s%&amp;#39; (Eddy, 18)字符串里有几个占位符，后面给数据的时候就要给出几个真实数据&amp;#39;&amp;#39;&amp;#39;运算符 &amp;#39;&amp;#39;&amp;#39;基本运算符+-*/%**增量赋值x += 1x -= 1x *= 1x /= 1链式赋值a = b = c = 666交叉赋值m = 10n = 999交换m 和 n 的数值方式一利用中间变量tum = mm = n n = tum方式二交叉赋值m,n = n,m解压赋值l = [11,22,33]默认情况下左右两边的个数一定要相等有多少个值就要给多少个变量名a ,b,c = l利用*打破变量名数量的限制a,*_,b = l*_常用来表达无用的数据逻辑运算and or notand连接多个条件，且必须成立，输出结果才为True，有一个条件不成立直接结束，输出Flaseor与and恰恰相反，链接的结果只要一个成立，结果都为True。有一个成立则直接输出结果Truenot取反 not True = Flase身份运算is判断地址是否相等==判断值是否想同值相同内存地址可能不同内存地址相同值一定相同&amp;#39;&amp;#39;&amp;#39;代码的缩进 &amp;#39;&amp;#39;&amp;#39;python中利用代码的缩进来表示代码的从属关系并不是所有的代码都可以又子代码的权限属于同一个代码的多个子代码，子代码之间的缩进必须是相同的遇到冒号说明接下来的代码需要缩进&amp;#39;&amp;#39;&amp;#39;流程控制值if判断 &amp;#39;&amp;#39;&amp;#39;if的固定句式if 条件1:代码1代码2elif 条件2:代码1代码2elif 条件3:代码1代码2else :代码1代码2那个条件成立就会执行哪个条件的子代码其他的都不会被执行所有条件代码中只会被执行一个&amp;#39;&amp;#39;&amp;#39;今日内容 if 判断结束 循环结构值while循环 循环结构之for循环 数据类型的内置方法 字符编码 今日内容详细 if判断 &amp;#39;&amp;#39;&amp;#39;if的嵌套(代码的缩进以及子代码的从属关系)eg:如果女人的年龄小于28岁且定义为漂亮的则上去要微信如果成功则邀请看电影吃饭逛街不成功则 打扰了&amp;#39;&amp;#39;&amp;#39;age = 26is_beautiful = Trueis_success = Trueif age &amp;lt; 28 and is_beautifulprint(&amp;#39;小姐姐加个微信&amp;#39;)#二次判断 if is_success:print(&amp;#39;我们去吃饭看电影逛街吧&amp;#39;)else:print(&amp;#39;打扰了&amp;#39;)else:print(&amp;#39;不好意思认错人了&amp;#39;)循环结构之while循环 break 用于结束离他最近的while循环</description>
-    </item>
-    
-    <item>
-      <title>Python之用户交互、格式化输出、运算符、流程控制</title>
-      <link>https://Eddy-622.github.io/posts/python%E7%94%A8%E6%88%B7%E4%BA%A4%E4%BA%92%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA%E8%BF%90%E7%AE%97%E7%AC%A6%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6-/</link>
-      <pubDate>Fri, 30 Oct 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://Eddy-622.github.io/posts/python%E7%94%A8%E6%88%B7%E4%BA%A4%E4%BA%92%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA%E8%BF%90%E7%AE%97%E7%AC%A6%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6-/</guid>
-      <description>10.29内容回顾   代码的注释
-&amp;#39;&amp;#39;&amp;#39;1.# 单行注释2.&amp;#39;&amp;#39;&amp;#39;&amp;#39;&amp;#39;&amp;#39;,&amp;#34;&amp;#34;&amp;#34;&amp;#34;&amp;#34;&amp;#34; 多行注释在pycharm中的快捷键ctrl+? 注释快捷键，再次激活取消注释&amp;#39;&amp;#39;&amp;#39;  变量
-&amp;#39;&amp;#39;&amp;#39;语法规范变量名 赋值符号 变量的值&amp;#39;&amp;#39;&amp;#39;name = &amp;#39;Eddy&amp;#39;&amp;#34;&amp;#34;&amp;#34;遇到赋值符号先看符号右边的再看符号左边的&amp;#34;&amp;#34;&amp;#34;# 情况1  name = &amp;#39;jason&amp;#39;name = &amp;#39;egon&amp;#39;name = &amp;#39;tony&amp;#39;&amp;#39;&amp;#39;&amp;#39;name依次被赋予 jason egon tony 三个值，但是最后只能指向一个值所有此时name对应的值为 tony&amp;#39;&amp;#39;&amp;#39;# 情况2 name = &amp;#39;jason&amp;#39;name1 = namename2 = name&amp;#39;&amp;#39;&amp;#39;name被赋予Jason，name1,name2 同时被赋予name的值所有 name1 = name2 = name = Jason&amp;#39;&amp;#39;&amp;#39;  变量的命名规范(必须遵守)
-&amp;#39;&amp;#39;&amp;#39;1.只能包含数字、字母、下划线2.数字不能开头、下划线也尽量不要开头(隐藏变量)3.</description>
     </item>
     
   </channel>

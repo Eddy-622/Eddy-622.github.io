@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="theme-color" content="#494f5c">
+	<meta name="msapplication-TileColor" content="#494f5c">
+<meta itemprop="name" content="MySQL连表查询练习题">
+<meta itemprop="description" content="作业 1、查询所有的课程的名称以及对应的任课老师姓名
+SELECT course.cname,teacher.tname FROM course INNER JOIN teacher on course.teacher_id=teacher.tid;2、查询学生表中男女生各有多少人
+SELECT gender as &#39;性别&#39;,count(gender) as &#39;人数&#39; FROM student GROUP BY gender ;3、查询物理成绩等于100的学生的姓名
+SELECTscore.num,student.sname FROMscoreINNER JOIN student ON score.student_id = student.sid WHEREscore.course_id IN ( SELECT course.cid FROM course WHERE course.cname = &#39;物理&#39; ) HAVINGscore.num = 100;4、查询平均成绩大于八十分的同学的姓名和平均成绩
+SELECTstudent.sname AS &#39;姓名&#39;,avg( score.num ) AS &#39;平均成绩&#39; FROMscoreRIGHT JOIN student ON score.">
+<meta itemprop="datePublished" content="2020-11-15T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-11-15T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="591">
+
+
+
+<meta itemprop="keywords" content="MySQL,连表查询习题," /><meta property="og:title" content="MySQL连表查询练习题" />
+<meta property="og:description" content="作业 1、查询所有的课程的名称以及对应的任课老师姓名
+SELECT course.cname,teacher.tname FROM course INNER JOIN teacher on course.teacher_id=teacher.tid;2、查询学生表中男女生各有多少人
+SELECT gender as &#39;性别&#39;,count(gender) as &#39;人数&#39; FROM student GROUP BY gender ;3、查询物理成绩等于100的学生的姓名
+SELECTscore.num,student.sname FROMscoreINNER JOIN student ON score.student_id = student.sid WHEREscore.course_id IN ( SELECT course.cid FROM course WHERE course.cname = &#39;物理&#39; ) HAVINGscore.num = 100;4、查询平均成绩大于八十分的同学的姓名和平均成绩
+SELECTstudent.sname AS &#39;姓名&#39;,avg( score.num ) AS &#39;平均成绩&#39; FROMscoreRIGHT JOIN student ON score." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://Eddy-622.github.io/posts/mysql%E8%BF%9E%E8%A1%A8%E6%9F%A5%E8%AF%A2%E7%BB%83%E4%B9%A0%E9%A2%98/" />
+<meta property="article:published_time" content="2020-11-15T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-11-15T00:00:00+00:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="MySQL连表查询练习题"/>
+<meta name="twitter:description" content="作业 1、查询所有的课程的名称以及对应的任课老师姓名
+SELECT course.cname,teacher.tname FROM course INNER JOIN teacher on course.teacher_id=teacher.tid;2、查询学生表中男女生各有多少人
+SELECT gender as &#39;性别&#39;,count(gender) as &#39;人数&#39; FROM student GROUP BY gender ;3、查询物理成绩等于100的学生的姓名
+SELECTscore.num,student.sname FROMscoreINNER JOIN student ON score.student_id = student.sid WHEREscore.course_id IN ( SELECT course.cid FROM course WHERE course.cname = &#39;物理&#39; ) HAVINGscore.num = 100;4、查询平均成绩大于八十分的同学的姓名和平均成绩
+SELECTstudent.sname AS &#39;姓名&#39;,avg( score.num ) AS &#39;平均成绩&#39; FROMscoreRIGHT JOIN student ON score."/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="/favicon.ico">
+
+	<title>MySQL连表查询练习题</title>
+	<link rel="stylesheet" href="https://Eddy-622.github.io/css/style.min.657bcb7af31123e4156b1a3d2ff60a636717e54ead74f882136b5114cf72b55e.css" integrity="sha256-ZXvLevMRI+QVaxo9L/YKY2cX5U6tdPiCE2tRFM9ytV4=" crossorigin="anonymous">
+	
+</head>
+
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp faster">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="https://Eddy-622.github.io">Eddy&#39;s Boke</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					
+				<a href="https://Eddy-622.github.io/posts/">博客</a>
+				<a href="https://Eddy-622.github.io/about-hugo/">关于</a>
+
+				</nav>
+			</div>
+			<div class="hdr-right hdr-icons">
+				<span class="hdr-social hide-in-mobile"><a href="https://mobile.twitter.com/zhang_kea" target="_blank" rel="noopener me" title="Twitter"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a><a href="https://www.facebook.com/kea.zhang.92" target="_blank" rel="noopener me" title="Instagram"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line></svg></a><a href="https://github.com/Eddy-622" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></span><button id="menu-btn" class="hdr-btn" title="Menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast">
+		<ul>
+			<li><a href="https://Eddy-622.github.io/posts/">博客</a></li>
+			<li><a href="https://Eddy-622.github.io/about-hugo/">关于</a></li>
+		</ul>
+	</div>
+
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta"><span>Nov 15, 2020</span></div>
+				<h1>MySQL连表查询练习题</h1>
+			</header>
+			<div class="content">
+				<h1 id="作业">作业<a href="#作业" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<p>1、查询所有的课程的名称以及对应的任课老师姓名</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">SELECT</span> <span class="n">course</span><span class="p">.</span><span class="n">cname</span><span class="p">,</span><span class="n">teacher</span><span class="p">.</span><span class="n">tname</span> <span class="k">FROM</span> <span class="n">course</span> <span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">teacher</span> <span class="k">on</span> <span class="n">course</span><span class="p">.</span><span class="n">teacher_id</span><span class="o">=</span><span class="n">teacher</span><span class="p">.</span><span class="n">tid</span><span class="p">;</span>
+</code></pre></div><p>2、查询学生表中男女生各有多少人</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">SELECT</span> <span class="n">gender</span> <span class="k">as</span> <span class="s1">&#39;性别&#39;</span><span class="p">,</span><span class="nf">count</span><span class="p">(</span><span class="n">gender</span><span class="p">)</span> <span class="k">as</span> <span class="s1">&#39;人数&#39;</span> <span class="k">FROM</span> <span class="n">student</span> <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">gender</span> <span class="p">;</span>
+</code></pre></div><p>3、查询物理成绩等于100的学生的姓名</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">SELECT</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">num</span><span class="p">,</span>
+	<span class="n">student</span><span class="p">.</span><span class="n">sname</span> 
+<span class="k">FROM</span>
+	<span class="n">score</span>
+	<span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">student</span> <span class="k">ON</span> <span class="n">score</span><span class="p">.</span><span class="n">student_id</span> <span class="o">=</span> <span class="n">student</span><span class="p">.</span><span class="n">sid</span> 
+<span class="k">WHERE</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">course_id</span> <span class="k">IN</span> <span class="p">(</span> <span class="k">SELECT</span> <span class="n">course</span><span class="p">.</span><span class="n">cid</span> <span class="k">FROM</span> <span class="n">course</span> <span class="k">WHERE</span> <span class="n">course</span><span class="p">.</span><span class="n">cname</span> <span class="o">=</span> <span class="s1">&#39;物理&#39;</span> <span class="p">)</span> 
+<span class="k">HAVING</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">num</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+</code></pre></div><p>4、查询平均成绩大于八十分的同学的姓名和平均成绩</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">SELECT</span>
+	<span class="n">student</span><span class="p">.</span><span class="n">sname</span> <span class="k">AS</span> <span class="s1">&#39;姓名&#39;</span><span class="p">,</span>
+	<span class="nf">avg</span><span class="p">(</span> <span class="n">score</span><span class="p">.</span><span class="n">num</span> <span class="p">)</span> <span class="k">AS</span> <span class="s1">&#39;平均成绩&#39;</span> 
+<span class="k">FROM</span>
+	<span class="n">score</span>
+	<span class="k">RIGHT</span> <span class="k">JOIN</span> <span class="n">student</span> <span class="k">ON</span> <span class="n">score</span><span class="p">.</span><span class="n">student_id</span> <span class="o">=</span> <span class="n">student</span><span class="p">.</span><span class="n">sid</span> 
+<span class="k">GROUP</span> <span class="k">BY</span>
+	<span class="n">student</span><span class="p">.</span><span class="n">sid</span> 
+<span class="k">HAVING</span>
+	<span class="nf">avg</span><span class="p">(</span> <span class="n">score</span><span class="p">.</span><span class="n">num</span> <span class="p">)</span> <span class="o">&gt;</span> <span class="mi">80</span><span class="p">;</span>
+</code></pre></div><p>5、查询所有学生的学号，姓名，选课数，总成绩</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">SELECT</span>
+	<span class="n">student</span><span class="p">.</span><span class="n">sname</span><span class="p">,</span>
+	<span class="n">t1</span><span class="p">.</span><span class="n">sum_num</span><span class="p">,</span>
+	<span class="n">t1</span><span class="p">.</span><span class="n">count_cid</span> 
+<span class="k">FROM</span>
+	<span class="n">student</span>
+	<span class="k">INNER</span> <span class="k">JOIN</span> <span class="p">(</span>
+<span class="k">SELECT</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">student_id</span><span class="p">,</span>
+	<span class="nf">sum</span><span class="p">(</span> <span class="n">score</span><span class="p">.</span><span class="n">num</span> <span class="p">)</span> <span class="k">AS</span> <span class="n">sum_num</span><span class="p">,</span>
+	<span class="nf">count</span><span class="p">(</span> <span class="n">course</span><span class="p">.</span><span class="n">cid</span> <span class="p">)</span> <span class="k">AS</span> <span class="n">count_cid</span> 
+<span class="k">FROM</span>
+	<span class="n">course</span>
+	<span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">score</span> <span class="k">ON</span> <span class="n">course</span><span class="p">.</span><span class="n">cid</span> <span class="o">=</span> <span class="n">score</span><span class="p">.</span><span class="n">course_id</span> 
+<span class="k">GROUP</span> <span class="k">BY</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">student_id</span> 
+	<span class="p">)</span> <span class="k">AS</span> <span class="n">t1</span> <span class="k">ON</span> <span class="n">student</span><span class="p">.</span><span class="n">sid</span> <span class="o">=</span> <span class="n">t1</span><span class="p">.</span><span class="n">student_id</span><span class="p">;</span>
+</code></pre></div><p>6、 查询姓李老师的个数</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">SELECT</span>
+	<span class="nf">count</span><span class="p">(</span> <span class="n">teacher</span><span class="p">.</span><span class="n">tname</span> <span class="p">)</span> 
+<span class="k">FROM</span>
+	<span class="n">teacher</span> 
+<span class="k">WHERE</span>
+	<span class="n">teacher</span><span class="p">.</span><span class="n">tname</span> <span class="k">LIKE</span> <span class="s1">&#39;李%&#39;</span><span class="p">;</span>
+</code></pre></div><p>7、 查询没有报李平老师课的学生姓名</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">SELECT</span>
+	<span class="n">student</span><span class="p">.</span><span class="n">sname</span> 
+<span class="k">FROM</span>
+	<span class="n">student</span> 
+<span class="k">WHERE</span>
+	<span class="n">student</span><span class="p">.</span><span class="n">sid</span> <span class="k">NOT</span> <span class="k">IN</span> <span class="p">(</span>
+<span class="k">SELECT</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">student_id</span> 
+<span class="k">FROM</span>
+	<span class="n">score</span> 
+<span class="k">WHERE</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">course_id</span> <span class="k">IN</span> <span class="p">(</span> <span class="k">SELECT</span> <span class="n">course</span><span class="p">.</span><span class="n">cid</span> <span class="k">FROM</span> <span class="n">course</span> <span class="k">WHERE</span> <span class="n">course</span><span class="p">.</span><span class="n">teacher_id</span> <span class="k">IN</span> <span class="p">(</span> <span class="k">SELECT</span> <span class="n">teacher</span><span class="p">.</span><span class="n">tid</span> <span class="k">FROM</span> <span class="n">teacher</span> <span class="k">WHERE</span> <span class="n">teacher</span><span class="p">.</span><span class="n">tname</span> <span class="o">=</span> <span class="s1">&#39;李平老师&#39;</span> <span class="p">)</span> <span class="p">)</span> 
+	<span class="p">);</span>
+</code></pre></div><p>8、 查询物理课程比生物课程高的学生的学号</p>
+<p>9、 查询没有同时选修物理课程和体育课程的学生姓名</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">SELECT</span>
+	<span class="n">student</span><span class="p">.</span><span class="n">sname</span> 
+<span class="k">FROM</span>
+	<span class="n">student</span> 
+<span class="k">WHERE</span>
+	<span class="n">student</span><span class="p">.</span><span class="n">sid</span> <span class="k">NOT</span> <span class="k">IN</span> <span class="p">(</span>
+<span class="k">SELECT</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">student_id</span> 
+<span class="k">FROM</span>
+	<span class="n">score</span> 
+<span class="k">WHERE</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">course_id</span> <span class="k">IN</span> <span class="p">(</span> <span class="k">SELECT</span> <span class="n">course</span><span class="p">.</span><span class="n">cid</span> <span class="k">FROM</span> <span class="n">course</span> <span class="k">WHERE</span> <span class="n">course</span><span class="p">.</span><span class="n">cname</span> <span class="o">=</span> <span class="s1">&#39;物理&#39;</span> <span class="k">OR</span> <span class="n">course</span><span class="p">.</span><span class="n">cname</span> <span class="o">=</span> <span class="s1">&#39;体育&#39;</span> <span class="p">)</span> 
+<span class="k">GROUP</span> <span class="k">BY</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">student_id</span> 
+<span class="k">HAVING</span>
+	<span class="nf">count</span><span class="p">(</span> <span class="n">score</span><span class="p">.</span><span class="n">student_id</span> <span class="p">)</span> <span class="o">=</span> <span class="mi">1</span> 
+	<span class="p">);</span>
+</code></pre></div><p>10、查询挂科超过两门(包括两门)的学生姓名和班级</p>
+<div class="highlight"><pre class="chroma"><code class="language-MYSQL" data-lang="MYSQL"><span class="k">SELECT</span>
+	<span class="n">student</span><span class="p">.</span><span class="n">sname</span><span class="p">,</span>
+	<span class="n">class</span><span class="p">.</span><span class="n">caption</span> 
+<span class="k">FROM</span>
+	<span class="n">student</span>
+	<span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">class</span> <span class="k">ON</span> <span class="n">student</span><span class="p">.</span><span class="n">class_id</span> <span class="o">=</span> <span class="n">class</span><span class="p">.</span><span class="n">cid</span> 
+<span class="k">WHERE</span>
+	<span class="n">student</span><span class="p">.</span><span class="n">sid</span> <span class="k">IN</span> <span class="p">(</span> <span class="k">SELECT</span> <span class="n">score</span><span class="p">.</span><span class="n">student_id</span> <span class="k">FROM</span> <span class="n">score</span> <span class="k">WHERE</span> <span class="n">score</span><span class="p">.</span><span class="n">num</span> <span class="o">&lt;</span> <span class="mi">60</span> <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">score</span><span class="p">.</span><span class="n">student_id</span> <span class="k">HAVING</span> <span class="nf">count</span><span class="p">(</span> <span class="n">student_id</span> <span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="p">);</span>
+</code></pre></div><p>11、查询选修了所有课程的学生姓名</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">SELECT</span>
+	<span class="n">student</span><span class="p">.</span><span class="n">sname</span> 
+<span class="k">FROM</span>
+	<span class="n">student</span> 
+<span class="k">WHERE</span>
+	<span class="n">student</span><span class="p">.</span><span class="n">sid</span> <span class="k">IN</span> <span class="p">(</span>
+<span class="k">SELECT</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">student_id</span> 
+<span class="k">FROM</span>
+	<span class="n">score</span> 
+<span class="k">WHERE</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">course_id</span> <span class="k">IN</span> <span class="p">(</span> <span class="k">SELECT</span> <span class="n">course</span><span class="p">.</span><span class="n">cid</span> <span class="k">FROM</span> <span class="n">course</span> <span class="p">)</span> 
+<span class="k">GROUP</span> <span class="k">BY</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">student_id</span> 
+<span class="k">HAVING</span>
+	<span class="nf">count</span><span class="p">(</span> <span class="n">score</span><span class="p">.</span><span class="n">student_id</span> <span class="p">)</span> <span class="o">=</span> <span class="mi">4</span> 
+	<span class="p">)</span> <span class="p">;</span>
+</code></pre></div><p>12、查询李平老师教的课程的所有成绩记录</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">SELECT</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">num</span> <span class="k">AS</span> <span class="s1">&#39;成绩&#39;</span> 
+<span class="k">FROM</span>
+	<span class="n">score</span> 
+<span class="k">WHERE</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">course_id</span> <span class="k">IN</span> <span class="p">(</span> <span class="k">SELECT</span> <span class="n">course</span><span class="p">.</span><span class="n">cid</span> <span class="k">FROM</span> <span class="n">course</span> <span class="k">WHERE</span> <span class="n">course</span><span class="p">.</span><span class="n">teacher_id</span> <span class="k">IN</span> <span class="p">(</span> <span class="k">SELECT</span> <span class="n">teacher</span><span class="p">.</span><span class="n">tid</span> <span class="k">FROM</span> <span class="n">teacher</span> <span class="k">WHERE</span> <span class="n">teacher</span><span class="p">.</span><span class="n">tname</span> <span class="o">=</span> <span class="s1">&#39;李平老师&#39;</span> <span class="p">)</span> <span class="p">);</span>
+</code></pre></div><p>13、查询全部学生都选修了的课程号和课程名</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">SELECT</span>
+	<span class="n">student</span><span class="p">.</span><span class="n">sname</span> <span class="k">AS</span> <span class="s1">&#39;学生姓名&#39;</span><span class="p">,</span>
+	<span class="n">t1</span><span class="p">.</span><span class="n">course_id</span> <span class="k">AS</span> <span class="s1">&#39;课程编号&#39;</span><span class="p">,</span>
+	<span class="n">t1</span><span class="p">.</span><span class="n">cname</span> <span class="k">AS</span> <span class="s1">&#39;课程名称&#39;</span> 
+<span class="k">FROM</span>
+	<span class="n">student</span>
+	<span class="k">INNER</span> <span class="k">JOIN</span> <span class="p">(</span> <span class="k">SELECT</span> <span class="n">score</span><span class="p">.</span><span class="n">student_id</span><span class="p">,</span> <span class="n">score</span><span class="p">.</span><span class="n">course_id</span><span class="p">,</span> <span class="n">course</span><span class="p">.</span><span class="n">cname</span> <span class="k">FROM</span> <span class="n">score</span> <span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">course</span> <span class="k">ON</span> <span class="n">score</span><span class="p">.</span><span class="n">course_id</span> <span class="o">=</span> <span class="n">course</span><span class="p">.</span><span class="n">cid</span> <span class="p">)</span> <span class="k">AS</span> <span class="n">t1</span> <span class="k">ON</span> <span class="n">student</span><span class="p">.</span><span class="n">sid</span> <span class="o">=</span> <span class="n">t1</span><span class="p">.</span><span class="n">student_id</span><span class="p">;</span>
+</code></pre></div><p>14、查询每门课程被选修的次数</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">SELECT</span>
+	<span class="n">course</span><span class="p">.</span><span class="n">cname</span> <span class="k">AS</span> <span class="s1">&#39;课程名称&#39;</span><span class="p">,</span>
+	<span class="n">t1</span><span class="p">.</span><span class="n">t2</span> <span class="k">AS</span> <span class="s1">&#39;选修次数&#39;</span> 
+<span class="k">FROM</span>
+	<span class="n">course</span>
+	<span class="k">INNER</span> <span class="k">JOIN</span> <span class="p">(</span> <span class="k">SELECT</span> <span class="n">score</span><span class="p">.</span><span class="n">course_id</span><span class="p">,</span> <span class="nf">count</span><span class="p">(</span> <span class="n">score</span><span class="p">.</span><span class="n">course_id</span> <span class="p">)</span> <span class="k">AS</span> <span class="n">t2</span> <span class="k">FROM</span> <span class="n">score</span> <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">score</span><span class="p">.</span><span class="n">course_id</span> <span class="p">)</span> <span class="k">AS</span> <span class="n">t1</span> <span class="k">ON</span> <span class="n">course</span><span class="p">.</span><span class="n">cid</span> <span class="o">=</span> <span class="n">t1</span><span class="p">.</span><span class="n">course_id</span><span class="p">;</span>
+</code></pre></div><p>15、查询之选修了一门课程的学生姓名和学号</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">SELECT</span>
+	<span class="n">student</span><span class="p">.</span><span class="n">sname</span> <span class="k">AS</span> <span class="s1">&#39;学生姓名&#39;</span><span class="p">,</span>
+	<span class="n">student</span><span class="p">.</span><span class="n">sid</span> <span class="k">AS</span> <span class="s1">&#39;学号&#39;</span> 
+<span class="k">FROM</span>
+	<span class="n">student</span> 
+<span class="k">WHERE</span>
+	<span class="n">student</span><span class="p">.</span><span class="n">sid</span> <span class="k">IN</span> <span class="p">(</span> <span class="k">SELECT</span> <span class="n">score</span><span class="p">.</span><span class="n">student_id</span> <span class="k">FROM</span> <span class="n">score</span> <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">score</span><span class="p">.</span><span class="n">student_id</span> <span class="k">HAVING</span> <span class="nf">count</span><span class="p">(</span> <span class="n">score</span><span class="p">.</span><span class="n">student_id</span> <span class="p">)</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">);</span> 
+</code></pre></div><p>16、查询所有学生考出的成绩并按从高到低排序（成绩去重）</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">SELECT</span>
+	<span class="n">student</span><span class="p">.</span><span class="n">sname</span> <span class="k">AS</span> <span class="s1">&#39;姓名&#39;</span><span class="p">,</span>
+	<span class="n">t1</span><span class="p">.</span><span class="n">num</span> <span class="k">AS</span> <span class="s1">&#39;成绩&#39;</span> 
+<span class="k">FROM</span>
+	<span class="n">student</span>
+	<span class="k">INNER</span> <span class="k">JOIN</span> <span class="p">(</span> <span class="k">SELECT</span> <span class="k">DISTINCT</span> <span class="n">score</span><span class="p">.</span><span class="n">num</span><span class="p">,</span> <span class="n">score</span><span class="p">.</span><span class="n">student_id</span> <span class="k">AS</span> <span class="n">t2</span> <span class="k">FROM</span> <span class="n">score</span> <span class="p">)</span> <span class="k">AS</span> <span class="n">t1</span> <span class="k">ON</span> <span class="n">student</span><span class="p">.</span><span class="n">sid</span> <span class="o">=</span> <span class="n">t1</span><span class="p">.</span><span class="n">t2</span> 
+<span class="k">ORDER</span> <span class="k">BY</span>
+	<span class="n">t1</span><span class="p">.</span><span class="n">num</span> <span class="k">DESC</span><span class="p">;</span>
+</code></pre></div><p>17、查询平均成绩大于85的学生姓名和平均成绩</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">SELECT</span>
+	<span class="n">student</span><span class="p">.</span><span class="n">sname</span> <span class="k">AS</span> <span class="s1">&#39;姓名&#39;</span><span class="p">,</span>
+	<span class="n">t1</span><span class="p">.</span><span class="n">avgnum</span> <span class="k">AS</span> <span class="s1">&#39;平均成绩&#39;</span> 
+<span class="k">FROM</span>
+	<span class="n">student</span>
+	<span class="k">INNER</span> <span class="k">JOIN</span> <span class="p">(</span>
+<span class="k">SELECT</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">student_id</span> <span class="k">AS</span> <span class="n">sid1</span><span class="p">,</span>
+	<span class="nf">avg</span><span class="p">(</span> <span class="n">score</span><span class="p">.</span><span class="n">student_id</span> <span class="p">)</span> <span class="k">AS</span> <span class="n">avgnum</span> 
+<span class="k">FROM</span>
+	<span class="n">score</span> 
+<span class="k">GROUP</span> <span class="k">BY</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">student_id</span> 
+<span class="k">HAVING</span>
+	<span class="nf">avg</span><span class="p">(</span> <span class="n">score</span><span class="p">.</span><span class="n">num</span> <span class="p">)</span> <span class="o">&gt;</span> <span class="mi">85</span> 
+	<span class="p">)</span> <span class="k">AS</span> <span class="n">t1</span> <span class="k">ON</span> <span class="n">student</span><span class="p">.</span><span class="n">sid</span> <span class="o">=</span> <span class="n">t1</span><span class="p">.</span><span class="n">sid1</span><span class="p">;</span>
+</code></pre></div><p>18、查询生物成绩不及格的学生姓名和对应生物分数</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">SELECT</span>
+	<span class="n">student</span><span class="p">.</span><span class="n">sname</span> <span class="k">AS</span> <span class="s1">&#39;姓名&#39;</span><span class="p">,</span>
+	<span class="n">t1</span><span class="p">.</span><span class="n">num</span> <span class="k">AS</span> <span class="s1">&#39;成绩&#39;</span> 
+<span class="k">FROM</span>
+	<span class="n">student</span>
+	<span class="k">INNER</span> <span class="k">JOIN</span> <span class="p">(</span>
+<span class="k">SELECT</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">student_id</span><span class="p">,</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">num</span> 
+<span class="k">FROM</span>
+	<span class="n">score</span> 
+<span class="k">WHERE</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">course_id</span> <span class="k">IN</span> <span class="p">(</span> <span class="k">SELECT</span> <span class="n">course</span><span class="p">.</span><span class="n">cid</span> <span class="k">FROM</span> <span class="n">course</span> <span class="k">WHERE</span> <span class="n">course</span><span class="p">.</span><span class="n">cname</span> <span class="o">=</span> <span class="s1">&#39;生物&#39;</span> <span class="p">)</span> 
+	<span class="k">AND</span> <span class="n">score</span><span class="p">.</span><span class="n">num</span> <span class="o">&lt;</span> <span class="mi">60</span> 
+	<span class="p">)</span> <span class="k">AS</span> <span class="n">t1</span> <span class="k">ON</span> <span class="n">student</span><span class="p">.</span><span class="n">sid</span> <span class="o">=</span> <span class="n">t1</span><span class="p">.</span><span class="n">student_id</span><span class="p">;</span>
+</code></pre></div><p>19、查询在所有选修了李平老师课程的学生中，这些课程(李平老师的课程，不是所有课程)平均成绩最高的学生姓名</p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">SELECT</span>
+	<span class="n">student</span><span class="p">.</span><span class="n">sname</span> <span class="k">AS</span> <span class="s1">&#39;姓名&#39;</span><span class="p">,</span>
+	<span class="n">t1</span><span class="p">.</span><span class="n">t2</span> <span class="k">AS</span> <span class="s1">&#39;成绩&#39;</span> 
+<span class="k">FROM</span>
+	<span class="n">student</span>
+	<span class="k">INNER</span> <span class="k">JOIN</span> <span class="p">(</span>
+<span class="k">SELECT</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">student_id</span><span class="p">,</span>
+	<span class="nf">avg</span><span class="p">(</span> <span class="n">score</span><span class="p">.</span><span class="n">num</span> <span class="p">)</span> <span class="k">AS</span> <span class="n">t2</span> 
+<span class="k">FROM</span>
+	<span class="n">score</span> 
+<span class="k">WHERE</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">course_id</span> <span class="k">IN</span> <span class="p">(</span> <span class="k">SELECT</span> <span class="n">course</span><span class="p">.</span><span class="n">cid</span> <span class="k">FROM</span> <span class="n">course</span> <span class="k">WHERE</span> <span class="n">course</span><span class="p">.</span><span class="n">teacher_id</span> <span class="k">IN</span> <span class="p">(</span> <span class="k">SELECT</span> <span class="n">teacher</span><span class="p">.</span><span class="n">tid</span> <span class="k">FROM</span> <span class="n">teacher</span> <span class="k">WHERE</span> <span class="n">teacher</span><span class="p">.</span><span class="n">tname</span> <span class="o">=</span> <span class="s1">&#39;李平老师&#39;</span> <span class="p">)</span> <span class="p">)</span> 
+<span class="k">GROUP</span> <span class="k">BY</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">student_id</span> 
+<span class="k">ORDER</span> <span class="k">BY</span>
+	<span class="nf">avg</span><span class="p">(</span> <span class="n">score</span><span class="p">.</span><span class="n">num</span> <span class="p">)</span> <span class="k">DESC</span> 
+	<span class="k">LIMIT</span> <span class="mi">1</span> 
+	<span class="p">)</span> <span class="k">AS</span> <span class="n">t1</span> <span class="k">ON</span> <span class="n">student</span><span class="p">.</span><span class="n">sid</span> <span class="o">=</span> <span class="n">t1</span><span class="p">.</span><span class="n">student_id</span><span class="p">;</span>
+</code></pre></div><p>20、查询每门课程成绩最好的前两名学生姓名</p>
+<p>21、查询不同课程但成绩相同的学号，课程号，成绩</p>
+<p>22、查询没学过“叶平”老师课程的学生姓名以及选修的课程名称；</p>
+<p>23、查询所有选修了学号为1的同学选修过的一门或者多门课程的同学学号和姓名；</p>
+<p>24、任课最多的老师中学生单科成绩最高的学生姓名</p>
+
+			</div>
+			<hr class="post-end">
+			<footer class="post-info">
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>Eddy Zhang</p>
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://Eddy-622.github.io/tags/mysql">MySQL</a></span><span class="tag"><a href="https://Eddy-622.github.io/tags/%E8%BF%9E%E8%A1%A8%E6%9F%A5%E8%AF%A2%E4%B9%A0%E9%A2%98">连表查询习题</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>591 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-11-15 08:00 &#43;0800</p>
+			</footer>
+		</article>
+		<div class="post-nav thin">
+			<a class="next-post" href="https://Eddy-622.github.io/posts/%E5%88%9D%E8%AF%86%E7%88%AC%E8%99%AB%E6%A6%82%E5%BF%B5html/">
+				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>初识爬虫、概念、HTML</span>
+			</a>
+			<a class="prev-post" href="https://Eddy-622.github.io/posts/mysql%E4%B9%8B%E9%93%BE%E6%8E%A5python%E6%93%8D%E4%BD%9Csql%E6%B3%A8%E5%85%A5%E9%97%AE%E9%A2%98/">
+				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>MySQL之链接Python操作、SQL注入问题</span>
+			</a>
+		</div>
+		<div id="comments" class="thin">
+</div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p>&copy; 2020 <a href="https://Eddy-622.github.io">Eddy Zhang</a></p>
+		<p>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://Eddy-622.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+		</p>
+	</footer>
+
+
+
+	<script src="https://Eddy-622.github.io/js/bundle.min.4a9a0ac3d2217822c7865b4161e6c2a71de1d70492264337755427898dd718f6.js" integrity="sha256-SpoKw9IheCLHhltBYebCpx3h1wSSJkM3dVQniY3XGPY=" crossorigin="anonymous"></script>
+	
+
+</body>
+
+</html>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="theme-color" content="#494f5c">
+	<meta name="msapplication-TileColor" content="#494f5c">
+<meta itemprop="name" content="爬虫之requests模块、cookie与session、json格式数据">
+<meta itemprop="description" content="今日内容概要  requests模块 cookie与session requests爬取网址数据实战演练 json格式数据  今日内容详细 requests模块 &#34;&#34;&#34;get请求携带参数在url中携带 url？username=jason&amp;hobby=readrequestes模块携带参数import requestsres = requests.get(&#39;https://www.baidu.com/s&#39;,params={&#39;wd&#39;: &#39;美女&#39;},headers={&#39;User-Agent&#39;: &#39;Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.76 Mobile Safari/537.36&#39;,})with open(r&#39;mn1.html&#39;, &#39;wb&#39;) as f:f.write(res.content)&#34;&#34;&#34;总结:大部分网址基本上都会校验你是否是个浏览器，所以我们以后在发送请求的时候最后将User-agent携带着&#34;&#34;&#34;res = requests.get(&#39;url&#39;),params={字典形式携带的参数}headers={浏览器校验头，防止一般的简单网站防爬}&#34;&#34;&#34;cookie与session &#34;&#34;&#34;cookie与session都是用来记录当前用户状态的二者产生的原因在于HTTP协议是无状态的 &gt;&gt;&gt; HTTP协议不记录用户信息但是网站需要记录用户的状态，登录信息等，cookie 和 session 便是分别负责在服务端与客户端进行身份识别cookie的由来就是保存在浏览器上面的k:v键值对session的由来就是保存在服务端上面的数据&#39;&#39;&#39;在互联网中没有绝对意义上的安全&#39;&#39;&#39;两者工作机制session的工作需要依赖于cookie总结:只要是需要保存用户状态的网址，都需要借助于cookie浏览器可以选择保存cookie也可以选择拒绝一旦浏览器拒绝保存cookie，那么所有网址的登录都无法进行知识扩展:https://www.">
+<meta itemprop="datePublished" content="2020-11-18T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-11-18T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="255">
+
+
+
+<meta itemprop="keywords" content="爬虫,requests模块,cookie与session,json," /><meta property="og:title" content="爬虫之requests模块、cookie与session、json格式数据" />
+<meta property="og:description" content="今日内容概要  requests模块 cookie与session requests爬取网址数据实战演练 json格式数据  今日内容详细 requests模块 &#34;&#34;&#34;get请求携带参数在url中携带 url？username=jason&amp;hobby=readrequestes模块携带参数import requestsres = requests.get(&#39;https://www.baidu.com/s&#39;,params={&#39;wd&#39;: &#39;美女&#39;},headers={&#39;User-Agent&#39;: &#39;Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.76 Mobile Safari/537.36&#39;,})with open(r&#39;mn1.html&#39;, &#39;wb&#39;) as f:f.write(res.content)&#34;&#34;&#34;总结:大部分网址基本上都会校验你是否是个浏览器，所以我们以后在发送请求的时候最后将User-agent携带着&#34;&#34;&#34;res = requests.get(&#39;url&#39;),params={字典形式携带的参数}headers={浏览器校验头，防止一般的简单网站防爬}&#34;&#34;&#34;cookie与session &#34;&#34;&#34;cookie与session都是用来记录当前用户状态的二者产生的原因在于HTTP协议是无状态的 &gt;&gt;&gt; HTTP协议不记录用户信息但是网站需要记录用户的状态，登录信息等，cookie 和 session 便是分别负责在服务端与客户端进行身份识别cookie的由来就是保存在浏览器上面的k:v键值对session的由来就是保存在服务端上面的数据&#39;&#39;&#39;在互联网中没有绝对意义上的安全&#39;&#39;&#39;两者工作机制session的工作需要依赖于cookie总结:只要是需要保存用户状态的网址，都需要借助于cookie浏览器可以选择保存cookie也可以选择拒绝一旦浏览器拒绝保存cookie，那么所有网址的登录都无法进行知识扩展:https://www." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Brequests%E6%A8%A1%E5%9D%97cookie%E4%B8%8Esessionjson%E6%A0%BC%E5%BC%8F%E6%95%B0%E6%8D%AE/" />
+<meta property="article:published_time" content="2020-11-18T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-11-18T00:00:00+00:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="爬虫之requests模块、cookie与session、json格式数据"/>
+<meta name="twitter:description" content="今日内容概要  requests模块 cookie与session requests爬取网址数据实战演练 json格式数据  今日内容详细 requests模块 &#34;&#34;&#34;get请求携带参数在url中携带 url？username=jason&amp;hobby=readrequestes模块携带参数import requestsres = requests.get(&#39;https://www.baidu.com/s&#39;,params={&#39;wd&#39;: &#39;美女&#39;},headers={&#39;User-Agent&#39;: &#39;Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.76 Mobile Safari/537.36&#39;,})with open(r&#39;mn1.html&#39;, &#39;wb&#39;) as f:f.write(res.content)&#34;&#34;&#34;总结:大部分网址基本上都会校验你是否是个浏览器，所以我们以后在发送请求的时候最后将User-agent携带着&#34;&#34;&#34;res = requests.get(&#39;url&#39;),params={字典形式携带的参数}headers={浏览器校验头，防止一般的简单网站防爬}&#34;&#34;&#34;cookie与session &#34;&#34;&#34;cookie与session都是用来记录当前用户状态的二者产生的原因在于HTTP协议是无状态的 &gt;&gt;&gt; HTTP协议不记录用户信息但是网站需要记录用户的状态，登录信息等，cookie 和 session 便是分别负责在服务端与客户端进行身份识别cookie的由来就是保存在浏览器上面的k:v键值对session的由来就是保存在服务端上面的数据&#39;&#39;&#39;在互联网中没有绝对意义上的安全&#39;&#39;&#39;两者工作机制session的工作需要依赖于cookie总结:只要是需要保存用户状态的网址，都需要借助于cookie浏览器可以选择保存cookie也可以选择拒绝一旦浏览器拒绝保存cookie，那么所有网址的登录都无法进行知识扩展:https://www."/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="/favicon.ico">
+
+	<title>爬虫之requests模块、cookie与session、json格式数据</title>
+	<link rel="stylesheet" href="https://Eddy-622.github.io/css/style.min.657bcb7af31123e4156b1a3d2ff60a636717e54ead74f882136b5114cf72b55e.css" integrity="sha256-ZXvLevMRI+QVaxo9L/YKY2cX5U6tdPiCE2tRFM9ytV4=" crossorigin="anonymous">
+	
+</head>
+
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp faster">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="https://Eddy-622.github.io">Eddy&#39;s Boke</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					
+				<a href="https://Eddy-622.github.io/posts/">博客</a>
+				<a href="https://Eddy-622.github.io/about-hugo/">关于</a>
+
+				</nav>
+			</div>
+			<div class="hdr-right hdr-icons">
+				<span class="hdr-social hide-in-mobile"><a href="https://mobile.twitter.com/zhang_kea" target="_blank" rel="noopener me" title="Twitter"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a><a href="https://www.facebook.com/kea.zhang.92" target="_blank" rel="noopener me" title="Instagram"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line></svg></a><a href="https://github.com/Eddy-622" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></span><button id="menu-btn" class="hdr-btn" title="Menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast">
+		<ul>
+			<li><a href="https://Eddy-622.github.io/posts/">博客</a></li>
+			<li><a href="https://Eddy-622.github.io/about-hugo/">关于</a></li>
+		</ul>
+	</div>
+
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta"><span>Nov 18, 2020</span></div>
+				<h1>爬虫之requests模块、cookie与session、json格式数据</h1>
+			</header>
+			<div class="content">
+				<h1 id="今日内容概要">今日内容概要<a href="#今日内容概要" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<ul>
+<li>requests模块</li>
+<li>cookie与session</li>
+<li>requests爬取网址数据实战演练</li>
+<li>json格式数据</li>
+</ul>
+<h1 id="今日内容详细">今日内容详细<a href="#今日内容详细" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<h4 id="requests模块">requests模块<a href="#requests模块" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;get请求携带参数
+</span><span class="s2">	在url中携带 url？username=jason&amp;hobby=read
+</span><span class="s2">requestes模块携带参数
+</span><span class="s2">	import requests
+</span><span class="s2">    
+</span><span class="s2">    res = requests.get(&#39;https://www.baidu.com/s&#39;,
+</span><span class="s2">                   params={
+</span><span class="s2">                       &#39;wd&#39;: &#39;美女&#39;
+</span><span class="s2">                   },
+</span><span class="s2">                   headers={
+</span><span class="s2">                       &#39;User-Agent&#39;: &#39;Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.76 Mobile Safari/537.36&#39;,
+</span><span class="s2">                   }
+</span><span class="s2">                   )
+</span><span class="s2">with open(r&#39;mn1.html&#39;, &#39;wb&#39;) as f:
+</span><span class="s2">    f.write(res.content)
+</span><span class="s2">&#34;&#34;&#34;</span>
+<span class="err">总结</span><span class="p">:</span><span class="err">大部分网址基本上都会校验你是否是个浏览器，所以我们以后在发送请求的时候最后将</span><span class="n">User</span><span class="o">-</span><span class="n">agent携带着</span>
+<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">		res = requests.get(&#39;url&#39;),
+</span><span class="s2">    			params={
+</span><span class="s2">                    字典形式携带的参数
+</span><span class="s2">                }
+</span><span class="s2">        		headers={
+</span><span class="s2">                    浏览器校验头，防止一般的简单网站防爬
+</span><span class="s2">                }
+</span><span class="s2">            
+</span><span class="s2">&#34;&#34;&#34;</span>
+</code></pre></div><h4 id="cookie与session">cookie与session<a href="#cookie与session" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;cookie与session都是用来记录当前用户状态的
+</span><span class="s2">二者产生的原因在于HTTP协议是无状态的    
+</span><span class="s2">
+</span><span class="s2">&gt;&gt;&gt; HTTP协议不记录用户信息但是网站需要记录用户的状态，登录信息等，cookie 和 session 便是分别负责在服务端与客户端进行身份识别
+</span><span class="s2">
+</span><span class="s2">cookie的由来
+</span><span class="s2">	就是保存在浏览器上面的k:v键值对
+</span><span class="s2">
+</span><span class="s2">session的由来
+</span><span class="s2">	就是保存在服务端上面的数据
+</span><span class="s2">&#39;&#39;&#39;
+</span><span class="s2">在互联网中没有绝对意义上的安全
+</span><span class="s2">&#39;&#39;&#39;
+</span><span class="s2">两者工作机制
+</span><span class="s2">	session的工作需要依赖于cookie
+</span><span class="s2">    
+</span><span class="s2">总结:
+</span><span class="s2">    只要是需要保存用户状态的网址，都需要借助于cookie
+</span><span class="s2">    浏览器可以选择保存cookie也可以选择拒绝
+</span><span class="s2">    一旦浏览器拒绝保存cookie，那么所有网址的登录都无法进行
+</span><span class="s2">
+</span><span class="s2">知识扩展:https://www.cnblogs.com/Dominic-Ji/p/10886902.html&#34;&#34;&#34;</span>
+</code></pre></div><h4 id="携带cookie">携带cookie<a href="#携带cookie" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;句型：
+</span><span class="s2">	res = requests.get/post/...(
+</span><span class="s2">	url=&#39;&#39;,
+</span><span class="s2">    headers={},
+</span><span class="s2">    params={},
+</span><span class="s2">    cookies={}
+</span><span class="s2">)
+</span><span class="s2">
+</span><span class="s2">    案例:华华手机登录  http://www.aa7a.cn/user.php
+</span><span class="s2">&#39;&#39;&#39;
+</span><span class="s2">验证是否登录 我们可以采用返回界面数据右上角是否含有用户名
+</span><span class="s2">&#39;&#39;&#39;
+</span><span class="s2">1.先研究登录请求发送的地址和数据格式
+</span><span class="s2">2.找到请求体数据格式 直接拿走
+</span><span class="s2">	username: weqeqw
+</span><span class="s2">    password: wqewqewqe
+</span><span class="s2">    captcha: CA3V
+</span><span class="s2">    remember: 1
+</span><span class="s2">    ref: http://www.aa7a.cn
+</span><span class="s2">    act: act_login
+</span><span class="s2">3.自己模拟post请求发送
+</span><span class="s2">4.如果用户名和密码正确 服务端就会给你返回标识你身份的cookie信息
+</span><span class="s2">	我们只需要获取到服务端给我们返回的cookie数据以后就可以拿着cookie无限制登录访问
+</span><span class="s2"> 
+</span><span class="s2">import requests
+</span><span class="s2">
+</span><span class="s2">headers = {
+</span><span class="s2">    &#39;User-Agent&#39;: &#39;Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.76 Mobile Safari/537.36&#39;,
+</span><span class="s2">}
+</span><span class="s2">
+</span><span class="s2">res = requests.post(&#39;http://www.aa7a.cn/user.php&#39;,
+</span><span class="s2">                    headers=headers,
+</span><span class="s2">                    # post请求携带数据需要使用data参数
+</span><span class="s2">                    data={
+</span><span class="s2">                        &#39;username&#39;: &#39;616564099@qq.com&#39;,
+</span><span class="s2">                        &#39;password&#39;: &#39;lqz123&#39;,
+</span><span class="s2">                        &#39;captcha&#39;: &#39;CA3V&#39;,
+</span><span class="s2">                        &#39;remember&#39;: &#39;1&#39;,
+</span><span class="s2">                        &#39;ref&#39;: &#39;http://www.aa7a.cn&#39;,
+</span><span class="s2">                        &#39;act&#39;: &#39;act_login&#39;
+</span><span class="s2">                    }
+</span><span class="s2">                    )
+</span><span class="s2"># 获取服务端返回的cookie数据
+</span><span class="s2">cookie=res.cookies.get_dict()
+</span><span class="s2">
+</span><span class="s2"># 携带着cookie访问网址首页 验证是否是登录状态
+</span><span class="s2">res = requests.get(&#39;http://www.aa7a.cn/user.php&#39;,
+</span><span class="s2">                   headers=headers,
+</span><span class="s2">                   cookies=cookie
+</span><span class="s2">                   )
+</span><span class="s2">if &#39;616564099@qq.com&#39; in res.text:
+</span><span class="s2">    print(&#39;登录成功&#39;)
+</span><span class="s2">else:
+</span><span class="s2">    print(&#39;用户名或密码错误&#39;)&#34;&#34;&#34;</span>
+</code></pre></div><h4 id="当爬取下来的数据过大">当爬取下来的数据过大<a href="#当爬取下来的数据过大" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;#stream参数:一点一点的取,比如下载视频时,如果视频100G,用response.content然后一下子写到文件中是不合理的
+</span><span class="s2">
+</span><span class="s2">import requests
+</span><span class="s2">
+</span><span class="s2">response=requests.get(&#39;https://gss3.baidu.com/6LZ0ej3k1Qd3ote6lo7D0j9wehsv/tieba-smallvideo-transcode/1767502_56ec685f9c7ec542eeaf6eac93a65dc7_6fe25cd1347c_3.mp4&#39;,
+</span><span class="s2">                      stream=True)
+</span><span class="s2">
+</span><span class="s2">with open(&#39;b.mp4&#39;,&#39;wb&#39;) as f:
+</span><span class="s2">    for line in response.iter_content():
+</span><span class="s2">        f.write(line)&#34;&#34;&#34;</span>
+</code></pre></div><h4 id="json格式数据">json格式数据<a href="#json格式数据" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;json格式数据是前端和后端通用的一种格式，用来打破语言限制实现无障碍数据沟通交流&#39;&#39;&#39;</span>
+<span class="s2">&#34;&#34;&#34;json格式的数据跟我们python里面的字典长得非常的像
+</span><span class="s2">只不过json格式引号都是双引号
+</span><span class="s2">双引号是json格式数据的标识
+</span><span class="s2">
+</span><span class="s2"># import json
+</span><span class="s2">d = {&#39;username&#39;:&#39;jason&#39;,&#39;password&#39;:&#39;123&#39;}
+</span><span class="s2"># 将数据转换成json格式(想给别人发数据)
+</span><span class="s2">res = json.dumps(d)   # 将字段转换成json格式的字符串
+</span><span class="s2">print(res,type(res))
+</span><span class="s2"># 将json格式数据转换成python数据(别人给你发数据)
+</span><span class="s2">res1 = json.loads(res)  # 将json格式字符串转换成字典
+</span><span class="s2">print(res1,type(res1))&#34;&#34;&#34;</span>
+</code></pre></div><h4 id="ip代理池cookie池">IP代理池、Cookie池<a href="#ip代理池cookie池" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">IP代理池
+</span><span class="s2">
+</span><span class="s2">防爬措施
+</span><span class="s2">1.服务端可以获取到每个客户端的IP地址
+</span><span class="s2">	规定一个IP地址在一定的时间范围内不得访问超出规定次数的请求
+</span><span class="s2">    如果超出了直接对该IP地址做访问限制(一定时间内，终身封禁)
+</span><span class="s2">破解措施
+</span><span class="s2">使用IP代理池
+</span><span class="s2">	给你提供很多IP每次从中随机获取一个去访问服务端，避过次数校验
+</span><span class="s2">#代理设置:先发送请求给代理,然后由代理帮忙发送(封ip是常见的事情)
+</span><span class="s2">import requests
+</span><span class="s2">proxies={
+</span><span class="s2">    &#39;http&#39;:&#39;183.166.161.14:4226&#39;,
+</span><span class="s2">    &#39;http&#39;:&#39;115.209.120.210:4226&#39;,
+</span><span class="s2">    &#39;http&#39;:&#39;119.178.168.138:4245&#39;,
+</span><span class="s2">}
+</span><span class="s2">respone=requests.get(&#39;https://www.12306.cn&#39;,
+</span><span class="s2">                     proxies=proxies)
+</span><span class="s2">
+</span><span class="s2">print(respone.status_code)
+</span><span class="s2">
+</span><span class="s2">Cookie池
+</span><span class="s2">规定一个Cookie在一定的时间范围内不得访问超出规定次数的请求
+</span><span class="s2">    如果超出了直接对该Cookie做访问限制(一定时间内，终身封禁)
+</span><span class="s2">破解措施
+</span><span class="s2">使用Cookie代理池
+</span><span class="s2">	给你提供很多Cookie每次从中随机获取一个去访问服务端，避过次数校验
+</span><span class="s2">    
+</span><span class="s2">先在某一个网址用很多用户名和密码登录获取每一次的cookie
+</span><span class="s2">然后存储到一个文件中
+</span><span class="s2">之后访问该网址随机从文件中获取一个cookie去访问&#34;&#34;&#34;</span>
+</code></pre></div><h4 id="上传文件">上传文件<a href="#上传文件" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">files</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;file&#39;</span><span class="p">:</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;a.jpg&#39;</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)}</span>
+<span class="n">respone</span><span class="o">=</span><span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;http://httpbin.org/post&#39;</span><span class="p">,</span>
+                      <span class="n">files</span><span class="o">=</span><span class="n">files</span>
+                     <span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">respone</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+</code></pre></div>
+			</div>
+			<hr class="post-end">
+			<footer class="post-info">
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>Eddy Zhang</p>
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://Eddy-622.github.io/tags/%E7%88%AC%E8%99%AB">爬虫</a></span><span class="tag"><a href="https://Eddy-622.github.io/tags/requests%E6%A8%A1%E5%9D%97">requests模块</a></span><span class="tag"><a href="https://Eddy-622.github.io/tags/cookie%E4%B8%8Esession">cookie与session</a></span><span class="tag"><a href="https://Eddy-622.github.io/tags/json">json</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>255 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-11-18 08:00 &#43;0800</p>
+			</footer>
+		</article>
+		<div class="post-nav thin">
+			<a class="prev-post" href="https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Brequests%E6%A8%A1%E5%9D%97%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
+				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>爬虫之requests模块、正则表达式</span>
+			</a>
+		</div>
+		<div id="comments" class="thin">
+</div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p>&copy; 2020 <a href="https://Eddy-622.github.io">Eddy Zhang</a></p>
+		<p>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://Eddy-622.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+		</p>
+	</footer>
+
+
+
+	<script src="https://Eddy-622.github.io/js/bundle.min.4a9a0ac3d2217822c7865b4161e6c2a71de1d70492264337755427898dd718f6.js" integrity="sha256-SpoKw9IheCLHhltBYebCpx3h1wSSJkM3dVQniY3XGPY=" crossorigin="anonymous"></script>
+	
+
+</body>
+
+</html>

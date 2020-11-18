@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python解释器链接操作 on Eddy&#39;s Boke</title>
+    <link>https://Eddy-622.github.io/tags/python%E8%A7%A3%E9%87%8A%E5%99%A8%E9%93%BE%E6%8E%A5%E6%93%8D%E4%BD%9C/</link>
+    <description>Recent content in Python解释器链接操作 on Eddy&#39;s Boke</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Fri, 13 Nov 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://Eddy-622.github.io/tags/python%E8%A7%A3%E9%87%8A%E5%99%A8%E9%93%BE%E6%8E%A5%E6%93%8D%E4%BD%9C/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>MySQL之链接Python操作、SQL注入问题</title>
+      <link>https://Eddy-622.github.io/posts/mysql%E4%B9%8B%E9%93%BE%E6%8E%A5python%E6%93%8D%E4%BD%9Csql%E6%B3%A8%E5%85%A5%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Fri, 13 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/posts/mysql%E4%B9%8B%E9%93%BE%E6%8E%A5python%E6%93%8D%E4%BD%9Csql%E6%B3%A8%E5%85%A5%E9%97%AE%E9%A2%98/</guid>
+      <description>昨日内容回顾   连表操作
+&amp;#34;&amp;#34;&amp;#34;由于在实际应用中，我们需要的数据很有可能是来自于多张表 这个时候我们可以采用多表查询的方式1:连表操作 连表操作的本质就是先将多张表拼接成一张表，然后基于这张拼接之后的表做单表查询 &amp;gt;&amp;gt;&amp;gt; 笛卡尔积 select * from emp,dep; &amp;#34;&amp;#34;&amp;#34; 在涉及到多表查询SQL语句的编写过程中，为了避免字段冲突的问题 我们一般都会加上表名来做明确的区分，否则可能会报错 &amp;#34;&amp;#34;&amp;#34; &amp;gt;&amp;gt;&amp;gt; 连表操作 inner join 将两张表都有对应关系的数据按照指定的条件拼接到一起 select * from emp inner join dep on emp.dep_id = dep.id; left join 以关键字left join左边的表为基准，展示左表所有的记录，没有的null填充 select * from emp left join dep on emp.dep_id = dep.id; right join 以关键字right join右边的表为基准，展示右表所有的记录，没有的null填充 select * from emp right join dep on emp.dep_id = dep.id; union 两张表所有的技术全部展示出来，各自没有对应的全部用null填充 select * from emp left join dep on emp.</description>
+    </item>
+    
+  </channel>
+</rss>

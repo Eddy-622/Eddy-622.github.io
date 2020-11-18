@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="theme-color" content="#494f5c">
+	<meta name="msapplication-TileColor" content="#494f5c">
+<meta itemprop="name" content="初识爬虫、概念、HTML">
+<meta itemprop="description" content="今日内容概要  爬虫的概念 前端之HTML 正则表达式  今日内容详细 爬虫的概念 &#39;&#39;&#39;互联网所有的计算机彼此互联，形成一张无形的大网联网目的实现数据的彼此传递什么是上网通过浏览器发送请求获取相应的数据（数据通过互联网传输的都是二进制格式）什么是爬虫通过代码模拟浏览器发送请求获取相应的数据兵器过滤出自己想要的存储到数据库中比喻我们把互联网当成一张很大的蜘蛛网，每台计算机上的数据便是蜘蛛的一个猎物，而爬虫程序就是一个小蜘蛛，沿着蜘蛛网抓取自己想要的猎物/数据价值 互联网最有价值的便是数据，往往谁能掌控行业的一手数据便能成为行业的主宰，这些数据代表着行业的真金白银，而爬虫就是使用工具高效的挖掘这些真金白银注意由于爬虫是有一点擦变性性质的，不要什么数据都去爬银行账户信息之类的&#39;&#39;&#39;爬虫流程 &#39;&#39;&#39;1. 通过代码模拟浏览器发送请求2. 必须要通过对方的校验才能获取到数据3. 解析获取到的二进制数据4、提取我们需要的保存到数据库cs架构与bs架构bs架构的本身也是cs架构通过一个浏览器访问多个服务端&#39;&#39;&#39;HTTP协议 &#39;&#39;&#39;HTTP协议：超文本传输协议规定了浏览器与服务端之间数据交互的格式四大特性：1、基与请求响应2、基于TCP/IP作用于应用层之上的协议3、无状态不保存用户状态4无连接（短链接）彼此交互完数据之后再无瓜葛数据格式请求格式请求首行（请求方法，HTTP协议版本）请求头（一大堆k：v键值对）请求体（post携带的请求数据会携带在请求体内）响应格式响应首行响应头响应体响应状态码用一串数字来表达信息1XX：服务端已经接受到了你的请求，正在处理你可以继续提交数据2XX：服务端应景成功的响应了对应的数据（200）3XX：重定向（原本访问A重定向到了B）4XX：404请求资源不存在，403请求不符合条件5XX：服务器内部错误（500）&#39;&#39;&#39;请求方法 &#39;&#39;&#39;1、get请求向别人要数据eg:1.浏览器地址栏里面输入www.baidu.com朝百度服务端要百度首页的数据2.">
+<meta itemprop="datePublished" content="2020-11-16T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-11-16T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="148">
+
+
+
+<meta itemprop="keywords" content="爬虫,概念,正则,HTML," /><meta property="og:title" content="初识爬虫、概念、HTML" />
+<meta property="og:description" content="今日内容概要  爬虫的概念 前端之HTML 正则表达式  今日内容详细 爬虫的概念 &#39;&#39;&#39;互联网所有的计算机彼此互联，形成一张无形的大网联网目的实现数据的彼此传递什么是上网通过浏览器发送请求获取相应的数据（数据通过互联网传输的都是二进制格式）什么是爬虫通过代码模拟浏览器发送请求获取相应的数据兵器过滤出自己想要的存储到数据库中比喻我们把互联网当成一张很大的蜘蛛网，每台计算机上的数据便是蜘蛛的一个猎物，而爬虫程序就是一个小蜘蛛，沿着蜘蛛网抓取自己想要的猎物/数据价值 互联网最有价值的便是数据，往往谁能掌控行业的一手数据便能成为行业的主宰，这些数据代表着行业的真金白银，而爬虫就是使用工具高效的挖掘这些真金白银注意由于爬虫是有一点擦变性性质的，不要什么数据都去爬银行账户信息之类的&#39;&#39;&#39;爬虫流程 &#39;&#39;&#39;1. 通过代码模拟浏览器发送请求2. 必须要通过对方的校验才能获取到数据3. 解析获取到的二进制数据4、提取我们需要的保存到数据库cs架构与bs架构bs架构的本身也是cs架构通过一个浏览器访问多个服务端&#39;&#39;&#39;HTTP协议 &#39;&#39;&#39;HTTP协议：超文本传输协议规定了浏览器与服务端之间数据交互的格式四大特性：1、基与请求响应2、基于TCP/IP作用于应用层之上的协议3、无状态不保存用户状态4无连接（短链接）彼此交互完数据之后再无瓜葛数据格式请求格式请求首行（请求方法，HTTP协议版本）请求头（一大堆k：v键值对）请求体（post携带的请求数据会携带在请求体内）响应格式响应首行响应头响应体响应状态码用一串数字来表达信息1XX：服务端已经接受到了你的请求，正在处理你可以继续提交数据2XX：服务端应景成功的响应了对应的数据（200）3XX：重定向（原本访问A重定向到了B）4XX：404请求资源不存在，403请求不符合条件5XX：服务器内部错误（500）&#39;&#39;&#39;请求方法 &#39;&#39;&#39;1、get请求向别人要数据eg:1.浏览器地址栏里面输入www.baidu.com朝百度服务端要百度首页的数据2." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://Eddy-622.github.io/posts/%E5%88%9D%E8%AF%86%E7%88%AC%E8%99%AB%E6%A6%82%E5%BF%B5html/" />
+<meta property="article:published_time" content="2020-11-16T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-11-16T00:00:00+00:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="初识爬虫、概念、HTML"/>
+<meta name="twitter:description" content="今日内容概要  爬虫的概念 前端之HTML 正则表达式  今日内容详细 爬虫的概念 &#39;&#39;&#39;互联网所有的计算机彼此互联，形成一张无形的大网联网目的实现数据的彼此传递什么是上网通过浏览器发送请求获取相应的数据（数据通过互联网传输的都是二进制格式）什么是爬虫通过代码模拟浏览器发送请求获取相应的数据兵器过滤出自己想要的存储到数据库中比喻我们把互联网当成一张很大的蜘蛛网，每台计算机上的数据便是蜘蛛的一个猎物，而爬虫程序就是一个小蜘蛛，沿着蜘蛛网抓取自己想要的猎物/数据价值 互联网最有价值的便是数据，往往谁能掌控行业的一手数据便能成为行业的主宰，这些数据代表着行业的真金白银，而爬虫就是使用工具高效的挖掘这些真金白银注意由于爬虫是有一点擦变性性质的，不要什么数据都去爬银行账户信息之类的&#39;&#39;&#39;爬虫流程 &#39;&#39;&#39;1. 通过代码模拟浏览器发送请求2. 必须要通过对方的校验才能获取到数据3. 解析获取到的二进制数据4、提取我们需要的保存到数据库cs架构与bs架构bs架构的本身也是cs架构通过一个浏览器访问多个服务端&#39;&#39;&#39;HTTP协议 &#39;&#39;&#39;HTTP协议：超文本传输协议规定了浏览器与服务端之间数据交互的格式四大特性：1、基与请求响应2、基于TCP/IP作用于应用层之上的协议3、无状态不保存用户状态4无连接（短链接）彼此交互完数据之后再无瓜葛数据格式请求格式请求首行（请求方法，HTTP协议版本）请求头（一大堆k：v键值对）请求体（post携带的请求数据会携带在请求体内）响应格式响应首行响应头响应体响应状态码用一串数字来表达信息1XX：服务端已经接受到了你的请求，正在处理你可以继续提交数据2XX：服务端应景成功的响应了对应的数据（200）3XX：重定向（原本访问A重定向到了B）4XX：404请求资源不存在，403请求不符合条件5XX：服务器内部错误（500）&#39;&#39;&#39;请求方法 &#39;&#39;&#39;1、get请求向别人要数据eg:1.浏览器地址栏里面输入www.baidu.com朝百度服务端要百度首页的数据2."/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="/favicon.ico">
+
+	<title>初识爬虫、概念、HTML</title>
+	<link rel="stylesheet" href="https://Eddy-622.github.io/css/style.min.657bcb7af31123e4156b1a3d2ff60a636717e54ead74f882136b5114cf72b55e.css" integrity="sha256-ZXvLevMRI+QVaxo9L/YKY2cX5U6tdPiCE2tRFM9ytV4=" crossorigin="anonymous">
+	
+</head>
+
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp faster">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="https://Eddy-622.github.io">Eddy&#39;s Boke</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					
+				<a href="https://Eddy-622.github.io/posts/">博客</a>
+				<a href="https://Eddy-622.github.io/about-hugo/">关于</a>
+
+				</nav>
+			</div>
+			<div class="hdr-right hdr-icons">
+				<span class="hdr-social hide-in-mobile"><a href="https://mobile.twitter.com/zhang_kea" target="_blank" rel="noopener me" title="Twitter"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a><a href="https://www.facebook.com/kea.zhang.92" target="_blank" rel="noopener me" title="Instagram"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line></svg></a><a href="https://github.com/Eddy-622" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></span><button id="menu-btn" class="hdr-btn" title="Menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast">
+		<ul>
+			<li><a href="https://Eddy-622.github.io/posts/">博客</a></li>
+			<li><a href="https://Eddy-622.github.io/about-hugo/">关于</a></li>
+		</ul>
+	</div>
+
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta"><span>Nov 16, 2020</span></div>
+				<h1>初识爬虫、概念、HTML</h1>
+			</header>
+			<div class="content">
+				<h2 id="今日内容概要">今日内容概要<a href="#今日内容概要" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<ul>
+<li>爬虫的概念</li>
+<li>前端之HTML</li>
+<li>正则表达式</li>
+</ul>
+<h2 id="今日内容详细">今日内容详细<a href="#今日内容详细" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<h4 id="爬虫的概念">爬虫的概念<a href="#爬虫的概念" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">互联网
+</span><span class="s1">	所有的计算机彼此互联，形成一张无形的大网
+</span><span class="s1">联网目的
+</span><span class="s1">	实现数据的彼此传递
+</span><span class="s1">什么是上网
+</span><span class="s1">	通过浏览器发送请求获取相应的数据
+</span><span class="s1">    （数据通过互联网传输的都是二进制格式）
+</span><span class="s1">什么是爬虫
+</span><span class="s1">	通过代码模拟浏览器发送请求
+</span><span class="s1">    获取相应的数据兵器过滤出自己想要的
+</span><span class="s1">    存储到数据库中
+</span><span class="s1">    
+</span><span class="s1">    
+</span><span class="s1">比喻
+</span><span class="s1">	我们把互联网当成一张很大的蜘蛛网，每台计算机上的数据便是蜘蛛的一个猎物，而爬虫程序就是一个小蜘蛛，沿着蜘蛛网抓取自己想要的猎物/数据
+</span><span class="s1">    
+</span><span class="s1">价值 	
+</span><span class="s1">	互联网最有价值的便是数据，往往谁能掌控行业的一手数据便能成为行业的主宰，这些数据代表着行业的真金白银，而爬虫就是使用工具高效的挖掘这些真金白银
+</span><span class="s1">    
+</span><span class="s1">注意
+</span><span class="s1">	由于爬虫是有一点擦变性性质的，不要什么数据都去爬
+</span><span class="s1">    银行账户信息之类的&#39;&#39;&#39;</span>
+    
+</code></pre></div><h4 id="爬虫流程">爬虫流程<a href="#爬虫流程" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;1. 通过代码模拟浏览器发送请求
+</span><span class="s1">
+</span><span class="s1">2. 必须要通过对方的校验才能获取到数据
+</span><span class="s1">
+</span><span class="s1">3. 解析获取到的二进制数据
+</span><span class="s1">
+</span><span class="s1">4、提取我们需要的保存到数据库
+</span><span class="s1">
+</span><span class="s1">cs架构与bs架构
+</span><span class="s1">bs架构的本身也是cs架构
+</span><span class="s1">
+</span><span class="s1">通过一个浏览器访问多个服务端&#39;&#39;&#39;</span>
+
+</code></pre></div><h4 id="http协议">HTTP协议<a href="#http协议" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;HTTP协议：超文本传输协议
+</span><span class="s1">规定了浏览器与服务端之间数据交互的格式
+</span><span class="s1">
+</span><span class="s1">四大特性：
+</span><span class="s1">	1、基与请求响应
+</span><span class="s1">    2、基于TCP/IP作用于应用层之上的协议
+</span><span class="s1">    3、无状态
+</span><span class="s1">    	不保存用户状态
+</span><span class="s1">    4无连接（短链接）
+</span><span class="s1">    	彼此交互完数据之后再无瓜葛
+</span><span class="s1">        
+</span><span class="s1">数据格式
+</span><span class="s1">	请求格式
+</span><span class="s1">    	请求首行（请求方法，HTTP协议版本）
+</span><span class="s1">        请求头（一大堆k：v键值对）
+</span><span class="s1">        
+</span><span class="s1">        请求体（post携带的请求数据会携带在请求体内）
+</span><span class="s1">        
+</span><span class="s1">	响应格式
+</span><span class="s1">    	响应首行
+</span><span class="s1">        响应头
+</span><span class="s1">        	
+</span><span class="s1">        响应体
+</span><span class="s1">
+</span><span class="s1">响应状态码
+</span><span class="s1">	用一串数字来表达信息
+</span><span class="s1">    1XX：服务端已经接受到了你的请求，正在处理你可以继续提交数据
+</span><span class="s1">    2XX：服务端应景成功的响应了对应的数据（200）
+</span><span class="s1">    3XX：重定向（原本访问A重定向到了B）
+</span><span class="s1">    4XX：404请求资源不存在，403请求不符合条件
+</span><span class="s1">    5XX：服务器内部错误（500）&#39;&#39;&#39;</span>
+</code></pre></div><h4 id="请求方法">请求方法<a href="#请求方法" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">1、get请求
+</span><span class="s1">	向别人要数据
+</span><span class="s1">    eg:
+</span><span class="s1">        1.浏览器地址栏里面输入www.baidu.com朝百度服务端要百度首页的数据
+</span><span class="s1">        2.朝别人要数据的时候也可以携带额外的参数，比如获取某个岗位的招聘信息，那么我可以加上一些筛选条件:工作经验、学历...
+</span><span class="s1">    get请求携带数据是直接放在url的后面
+</span><span class="s1">    	url?username=jason&amp;password=123
+</span><span class="s1">        get请求只能携带不敏感的信息，并且大小有限制
+</span><span class="s1">
+</span><span class="s1">url统一资源定位符 你可以直接理解为是网址
+</span><span class="s1">
+</span><span class="s1">    
+</span><span class="s1">2.post请求
+</span><span class="s1">	朝别人提交数据
+</span><span class="s1">    eg:
+</span><span class="s1">        1.用户注册登录
+</span><span class="s1">        	将用户名和密码提交给服务端
+</span><span class="s1">       	post请求携带的数据都是放在请求体里面的 &#39;&#39;&#39;</span>
+</code></pre></div><h4 id="为什么要学http协议">为什么要学HTTP协议<a href="#为什么要学http协议" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;因为爬虫是模拟浏览器朝服务端发送请求
+</span><span class="s1">而浏览器与服务端之间数据交互要遵循HTTP协议
+</span><span class="s1">所以我们写爬虫程序也得按照HTTP协议规范来写&#39;&#39;&#39;</span>
+</code></pre></div><h5 id="前端之html">前端之HTML<a href="#前端之html" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h5>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;浏览器之所以能够展示出华丽花哨的界面
+</span><span class="s1">那是因为服务端返回给浏览器的都是HTML文件
+</span><span class="s1">
+</span><span class="s1">HTML是构建网页的骨架，如果你想让你的服务端能够被浏览器正常的访问并且展示内容，你必须用HTML来书写网页
+</span><span class="s1">
+</span><span class="s1">简介
+</span><span class="s1">超文本标记语言，是用来构造网页骨架的
+</span><span class="s1">
+</span><span class="s1">虽然HTML很丑 但是浏览器会自动帮你按照一定的语法规则渲染成好看的界面&#39;&#39;&#39;</span>
+</code></pre></div><h5 id="为什么要学html">为什么要学HTML<a href="#为什么要学html" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h5>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;因为朝服务端要数据 本质其实就是服务端给了一堆HTML代码
+</span><span class="s1">而我们需要从HTML代码中筛选出我们需要的数据&#39;&#39;&#39;</span>
+</code></pre></div><h4 id="前端三剑客">前端三剑客<a href="#前端三剑客" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">HTML 
+</span><span class="s1">	构建网页的骨架
+</span><span class="s1">CSS
+</span><span class="s1">	用来给HTML调节样式
+</span><span class="s1">JavaScript
+</span><span class="s1">	用来生成页面的动态效果&#39;&#39;&#39;</span>
+</code></pre></div><h4 id="html">HTML<a href="#html" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">文档结构
+</span><span class="s1">&lt;html&gt;
+</span><span class="s1">	&lt;head&gt;
+</span><span class="s1">    	放的基本都不是给人看的信息
+</span><span class="s1">    &lt;/head&gt;
+</span><span class="s1">    &lt;body&gt;
+</span><span class="s1">    	放的都是浏览器会直接展示给用户看的
+</span><span class="s1">    &lt;/body&gt;
+</span><span class="s1">&lt;/html&gt;&#39;&#39;&#39;</span>
+</code></pre></div><h4 id="head内常见标签">head内常见标签<a href="#head内常见标签" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">title
+</span><span class="s1">	定义网页标题
+</span><span class="s1">script
+</span><span class="s1">	可以引入外部js文件
+</span><span class="s1">    也可以直接在改标题内部书写js代码
+</span><span class="s1">link
+</span><span class="s1">	引入外部js文件
+</span><span class="s1">style
+</span><span class="s1">	在内部可以直接书写css代码&#39;&#39;&#39;</span>
+</code></pre></div><h4 id="body内常见标签">body内常见标签<a href="#body内常见标签" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">h1~h6	标题标签（一节标题到六级标题）
+</span><span class="s1">a		链接标签（点击即跳转到对应链接地址）
+</span><span class="s1">img 	图片标签（展示图片）
+</span><span class="s1">div		页面布局（用div划分区域）
+</span><span class="s1">span	文本标签（普通文本）
+</span><span class="s1">form表单	
+</span><span class="s1">		能够获取用户数据并且发送给后端
+</span><span class="s1">    	action
+</span><span class="s1">        	控制提交给哪个后端
+</span><span class="s1">        method
+</span><span class="s1">        	控制请求方式 默认get请求
+</span><span class="s1">&#39;&#39;&#39;</span>
+</code></pre></div><h4 id="学会利用chrome快速开发">学会利用chrome快速开发<a href="#学会利用chrome快速开发" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+
+			</div>
+			<hr class="post-end">
+			<footer class="post-info">
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>Eddy Zhang</p>
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://Eddy-622.github.io/tags/%E7%88%AC%E8%99%AB">爬虫</a></span><span class="tag"><a href="https://Eddy-622.github.io/tags/%E6%A6%82%E5%BF%B5">概念</a></span><span class="tag"><a href="https://Eddy-622.github.io/tags/%E6%AD%A3%E5%88%99">正则</a></span><span class="tag"><a href="https://Eddy-622.github.io/tags/html">HTML</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>148 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-11-16 08:00 &#43;0800</p>
+			</footer>
+		</article>
+		<div class="post-nav thin">
+			<a class="next-post" href="https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Brequests%E6%A8%A1%E5%9D%97%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
+				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>爬虫之requests模块、正则表达式</span>
+			</a>
+			<a class="prev-post" href="https://Eddy-622.github.io/posts/mysql%E8%BF%9E%E8%A1%A8%E6%9F%A5%E8%AF%A2%E7%BB%83%E4%B9%A0%E9%A2%98/">
+				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>MySQL连表查询练习题</span>
+			</a>
+		</div>
+		<div id="comments" class="thin">
+</div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p>&copy; 2020 <a href="https://Eddy-622.github.io">Eddy Zhang</a></p>
+		<p>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://Eddy-622.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+		</p>
+	</footer>
+
+
+
+	<script src="https://Eddy-622.github.io/js/bundle.min.4a9a0ac3d2217822c7865b4161e6c2a71de1d70492264337755427898dd718f6.js" integrity="sha256-SpoKw9IheCLHhltBYebCpx3h1wSSJkM3dVQniY3XGPY=" crossorigin="anonymous"></script>
+	
+
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>连表查询习题 on Eddy&#39;s Boke</title>
+    <link>https://Eddy-622.github.io/tags/%E8%BF%9E%E8%A1%A8%E6%9F%A5%E8%AF%A2%E4%B9%A0%E9%A2%98/</link>
+    <description>Recent content in 连表查询习题 on Eddy&#39;s Boke</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Sun, 15 Nov 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://Eddy-622.github.io/tags/%E8%BF%9E%E8%A1%A8%E6%9F%A5%E8%AF%A2%E4%B9%A0%E9%A2%98/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>MySQL连表查询练习题</title>
+      <link>https://Eddy-622.github.io/posts/mysql%E8%BF%9E%E8%A1%A8%E6%9F%A5%E8%AF%A2%E7%BB%83%E4%B9%A0%E9%A2%98/</link>
+      <pubDate>Sun, 15 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/posts/mysql%E8%BF%9E%E8%A1%A8%E6%9F%A5%E8%AF%A2%E7%BB%83%E4%B9%A0%E9%A2%98/</guid>
+      <description>作业 1、查询所有的课程的名称以及对应的任课老师姓名
+SELECT course.cname,teacher.tname FROM course INNER JOIN teacher on course.teacher_id=teacher.tid;2、查询学生表中男女生各有多少人
+SELECT gender as &amp;#39;性别&amp;#39;,count(gender) as &amp;#39;人数&amp;#39; FROM student GROUP BY gender ;3、查询物理成绩等于100的学生的姓名
+SELECTscore.num,student.sname FROMscoreINNER JOIN student ON score.student_id = student.sid WHEREscore.course_id IN ( SELECT course.cid FROM course WHERE course.cname = &amp;#39;物理&amp;#39; ) HAVINGscore.num = 100;4、查询平均成绩大于八十分的同学的姓名和平均成绩
+SELECTstudent.sname AS &amp;#39;姓名&amp;#39;,avg( score.num ) AS &amp;#39;平均成绩&amp;#39; FROMscoreRIGHT JOIN student ON score.</description>
+    </item>
+    
+  </channel>
+</rss>
