@@ -8,15 +8,16 @@
 	<meta name="theme-color" content="#494f5c">
 	<meta name="msapplication-TileColor" content="#494f5c">
 <meta itemprop="name" content="爬虫之selenium模块、实例演示">
-<meta itemprop="description" content="今日内容概要  爬取天气信息 爬取汽车之家信息 selenium模块  今日内容详细   爬取天气信息 URL:http://tianqi.2345.com有一些网站的数据是后续js动态加载的 (网站的地址不变数据在变) 打开浏览器network点击获取数据的按钮查看内部js请求 多请求几次总结url变化规律
-http://tianqi.2345.com/Pc/GetHistory?areaInfhttp://tianqi.2345.com/Pc/GetHistory?areaInfo%5BareaId%5D=60010&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10 http://tianqi.2345.com/Pc/GetHistory?areaInfo%5BareaId%5D=60010&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=9http://tianqi.2345.com/Pc/GetHistory?areaInfo%5BareaId%5D=71447&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10o%5BareaId%5D=60010&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10 朝上述url发送get请求
-import requestsimport jsonimport pandasres = requests.get(&#39;http://tianqi.2345.com/Pc/GetHistory?areaInfo%5BareaId%5D=71447&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10&#39;)content = res.content先反序列化成python里面的字典
-json_dict = json.loads(content)​	loads方法既可以反序列化json格式字符串 ​	也可以发序列化json格式的二进制数据
+<meta itemprop="description" content="今日内容概要  爬取天气信息 爬取汽车之家信息 selenium模块  今日内容详细   爬取天气信息 http://tianqi.2345.com有一些网站的数据是后续js动态加载的 (网站的地址不变数据在变) 打开浏览器network点击获取数据的按钮查看内部js请求 多请求几次总结url变化规律
+http://tianqi.2345.com/Pc/GetHistoryareaInfo%5BareaId%5D=60010&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=9http://tianqi.2345.com/Pc/GetHistoryareaInfo%5BareaId%5D=71447&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10o%5BareaId%5D=60010&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10 朝上述url发送get请求
+  import requests import json import pandas
+res = requests.get(&lsquo;http://tianqi.2345.com/Pc/GetHistory?areaInfo%5BareaId%5D=71447&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10&#39;) content = res.content
+先反序列化成python里面的字典```pythonjson_dict = json.loads(content)​	loads方法既可以反序列化json格式字符串 ​	也可以发序列化json格式的二进制数据
 在利用字典取值获取天气相关的数据
 real_data = json_dict.get(&#39;data&#39;)直接将页面上的表格数据筛选出来
 res = pandas.read_html(real_data)print(res)爬取汽车之家数据 新闻标签页
 https://www.autohome.com.cn/news/总结每个页的url规律 推导出固定url格式
-https://www.autohome.com.cn/news/1/#liststart https://www.autohome.com.cn/news/2/#liststart https://www.autohome.com.cn/news/3/#liststart 利用代码事先翻页的功能
+https://www.autohome.com.cn/news/1/#liststarthttps://www.autohome.com.cn/news/2/#liststarthttps://www.autohome.com.cn/news/3/#liststart利用代码事先翻页的功能
 url_reg = &#39;https://www.autohome.com.cn/news/%s/#liststart&#39;for i in range(1,6010):print(url_reg%i)尝试着直接朝url发送get请求获取数据
 研究目标数据所在的HTML规律">
 <meta itemprop="datePublished" content="2020-11-20T00:00:00&#43;00:00" />
@@ -26,15 +27,16 @@ url_reg = &#39;https://www.autohome.com.cn/news/%s/#liststart&#39;for i in rang
 
 
 <meta itemprop="keywords" content="爬虫,selenium模块,实例演示," /><meta property="og:title" content="爬虫之selenium模块、实例演示" />
-<meta property="og:description" content="今日内容概要  爬取天气信息 爬取汽车之家信息 selenium模块  今日内容详细   爬取天气信息 URL:http://tianqi.2345.com有一些网站的数据是后续js动态加载的 (网站的地址不变数据在变) 打开浏览器network点击获取数据的按钮查看内部js请求 多请求几次总结url变化规律
-http://tianqi.2345.com/Pc/GetHistory?areaInfhttp://tianqi.2345.com/Pc/GetHistory?areaInfo%5BareaId%5D=60010&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10 http://tianqi.2345.com/Pc/GetHistory?areaInfo%5BareaId%5D=60010&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=9http://tianqi.2345.com/Pc/GetHistory?areaInfo%5BareaId%5D=71447&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10o%5BareaId%5D=60010&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10 朝上述url发送get请求
-import requestsimport jsonimport pandasres = requests.get(&#39;http://tianqi.2345.com/Pc/GetHistory?areaInfo%5BareaId%5D=71447&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10&#39;)content = res.content先反序列化成python里面的字典
-json_dict = json.loads(content)​	loads方法既可以反序列化json格式字符串 ​	也可以发序列化json格式的二进制数据
+<meta property="og:description" content="今日内容概要  爬取天气信息 爬取汽车之家信息 selenium模块  今日内容详细   爬取天气信息 http://tianqi.2345.com有一些网站的数据是后续js动态加载的 (网站的地址不变数据在变) 打开浏览器network点击获取数据的按钮查看内部js请求 多请求几次总结url变化规律
+http://tianqi.2345.com/Pc/GetHistoryareaInfo%5BareaId%5D=60010&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=9http://tianqi.2345.com/Pc/GetHistoryareaInfo%5BareaId%5D=71447&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10o%5BareaId%5D=60010&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10 朝上述url发送get请求
+  import requests import json import pandas
+res = requests.get(&lsquo;http://tianqi.2345.com/Pc/GetHistory?areaInfo%5BareaId%5D=71447&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10&#39;) content = res.content
+先反序列化成python里面的字典```pythonjson_dict = json.loads(content)​	loads方法既可以反序列化json格式字符串 ​	也可以发序列化json格式的二进制数据
 在利用字典取值获取天气相关的数据
 real_data = json_dict.get(&#39;data&#39;)直接将页面上的表格数据筛选出来
 res = pandas.read_html(real_data)print(res)爬取汽车之家数据 新闻标签页
 https://www.autohome.com.cn/news/总结每个页的url规律 推导出固定url格式
-https://www.autohome.com.cn/news/1/#liststart https://www.autohome.com.cn/news/2/#liststart https://www.autohome.com.cn/news/3/#liststart 利用代码事先翻页的功能
+https://www.autohome.com.cn/news/1/#liststarthttps://www.autohome.com.cn/news/2/#liststarthttps://www.autohome.com.cn/news/3/#liststart利用代码事先翻页的功能
 url_reg = &#39;https://www.autohome.com.cn/news/%s/#liststart&#39;for i in range(1,6010):print(url_reg%i)尝试着直接朝url发送get请求获取数据
 研究目标数据所在的HTML规律" />
 <meta property="og:type" content="article" />
@@ -43,15 +45,16 @@ url_reg = &#39;https://www.autohome.com.cn/news/%s/#liststart&#39;for i in rang
 <meta property="article:modified_time" content="2020-11-20T00:00:00+00:00" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="爬虫之selenium模块、实例演示"/>
-<meta name="twitter:description" content="今日内容概要  爬取天气信息 爬取汽车之家信息 selenium模块  今日内容详细   爬取天气信息 URL:http://tianqi.2345.com有一些网站的数据是后续js动态加载的 (网站的地址不变数据在变) 打开浏览器network点击获取数据的按钮查看内部js请求 多请求几次总结url变化规律
-http://tianqi.2345.com/Pc/GetHistory?areaInfhttp://tianqi.2345.com/Pc/GetHistory?areaInfo%5BareaId%5D=60010&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10 http://tianqi.2345.com/Pc/GetHistory?areaInfo%5BareaId%5D=60010&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=9http://tianqi.2345.com/Pc/GetHistory?areaInfo%5BareaId%5D=71447&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10o%5BareaId%5D=60010&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10 朝上述url发送get请求
-import requestsimport jsonimport pandasres = requests.get(&#39;http://tianqi.2345.com/Pc/GetHistory?areaInfo%5BareaId%5D=71447&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10&#39;)content = res.content先反序列化成python里面的字典
-json_dict = json.loads(content)​	loads方法既可以反序列化json格式字符串 ​	也可以发序列化json格式的二进制数据
+<meta name="twitter:description" content="今日内容概要  爬取天气信息 爬取汽车之家信息 selenium模块  今日内容详细   爬取天气信息 http://tianqi.2345.com有一些网站的数据是后续js动态加载的 (网站的地址不变数据在变) 打开浏览器network点击获取数据的按钮查看内部js请求 多请求几次总结url变化规律
+http://tianqi.2345.com/Pc/GetHistoryareaInfo%5BareaId%5D=60010&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=9http://tianqi.2345.com/Pc/GetHistoryareaInfo%5BareaId%5D=71447&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10o%5BareaId%5D=60010&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10 朝上述url发送get请求
+  import requests import json import pandas
+res = requests.get(&lsquo;http://tianqi.2345.com/Pc/GetHistory?areaInfo%5BareaId%5D=71447&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10&#39;) content = res.content
+先反序列化成python里面的字典```pythonjson_dict = json.loads(content)​	loads方法既可以反序列化json格式字符串 ​	也可以发序列化json格式的二进制数据
 在利用字典取值获取天气相关的数据
 real_data = json_dict.get(&#39;data&#39;)直接将页面上的表格数据筛选出来
 res = pandas.read_html(real_data)print(res)爬取汽车之家数据 新闻标签页
 https://www.autohome.com.cn/news/总结每个页的url规律 推导出固定url格式
-https://www.autohome.com.cn/news/1/#liststart https://www.autohome.com.cn/news/2/#liststart https://www.autohome.com.cn/news/3/#liststart 利用代码事先翻页的功能
+https://www.autohome.com.cn/news/1/#liststarthttps://www.autohome.com.cn/news/2/#liststarthttps://www.autohome.com.cn/news/3/#liststart利用代码事先翻页的功能
 url_reg = &#39;https://www.autohome.com.cn/news/%s/#liststart&#39;for i in range(1,6010):print(url_reg%i)尝试着直接朝url发送get请求获取数据
 研究目标数据所在的HTML规律"/>
 
@@ -112,26 +115,28 @@ url_reg = &#39;https://www.autohome.com.cn/news/%s/#liststart&#39;for i in rang
 <ol>
 <li>
 <h3 id="爬取天气信息">爬取天气信息<a href="#爬取天气信息" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">URL</span><span class="p">:</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">tianqi</span><span class="o">.</span><span class="mf">2345.</span><span class="n">com</span>
-</code></pre></div><p>有一些网站的数据是后续js动态加载的
+<div class="highlight"><pre class="chroma"><code class="language-http" data-lang="http"><span class="err">http://tianqi.2345.com
+</span></code></pre></div><p>有一些网站的数据是后续js动态加载的
 (网站的地址不变数据在变)
 打开浏览器network点击获取数据的按钮查看内部js请求
 多请求几次总结url变化规律</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">tianqi</span><span class="o">.</span><span class="mf">2345.</span><span class="n">com</span><span class="o">/</span><span class="n">Pc</span><span class="o">/</span><span class="n">GetHistory</span><span class="err">?</span><span class="n">areaInfhttp</span><span class="p">:</span><span class="o">//</span><span class="n">tianqi</span><span class="o">.</span><span class="mf">2345.</span><span class="n">com</span><span class="o">/</span><span class="n">Pc</span><span class="o">/</span><span class="n">GetHistory</span><span class="err">?</span><span class="n">areaInfo</span><span class="o">%</span><span class="mi">5</span><span class="n">BareaId</span><span class="o">%</span><span class="mi">5</span><span class="n">D</span><span class="o">=</span><span class="mi">60010</span><span class="o">&amp;</span><span class="n">areaInfo</span><span class="o">%</span><span class="mi">5</span><span class="n">BareaType</span><span class="o">%</span><span class="mi">5</span><span class="n">D</span><span class="o">=</span><span class="mi">2</span><span class="o">&amp;</span><span class="n">date</span><span class="o">%</span><span class="mi">5</span><span class="n">Byear</span><span class="o">%</span><span class="mi">5</span><span class="n">D</span><span class="o">=</span><span class="mi">2020</span><span class="o">&amp;</span><span class="n">date</span><span class="o">%</span><span class="mi">5</span><span class="n">Bmonth</span><span class="o">%</span><span class="mi">5</span><span class="n">D</span><span class="o">=</span><span class="mi">10</span>  
-           
-    <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">tianqi</span><span class="o">.</span><span class="mf">2345.</span><span class="n">com</span><span class="o">/</span><span class="n">Pc</span><span class="o">/</span><span class="n">GetHistory</span><span class="err">?</span><span class="n">areaInfo</span><span class="o">%</span><span class="mi">5</span><span class="n">BareaId</span><span class="o">%</span><span class="mi">5</span><span class="n">D</span><span class="o">=</span><span class="mi">60010</span><span class="o">&amp;</span><span class="n">areaInfo</span><span class="o">%</span><span class="mi">5</span><span class="n">BareaType</span><span class="o">%</span><span class="mi">5</span><span class="n">D</span><span class="o">=</span><span class="mi">2</span><span class="o">&amp;</span><span class="n">date</span><span class="o">%</span><span class="mi">5</span><span class="n">Byear</span><span class="o">%</span><span class="mi">5</span><span class="n">D</span><span class="o">=</span><span class="mi">2020</span><span class="o">&amp;</span><span class="n">date</span><span class="o">%</span><span class="mi">5</span><span class="n">Bmonth</span><span class="o">%</span><span class="mi">5</span><span class="n">D</span><span class="o">=</span><span class="mi">9</span>
-           
-    <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">tianqi</span><span class="o">.</span><span class="mf">2345.</span><span class="n">com</span><span class="o">/</span><span class="n">Pc</span><span class="o">/</span><span class="n">GetHistory</span><span class="err">?</span><span class="n">areaInfo</span><span class="o">%</span><span class="mi">5</span><span class="n">BareaId</span><span class="o">%</span><span class="mi">5</span><span class="n">D</span><span class="o">=</span><span class="mi">71447</span><span class="o">&amp;</span><span class="n">areaInfo</span><span class="o">%</span><span class="mi">5</span><span class="n">BareaType</span><span class="o">%</span><span class="mi">5</span><span class="n">D</span><span class="o">=</span><span class="mi">2</span><span class="o">&amp;</span><span class="n">date</span><span class="o">%</span><span class="mi">5</span><span class="n">Byear</span><span class="o">%</span><span class="mi">5</span><span class="n">D</span><span class="o">=</span><span class="mi">2020</span><span class="o">&amp;</span><span class="n">date</span><span class="o">%</span><span class="mi">5</span><span class="n">Bmonth</span><span class="o">%</span><span class="mi">5</span><span class="n">D</span><span class="o">=</span><span class="mi">10</span><span class="n">o</span><span class="o">%</span><span class="mi">5</span><span class="n">BareaId</span><span class="o">%</span><span class="mi">5</span><span class="n">D</span><span class="o">=</span><span class="mi">60010</span><span class="o">&amp;</span><span class="n">areaInfo</span><span class="o">%</span><span class="mi">5</span><span class="n">BareaType</span><span class="o">%</span><span class="mi">5</span><span class="n">D</span><span class="o">=</span><span class="mi">2</span><span class="o">&amp;</span><span class="n">date</span><span class="o">%</span><span class="mi">5</span><span class="n">Byear</span><span class="o">%</span><span class="mi">5</span><span class="n">D</span><span class="o">=</span><span class="mi">2020</span><span class="o">&amp;</span><span class="n">date</span><span class="o">%</span><span class="mi">5</span><span class="n">Bmonth</span><span class="o">%</span><span class="mi">5</span><span class="n">D</span><span class="o">=</span><span class="mi">10</span>  
-</code></pre></div><p>朝上述url发送get请求</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">requests</span>
-<span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">import</span> <span class="nn">pandas</span>
-   
-<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://tianqi.2345.com/Pc/GetHistory?areaInfo%5BareaId%5D=71447&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10&#39;</span><span class="p">)</span>
-<span class="n">content</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">content</span>
-</code></pre></div><p>先反序列化成python里面的字典</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">json_dict</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
-</code></pre></div><p>​				loads方法既可以反序列化json格式字符串
+<div class="highlight"><pre class="chroma"><code class="language-http" data-lang="http"><span class="err">http://tianqi.2345.com/Pc/GetHistoryareaInfo%5BareaId%5D=60010&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=9
+</span><span class="err">           
+</span><span class="err">http://tianqi.2345.com/Pc/GetHistoryareaInfo%5BareaId%5D=71447&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10o%5BareaId%5D=60010&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10  
+</span></code></pre></div><p>朝上述url发送get请求</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"></code></pre></div></li>
+</ol>
+<p>import requests
+import json
+import pandas</p>
+<p>res = requests.get(&lsquo;<a href="http://tianqi.2345.com/Pc/GetHistory?areaInfo%5BareaId%5D=71447&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10'">http://tianqi.2345.com/Pc/GetHistory?areaInfo%5BareaId%5D=71447&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10'</a>)
+content = res.content</p>
+<pre><code>
+先反序列化成python里面的字典
+
+```python
+json_dict = json.loads(content)
+</code></pre><p>​				loads方法既可以反序列化json格式字符串
 ​				也可以发序列化json格式的二进制数据</p>
 <p>在利用字典取值获取天气相关的数据</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">real_data</span> <span class="o">=</span> <span class="n">json_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">)</span>
@@ -140,12 +145,12 @@ url_reg = &#39;https://www.autohome.com.cn/news/%s/#liststart&#39;for i in rang
 <span class="k">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
 </code></pre></div><h4 id="爬取汽车之家数据">爬取汽车之家数据<a href="#爬取汽车之家数据" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
 <p>新闻标签页</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">autohome</span><span class="o">.</span><span class="n">com</span><span class="o">.</span><span class="n">cn</span><span class="o">/</span><span class="n">news</span><span class="o">/</span>
-</code></pre></div><p>总结每个页的url规律 推导出固定url格式</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">autohome</span><span class="o">.</span><span class="n">com</span><span class="o">.</span><span class="n">cn</span><span class="o">/</span><span class="n">news</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span><span class="c1">#liststart</span>
-<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">autohome</span><span class="o">.</span><span class="n">com</span><span class="o">.</span><span class="n">cn</span><span class="o">/</span><span class="n">news</span><span class="o">/</span><span class="mi">2</span><span class="o">/</span><span class="c1">#liststart</span>
-<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">autohome</span><span class="o">.</span><span class="n">com</span><span class="o">.</span><span class="n">cn</span><span class="o">/</span><span class="n">news</span><span class="o">/</span><span class="mi">3</span><span class="o">/</span><span class="c1">#liststart</span>
-</code></pre></div><p>利用代码事先翻页的功能</p>
+<div class="highlight"><pre class="chroma"><code class="language-http" data-lang="http"><span class="err">https://www.autohome.com.cn/news/
+</span></code></pre></div><p>总结每个页的url规律 推导出固定url格式</p>
+<div class="highlight"><pre class="chroma"><code class="language-http" data-lang="http"><span class="err">https://www.autohome.com.cn/news/1/#liststart
+</span><span class="err">https://www.autohome.com.cn/news/2/#liststart
+</span><span class="err">https://www.autohome.com.cn/news/3/#liststart
+</span></code></pre></div><p>利用代码事先翻页的功能</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">url_reg</span> <span class="o">=</span> <span class="s1">&#39;https://www.autohome.com.cn/news/</span><span class="si">%s</span><span class="s1">/#liststart&#39;</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6010</span><span class="p">):</span>
     <span class="k">print</span><span class="p">(</span><span class="n">url_reg</span><span class="o">%</span><span class="n">i</span><span class="p">)</span>
@@ -153,7 +158,7 @@ url_reg = &#39;https://www.autohome.com.cn/news/%s/#liststart&#39;for i in rang
 <p>研究目标数据所在的HTML规律</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
-   
+
 <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://www.autohome.com.cn/news/1/#liststart&#39;</span><span class="p">)</span>
 <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s1">&#39;lxml&#39;</span><span class="p">)</span>
 </code></pre></div><p>每一个新闻其实就是一个li标签  所有的新闻li都是ul标签内</p>
@@ -167,12 +172,12 @@ url_reg = &#39;https://www.autohome.com.cn/news/%s/#liststart&#39;for i in rang
     <span class="k">if</span> <span class="n">a_obj</span><span class="p">:</span>
         <span class="c1"># 获取文字链接</span>
         <span class="k">print</span><span class="p">(</span><span class="s1">&#39;https:&#39;</span> <span class="o">+</span> <span class="n">a_obj</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">))</span>
-   
+
     <span class="c1"># 筛选出文字标题</span>
     <span class="n">h3_obj</span> <span class="o">=</span> <span class="n">li_obj</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;h3&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">h3_obj</span><span class="p">:</span>
         <span class="k">print</span><span class="p">(</span><span class="n">h3_obj</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
-   
+
     <span class="c1"># 筛选出发布时间</span>
     <span class="n">div_obj</span> <span class="o">=</span> <span class="n">li_obj</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;article-bar&#39;</span><span class="p">})</span>
     <span class="k">if</span> <span class="n">div_obj</span><span class="p">:</span>
@@ -189,8 +194,6 @@ url_reg = &#39;https://www.autohome.com.cn/news/%s/#liststart&#39;for i in rang
 </code></pre></div><p>思考：</p>
 <p>1.如何实现爬取多页
 2.如何封装成函数 用户指定几页就爬几页</p>
-</li>
-</ol>
 <hr>
 <h4 id="爬取b站视频">爬取b站视频<a href="#爬取b站视频" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
 <ul>
@@ -198,12 +201,12 @@ url_reg = &#39;https://www.autohome.com.cn/news/%s/#liststart&#39;for i in rang
 视频和音频是分开的</li>
 </ul>
 <p>​	研究ulr的规律</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">bilibili</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">video</span><span class="o">/</span><span class="n">BV1QE41147hU</span><span class="err">?</span><span class="n">p</span><span class="o">=</span><span class="mi">1</span>
-<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">bilibili</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">video</span><span class="o">/</span><span class="n">BV1QE41147hU</span><span class="err">?</span><span class="n">p</span><span class="o">=</span><span class="mi">2</span>
-<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">bilibili</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">video</span><span class="o">/</span><span class="n">BV1QE41147hU</span><span class="err">?</span><span class="n">p</span><span class="o">=</span><span class="mi">3</span>
-</code></pre></div><p>总体数据的地址大部分都是隐藏在js动态加载的文件里面</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">cnblogs</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">xiaoyuanqujing</span><span class="o">/</span><span class="n">articles</span><span class="o">/</span><span class="mf">12014416.</span><span class="n">html</span>
-</code></pre></div><hr>
+<div class="highlight"><pre class="chroma"><code class="language-http" data-lang="http"><span class="err">https://www.bilibili.com/video/BV1QE41147hU?p=1
+</span><span class="err">https://www.bilibili.com/video/BV1QE41147hU?p=2
+</span><span class="err">https://www.bilibili.com/video/BV1QE41147hU?p=3
+</span></code></pre></div><p>总体数据的地址大部分都是隐藏在js动态加载的文件里面</p>
+<div class="highlight"><pre class="chroma"><code class="language-http" data-lang="http"><span class="err">https://www.cnblogs.com/xiaoyuanqujing/articles/12014416.html
+</span></code></pre></div><hr>
 <h4 id="selenium模块">selenium模块<a href="#selenium模块" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
 <p>selenium最初是一个自动化测试工具,而爬虫中使用它主要是为了解决requests无法直接执行JavaScript代码的问题</p>
 <p>selenium本质是通过驱动浏览器，完全模拟浏览器的操作，比如跳转、输入、点击、下拉等，来拿到网页渲染之后的结果，可支持多种浏览器</p>
