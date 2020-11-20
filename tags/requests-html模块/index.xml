@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>requests-html模块 on Eddy&#39;s Boke</title>
+    <link>https://Eddy-622.github.io/tags/requests-html%E6%A8%A1%E5%9D%97/</link>
+    <description>Recent content in requests-html模块 on Eddy&#39;s Boke</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Thu, 19 Nov 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://Eddy-622.github.io/tags/requests-html%E6%A8%A1%E5%9D%97/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>爬虫之requests-html模块、BS4模块</title>
+      <link>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Brequests-html%E6%A8%A1%E5%9D%97bs4%E6%A8%A1%E5%9D%97/</link>
+      <pubDate>Thu, 19 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Brequests-html%E6%A8%A1%E5%9D%97bs4%E6%A8%A1%E5%9D%97/</guid>
+      <description>今日内容概要  requests-html模块 BS4模块 爬取红牛分公司信息 爬取链家二手房信息  今日内容详细 requests-html模块 该模块的作者就是requests模块的作者
+相比之下此模块更牛逼，可以直接运行js代码
+  下载
+pip3 install requests-html  基本使用
+from requests-html import HTMLSessionr = HTMLSession.get(&amp;#39;URL&amp;#39;)a_link = r.html.linksprint(a_link)all_link = r.html.absolute_linksprint(all_link)查找标签id是downloads的标签
+about = r.html.find(&amp;#39;#downloads&amp;#39;, first=True)查看该标签内部所有的文本信息
+about_text = about.text查看该标签所有的属性
+about_attr = about.attrs查看该标签内部包含的所有a标签
+about_a = about.find(&amp;#39;a&amp;#39;)for a in about_a:print(a.text) # 获取每个a标签内部的文本 print(a.links) # 获取每个a标签内部的链接地址 requests-html官方文档
+http://requests-html.kennethreitz.org/ # 习惯看英文文档   BS4模块</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="theme-color" content="#494f5c">
+	<meta name="msapplication-TileColor" content="#494f5c">
+<meta itemprop="name" content="爬虫之requests-html模块、BS4模块">
+<meta itemprop="description" content="今日内容概要  requests-html模块 BS4模块 爬取红牛分公司信息 爬取链家二手房信息  今日内容详细 requests-html模块 该模块的作者就是requests模块的作者
+相比之下此模块更牛逼，可以直接运行js代码
+  下载
+pip3 install requests-html  基本使用
+from requests-html import HTMLSessionr = HTMLSession.get(&#39;URL&#39;)a_link = r.html.linksprint(a_link)all_link = r.html.absolute_linksprint(all_link)查找标签id是downloads的标签
+about = r.html.find(&#39;#downloads&#39;, first=True)查看该标签内部所有的文本信息
+about_text = about.text查看该标签所有的属性
+about_attr = about.attrs查看该标签内部包含的所有a标签
+about_a = about.find(&#39;a&#39;)for a in about_a:print(a.text) # 获取每个a标签内部的文本 print(a.links) # 获取每个a标签内部的链接地址 requests-html官方文档
+http://requests-html.kennethreitz.org/ # 习惯看英文文档   BS4模块">
+<meta itemprop="datePublished" content="2020-11-19T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-11-19T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="424">
+
+
+
+<meta itemprop="keywords" content="爬虫,requests-html模块,BS4模块," /><meta property="og:title" content="爬虫之requests-html模块、BS4模块" />
+<meta property="og:description" content="今日内容概要  requests-html模块 BS4模块 爬取红牛分公司信息 爬取链家二手房信息  今日内容详细 requests-html模块 该模块的作者就是requests模块的作者
+相比之下此模块更牛逼，可以直接运行js代码
+  下载
+pip3 install requests-html  基本使用
+from requests-html import HTMLSessionr = HTMLSession.get(&#39;URL&#39;)a_link = r.html.linksprint(a_link)all_link = r.html.absolute_linksprint(all_link)查找标签id是downloads的标签
+about = r.html.find(&#39;#downloads&#39;, first=True)查看该标签内部所有的文本信息
+about_text = about.text查看该标签所有的属性
+about_attr = about.attrs查看该标签内部包含的所有a标签
+about_a = about.find(&#39;a&#39;)for a in about_a:print(a.text) # 获取每个a标签内部的文本 print(a.links) # 获取每个a标签内部的链接地址 requests-html官方文档
+http://requests-html.kennethreitz.org/ # 习惯看英文文档   BS4模块" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Brequests-html%E6%A8%A1%E5%9D%97bs4%E6%A8%A1%E5%9D%97/" />
+<meta property="article:published_time" content="2020-11-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-11-19T00:00:00+00:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="爬虫之requests-html模块、BS4模块"/>
+<meta name="twitter:description" content="今日内容概要  requests-html模块 BS4模块 爬取红牛分公司信息 爬取链家二手房信息  今日内容详细 requests-html模块 该模块的作者就是requests模块的作者
+相比之下此模块更牛逼，可以直接运行js代码
+  下载
+pip3 install requests-html  基本使用
+from requests-html import HTMLSessionr = HTMLSession.get(&#39;URL&#39;)a_link = r.html.linksprint(a_link)all_link = r.html.absolute_linksprint(all_link)查找标签id是downloads的标签
+about = r.html.find(&#39;#downloads&#39;, first=True)查看该标签内部所有的文本信息
+about_text = about.text查看该标签所有的属性
+about_attr = about.attrs查看该标签内部包含的所有a标签
+about_a = about.find(&#39;a&#39;)for a in about_a:print(a.text) # 获取每个a标签内部的文本 print(a.links) # 获取每个a标签内部的链接地址 requests-html官方文档
+http://requests-html.kennethreitz.org/ # 习惯看英文文档   BS4模块"/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="/favicon.ico">
+
+	<title>爬虫之requests-html模块、BS4模块</title>
+	<link rel="stylesheet" href="https://Eddy-622.github.io/css/style.min.657bcb7af31123e4156b1a3d2ff60a636717e54ead74f882136b5114cf72b55e.css" integrity="sha256-ZXvLevMRI+QVaxo9L/YKY2cX5U6tdPiCE2tRFM9ytV4=" crossorigin="anonymous">
+	
+</head>
+
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp faster">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="https://Eddy-622.github.io">Eddy&#39;s Boke</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					
+				<a href="https://Eddy-622.github.io/posts/">博客</a>
+				<a href="https://Eddy-622.github.io/about-hugo/">关于</a>
+
+				</nav>
+			</div>
+			<div class="hdr-right hdr-icons">
+				<span class="hdr-social hide-in-mobile"><a href="https://mobile.twitter.com/zhang_kea" target="_blank" rel="noopener me" title="Twitter"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a><a href="https://www.facebook.com/kea.zhang.92" target="_blank" rel="noopener me" title="Instagram"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line></svg></a><a href="https://github.com/Eddy-622" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></span><button id="menu-btn" class="hdr-btn" title="Menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast">
+		<ul>
+			<li><a href="https://Eddy-622.github.io/posts/">博客</a></li>
+			<li><a href="https://Eddy-622.github.io/about-hugo/">关于</a></li>
+		</ul>
+	</div>
+
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta"><span>Nov 19, 2020</span></div>
+				<h1>爬虫之requests-html模块、BS4模块</h1>
+			</header>
+			<div class="content">
+				<h1 id="今日内容概要">今日内容概要<a href="#今日内容概要" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<ul>
+<li>requests-html模块</li>
+<li>BS4模块</li>
+<li>爬取红牛分公司信息</li>
+<li>爬取链家二手房信息</li>
+</ul>
+<h1 id="今日内容详细">今日内容详细<a href="#今日内容详细" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<h4 id="requests-html模块">requests-html模块<a href="#requests-html模块" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<p>该模块的作者就是requests模块的作者</p>
+<p>相比之下此模块更牛逼，可以直接运行js代码</p>
+<ul>
+<li>
+<p>下载</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">pip3</span> <span class="n">install</span> <span class="n">requests</span><span class="o">-</span><span class="n">html</span>
+</code></pre></div></li>
+<li>
+<p>基本使用</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">requests</span><span class="o">-</span><span class="n">html</span> <span class="kn">import</span> <span class="nn">HTMLSession</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">HTMLSession</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;URL&#39;</span><span class="p">)</span>
+<span class="n">a_link</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">html</span><span class="o">.</span><span class="n">links</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a_link</span><span class="p">)</span>
+<span class="n">all_link</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">html</span><span class="o">.</span><span class="n">absolute_links</span>
+<span class="k">print</span><span class="p">(</span><span class="n">all_link</span><span class="p">)</span>
+</code></pre></div><p>查找标签id是downloads的标签</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">about</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">html</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;#downloads&#39;</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div><p>查看该标签内部所有的文本信息</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">about_text</span> <span class="o">=</span> <span class="n">about</span><span class="o">.</span><span class="n">text</span>
+</code></pre></div><p>查看该标签所有的属性</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">about_attr</span> <span class="o">=</span> <span class="n">about</span><span class="o">.</span><span class="n">attrs</span>
+</code></pre></div><p>查看该标签内部包含的所有a标签</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">about_a</span> <span class="o">=</span> <span class="n">about</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">about_a</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>  <span class="c1"># 获取每个a标签内部的文本</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">links</span><span class="p">)</span>  <span class="c1"># 获取每个a标签内部的链接地址</span>
+</code></pre></div><p>requests-html官方文档</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">requests</span><span class="o">-</span><span class="n">html</span><span class="o">.</span><span class="n">kennethreitz</span><span class="o">.</span><span class="n">org</span><span class="o">/</span>  <span class="c1"># 习惯看英文文档</span>
+</code></pre></div></li>
+</ul>
+<p>BS4模块</p>
+<ul>
+<li>
+<p>下载模块</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">pip3</span> <span class="n">install</span> <span class="n">beautifulsoup4</span>
+</code></pre></div><p>下载解析器</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">pip3</span> <span class="n">install</span> <span class="n">lxml</span>
+</code></pre></div><p>中文文档</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">beautifulsoup</span><span class="o">.</span><span class="n">readthedocs</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">zh_CN</span><span class="o">/</span><span class="n">v4</span><span class="o">.</span><span class="mf">4.0</span><span class="o">/</span>
+</code></pre></div><p>基本使用</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">html_doc</span> <span class="o">=</span> <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">&lt;html&gt;&lt;head&gt;&lt;title&gt;The Dormouse&#39;s story&lt;/title&gt;&lt;/head&gt;
+</span><span class="s2">&lt;body&gt;
+</span><span class="s2">&lt;p class=&#34;title&#34;&gt;&lt;b&gt;The Dormouse&#39;s story&lt;/b&gt;&lt;/p&gt;
+</span><span class="s2">  
+</span><span class="s2">&lt;p class=&#34;story&#34;&gt;Once upon a time there were three little sisters; and their names were
+</span><span class="s2">&lt;a href=&#34;http://example.com/elsie&#34; class=&#34;sister&#34; id=&#34;link1&#34;&gt;Elsie&lt;/a&gt;,
+</span><span class="s2">&lt;a href=&#34;http://example.com/lacie&#34; class=&#34;sister&#34; id=&#34;link2&#34;&gt;Lacie&lt;/a&gt; and
+</span><span class="s2">&lt;a href=&#34;http://example.com/tillie&#34; class=&#34;sister&#34; id=&#34;link3&#34;&gt;Tillie&lt;/a&gt;;
+</span><span class="s2">and they lived at the bottom of a well.&lt;/p&gt;
+</span><span class="s2">  
+</span><span class="s2">&lt;p class=&#34;story&#34;&gt;...&lt;/p&gt;
+</span><span class="s2">&#34;&#34;&#34;</span>
+  
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html_doc</span><span class="p">,</span><span class="s1">&#39;lxml&#39;</span><span class="p">)</span>
+</code></pre></div><p>文档格式化展示</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="n">soup</span><span class="o">.</span><span class="n">prettify</span><span class="p">())</span>
+</code></pre></div><p>查找HTML文档中的title标签</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="n">soup</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
+</code></pre></div><p>查找title标签内部的文本</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="n">soup</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">string</span><span class="p">)</span>
+</code></pre></div><p>查看title标签的父标签(包含它的外部标签)</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="n">soup</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">parent</span><span class="p">)</span>
+</code></pre></div><p>查找p标签的class属性值</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="n">soup</span><span class="o">.</span><span class="n">p</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">])</span>
+</code></pre></div><p>查找标签内部所有的属性名和对应的属性值</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="n">soup</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
+</code></pre></div><p>获取HTML文档中所有的文本</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="n">soup</span><span class="o">.</span><span class="n">get_text</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">soup</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</code></pre></div><p>================================================</p>
+<p>查找文档内所有的a标签</p>
+<p>find只会找到符合条件的第一个标签</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a_list</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+</code></pre></div><p>find_all会找到所有符合条件的标签 用列表组织起来</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a_lists</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+</code></pre></div><p>根据标签的id查找标签</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"> <span class="n">a</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">&#39;link3&#39;</span><span class="p">)</span>
+</code></pre></div><p>根据标签的class查找标签</p>
+<p>如果标签的属性名和python中的关键字冲突
+我们只需要在属性名的后面加一个下划线即可</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">p</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">class_</span><span class="o">=</span><span class="s1">&#39;story&#39;</span><span class="p">)</span>
+</code></pre></div><p>获取所有a标签的href属性名对应的属性值(链接地址)</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a_lists</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>  	<span class="c1"># 结果是列表 里面才是一个个的a标签</span>
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">a_lists</span><span class="p">:</span>  				<span class="c1"># 循环获取每一个a标签</span>
+  <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">))</span> 		 <span class="c1"># 获取标签内部href属性名对应的属性值</span>
+</code></pre></div><p>================================================</p>
+</li>
+</ul>
+<h4 id="爬取红牛分公司的所有信息">爬取红牛分公司的所有信息<a href="#爬取红牛分公司的所有信息" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<ul>
+<li>
+<p>直接使用正则匹配数据</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">re</span>
+  
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://www.redbull.com.cn/about/branch&#39;</span><span class="p">)</span>
+</code></pre></div><p>先用正则表达式
+获取公司名称</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">company_title_list</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;&lt;h2&gt;(.*?)&lt;/h2&gt;&#39;</span><span class="p">,</span><span class="n">res</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</code></pre></div><p>获取公司地址</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">company_addr_list</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s2">&#34;&lt;p class=&#39;mapIco&#39;&gt;(.*?)&lt;/p&gt;&#34;</span><span class="p">,</span><span class="n">res</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</code></pre></div><p>获取公司邮箱</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">company_email_list</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s2">&#34;&lt;p class=&#39;mailIco&#39;&gt;(.*?)&lt;/p&gt;&#34;</span><span class="p">,</span><span class="n">res</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</code></pre></div><p>获取公司电话</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">company_phone_list</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s2">&#34;&lt;p class=&#39;telIco&#39;&gt;(.*?)&lt;/p&gt;&#34;</span><span class="p">,</span><span class="n">res</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">company_phone_list</span><span class="p">)</span>
+</code></pre></div></li>
+<li>
+<p>使用bs模块</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifuiSoup</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://www.redbull.com.cn/about/branch&#39;</span><span class="p">)</span>
+<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">text</span><span class="p">,</span><span class="s1">&#39;lxml&#39;</span><span class="p">)</span>
+</code></pre></div><p>公司名称</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">title_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">company_title_list</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;h2&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">h2_obj</span> <span class="ow">in</span> <span class="n">company_title_list</span><span class="p">:</span>
+    <span class="n">title_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">h2_obj</span><span class="o">.</span><span class="n">string</span><span class="p">)</span>
+</code></pre></div><p>公司地址</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">addr_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">company_addr_list</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="n">class_</span><span class="o">=</span><span class="s1">&#39;mapIco&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">p_obj</span> <span class="ow">in</span> <span class="n">company_addr_list</span><span class="p">:</span>
+    <span class="n">addr_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p_obj</span><span class="o">.</span><span class="n">string</span><span class="p">)</span>
+</code></pre></div><p>公司邮箱</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">email_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">company_email_list</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="n">class_</span><span class="o">=</span><span class="s1">&#39;mailIco&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">e_obj</span> <span class="ow">in</span> <span class="n">company_email_list</span><span class="p">:</span>
+    <span class="n">email_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">e_obj</span><span class="o">.</span><span class="n">string</span><span class="p">)</span>
+</code></pre></div><p>公司电话</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">phone_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">company_phone_list</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="n">class_</span><span class="o">=</span><span class="s1">&#39;telIco&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">phone_obj</span> <span class="ow">in</span> <span class="n">company_phone_list</span><span class="p">:</span>
+    <span class="n">phone_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">phone_obj</span><span class="o">.</span><span class="n">string</span><span class="p">)</span>
+</code></pre></div><p>将对应的数据整合到一个元组中</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">data</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">title_list</span><span class="p">,</span><span class="n">addr_list</span><span class="p">,</span><span class="n">email_list</span><span class="p">,</span><span class="n">phone_list</span><span class="p">))</span>
+ <span class="k">for</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+     <span class="k">print</span><span class="p">(</span><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">     公司名称:</span><span class="si">%s</span><span class="s2">
+</span><span class="s2">     公司地址:</span><span class="si">%s</span><span class="s2">
+</span><span class="s2">     公司邮箱:</span><span class="si">%s</span><span class="s2">
+</span><span class="s2">     公司电话:</span><span class="si">%s</span><span class="s2">
+</span><span class="s2">     &#34;&#34;&#34;</span><span class="o">%</span><span class="n">info</span><span class="p">)</span>
+</code></pre></div><p>后期使用pandas进行处理</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">pandas</span>
+<span class="n">pf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">pf</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="s1">&#39;company.xlsx&#39;</span><span class="p">)</span>
+</code></pre></div></li>
+</ul>
+<h4 id="爬取链家二手房数据">爬取链家二手房数据<a href="#爬取链家二手房数据" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<ul>
+<li>
+<p>导入模块</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+  
+  
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;https://sh.lianjia.com/ershoufang/pudong/&#39;</span><span class="p">)</span>
+<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">text</span><span class="p">,</span><span class="s1">&#39;lxml&#39;</span><span class="p">)</span>
+</code></pre></div><p>查找属性名是data-el并且属性值是ershoufang的a标签</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">house_title</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">a_list</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s2">&#34;data-el&#34;</span><span class="p">:</span><span class="s2">&#34;ershoufang&#34;</span><span class="p">})</span>
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">a_list</span><span class="p">:</span>
+                          <span class="c1"># 排除内部没有文本的</span>
+    <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">string</span><span class="p">:</span>              <span class="c1"># None对应的布尔值是False</span>
+        <span class="n">house_title</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">string</span><span class="p">)</span>
+</code></pre></div><p>查找属性名是class并且属性值是flood的div标签</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">house_addr</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">div_list</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;div.flood&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">div</span> <span class="ow">in</span> <span class="n">div_list</span><span class="p">:</span>
+    <span class="n">house_addr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">div</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</code></pre></div><p>查找属性名是class并且属性值是houseInfo的div标签</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">house_info</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">info_list</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;div&#39;</span><span class="p">,</span><span class="n">class_</span><span class="o">=</span><span class="s1">&#39;houseInfo&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">info_list</span><span class="p">:</span>
+    <span class="n">house_info</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">info</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</code></pre></div><p>查找属性名是class并且属性值是totalPrice的div标签</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">price_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">total_list</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;div&#39;</span><span class="p">,</span><span class="n">class_</span><span class="o">=</span><span class="s1">&#39;totalPrice&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">price</span> <span class="ow">in</span> <span class="n">total_list</span><span class="p">:</span>
+    <span class="n">price_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">price</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+  
+</code></pre></div><p>查找属性名是class并且属性值是unitPrice的div标签</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">unit_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">unitPrice_list</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;div&#39;</span><span class="p">,</span><span class="n">class_</span><span class="o">=</span><span class="s1">&#39;unitPrice&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">unit</span> <span class="ow">in</span> <span class="n">unitPrice_list</span><span class="p">:</span>
+    <span class="n">unit_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">unit</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</code></pre></div><p>针对info信息如何拆分</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">info_detail</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">house_info</span><span class="p">:</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;|&#39;</span><span class="p">)</span>
+    <span class="n">temp</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">res</span><span class="p">:</span>
+        <span class="n">temp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+    <span class="n">info_detail</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">info_detail</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">    户型:</span><span class="si">%s</span><span class="s2">
+</span><span class="s2">    面积:</span><span class="si">%s</span><span class="s2">
+</span><span class="s2">    朝向:</span><span class="si">%s</span><span class="s2">
+</span><span class="s2">    装修:</span><span class="si">%s</span><span class="s2">
+</span><span class="s2">    楼层:</span><span class="si">%s</span><span class="s2">
+</span><span class="s2">    年代:</span><span class="si">%s</span><span class="s2">
+</span><span class="s2">    类型:</span><span class="si">%s</span><span class="s2">
+</span><span class="s2">    &#34;&#34;&#34;</span><span class="o">%</span><span class="p">(</span><span class="n">j</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">j</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">j</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">j</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="n">j</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span><span class="n">j</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span><span class="n">j</span><span class="p">[</span><span class="mi">6</span><span class="p">]))</span>
+</code></pre></div><p>汇总</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">data</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">house_title</span><span class="p">,</span> <span class="n">house_addr</span><span class="p">,</span> <span class="n">info_detail</span><span class="p">,</span> <span class="n">price_list</span><span class="p">,</span> <span class="n">unit_list</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">fo</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+    <span class="c1"># print(info)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">    标题信息:</span><span class="si">%s</span><span class="s2">
+</span><span class="s2">    房屋地址:</span><span class="si">%s</span><span class="s2">
+</span><span class="s2">    户型:</span><span class="si">%s</span><span class="s2">
+</span><span class="s2">    面积:</span><span class="si">%s</span><span class="s2">
+</span><span class="s2">    朝向:</span><span class="si">%s</span><span class="s2">
+</span><span class="s2">    装修:</span><span class="si">%s</span><span class="s2">
+</span><span class="s2">    楼层:</span><span class="si">%s</span><span class="s2">
+</span><span class="s2">    年代:</span><span class="si">%s</span><span class="s2">
+</span><span class="s2">    类型:</span><span class="si">%s</span><span class="s2">
+</span><span class="s2">    预计价格:</span><span class="si">%s</span><span class="s2">
+</span><span class="s2">    平均单价:</span><span class="si">%s</span><span class="s2">
+</span><span class="s2">    &#34;&#34;&#34;</span> <span class="o">%</span> <span class="p">(</span><span class="n">fo</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">fo</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">fo</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">fo</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">fo</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">fo</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">fo</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">fo</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">fo</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span>
+           <span class="n">fo</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">fo</span><span class="p">[</span><span class="mi">10</span><span class="p">]))</span>
+  
+</code></pre></div></li>
+</ul>
+
+			</div>
+			<hr class="post-end">
+			<footer class="post-info">
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>Eddy Zhang</p>
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://Eddy-622.github.io/tags/%E7%88%AC%E8%99%AB">爬虫</a></span><span class="tag"><a href="https://Eddy-622.github.io/tags/requests-html%E6%A8%A1%E5%9D%97">requests-html模块</a></span><span class="tag"><a href="https://Eddy-622.github.io/tags/bs4%E6%A8%A1%E5%9D%97">BS4模块</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>424 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-11-19 08:00 &#43;0800</p>
+			</footer>
+		</article>
+		<div class="post-nav thin">
+			<a class="prev-post" href="https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Brequests%E6%A8%A1%E5%9D%97cookie%E4%B8%8Esessionjson%E6%A0%BC%E5%BC%8F%E6%95%B0%E6%8D%AE/">
+				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>爬虫之requests模块、cookie与session、json格式数据</span>
+			</a>
+		</div>
+		<div id="comments" class="thin">
+</div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p>&copy; 2020 <a href="https://Eddy-622.github.io">Eddy Zhang</a></p>
+		<p>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://Eddy-622.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+		</p>
+	</footer>
+
+
+
+	<script src="https://Eddy-622.github.io/js/bundle.min.4a9a0ac3d2217822c7865b4161e6c2a71de1d70492264337755427898dd718f6.js" integrity="sha256-SpoKw9IheCLHhltBYebCpx3h1wSSJkM3dVQniY3XGPY=" crossorigin="anonymous"></script>
+	
+
+</body>
+
+</html>

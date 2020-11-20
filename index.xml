@@ -13,12 +13,30 @@
     
     
     <item>
+      <title>爬虫之requests-html模块、BS4模块</title>
+      <link>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Brequests-html%E6%A8%A1%E5%9D%97bs4%E6%A8%A1%E5%9D%97/</link>
+      <pubDate>Thu, 19 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Brequests-html%E6%A8%A1%E5%9D%97bs4%E6%A8%A1%E5%9D%97/</guid>
+      <description>今日内容概要  requests-html模块 BS4模块 爬取红牛分公司信息 爬取链家二手房信息  今日内容详细 requests-html模块 该模块的作者就是requests模块的作者
+相比之下此模块更牛逼，可以直接运行js代码
+  下载
+pip3 install requests-html  基本使用
+from requests-html import HTMLSessionr = HTMLSession.get(&amp;#39;URL&amp;#39;)a_link = r.html.linksprint(a_link)all_link = r.html.absolute_linksprint(all_link)查找标签id是downloads的标签
+about = r.html.find(&amp;#39;#downloads&amp;#39;, first=True)查看该标签内部所有的文本信息
+about_text = about.text查看该标签所有的属性
+about_attr = about.attrs查看该标签内部包含的所有a标签
+about_a = about.find(&amp;#39;a&amp;#39;)for a in about_a:print(a.text) # 获取每个a标签内部的文本 print(a.links) # 获取每个a标签内部的链接地址 requests-html官方文档
+http://requests-html.kennethreitz.org/ # 习惯看英文文档   BS4模块</description>
+    </item>
+    
+    <item>
       <title>爬虫之requests模块、cookie与session、json格式数据</title>
       <link>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Brequests%E6%A8%A1%E5%9D%97cookie%E4%B8%8Esessionjson%E6%A0%BC%E5%BC%8F%E6%95%B0%E6%8D%AE/</link>
       <pubDate>Wed, 18 Nov 2020 00:00:00 +0000</pubDate>
       
       <guid>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Brequests%E6%A8%A1%E5%9D%97cookie%E4%B8%8Esessionjson%E6%A0%BC%E5%BC%8F%E6%95%B0%E6%8D%AE/</guid>
-      <description>今日内容概要  requests模块 cookie与session requests爬取网址数据实战演练 json格式数据  今日内容详细 requests模块 &amp;#34;&amp;#34;&amp;#34;get请求携带参数在url中携带 url？username=jason&amp;amp;hobby=readrequestes模块携带参数import requestsres = requests.get(&amp;#39;https://www.baidu.com/s&amp;#39;,params={&amp;#39;wd&amp;#39;: &amp;#39;美女&amp;#39;},headers={&amp;#39;User-Agent&amp;#39;: &amp;#39;Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.76 Mobile Safari/537.36&amp;#39;,})with open(r&amp;#39;mn1.html&amp;#39;, &amp;#39;wb&amp;#39;) as f:f.write(res.content)&amp;#34;&amp;#34;&amp;#34;总结:大部分网址基本上都会校验你是否是个浏览器，所以我们以后在发送请求的时候最后将User-agent携带着&amp;#34;&amp;#34;&amp;#34;res = requests.get(&amp;#39;url&amp;#39;),params={字典形式携带的参数}headers={浏览器校验头，防止一般的简单网站防爬}&amp;#34;&amp;#34;&amp;#34;cookie与session &amp;#34;&amp;#34;&amp;#34;cookie与session都是用来记录当前用户状态的二者产生的原因在于HTTP协议是无状态的 &amp;gt;&amp;gt;&amp;gt; HTTP协议不记录用户信息但是网站需要记录用户的状态，登录信息等，cookie 和 session 便是分别负责在服务端与客户端进行身份识别cookie的由来就是保存在浏览器上面的k:v键值对session的由来就是保存在服务端上面的数据&amp;#39;&amp;#39;&amp;#39;在互联网中没有绝对意义上的安全&amp;#39;&amp;#39;&amp;#39;两者工作机制session的工作需要依赖于cookie总结:只要是需要保存用户状态的网址，都需要借助于cookie浏览器可以选择保存cookie也可以选择拒绝一旦浏览器拒绝保存cookie，那么所有网址的登录都无法进行知识扩展:https://www.</description>
+      <description>今日内容概要  requests模块 cookie与session requests爬取网址数据实战演练 json格式数据  今日内容详细 requests模块 &amp;#34;&amp;#34;&amp;#34;get请求携带参数在url中携带 url？username=jason&amp;amp;hobby=readrequestes模块携带参数import requestsres = requests.get(&amp;#39;https://www.baidu.com/s&amp;#39;,params={&amp;#39;wd&amp;#39;: &amp;#39;美女&amp;#39;},headers={&amp;#39;User-Agent&amp;#39;: &amp;#39;Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.76 Mobile Safari/537.36&amp;#39;,})with open(r&amp;#39;mn1.html&amp;#39;, &amp;#39;wb&amp;#39;) as f:f.write(res.content)总结:大部分网址基本上都会校验你是否是个浏览器，所以我们以后在发送请求的时候最后将User-agent携带着res = requests.get(&amp;#39;url&amp;#39;),params={字典形式携带的参数}headers={浏览器校验头，防止一般的简单网站防爬}&amp;#34;&amp;#34;&amp;#34;cookie与session &amp;#34;&amp;#34;&amp;#34;cookie与session都是用来记录当前用户状态的二者产生的原因在于HTTP协议是无状态的 &amp;gt;&amp;gt;&amp;gt; HTTP协议不记录用户信息但是网站需要记录用户的状态，登录信息等，cookie 和 session 便是分别负责在服务端与客户端进行身份识别cookie的由来就是保存在浏览器上面的k:v键值对session的由来就是保存在服务端上面的数据&amp;#39;&amp;#39;&amp;#39;在互联网中没有绝对意义上的安全&amp;#39;&amp;#39;&amp;#39;两者工作机制session的工作需要依赖于cookie总结:只要是需要保存用户状态的网址，都需要借助于cookie浏览器可以选择保存cookie也可以选择拒绝一旦浏览器拒绝保存cookie，那么所有网址的登录都无法进行知识扩展:https://www.</description>
     </item>
     
     <item>
@@ -121,21 +139,6 @@ SELECTstudent.sname AS &amp;#39;姓名&amp;#39;,avg( score.num ) AS &amp;#39;�
   MySQL中的数据类型
   今日内容详细 基本的SQL语句
 &amp;#34;&amp;#34;&amp;#34;针对数据库的增删改查查看show databases; &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;查看所有的数据库show create database 数据库名字； &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;单独查指定的数据库create database 数据库名字； &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;创建数据库alter database 数据库名字 charset=&amp;#39;gbk&amp;#39;; &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;更改数据库的字符编码drop database 数据库名字; &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;删除数据库针对表的增删改查如何查看当前在哪个库下select database();切换数据库use 数据库名；查看show tables; .&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;查看当前库下的所有表show create table 表名； &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;查看指定的表信息describe 表明; &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;查看指定表结构desc 表名；增create table 表名(字段名 字段类型); &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;新建表格改alter table 表名 modify 字段名 字段的数据类型; &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;更改字段的数据类型alter table 表名 change 字段名 新字段名 字段类型;	&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;改字段名alter table 表名 rename 新表名; &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;改表名删drop table 表名;针对记录的增删改查select * from 表名;	&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;查看指定表的所有数据select * from 库名.</description>
-    </item>
-    
-    <item>
-      <title>MySQL之下载安装</title>
-      <link>https://Eddy-622.github.io/posts/mysql%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85/</link>
-      <pubDate>Fri, 06 Nov 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://Eddy-622.github.io/posts/mysql%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85/</guid>
-      <description>数据库 软件开发架构 &amp;#34;&amp;#34;&amp;#34;1.c/s架构c:client 客户端s:server 服务端2.b/s架构b:broswer:浏览器s:server 服务器服务端就类似于是一家家的店客户端就类似于是去店里消费的客人c/s架构下我们客人要想体验服务，就必须下载对应服务的app客户端b/s架构下我们要想体验服务，必须要挨个下载对应的app，只需要使用浏览器即可我们之前下载的一个个app其实本质就是客户端# b/s架构本质上也是c/s架构&amp;#34;&amp;#34;&amp;#34;数据库的演变过程 单机游戏
-&amp;#39;&amp;#39;&amp;#39;1.不用联网2.计算机与计算机之间游戏数据不共享数据都是保存的各自的本地(数据彼此不共享)&amp;#39;&amp;#39;&amp;#39;联网游戏
-&amp;#39;&amp;#39;&amp;#39;1.得有互联网2.游戏数据是共享的数据彼此都是共享的&amp;#39;&amp;#39;&amp;#39;总结:其实数据库软件本质上还是c/s架构的软件
-数据库的作用 文件存储数据
-&amp;#39;&amp;#39;&amp;#39;用户Ajason:123用户Bjason|123用户Cjason~123每个人存储数据的格式是千差万别的，程序兼容性非常的差&amp;#39;&amp;#39;&amp;#39;按照数据类型的不同创建不同的文件夹处理
-&amp;#39;&amp;#39;&amp;#39;存储数据的文件一般情况下我们都会默认放在一个data文件夹内虽然没有解决数据格式的问题，但是统一了数据存储位置的问题&amp;#39;&amp;#39;&amp;#39;数据库软件
-&amp;#39;&amp;#39;&amp;#39;1.针对数据的存储有固定的格式2.针对数据的存储位置也做了限制(统一都存在数据库服务端)&amp;#39;&amp;#39;&amp;#39;数据库的分类 &amp;#39;&amp;#39;&amp;#39;1.关系型数据库MySQL、Oracle、PostgreSQL、MariaDB(跟MySQL很像)、DB2、SQL server、sqlite特点:1.存储数据基本上都是以表结构的形式(表结构 表字段 字段类型)2.表与表之间可以创建代码层面上的关系(后续课程会详细的讲)用户表房屋表虽然数据库软件有很多，但是内部原理的都是一样的，尤其是当你学会了MySQL之后，再去学其他的数据库软件非常的轻松2.</description>
     </item>
     
   </channel>
