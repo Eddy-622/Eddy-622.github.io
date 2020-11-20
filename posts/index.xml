@@ -6,8 +6,143 @@
 		<generator>Hugo -- gohugo.io</generator>
 		<language>zh-CN</language>
 		<copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-		<lastBuildDate>Thu, 19 Nov 2020 00:00:00 +0000</lastBuildDate>
+		<lastBuildDate>Fri, 20 Nov 2020 00:00:00 +0000</lastBuildDate>
 		<atom:link href="https://Eddy-622.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>爬虫之selenium模块、实例演示</title>
+			<link>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Bselenium%E6%A8%A1%E5%9D%97%E5%AE%9E%E4%BE%8B%E6%BC%94%E7%A4%BA/</link>
+			<pubDate>Fri, 20 Nov 2020 00:00:00 +0000</pubDate>
+			
+			<guid>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Bselenium%E6%A8%A1%E5%9D%97%E5%AE%9E%E4%BE%8B%E6%BC%94%E7%A4%BA/</guid>
+			<description>今日内容概要  爬取天气信息 爬取汽车之家信息 selenium模块  今日内容详细   爬取天气信息 URL:http://tianqi.2345.com有一些网站的数据是后续js动态加载的 (网站的地址不变数据在变) 打开浏览器network点击获取数据的按钮查看内部js请求 多请求几次总结url变化规律
+http://tianqi.2345.com/Pc/GetHistory?areaInfhttp://tianqi.2345.com/Pc/GetHistory?areaInfo%5BareaId%5D=60010&amp;amp;areaInfo%5BareaType%5D=2&amp;amp;date%5Byear%5D=2020&amp;amp;date%5Bmonth%5D=10 http://tianqi.2345.com/Pc/GetHistory?areaInfo%5BareaId%5D=60010&amp;amp;areaInfo%5BareaType%5D=2&amp;amp;date%5Byear%5D=2020&amp;amp;date%5Bmonth%5D=9http://tianqi.2345.com/Pc/GetHistory?areaInfo%5BareaId%5D=71447&amp;amp;areaInfo%5BareaType%5D=2&amp;amp;date%5Byear%5D=2020&amp;amp;date%5Bmonth%5D=10o%5BareaId%5D=60010&amp;amp;areaInfo%5BareaType%5D=2&amp;amp;date%5Byear%5D=2020&amp;amp;date%5Bmonth%5D=10 朝上述url发送get请求
+import requestsimport jsonimport pandasres = requests.get(&amp;#39;http://tianqi.2345.com/Pc/GetHistory?areaInfo%5BareaId%5D=71447&amp;amp;areaInfo%5BareaType%5D=2&amp;amp;date%5Byear%5D=2020&amp;amp;date%5Bmonth%5D=10&amp;#39;)content = res.content先反序列化成python里面的字典
+json_dict = json.loads(content)​	loads方法既可以反序列化json格式字符串 ​	也可以发序列化json格式的二进制数据
+在利用字典取值获取天气相关的数据
+real_data = json_dict.get(&amp;#39;data&amp;#39;)直接将页面上的表格数据筛选出来
+res = pandas.read_html(real_data)print(res)爬取汽车之家数据 新闻标签页
+https://www.autohome.com.cn/news/总结每个页的url规律 推导出固定url格式
+https://www.autohome.com.cn/news/1/#liststart https://www.autohome.com.cn/news/2/#liststart https://www.autohome.com.cn/news/3/#liststart 利用代码事先翻页的功能
+url_reg = &amp;#39;https://www.autohome.com.cn/news/%s/#liststart&amp;#39;for i in range(1,6010):print(url_reg%i)尝试着直接朝url发送get请求获取数据
+研究目标数据所在的HTML规律</description>
+			<content type="html"><![CDATA[<h1 id="今日内容概要">今日内容概要</h1>
+<ul>
+<li>爬取天气信息</li>
+<li>爬取汽车之家信息</li>
+<li>selenium模块</li>
+</ul>
+<h1 id="今日内容详细">今日内容详细</h1>
+<ol>
+<li>
+<h3 id="爬取天气信息">爬取天气信息</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">URL</span><span class="p">:</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">tianqi</span><span class="o">.</span><span class="mf">2345.</span><span class="n">com</span>
+</code></pre></div><p>有一些网站的数据是后续js动态加载的
+(网站的地址不变数据在变)
+打开浏览器network点击获取数据的按钮查看内部js请求
+多请求几次总结url变化规律</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">tianqi</span><span class="o">.</span><span class="mf">2345.</span><span class="n">com</span><span class="o">/</span><span class="n">Pc</span><span class="o">/</span><span class="n">GetHistory</span><span class="err">?</span><span class="n">areaInfhttp</span><span class="p">:</span><span class="o">//</span><span class="n">tianqi</span><span class="o">.</span><span class="mf">2345.</span><span class="n">com</span><span class="o">/</span><span class="n">Pc</span><span class="o">/</span><span class="n">GetHistory</span><span class="err">?</span><span class="n">areaInfo</span><span class="o">%</span><span class="mi">5</span><span class="n">BareaId</span><span class="o">%</span><span class="mi">5</span><span class="n">D</span><span class="o">=</span><span class="mi">60010</span><span class="o">&amp;</span><span class="n">areaInfo</span><span class="o">%</span><span class="mi">5</span><span class="n">BareaType</span><span class="o">%</span><span class="mi">5</span><span class="n">D</span><span class="o">=</span><span class="mi">2</span><span class="o">&amp;</span><span class="n">date</span><span class="o">%</span><span class="mi">5</span><span class="n">Byear</span><span class="o">%</span><span class="mi">5</span><span class="n">D</span><span class="o">=</span><span class="mi">2020</span><span class="o">&amp;</span><span class="n">date</span><span class="o">%</span><span class="mi">5</span><span class="n">Bmonth</span><span class="o">%</span><span class="mi">5</span><span class="n">D</span><span class="o">=</span><span class="mi">10</span>  
+           
+    <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">tianqi</span><span class="o">.</span><span class="mf">2345.</span><span class="n">com</span><span class="o">/</span><span class="n">Pc</span><span class="o">/</span><span class="n">GetHistory</span><span class="err">?</span><span class="n">areaInfo</span><span class="o">%</span><span class="mi">5</span><span class="n">BareaId</span><span class="o">%</span><span class="mi">5</span><span class="n">D</span><span class="o">=</span><span class="mi">60010</span><span class="o">&amp;</span><span class="n">areaInfo</span><span class="o">%</span><span class="mi">5</span><span class="n">BareaType</span><span class="o">%</span><span class="mi">5</span><span class="n">D</span><span class="o">=</span><span class="mi">2</span><span class="o">&amp;</span><span class="n">date</span><span class="o">%</span><span class="mi">5</span><span class="n">Byear</span><span class="o">%</span><span class="mi">5</span><span class="n">D</span><span class="o">=</span><span class="mi">2020</span><span class="o">&amp;</span><span class="n">date</span><span class="o">%</span><span class="mi">5</span><span class="n">Bmonth</span><span class="o">%</span><span class="mi">5</span><span class="n">D</span><span class="o">=</span><span class="mi">9</span>
+           
+    <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">tianqi</span><span class="o">.</span><span class="mf">2345.</span><span class="n">com</span><span class="o">/</span><span class="n">Pc</span><span class="o">/</span><span class="n">GetHistory</span><span class="err">?</span><span class="n">areaInfo</span><span class="o">%</span><span class="mi">5</span><span class="n">BareaId</span><span class="o">%</span><span class="mi">5</span><span class="n">D</span><span class="o">=</span><span class="mi">71447</span><span class="o">&amp;</span><span class="n">areaInfo</span><span class="o">%</span><span class="mi">5</span><span class="n">BareaType</span><span class="o">%</span><span class="mi">5</span><span class="n">D</span><span class="o">=</span><span class="mi">2</span><span class="o">&amp;</span><span class="n">date</span><span class="o">%</span><span class="mi">5</span><span class="n">Byear</span><span class="o">%</span><span class="mi">5</span><span class="n">D</span><span class="o">=</span><span class="mi">2020</span><span class="o">&amp;</span><span class="n">date</span><span class="o">%</span><span class="mi">5</span><span class="n">Bmonth</span><span class="o">%</span><span class="mi">5</span><span class="n">D</span><span class="o">=</span><span class="mi">10</span><span class="n">o</span><span class="o">%</span><span class="mi">5</span><span class="n">BareaId</span><span class="o">%</span><span class="mi">5</span><span class="n">D</span><span class="o">=</span><span class="mi">60010</span><span class="o">&amp;</span><span class="n">areaInfo</span><span class="o">%</span><span class="mi">5</span><span class="n">BareaType</span><span class="o">%</span><span class="mi">5</span><span class="n">D</span><span class="o">=</span><span class="mi">2</span><span class="o">&amp;</span><span class="n">date</span><span class="o">%</span><span class="mi">5</span><span class="n">Byear</span><span class="o">%</span><span class="mi">5</span><span class="n">D</span><span class="o">=</span><span class="mi">2020</span><span class="o">&amp;</span><span class="n">date</span><span class="o">%</span><span class="mi">5</span><span class="n">Bmonth</span><span class="o">%</span><span class="mi">5</span><span class="n">D</span><span class="o">=</span><span class="mi">10</span>  
+</code></pre></div><p>朝上述url发送get请求</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">pandas</span>
+   
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://tianqi.2345.com/Pc/GetHistory?areaInfo%5BareaId%5D=71447&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10&#39;</span><span class="p">)</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">content</span>
+</code></pre></div><p>先反序列化成python里面的字典</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">json_dict</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+</code></pre></div><p>​				loads方法既可以反序列化json格式字符串
+​				也可以发序列化json格式的二进制数据</p>
+<p>在利用字典取值获取天气相关的数据</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">real_data</span> <span class="o">=</span> <span class="n">json_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">)</span>
+</code></pre></div><p>直接将页面上的表格数据筛选出来</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">res</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_html</span><span class="p">(</span><span class="n">real_data</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+</code></pre></div><h4 id="爬取汽车之家数据">爬取汽车之家数据</h4>
+<p>新闻标签页</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">autohome</span><span class="o">.</span><span class="n">com</span><span class="o">.</span><span class="n">cn</span><span class="o">/</span><span class="n">news</span><span class="o">/</span>
+</code></pre></div><p>总结每个页的url规律 推导出固定url格式</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">autohome</span><span class="o">.</span><span class="n">com</span><span class="o">.</span><span class="n">cn</span><span class="o">/</span><span class="n">news</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span><span class="c1">#liststart</span>
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">autohome</span><span class="o">.</span><span class="n">com</span><span class="o">.</span><span class="n">cn</span><span class="o">/</span><span class="n">news</span><span class="o">/</span><span class="mi">2</span><span class="o">/</span><span class="c1">#liststart</span>
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">autohome</span><span class="o">.</span><span class="n">com</span><span class="o">.</span><span class="n">cn</span><span class="o">/</span><span class="n">news</span><span class="o">/</span><span class="mi">3</span><span class="o">/</span><span class="c1">#liststart</span>
+</code></pre></div><p>利用代码事先翻页的功能</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">url_reg</span> <span class="o">=</span> <span class="s1">&#39;https://www.autohome.com.cn/news/</span><span class="si">%s</span><span class="s1">/#liststart&#39;</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6010</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">url_reg</span><span class="o">%</span><span class="n">i</span><span class="p">)</span>
+</code></pre></div><p>尝试着直接朝url发送get请求获取数据</p>
+<p>研究目标数据所在的HTML规律</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+   
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://www.autohome.com.cn/news/1/#liststart&#39;</span><span class="p">)</span>
+<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s1">&#39;lxml&#39;</span><span class="p">)</span>
+</code></pre></div><p>每一个新闻其实就是一个li标签  所有的新闻li都是ul标签内</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">ul_obj_list</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;ul&#39;</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;article&#39;</span><span class="p">})[</span><span class="mi">0</span><span class="p">]</span>
+</code></pre></div><p>从ul中筛选出一个个li标签</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">li_obj_list</span> <span class="o">=</span> <span class="n">ul_obj_list</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;li&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">li_obj</span> <span class="ow">in</span> <span class="n">li_obj_list</span><span class="p">:</span>
+    <span class="c1"># 筛选文字链接</span>
+    <span class="n">a_obj</span> <span class="o">=</span> <span class="n">li_obj</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+    <span class="c1"># 排除干扰项</span>
+    <span class="k">if</span> <span class="n">a_obj</span><span class="p">:</span>
+        <span class="c1"># 获取文字链接</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;https:&#39;</span> <span class="o">+</span> <span class="n">a_obj</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">))</span>
+   
+    <span class="c1"># 筛选出文字标题</span>
+    <span class="n">h3_obj</span> <span class="o">=</span> <span class="n">li_obj</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;h3&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">h3_obj</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">h3_obj</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+   
+    <span class="c1"># 筛选出发布时间</span>
+    <span class="n">div_obj</span> <span class="o">=</span> <span class="n">li_obj</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;article-bar&#39;</span><span class="p">})</span>
+    <span class="k">if</span> <span class="n">div_obj</span><span class="p">:</span>
+        <span class="n">time_span</span> <span class="o">=</span> <span class="n">div_obj</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;span&#39;</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">time_span</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+        <span class="n">read_span_obj</span> <span class="o">=</span> <span class="n">div_obj</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;span&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">read_span</span> <span class="o">=</span> <span class="n">read_span_obj</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;em&#39;</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">read_span</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+        <span class="n">comment_span</span> <span class="o">=</span> <span class="n">read_span_obj</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;em&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">comment_span</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+    <span class="n">p_obj</span> <span class="o">=</span> <span class="n">li_obj</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">p_obj</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">p_obj</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</code></pre></div><p>思考：</p>
+<p>1.如何实现爬取多页
+2.如何封装成函数 用户指定几页就爬几页</p>
+</li>
+</ol>
+<hr>
+<h4 id="爬取b站视频">爬取b站视频</h4>
+<ul>
+<li>b站的视频数据特点
+视频和音频是分开的</li>
+</ul>
+<p>​	研究ulr的规律</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">bilibili</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">video</span><span class="o">/</span><span class="n">BV1QE41147hU</span><span class="err">?</span><span class="n">p</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">bilibili</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">video</span><span class="o">/</span><span class="n">BV1QE41147hU</span><span class="err">?</span><span class="n">p</span><span class="o">=</span><span class="mi">2</span>
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">bilibili</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">video</span><span class="o">/</span><span class="n">BV1QE41147hU</span><span class="err">?</span><span class="n">p</span><span class="o">=</span><span class="mi">3</span>
+</code></pre></div><p>总体数据的地址大部分都是隐藏在js动态加载的文件里面</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">cnblogs</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">xiaoyuanqujing</span><span class="o">/</span><span class="n">articles</span><span class="o">/</span><span class="mf">12014416.</span><span class="n">html</span>
+</code></pre></div><hr>
+<h4 id="selenium模块">selenium模块</h4>
+<p>selenium最初是一个自动化测试工具,而爬虫中使用它主要是为了解决requests无法直接执行JavaScript代码的问题</p>
+<p>selenium本质是通过驱动浏览器，完全模拟浏览器的操作，比如跳转、输入、点击、下拉等，来拿到网页渲染之后的结果，可支持多种浏览器</p>
+<p>下载模块</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">pip3</span> <span class="n">install</span> <span class="n">selenium</span>
+</code></pre></div><p>如果想要操作浏览器需要下载对应浏览器的驱动
+下载驱动</p>
+<div class="highlight"><pre class="chroma"><code class="language-http" data-lang="http"><span class="err">http://npm.taobao.org/mirrors/chromedriver/2.38/
+</span></code></pre></div><p>基本使用</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">selenium</span> <span class="kn">import</span> <span class="n">webdriver</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="n">bro</span><span class="o">=</span><span class="n">webdriver</span><span class="o">.</span><span class="n">Chrome</span><span class="p">()</span>
+<span class="n">bro</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;http://www.baidu.com&#34;</span><span class="p">)</span>
+</code></pre></div>]]></content>
+		</item>
 		
 		<item>
 			<title>爬虫之requests-html模块、BS4模块</title>
@@ -270,7 +405,7 @@ http://requests-html.kennethreitz.org/ # 习惯看英文文档   BS4模块</des
 			<pubDate>Wed, 18 Nov 2020 00:00:00 +0000</pubDate>
 			
 			<guid>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Brequests%E6%A8%A1%E5%9D%97cookie%E4%B8%8Esessionjson%E6%A0%BC%E5%BC%8F%E6%95%B0%E6%8D%AE/</guid>
-			<description>今日内容概要  requests模块 cookie与session requests爬取网址数据实战演练 json格式数据  今日内容详细 requests模块 &amp;#34;&amp;#34;&amp;#34;get请求携带参数在url中携带 url？username=jason&amp;amp;hobby=readrequestes模块携带参数import requestsres = requests.get(&amp;#39;https://www.baidu.com/s&amp;#39;,params={&amp;#39;wd&amp;#39;: &amp;#39;美女&amp;#39;},headers={&amp;#39;User-Agent&amp;#39;: &amp;#39;Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.76 Mobile Safari/537.36&amp;#39;,})with open(r&amp;#39;mn1.html&amp;#39;, &amp;#39;wb&amp;#39;) as f:f.write(res.content)总结:大部分网址基本上都会校验你是否是个浏览器，所以我们以后在发送请求的时候最后将User-agent携带着res = requests.get(&amp;#39;url&amp;#39;),params={字典形式携带的参数}headers={浏览器校验头，防止一般的简单网站防爬}&amp;#34;&amp;#34;&amp;#34;cookie与session &amp;#34;&amp;#34;&amp;#34;cookie与session都是用来记录当前用户状态的二者产生的原因在于HTTP协议是无状态的 &amp;gt;&amp;gt;&amp;gt; HTTP协议不记录用户信息但是网站需要记录用户的状态，登录信息等，cookie 和 session 便是分别负责在服务端与客户端进行身份识别cookie的由来就是保存在浏览器上面的k:v键值对session的由来就是保存在服务端上面的数据&amp;#39;&amp;#39;&amp;#39;在互联网中没有绝对意义上的安全&amp;#39;&amp;#39;&amp;#39;两者工作机制session的工作需要依赖于cookie总结:只要是需要保存用户状态的网址，都需要借助于cookie浏览器可以选择保存cookie也可以选择拒绝一旦浏览器拒绝保存cookie，那么所有网址的登录都无法进行知识扩展:https://www.</description>
+			<description>今日内容概要  requests模块 cookie与session requests爬取网址数据实战演练 json格式数据  今日内容详细 requests模块 &amp;#34;&amp;#34;&amp;#34;get请求携带参数在url中携带 url？username=jason&amp;amp;hobby=readrequestes模块携带参数import requestsres = requests.get(&amp;#39;https://www.baidu.com/s&amp;#39;,params={&amp;#39;wd&amp;#39;: &amp;#39;美女&amp;#39;},headers={&amp;#39;User-Agent&amp;#39;: &amp;#39;Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.76 Mobile Safari/537.36&amp;#39;,})with open(r&amp;#39;mn1.html&amp;#39;, &amp;#39;wb&amp;#39;) as f:f.write(res.content)总结:大部分网址基本上都会校验你是否是个浏览器，所以我们以后在发送请求的时候最后将User-agent携带着res = requests.get(&amp;#39;url&amp;#39;),params={字典形式携带的参数}headers={浏览器校验头，防止一般的简单网站防爬}&amp;#34;&amp;#34;&amp;#34;cookie与session &amp;#34;&amp;#34;&amp;#34;cookie与session都是用来记录当前用户状态的二者产生的原因在于HTTP协议是无状态的 &amp;gt;&amp;gt;&amp;gt; HTTP协议不记录用户信息但是网站需要记录用户的状态，登录信息等，cookie 和 session 便是分别负责在服务端与客户端进行身份识别cookie的由来就是保存在浏览器上面的k:v键值对session的由来就是保存在服务端上面的数据&amp;#39;&amp;#39;&amp;#39;在互联网中没有绝对意义上的安全&amp;#39;&amp;#39;&amp;#39;两者工作机制session的工作需要依赖于cookie总结:只要是需要保存用户状态的网址，都需要借助于cookie浏览器可以选择保存cookie也可以选择拒绝一旦浏览器拒绝保存cookie，那么所有网址的登录都无法进行知识扩展:https://www.</description>
 			<content type="html"><![CDATA[<h1 id="今日内容概要">今日内容概要</h1>
 <ul>
 <li>requests模块</li>
@@ -280,7 +415,8 @@ http://requests-html.kennethreitz.org/ # 习惯看英文文档   BS4模块</des
 </ul>
 <h1 id="今日内容详细">今日内容详细</h1>
 <h4 id="requests模块">requests模块</h4>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;get请求携带参数
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">get请求携带参数
 </span><span class="s2">	在url中携带 url？username=jason&amp;hobby=read
 </span><span class="s2">requestes模块携带参数
 </span><span class="s2">	import requests
@@ -340,9 +476,9 @@ http://requests-html.kennethreitz.org/ # 习惯看英文文档   BS4模块</des
 </span><span class="s2">)
 </span><span class="s2">
 </span><span class="s2">    案例:华华手机登录  http://www.aa7a.cn/user.php
-</span><span class="s2">&#39;&#39;&#39;
+</span><span class="s2">
 </span><span class="s2">验证是否登录 我们可以采用返回界面数据右上角是否含有用户名
-</span><span class="s2">&#39;&#39;&#39;
+</span><span class="s2">
 </span><span class="s2">1.先研究登录请求发送的地址和数据格式
 </span><span class="s2">2.找到请求体数据格式 直接拿走
 </span><span class="s2">	username: weqeqw
@@ -384,7 +520,8 @@ http://requests-html.kennethreitz.org/ # 习惯看英文文档   BS4模块</des
 </span><span class="s2">if &#39;616564099@qq.com&#39; in res.text:
 </span><span class="s2">    print(&#39;登录成功&#39;)
 </span><span class="s2">else:
-</span><span class="s2">    print(&#39;用户名或密码错误&#39;)&#34;&#34;&#34;</span>
+</span><span class="s2">    print(&#39;用户名或密码错误&#39;)
+</span><span class="s2">&#34;&#34;&#34;</span>
 </code></pre></div><h4 id="当爬取下来的数据过大">当爬取下来的数据过大</h4>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;#stream参数:一点一点的取,比如下载视频时,如果视频100G,用response.content然后一下子写到文件中是不合理的
 </span><span class="s2">

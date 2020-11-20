@@ -13,6 +13,25 @@
     
     
     <item>
+      <title>爬虫之selenium模块、实例演示</title>
+      <link>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Bselenium%E6%A8%A1%E5%9D%97%E5%AE%9E%E4%BE%8B%E6%BC%94%E7%A4%BA/</link>
+      <pubDate>Fri, 20 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Bselenium%E6%A8%A1%E5%9D%97%E5%AE%9E%E4%BE%8B%E6%BC%94%E7%A4%BA/</guid>
+      <description>今日内容概要  爬取天气信息 爬取汽车之家信息 selenium模块  今日内容详细   爬取天气信息 URL:http://tianqi.2345.com有一些网站的数据是后续js动态加载的 (网站的地址不变数据在变) 打开浏览器network点击获取数据的按钮查看内部js请求 多请求几次总结url变化规律
+http://tianqi.2345.com/Pc/GetHistory?areaInfhttp://tianqi.2345.com/Pc/GetHistory?areaInfo%5BareaId%5D=60010&amp;amp;areaInfo%5BareaType%5D=2&amp;amp;date%5Byear%5D=2020&amp;amp;date%5Bmonth%5D=10 http://tianqi.2345.com/Pc/GetHistory?areaInfo%5BareaId%5D=60010&amp;amp;areaInfo%5BareaType%5D=2&amp;amp;date%5Byear%5D=2020&amp;amp;date%5Bmonth%5D=9http://tianqi.2345.com/Pc/GetHistory?areaInfo%5BareaId%5D=71447&amp;amp;areaInfo%5BareaType%5D=2&amp;amp;date%5Byear%5D=2020&amp;amp;date%5Bmonth%5D=10o%5BareaId%5D=60010&amp;amp;areaInfo%5BareaType%5D=2&amp;amp;date%5Byear%5D=2020&amp;amp;date%5Bmonth%5D=10 朝上述url发送get请求
+import requestsimport jsonimport pandasres = requests.get(&amp;#39;http://tianqi.2345.com/Pc/GetHistory?areaInfo%5BareaId%5D=71447&amp;amp;areaInfo%5BareaType%5D=2&amp;amp;date%5Byear%5D=2020&amp;amp;date%5Bmonth%5D=10&amp;#39;)content = res.content先反序列化成python里面的字典
+json_dict = json.loads(content)​	loads方法既可以反序列化json格式字符串 ​	也可以发序列化json格式的二进制数据
+在利用字典取值获取天气相关的数据
+real_data = json_dict.get(&amp;#39;data&amp;#39;)直接将页面上的表格数据筛选出来
+res = pandas.read_html(real_data)print(res)爬取汽车之家数据 新闻标签页
+https://www.autohome.com.cn/news/总结每个页的url规律 推导出固定url格式
+https://www.autohome.com.cn/news/1/#liststart https://www.autohome.com.cn/news/2/#liststart https://www.autohome.com.cn/news/3/#liststart 利用代码事先翻页的功能
+url_reg = &amp;#39;https://www.autohome.com.cn/news/%s/#liststart&amp;#39;for i in range(1,6010):print(url_reg%i)尝试着直接朝url发送get请求获取数据
+研究目标数据所在的HTML规律</description>
+    </item>
+    
+    <item>
       <title>爬虫之requests-html模块、BS4模块</title>
       <link>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Brequests-html%E6%A8%A1%E5%9D%97bs4%E6%A8%A1%E5%9D%97/</link>
       <pubDate>Thu, 19 Nov 2020 00:00:00 +0000</pubDate>
@@ -36,7 +55,7 @@ http://requests-html.kennethreitz.org/ # 习惯看英文文档   BS4模块</des
       <pubDate>Wed, 18 Nov 2020 00:00:00 +0000</pubDate>
       
       <guid>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Brequests%E6%A8%A1%E5%9D%97cookie%E4%B8%8Esessionjson%E6%A0%BC%E5%BC%8F%E6%95%B0%E6%8D%AE/</guid>
-      <description>今日内容概要  requests模块 cookie与session requests爬取网址数据实战演练 json格式数据  今日内容详细 requests模块 &amp;#34;&amp;#34;&amp;#34;get请求携带参数在url中携带 url？username=jason&amp;amp;hobby=readrequestes模块携带参数import requestsres = requests.get(&amp;#39;https://www.baidu.com/s&amp;#39;,params={&amp;#39;wd&amp;#39;: &amp;#39;美女&amp;#39;},headers={&amp;#39;User-Agent&amp;#39;: &amp;#39;Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.76 Mobile Safari/537.36&amp;#39;,})with open(r&amp;#39;mn1.html&amp;#39;, &amp;#39;wb&amp;#39;) as f:f.write(res.content)总结:大部分网址基本上都会校验你是否是个浏览器，所以我们以后在发送请求的时候最后将User-agent携带着res = requests.get(&amp;#39;url&amp;#39;),params={字典形式携带的参数}headers={浏览器校验头，防止一般的简单网站防爬}&amp;#34;&amp;#34;&amp;#34;cookie与session &amp;#34;&amp;#34;&amp;#34;cookie与session都是用来记录当前用户状态的二者产生的原因在于HTTP协议是无状态的 &amp;gt;&amp;gt;&amp;gt; HTTP协议不记录用户信息但是网站需要记录用户的状态，登录信息等，cookie 和 session 便是分别负责在服务端与客户端进行身份识别cookie的由来就是保存在浏览器上面的k:v键值对session的由来就是保存在服务端上面的数据&amp;#39;&amp;#39;&amp;#39;在互联网中没有绝对意义上的安全&amp;#39;&amp;#39;&amp;#39;两者工作机制session的工作需要依赖于cookie总结:只要是需要保存用户状态的网址，都需要借助于cookie浏览器可以选择保存cookie也可以选择拒绝一旦浏览器拒绝保存cookie，那么所有网址的登录都无法进行知识扩展:https://www.</description>
+      <description>今日内容概要  requests模块 cookie与session requests爬取网址数据实战演练 json格式数据  今日内容详细 requests模块 &amp;#34;&amp;#34;&amp;#34;get请求携带参数在url中携带 url？username=jason&amp;amp;hobby=readrequestes模块携带参数import requestsres = requests.get(&amp;#39;https://www.baidu.com/s&amp;#39;,params={&amp;#39;wd&amp;#39;: &amp;#39;美女&amp;#39;},headers={&amp;#39;User-Agent&amp;#39;: &amp;#39;Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.76 Mobile Safari/537.36&amp;#39;,})with open(r&amp;#39;mn1.html&amp;#39;, &amp;#39;wb&amp;#39;) as f:f.write(res.content)总结:大部分网址基本上都会校验你是否是个浏览器，所以我们以后在发送请求的时候最后将User-agent携带着res = requests.get(&amp;#39;url&amp;#39;),params={字典形式携带的参数}headers={浏览器校验头，防止一般的简单网站防爬}&amp;#34;&amp;#34;&amp;#34;cookie与session &amp;#34;&amp;#34;&amp;#34;cookie与session都是用来记录当前用户状态的二者产生的原因在于HTTP协议是无状态的 &amp;gt;&amp;gt;&amp;gt; HTTP协议不记录用户信息但是网站需要记录用户的状态，登录信息等，cookie 和 session 便是分别负责在服务端与客户端进行身份识别cookie的由来就是保存在浏览器上面的k:v键值对session的由来就是保存在服务端上面的数据&amp;#39;&amp;#39;&amp;#39;在互联网中没有绝对意义上的安全&amp;#39;&amp;#39;&amp;#39;两者工作机制session的工作需要依赖于cookie总结:只要是需要保存用户状态的网址，都需要借助于cookie浏览器可以选择保存cookie也可以选择拒绝一旦浏览器拒绝保存cookie，那么所有网址的登录都无法进行知识扩展:https://www.</description>
     </item>
     
     <item>
@@ -123,22 +142,6 @@ SELECTstudent.sname AS &amp;#39;姓名&amp;#39;,avg( score.num ) AS &amp;#39;�
       <description>昨日内容回顾   存储引擎
 &amp;#39;&amp;#39;&amp;#39;查看存储引擎show engines;InnoDBMyISAMMemoryBlackHolecreate table t1(id int) engine=memory;&amp;#39;&amp;#39;&amp;#39;  基本SQL语句
 &amp;#39;&amp;#39;&amp;#39;针对库show databases;show create database db1;create database db1;alter database db1 charset=&amp;#39;gbk&amp;#39;;drop database db1;针对表select database();use db1;show tables;show create table t1;describe t1;desc t1;create table t1(id int);alter table t1 modify id tinyiny;alter table t1 change id nid int;alter table t1 rename t2;drop table t1;针对记录select * from t1;select id,username from t1;select User,Hostname from mysql.</description>
-    </item>
-    
-    <item>
-      <title>MySQL之基本语句，数据类型</title>
-      <link>https://Eddy-622.github.io/posts/mysql%E5%9F%BA%E6%9C%AC%E8%AF%AD%E5%8F%A5%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</link>
-      <pubDate>Mon, 09 Nov 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://Eddy-622.github.io/posts/mysql%E5%9F%BA%E6%9C%AC%E8%AF%AD%E5%8F%A5%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</guid>
-      <description>今日内容概要   基本的SQL的语句
-对数据库的增删改查
-对表的增删改查
-对记录的增删改查
-  数据库存储引擎
-  MySQL中的数据类型
-  今日内容详细 基本的SQL语句
-&amp;#34;&amp;#34;&amp;#34;针对数据库的增删改查查看show databases; &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;查看所有的数据库show create database 数据库名字； &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;单独查指定的数据库create database 数据库名字； &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;创建数据库alter database 数据库名字 charset=&amp;#39;gbk&amp;#39;; &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;更改数据库的字符编码drop database 数据库名字; &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;删除数据库针对表的增删改查如何查看当前在哪个库下select database();切换数据库use 数据库名；查看show tables; .&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;查看当前库下的所有表show create table 表名； &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;查看指定的表信息describe 表明; &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;查看指定表结构desc 表名；增create table 表名(字段名 字段类型); &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;新建表格改alter table 表名 modify 字段名 字段的数据类型; &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;更改字段的数据类型alter table 表名 change 字段名 新字段名 字段类型;	&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;改字段名alter table 表名 rename 新表名; &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;改表名删drop table 表名;针对记录的增删改查select * from 表名;	&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;查看指定表的所有数据select * from 库名.</description>
     </item>
     
   </channel>
