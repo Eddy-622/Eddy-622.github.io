@@ -115,15 +115,15 @@ url_reg = &#39;https://www.autohome.com.cn/news/%s/#liststart&#39;for i in rang
 <ol>
 <li>
 <h3 id="爬取天气信息">爬取天气信息<a href="#爬取天气信息" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<div class="highlight"><pre class="chroma"><code class="language-http" data-lang="http"><span class="err">http://tianqi.2345.com
-</span></code></pre></div><p>有一些网站的数据是后续js动态加载的
+<pre><code>http://tianqi.2345.com
+</code></pre><p>有一些网站的数据是后续js动态加载的
 (网站的地址不变数据在变)
 打开浏览器network点击获取数据的按钮查看内部js请求
 多请求几次总结url变化规律</p>
-<div class="highlight"><pre class="chroma"><code class="language-http" data-lang="http"><span class="err">http://tianqi.2345.com/Pc/GetHistoryareaInfo%5BareaId%5D=60010&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=9
-</span><span class="err">           
-</span><span class="err">http://tianqi.2345.com/Pc/GetHistoryareaInfo%5BareaId%5D=71447&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10o%5BareaId%5D=60010&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10  
-</span></code></pre></div><p>朝上述url发送get请求</p>
+<pre><code>http://tianqi.2345.com/Pc/GetHistoryareaInfo%5BareaId%5D=60010&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=9
+           
+http://tianqi.2345.com/Pc/GetHistoryareaInfo%5BareaId%5D=71447&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10o%5BareaId%5D=60010&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10  
+</code></pre><p>朝上述url发送get请求</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"></code></pre></div></li>
 </ol>
 <p>import requests
@@ -147,10 +147,10 @@ json_dict = json.loads(content)
 <p>新闻标签页</p>
 <div class="highlight"><pre class="chroma"><code class="language-http" data-lang="http"><span class="err">https://www.autohome.com.cn/news/
 </span></code></pre></div><p>总结每个页的url规律 推导出固定url格式</p>
-<div class="highlight"><pre class="chroma"><code class="language-http" data-lang="http"><span class="err">https://www.autohome.com.cn/news/1/#liststart
-</span><span class="err">https://www.autohome.com.cn/news/2/#liststart
-</span><span class="err">https://www.autohome.com.cn/news/3/#liststart
-</span></code></pre></div><p>利用代码事先翻页的功能</p>
+<pre><code>https://www.autohome.com.cn/news/1/#liststart
+https://www.autohome.com.cn/news/2/#liststart
+https://www.autohome.com.cn/news/3/#liststart
+</code></pre><p>利用代码事先翻页的功能</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">url_reg</span> <span class="o">=</span> <span class="s1">&#39;https://www.autohome.com.cn/news/</span><span class="si">%s</span><span class="s1">/#liststart&#39;</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6010</span><span class="p">):</span>
     <span class="k">print</span><span class="p">(</span><span class="n">url_reg</span><span class="o">%</span><span class="n">i</span><span class="p">)</span>
@@ -201,21 +201,27 @@ json_dict = json.loads(content)
 视频和音频是分开的</li>
 </ul>
 <p>​	研究ulr的规律</p>
-<div class="highlight"><pre class="chroma"><code class="language-http" data-lang="http"><span class="err">https://www.bilibili.com/video/BV1QE41147hU?p=1
-</span><span class="err">https://www.bilibili.com/video/BV1QE41147hU?p=2
-</span><span class="err">https://www.bilibili.com/video/BV1QE41147hU?p=3
-</span></code></pre></div><p>总体数据的地址大部分都是隐藏在js动态加载的文件里面</p>
-<div class="highlight"><pre class="chroma"><code class="language-http" data-lang="http"><span class="err">https://www.cnblogs.com/xiaoyuanqujing/articles/12014416.html
-</span></code></pre></div><hr>
+<pre><code>https://www.bilibili.com/video/BV1QE41147hU?p=1
+https://www.bilibili.com/video/BV1QE41147hU?p=2
+https://www.bilibili.com/video/BV1QE41147hU?p=3
+</code></pre><p>总体数据的地址大部分都是隐藏在js动态加载的文件里面</p>
+<pre><code>https://www.cnblogs.com/xiaoyuanqujing/articles/12014416.html
+</code></pre><hr>
 <h4 id="selenium模块">selenium模块<a href="#selenium模块" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<ul>
+<li>
 <p>selenium最初是一个自动化测试工具,而爬虫中使用它主要是为了解决requests无法直接执行JavaScript代码的问题</p>
+</li>
+<li>
 <p>selenium本质是通过驱动浏览器，完全模拟浏览器的操作，比如跳转、输入、点击、下拉等，来拿到网页渲染之后的结果，可支持多种浏览器</p>
+</li>
+</ul>
 <p>下载模块</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">pip3</span> <span class="n">install</span> <span class="n">selenium</span>
 </code></pre></div><p>如果想要操作浏览器需要下载对应浏览器的驱动
 下载驱动</p>
-<div class="highlight"><pre class="chroma"><code class="language-http" data-lang="http"><span class="err">http://npm.taobao.org/mirrors/chromedriver/2.38/
-</span></code></pre></div><p>基本使用</p>
+<pre><code>http://npm.taobao.org/mirrors/chromedriver/2.38/
+</code></pre><p>基本使用</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">selenium</span> <span class="kn">import</span> <span class="n">webdriver</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="n">bro</span><span class="o">=</span><span class="n">webdriver</span><span class="o">.</span><span class="n">Chrome</span><span class="p">()</span>

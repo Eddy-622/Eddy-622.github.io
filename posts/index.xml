@@ -37,15 +37,15 @@ url_reg = &amp;#39;https://www.autohome.com.cn/news/%s/#liststart&amp;#39;for i
 <ol>
 <li>
 <h3 id="爬取天气信息">爬取天气信息</h3>
-<div class="highlight"><pre class="chroma"><code class="language-http" data-lang="http"><span class="err">http://tianqi.2345.com
-</span></code></pre></div><p>有一些网站的数据是后续js动态加载的
+<pre><code>http://tianqi.2345.com
+</code></pre><p>有一些网站的数据是后续js动态加载的
 (网站的地址不变数据在变)
 打开浏览器network点击获取数据的按钮查看内部js请求
 多请求几次总结url变化规律</p>
-<div class="highlight"><pre class="chroma"><code class="language-http" data-lang="http"><span class="err">http://tianqi.2345.com/Pc/GetHistoryareaInfo%5BareaId%5D=60010&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=9
-</span><span class="err">           
-</span><span class="err">http://tianqi.2345.com/Pc/GetHistoryareaInfo%5BareaId%5D=71447&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10o%5BareaId%5D=60010&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10  
-</span></code></pre></div><p>朝上述url发送get请求</p>
+<pre><code>http://tianqi.2345.com/Pc/GetHistoryareaInfo%5BareaId%5D=60010&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=9
+           
+http://tianqi.2345.com/Pc/GetHistoryareaInfo%5BareaId%5D=71447&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10o%5BareaId%5D=60010&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10  
+</code></pre><p>朝上述url发送get请求</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"></code></pre></div></li>
 </ol>
 <p>import requests
@@ -69,10 +69,10 @@ json_dict = json.loads(content)
 <p>新闻标签页</p>
 <div class="highlight"><pre class="chroma"><code class="language-http" data-lang="http"><span class="err">https://www.autohome.com.cn/news/
 </span></code></pre></div><p>总结每个页的url规律 推导出固定url格式</p>
-<div class="highlight"><pre class="chroma"><code class="language-http" data-lang="http"><span class="err">https://www.autohome.com.cn/news/1/#liststart
-</span><span class="err">https://www.autohome.com.cn/news/2/#liststart
-</span><span class="err">https://www.autohome.com.cn/news/3/#liststart
-</span></code></pre></div><p>利用代码事先翻页的功能</p>
+<pre><code>https://www.autohome.com.cn/news/1/#liststart
+https://www.autohome.com.cn/news/2/#liststart
+https://www.autohome.com.cn/news/3/#liststart
+</code></pre><p>利用代码事先翻页的功能</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">url_reg</span> <span class="o">=</span> <span class="s1">&#39;https://www.autohome.com.cn/news/</span><span class="si">%s</span><span class="s1">/#liststart&#39;</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6010</span><span class="p">):</span>
     <span class="k">print</span><span class="p">(</span><span class="n">url_reg</span><span class="o">%</span><span class="n">i</span><span class="p">)</span>
@@ -123,21 +123,27 @@ json_dict = json.loads(content)
 视频和音频是分开的</li>
 </ul>
 <p>​	研究ulr的规律</p>
-<div class="highlight"><pre class="chroma"><code class="language-http" data-lang="http"><span class="err">https://www.bilibili.com/video/BV1QE41147hU?p=1
-</span><span class="err">https://www.bilibili.com/video/BV1QE41147hU?p=2
-</span><span class="err">https://www.bilibili.com/video/BV1QE41147hU?p=3
-</span></code></pre></div><p>总体数据的地址大部分都是隐藏在js动态加载的文件里面</p>
-<div class="highlight"><pre class="chroma"><code class="language-http" data-lang="http"><span class="err">https://www.cnblogs.com/xiaoyuanqujing/articles/12014416.html
-</span></code></pre></div><hr>
+<pre><code>https://www.bilibili.com/video/BV1QE41147hU?p=1
+https://www.bilibili.com/video/BV1QE41147hU?p=2
+https://www.bilibili.com/video/BV1QE41147hU?p=3
+</code></pre><p>总体数据的地址大部分都是隐藏在js动态加载的文件里面</p>
+<pre><code>https://www.cnblogs.com/xiaoyuanqujing/articles/12014416.html
+</code></pre><hr>
 <h4 id="selenium模块">selenium模块</h4>
+<ul>
+<li>
 <p>selenium最初是一个自动化测试工具,而爬虫中使用它主要是为了解决requests无法直接执行JavaScript代码的问题</p>
+</li>
+<li>
 <p>selenium本质是通过驱动浏览器，完全模拟浏览器的操作，比如跳转、输入、点击、下拉等，来拿到网页渲染之后的结果，可支持多种浏览器</p>
+</li>
+</ul>
 <p>下载模块</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">pip3</span> <span class="n">install</span> <span class="n">selenium</span>
 </code></pre></div><p>如果想要操作浏览器需要下载对应浏览器的驱动
 下载驱动</p>
-<div class="highlight"><pre class="chroma"><code class="language-http" data-lang="http"><span class="err">http://npm.taobao.org/mirrors/chromedriver/2.38/
-</span></code></pre></div><p>基本使用</p>
+<pre><code>http://npm.taobao.org/mirrors/chromedriver/2.38/
+</code></pre><p>基本使用</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">selenium</span> <span class="kn">import</span> <span class="n">webdriver</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="n">bro</span><span class="o">=</span><span class="n">webdriver</span><span class="o">.</span><span class="n">Chrome</span><span class="p">()</span>
@@ -1231,7 +1237,7 @@ SELECTstudent.sname AS &amp;#39;姓名&amp;#39;,avg( score.num ) AS &amp;#39;�
 			
 			<guid>https://Eddy-622.github.io/posts/mysql%E4%B9%8B%E9%93%BE%E6%8E%A5python%E6%93%8D%E4%BD%9Csql%E6%B3%A8%E5%85%A5%E9%97%AE%E9%A2%98/</guid>
 			<description>昨日内容回顾   连表操作
-&amp;#34;&amp;#34;&amp;#34;由于在实际应用中，我们需要的数据很有可能是来自于多张表 这个时候我们可以采用多表查询的方式1:连表操作 连表操作的本质就是先将多张表拼接成一张表，然后基于这张拼接之后的表做单表查询 &amp;gt;&amp;gt;&amp;gt; 笛卡尔积 select * from emp,dep; &amp;#34;&amp;#34;&amp;#34; 在涉及到多表查询SQL语句的编写过程中，为了避免字段冲突的问题 我们一般都会加上表名来做明确的区分，否则可能会报错 &amp;#34;&amp;#34;&amp;#34; &amp;gt;&amp;gt;&amp;gt; 连表操作 inner join 将两张表都有对应关系的数据按照指定的条件拼接到一起 select * from emp inner join dep on emp.dep_id = dep.id; left join 以关键字left join左边的表为基准，展示左表所有的记录，没有的null填充 select * from emp left join dep on emp.dep_id = dep.id; right join 以关键字right join右边的表为基准，展示右表所有的记录，没有的null填充 select * from emp right join dep on emp.dep_id = dep.id; union 两张表所有的技术全部展示出来，各自没有对应的全部用null填充 select * from emp left join dep on emp.</description>
+&amp;#34;&amp;#34;&amp;#34;由于在实际应用中，我们需要的数据很有可能是来自于多张表 这个时候我们可以采用多表查询的方式1:连表操作 连表操作的本质就是先将多张表拼接成一张表，然后基于这张拼接之后的表做单表查询 &amp;gt;&amp;gt;&amp;gt; 笛卡尔积 select * from emp,dep; 在涉及到多表查询SQL语句的编写过程中，为了避免字段冲突的问题 我们一般都会加上表名来做明确的区分，否则可能会报错 &amp;gt;&amp;gt;&amp;gt; 连表操作 inner join 将两张表都有对应关系的数据按照指定的条件拼接到一起 select * from emp inner join dep on emp.dep_id = dep.id; left join 以关键字left join左边的表为基准，展示左表所有的记录，没有的null填充 select * from emp left join dep on emp.dep_id = dep.id; right join 以关键字right join右边的表为基准，展示右表所有的记录，没有的null填充 select * from emp right join dep on emp.dep_id = dep.id; union 两张表所有的技术全部展示出来，各自没有对应的全部用null填充 select * from emp left join dep on emp.</description>
 			<content type="html"><![CDATA[<h1 id="昨日内容回顾">昨日内容回顾</h1>
 <ul>
 <li>
@@ -1242,10 +1248,10 @@ SELECTstudent.sname AS &amp;#39;姓名&amp;#39;,avg( score.num ) AS &amp;#39;�
 </span><span class="s2">  
 </span><span class="s2">&gt;&gt;&gt; 笛卡尔积
 </span><span class="s2">select * from emp,dep;
-</span><span class="s2">&#34;&#34;&#34;</span>
-<span class="err">在涉及到多表查询</span><span class="n">SQL语句的编写过程中</span><span class="err">，为了避免字段冲突的问题</span>
-<span class="err">我们一般都会加上表名来做明确的区分，否则可能会报错</span>
-<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">  
+</span><span class="s2">在涉及到多表查询SQL语句的编写过程中，为了避免字段冲突的问题
+</span><span class="s2">我们一般都会加上表名来做明确的区分，否则可能会报错
+</span><span class="s2">  
 </span><span class="s2">&gt;&gt;&gt; 连表操作
 </span><span class="s2">inner join
 </span><span class="s2">  将两张表都有对应关系的数据按照指定的条件拼接到一起
@@ -2000,86 +2006,13 @@ SELECTstudent.sname AS &amp;#39;姓名&amp;#39;,avg( score.num ) AS &amp;#39;�
 			<pubDate>Wed, 11 Nov 2020 00:00:00 +0000</pubDate>
 			
 			<guid>https://Eddy-622.github.io/posts/mysql%E5%8D%95%E8%A1%A8%E6%9F%A5%E8%AF%A2%E5%85%B3%E9%94%AE%E5%AD%97%E5%AD%97%E6%AE%B5%E4%BF%AE%E6%94%B9/</guid>
-			<description>昨日内容回顾   创建表的完整语法
-&amp;#39;&amp;#39;&amp;#39;create table 表名(字段名1 字段类型(数字) 约束条件1 约束条件2,字段名2 字段类型(数字) 约束条件1 约束条件2,字段名3 字段类型(数字) 约束条件1 约束条件2);&amp;#39;&amp;#39;&amp;#39;  约束条件
-&amp;#39;&amp;#39;&amp;#39;unsignedzerofillnot nulldefaultunique单列唯一联合唯一primary key单一主键联合主键auto_increment自增&amp;#39;&amp;#39;&amp;#39;  外键
-&amp;#39;&amp;#39;&amp;#39;外键就是用来建立表与表之间的关系表与表之间关系一对多多对多一对一如何判断表关系&amp;#34;换位思考&amp;#34;换位思考之后如果得出的结论是一方可以一方不可以那么表关系就是&amp;#34;一对多&amp;#34;换位思考之后如果得出的结论是双方都可以那么表关系就是&amp;#34;多对多&amp;#34;换位思考之后如果得出的结论是双方都不可以那么表关系就是&amp;#34;一对一&amp;#34;或者&amp;#34;没有关系&amp;#34;针对不同的表关系外键字段的创建位置也不同1.针对一对多外键字段建在多的一方2.针对多对多外键字段建在第三张关系表中3.针对一对一外键字段建在任何一方都可以但是建议你建在查询频率较高的表中&amp;#39;&amp;#39;&amp;#39;  SQL实现
-&amp;#39;&amp;#39;&amp;#39;create table emp(...dep_id int,foreign key(dep_id) references dep(id)on update cascade &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; 同步更新on delete cascade &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; 同步删除)&amp;#39;&amp;#39;&amp;#39;  作业</description>
-			<content type="html"><![CDATA[<h1 id="昨日内容回顾">昨日内容回顾</h1>
-<ul>
-<li>
-<p>创建表的完整语法</p>
-<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="s1">&#39;&#39;&#39;create table 表名(
-</span><span class="s1">  字段名1 字段类型(数字) 约束条件1 约束条件2,
-</span><span class="s1">    字段名2 字段类型(数字) 约束条件1 约束条件2,
-</span><span class="s1">    字段名3 字段类型(数字) 约束条件1 约束条件2
-</span><span class="s1">);&#39;&#39;&#39;</span>
-</code></pre></div></li>
-<li>
-<p>约束条件</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;unsigned
-</span><span class="s1">zerofill
-</span><span class="s1">not null
-</span><span class="s1">default
-</span><span class="s1">unique
-</span><span class="s1">  单列唯一
-</span><span class="s1">    联合唯一
-</span><span class="s1">primary key
-</span><span class="s1">  单一主键
-</span><span class="s1">    联合主键
-</span><span class="s1">auto_increment
-</span><span class="s1">  自增&#39;&#39;&#39;</span>
-</code></pre></div></li>
-<li>
-<p>外键</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;外键就是用来建立表与表之间的关系
-</span><span class="s1">  
-</span><span class="s1">表与表之间关系
-</span><span class="s1">  一对多
-</span><span class="s1">    多对多
-</span><span class="s1">    一对一
-</span><span class="s1">   
-</span><span class="s1">如何判断表关系
-</span><span class="s1">  &#34;换位思考&#34;
-</span><span class="s1">      
-</span><span class="s1">换位思考之后如果得出的结论是一方可以一方不可以那么表关系就是&#34;一对多&#34;
-</span><span class="s1">换位思考之后如果得出的结论是双方都可以那么表关系就是&#34;多对多&#34;
-</span><span class="s1">换位思考之后如果得出的结论是双方都不可以那么表关系就是&#34;一对一&#34;或者&#34;没有关系&#34;
-</span><span class="s1">  
-</span><span class="s1">针对不同的表关系外键字段的创建位置也不同
-</span><span class="s1">  1.针对一对多
-</span><span class="s1">      外键字段建在多的一方
-</span><span class="s1">    2.针对多对多
-</span><span class="s1">      外键字段建在第三张关系表中
-</span><span class="s1">    3.针对一对一
-</span><span class="s1">      外键字段建在任何一方都可以但是建议你建在查询频率较高的表中&#39;&#39;&#39;</span>
-</code></pre></div></li>
-<li>
-<p>SQL实现</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;create table emp(
-</span><span class="s1">  ...
-</span><span class="s1">    dep_id int,
-</span><span class="s1">    foreign key(dep_id) references dep(id)
-</span><span class="s1">    on update cascade  &gt;&gt;&gt;&gt;&gt; 同步更新
-</span><span class="s1">    on delete cascade  &gt;&gt;&gt;&gt;&gt; 同步删除
-</span><span class="s1">)&#39;&#39;&#39;</span>
-</code></pre></div></li>
-<li>
-<p>作业</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
-</span><span class="s2">1.书籍与出版社
-</span><span class="s2">  要求版权严格一些
-</span><span class="s2">    一对多的关系
-</span><span class="s2">2.学生和班级
-</span><span class="s2">  一对多
-</span><span class="s2">3.老师和课程
-</span><span class="s2">  多对多
-</span><span class="s2">  
-</span><span class="s2">有一些表关系并不是那么明确，需要你结合实际需求和具体的业务需要
-</span><span class="s2">&#34;&#34;&#34;</span>
-</code></pre></div></li>
-</ul>
-<h1 id="今日内容概要">今日内容概要</h1>
+			<description>今日内容概要   表关系判断之一对一
+  修改表的SQL语句补充
+  复制表(了解)
+  单表查询关键字的使用
+selectfrom wheregroup byhavingdistinctlimitorder byregexp  多表查询
+  今日内容详细 表关系判断之一对一 1.qq用户表2.客户表和学生表有时候一张表里面的数据量太多并且有大部分数据不是经常需要使用的，这个时候我们可以基于表关系的知识将一张表拆分为两张表，然后绑定表关系以用户表和用户详情表为例1.先站在用户表的基础上问一个用户能否对应多个用户详情信息不可以2.再站在用户详情表的基础上问一个用户详情能否对应多个用户信息不可以结论:双方都不可以，那么表关系就是&amp;quot;一对一&amp;quot;或者&amp;quot;没有关系&amp;quot;针对一对一外键字段建在任何一方都可以但是建议你建在查询频率较高的表中SQL语句实现create table user(id int primary key auto_increment,name varchar(32),age int,detail_id int unqiue,foreign key(detail_id) references userDetail(id));create table userDetail(id int primary key auto_increment,addr varchar(32),phone int)表关系的总结 &amp;quot;&amp;quot;&amp;quot;我们学习了如何判断表关系以及如何建立表关系，但是在实际工作中遇到有关系的表不一定非要用外键去建立表关系因为当表特别多的时候，如果频繁的使用外键会导致表关系非常的复杂，操作起来关联性太强耦合程度太高我们可以在sql语句层面建立表与表之间的逻辑关系比如:在修改用户表的时候房屋表也要跟着改，那么我们只需要将修改用户表的sql语句和修改房屋表的sql语句放在一起执行&amp;quot;&amp;quot;&amp;quot;修改表的SQL语句补充 &amp;quot;&amp;quot;&amp;quot;1.</description>
+			<content type="html"><![CDATA[<h1 id="今日内容概要">今日内容概要</h1>
 <ul>
 <li>
 <p>表关系判断之一对一</p>
@@ -2092,15 +2025,15 @@ SELECTstudent.sname AS &amp;#39;姓名&amp;#39;,avg( score.num ) AS &amp;#39;�
 </li>
 <li>
 <p>单表查询关键字的使用</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">select</span>
-<span class="kn">from</span> 
-<span class="nn">where</span>
-<span class="n">group</span> <span class="n">by</span>
-<span class="n">having</span>
-<span class="n">distinct</span>
-<span class="n">limit</span>
-<span class="n">order</span> <span class="n">by</span>
-<span class="n">regexp</span>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">select</span>
+<span class="k">from</span> 
+<span class="k">where</span>
+<span class="k">group</span> <span class="k">by</span>
+<span class="k">having</span>
+<span class="k">distinct</span>
+<span class="k">limit</span>
+<span class="k">order</span> <span class="k">by</span>
+<span class="k">regexp</span>
 </code></pre></div></li>
 <li>
 <p>多表查询</p>
@@ -2108,306 +2041,306 @@ SELECTstudent.sname AS &amp;#39;姓名&amp;#39;,avg( score.num ) AS &amp;#39;�
 </ul>
 <h1 id="今日内容详细">今日内容详细</h1>
 <h3 id="表关系判断之一对一">表关系判断之一对一</h3>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
-</span><span class="s2">1.qq用户表
-</span><span class="s2">2.客户表和学生表
-</span><span class="s2">
-</span><span class="s2">
-</span><span class="s2">
-</span><span class="s2">有时候一张表里面的数据量太多并且有大部分数据不是经常需要使用的，这个时候我们可以基于表关系的知识将一张表拆分为两张表，然后绑定表关系
-</span><span class="s2">
-</span><span class="s2">以用户表和用户详情表为例
-</span><span class="s2">	1.先站在用户表的基础上
-</span><span class="s2">    	问一个用户能否对应多个用户详情信息
-</span><span class="s2">        	不可以
-</span><span class="s2">    2.再站在用户详情表的基础上
-</span><span class="s2">    	问一个用户详情能否对应多个用户信息
-</span><span class="s2">        	不可以
-</span><span class="s2">结论:双方都不可以，那么表关系就是&#34;一对一&#34;或者&#34;没有关系&#34;
-</span><span class="s2">针对一对一
-</span><span class="s2">    	外键字段建在任何一方都可以但是建议你建在查询频率较高的表中
-</span><span class="s2">    
-</span><span class="s2">    
-</span><span class="s2">SQL语句实现
-</span><span class="s2">create table user(
-</span><span class="s2">	id int primary key auto_increment,
-</span><span class="s2">    name varchar(32),
-</span><span class="s2">    age int,
-</span><span class="s2">    detail_id int unqiue,
-</span><span class="s2">    foreign key(detail_id) references userDetail(id)
-</span><span class="s2">);
-</span><span class="s2">create table userDetail(
-</span><span class="s2">	id int primary key auto_increment,
-</span><span class="s2">    addr varchar(32),
-</span><span class="s2">    phone int
-</span><span class="s2">)&#34;&#34;&#34;</span>
-</code></pre></div><h3 id="表关系的总结">表关系的总结</h3>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
-</span><span class="s2">我们学习了如何判断表关系以及如何建立表关系，但是在实际工作中
-</span><span class="s2">遇到有关系的表不一定非要用外键去建立表关系
-</span><span class="s2">因为当表特别多的时候，如果频繁的使用外键会导致表关系非常的复杂，操作起来关联性太强耦合程度太高
-</span><span class="s2">我们可以在sql语句层面建立表与表之间的逻辑关系
-</span><span class="s2">	比如:在修改用户表的时候房屋表也要跟着改，那么我们只需要将
-</span><span class="s2">        修改用户表的sql语句和修改房屋表的sql语句放在一起执行&#34;&#34;&#34;</span>
-</code></pre></div><h3 id="修改表的sql语句补充">修改表的SQL语句补充</h3>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
-</span><span class="s2">1.修改表的表名
-</span><span class="s2">	alter table t1 rename t2;
-</span><span class="s2">2.修改表的字段类型
-</span><span class="s2">	alter table t1 modify id varchar(32);
-</span><span class="s2">3.修改表的字段名
-</span><span class="s2">	alter table t1 change id nid int;
-</span><span class="s2">4.添加额外的字段  &gt;&gt;&gt;&gt;&gt; 默认在尾部追加字段
-</span><span class="s2">	alter table t1 add password int;
-</span><span class="s2">5.添加额外的字段  &gt;&gt;&gt;&gt;&gt; 自定义位置
-</span><span class="s2">	alter table t1 add gender enum(&#39;male&#39;,&#39;female&#39;) after name;
-</span><span class="s2">6.添加额外的字段  &gt;&gt;&gt;&gt;&gt; 直接在表的开头
-</span><span class="s2">	alter table t1 add fid int first;
-</span><span class="s2">7.删除字段
-</span><span class="s2">	alter table t1 drop fid;
-</span><span class="s2">&#34;&#34;&#34;</span>
-</code></pre></div><h3 id="复制表了解">复制表（了解）</h3>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
-</span><span class="s2">sql语句的查询结果其实我们可以看成是一张存在于内存中的虚拟表
-</span><span class="s2">
-</span><span class="s2">create table t789 select * from dep;  &gt;&gt;&gt;&gt;&gt; 将后面表的查询结果直接作为新表的数据
-</span><span class="s2">&gt;&gt;&gt;&gt;&gt; 上述复制表的语法只复制表数据不复制表结构
-</span><span class="s2">
-</span><span class="s2">create table t999 like dep;  &gt;&gt;&gt;&gt;&gt; 复制表结构不要表数据
-</span><span class="s2">&#34;&#34;&#34;</span>
-</code></pre></div><h3 id="单表查询">单表查询</h3>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
-</span><span class="s2">create table emp(
-</span><span class="s2">  id int primary key auto_increment,
-</span><span class="s2">  name varchar(20) not null,
-</span><span class="s2">  sex enum(&#39;male&#39;,&#39;female&#39;) not null default &#39;male&#39;, &gt;&gt;&gt;&gt;&gt;大部分是男的
-</span><span class="s2">  age int(3) unsigned not null default 28,
-</span><span class="s2">  hire_date date not null,
-</span><span class="s2">  post varchar(50),
-</span><span class="s2">  post_comment varchar(100),
-</span><span class="s2">  salary double(15,2),
-</span><span class="s2">  office int, &gt;&gt;&gt;&gt;&gt;一个部门一个屋子
-</span><span class="s2">  depart_id int
-</span><span class="s2">);
-</span><span class="s2">
-</span><span class="s2">&gt;&gt;&gt;&gt;&gt;插入记录
-</span><span class="s2">&gt;&gt;&gt;&gt;&gt;三个部门：教学，销售，运营
-</span><span class="s2">insert into emp(name,sex,age,hire_date,post,salary,office,depart_id) values
-</span><span class="s2">(&#39;jason&#39;,&#39;male&#39;,18,&#39;20170301&#39;,&#39;张江第一帅形象代言&#39;,7300.33,401,1), &gt;&gt;&gt;&gt;&gt;以下是教学部
-</span><span class="s2">(&#39;tom&#39;,&#39;male&#39;,78,&#39;20150302&#39;,&#39;teacher&#39;,1000000.31,401,1),
-</span><span class="s2">(&#39;kevin&#39;,&#39;male&#39;,81,&#39;20130305&#39;,&#39;teacher&#39;,8300,401,1),
-</span><span class="s2">(&#39;tony&#39;,&#39;male&#39;,73,&#39;20140701&#39;,&#39;teacher&#39;,3500,401,1),
-</span><span class="s2">(&#39;owen&#39;,&#39;male&#39;,28,&#39;20121101&#39;,&#39;teacher&#39;,2100,401,1),
-</span><span class="s2">(&#39;jack&#39;,&#39;female&#39;,18,&#39;20110211&#39;,&#39;teacher&#39;,9000,401,1),
-</span><span class="s2">(&#39;jenny&#39;,&#39;male&#39;,18,&#39;19000301&#39;,&#39;teacher&#39;,30000,401,1),
-</span><span class="s2">(&#39;sank&#39;,&#39;male&#39;,48,&#39;20101111&#39;,&#39;teacher&#39;,10000,401,1),
-</span><span class="s2">(&#39;哈哈&#39;,&#39;female&#39;,48,&#39;20150311&#39;,&#39;sale&#39;,3000.13,402,2),&gt;&gt;&gt;&gt;&gt;以下是销售部门
-</span><span class="s2">(&#39;呵呵&#39;,&#39;female&#39;,38,&#39;20101101&#39;,&#39;sale&#39;,2000.35,402,2),
-</span><span class="s2">(&#39;西西&#39;,&#39;female&#39;,18,&#39;20110312&#39;,&#39;sale&#39;,1000.37,402,2),
-</span><span class="s2">(&#39;乐乐&#39;,&#39;female&#39;,18,&#39;20160513&#39;,&#39;sale&#39;,3000.29,402,2),
-</span><span class="s2">(&#39;拉拉&#39;,&#39;female&#39;,28,&#39;20170127&#39;,&#39;sale&#39;,4000.33,402,2),
-</span><span class="s2">(&#39;僧龙&#39;,&#39;male&#39;,28,&#39;20160311&#39;,&#39;operation&#39;,10000.13,403,3), &gt;&gt;&gt;&gt;&gt;以下是运营部门
-</span><span class="s2">(&#39;程咬金&#39;,&#39;male&#39;,18,&#39;19970312&#39;,&#39;operation&#39;,20000,403,3),
-</span><span class="s2">(&#39;程咬银&#39;,&#39;female&#39;,18,&#39;20130311&#39;,&#39;operation&#39;,19000,403,3),
-</span><span class="s2">(&#39;程咬铜&#39;,&#39;male&#39;,18,&#39;20150411&#39;,&#39;operation&#39;,18000,403,3),
-</span><span class="s2">(&#39;程咬铁&#39;,&#39;female&#39;,18,&#39;20140512&#39;,&#39;operation&#39;,17000,403,3);
-</span><span class="s2">
-</span><span class="s2">&gt;&gt;&gt;&gt;&gt;ps：如果在windows系统中，插入中文字符，select的结果为空白，可以将所有字符编码统一设置成gbk&#34;&#34;&#34;</span>
-</code></pre></div><h3 id="查询语句的书写顺序和执行顺序">查询语句的书写顺序和执行顺序</h3>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
-</span><span class="s2">select * from emp where id&gt;3;
-</span><span class="s2">
-</span><span class="s2">关键字的书写顺序
-</span><span class="s2">select
-</span><span class="s2">from
-</span><span class="s2">where
-</span><span class="s2">
-</span><span class="s2">关键字的执行顺序
-</span><span class="s2">from
-</span><span class="s2">where
-</span><span class="s2">select
-</span><span class="s2">
-</span><span class="s2">&gt;&gt;&gt;&gt;&gt; 书写顺序和执行顺序不需要刻意的去记忆，你就按照书写的习惯从左往右书写即可
-</span><span class="s2">&#34;&#34;&#34;</span>
-</code></pre></div><h3 id="查询关键字之where筛选">查询关键字之where(筛选)</h3>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
-</span><span class="s2">where是用来做数据的筛选操作
-</span><span class="s2">&gt;&gt;&gt;&gt;&gt; 1.查询id大于等于3小于等于6的数据
-</span><span class="s2">select id,name from emp where id &gt;= 3 and id &lt;= 6;
-</span><span class="s2">select *  from emp where id between 3 and 6;  
-</span><span class="s2">
-</span><span class="s2">&gt;&gt;&gt;&gt;&gt; 2.查询薪资是20000或者18000或者17000的数据
-</span><span class="s2">select * from emp where salary=20000 or salary=18000 or salary=17000;
-</span><span class="s2">select * from emp where salary in (20000,18000,17000);
-</span><span class="s2">
-</span><span class="s2">&gt;&gt;&gt;&gt;&gt; 3.查询员工姓名中包含字母o的员工的姓名和薪资
-</span><span class="s2">
-</span><span class="s2">模糊查询
-</span><span class="s2">	关键字 like
-</span><span class="s2">	关键符号
-</span><span class="s2">		%:匹配任意个数的任意字符
-</span><span class="s2">			eg:
-</span><span class="s2">				%j只要字符串末尾是j的都能匹配到
-</span><span class="s2">				%j%只要有j的都能匹配到
-</span><span class="s2">				
-</span><span class="s2">		_:匹配单个个数的任意字符
-</span><span class="s2">			eg:
-</span><span class="s2">				_j只能匹配尾部是j的两位字符
-</span><span class="s2">				_j_只能匹配中间是j的三位字符
-</span><span class="s2">
-</span><span class="s2">select name,salary from emp where name like &#39;</span><span class="si">%o</span><span class="s2">%&#39;;
-</span><span class="s2">
-</span><span class="s2">&gt;&gt;&gt;&gt;&gt; 4.查询员工姓名是由四个字符组成的员工姓名和薪资
-</span><span class="s2">select name,salary from emp where name like &#39;____&#39;;
-</span><span class="s2">select name,salary from emp where char_length(name) = 4;
-</span><span class="s2">
-</span><span class="s2">&gt;&gt;&gt;&gt;&gt; 5.查询id小于3或者大于6的数据
-</span><span class="s2">select * from emp where id&lt;3 or id&gt;6;
-</span><span class="s2">select *  from emp where id not between 3 and 6; 
-</span><span class="s2">
-</span><span class="s2">&gt;&gt;&gt;&gt;&gt; 6.查询岗位描述为空的员工的姓名和岗位名称
-</span><span class="s2">select name,post from emp where post_comment=null;  &gt;&gt;&gt;&gt;&gt; 不行
-</span><span class="s2">select name,post from emp where post_comment is NULL;  &gt;&gt;&gt;&gt;&gt; 可以
-</span><span class="s2">&#39;&#39;&#39;针对null不能用等号需要用is&#39;&#39;&#39;
-</span><span class="s2">&#34;&#34;&#34;</span>
-</code></pre></div><h3 id="查询关键字之group-by分组">查询关键字之group by(分组)</h3>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
-</span><span class="s2">分组
-</span><span class="s2">	将单个单个的数据按照一定的条件分门别类，之后以分类之后的整体作为运算集
-</span><span class="s2">1.按照部门进行分组
-</span><span class="s2">select * from emp group by post;
-</span><span class="s2">
-</span><span class="s2">需要注意的是在MySQL5.6版本及之前的版本上述语法不会报错
-</span><span class="s2">但是真正情况下分组之后不能够再获取到分组内单个数据的信息，只能拿到分组的依据不能直接再获取到单个数据信息
-</span><span class="s2">MySQL5.7及之后的版本会直接报错
-</span><span class="s2">
-</span><span class="s2">我们需要设置严格模式，让它符合分组之后的规律
-</span><span class="s2">
-</span><span class="s2">set global sql_mode = &#39;STRICT_TRANS_TABLES,ONLY_FULL_GROUP_BY&#39;;
-</span><span class="s2">select post from emp group by post;
-</span><span class="s2">
-</span><span class="s2">2.获取每个部门的最高工资
-</span><span class="s2">select post,max(salary) from emp group by post;
-</span><span class="s2">
-</span><span class="s2">3.获取每个部门的最低工资
-</span><span class="s2">select post,min(salary) from emp group by post;
-</span><span class="s2">
-</span><span class="s2">4.获取每个部门的平均工资
-</span><span class="s2">select post,avg(salary) from emp group by post;
-</span><span class="s2">
-</span><span class="s2">5.获取每个部门的总和工资
-</span><span class="s2">select post,sum(salary) from emp group by post;
-</span><span class="s2">
-</span><span class="s2">6.获取每个部门的人数
-</span><span class="s2">select post,count(id) from emp group by post;
-</span><span class="s2">
-</span><span class="s2">7.查询按照部门分组之后的每个部门名称和每个部门下员工姓名
-</span><span class="s2">select post,group_concat(name) from emp group by post;
-</span><span class="s2">
-</span><span class="s2">group_concat用于分组之后获取非分组依据的其他字段数据
-</span><span class="s2">括号里面可以接受多个数据 展示的时候会自动帮你拼接到一起展示出来
-</span><span class="s2">
-</span><span class="s2">8.查询按照部门分组之后的每个部门名称和每个部门下员工姓名和薪资
-</span><span class="s2">select post,group_concat(name,&#39;:&#39;,salary) from emp group by post;
-</span><span class="s2">select post,group_concat(name,&#39;_NB&#39;) from emp group by post;
-</span><span class="s2">
-</span><span class="s2">
-</span><span class="s2">concat功能跟group_concat是一致的 
-</span><span class="s2">只不过concat只能用于分组之前
-</span><span class="s2">group_concat用于分组之后
-</span><span class="s2">
-</span><span class="s2">&gt;&gt;&gt;&gt;&gt; 查询每个人的年薪
-</span><span class="s2">select name,salary*12 as annual_salary from emp;
-</span><span class="s2">select name,salary*12 annual_salary from emp;  &gt;&gt;&gt;&gt;&gt; as可以省略
-</span><span class="s2">
-</span><span class="s2">9.统计各部门年龄在30岁以上的员工平均工资
-</span><span class="s2">	1.先筛选出年龄在30岁以上的员工
-</span><span class="s2">    2.再按照部门分组运算即可
-</span><span class="s2">select post,avg(salary) from emp where age&gt;30 group by post;
-</span><span class="s2">&#34;&#34;&#34;</span>
-</code></pre></div><h3 id="查询关键之having过滤">查询关键之having(过滤)</h3>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
-</span><span class="s2">where是分组之前用于数据的筛选
-</span><span class="s2">having是分组之后用于数据的筛选
-</span><span class="s2">&#34;&#34;&#34;</span>
-<span class="s1">&#39;&#39;&#39;
-</span><span class="s1">1.统计各部门年龄在30岁以上的员工平均工资，并且保留平均工资大于10000的部门
-</span><span class="s1">select post,avg(salary) from emp 
-</span><span class="s1">			where age&gt;30 
-</span><span class="s1">    		group by post 
-</span><span class="s1">        	having avg(salary) &gt; 10000;
-</span><span class="s1">&#39;&#39;&#39;</span>
-</code></pre></div><h3 id="查询关键字之distinct去重">查询关键字之distinct(去重)</h3>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
-</span><span class="s1">去重的前提是数据必须是一模一样的才可以去重
-</span><span class="s1">
-</span><span class="s1">select distinct post from emp;
-</span><span class="s1">&#39;&#39;&#39;</span>
-</code></pre></div><h3 id="查询关键字之order-by排序">查询关键字之order by(排序)</h3>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
-</span><span class="s2">select * from emp order by salary  &gt;&gt;&gt;&gt;&gt; 默认是升序
-</span><span class="s2">select * from emp order by salary asc;  &gt;&gt;&gt;&gt;&gt; asc升序的意思 默认可以不写
-</span><span class="s2">select * from emp order by salary desc;  &gt;&gt;&gt;&gt;&gt; 降序
-</span><span class="s2">
-</span><span class="s2">排序的时候如果出现了相同值的情况 那么我们可以指定多个排序规则
-</span><span class="s2">select * from emp order by age asc,salary desc;
-</span><span class="s2">&gt;&gt;&gt;&gt;&gt; 先按照年龄升序排序 如果年龄相同再按照薪资降序排序
-</span><span class="s2">&#34;&#34;&#34;</span>
-</code></pre></div><h3 id="查询关键字之limit限制数据条数">查询关键字之limit(限制数据条数)</h3>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
-</span><span class="s2">
-</span><span class="s2">limit的使用场景最常见的就是数据的分页展示
-</span><span class="s2">select * from emp limit 5;  &gt;&gt;&gt;&gt;&gt; 只获取前五条数据
-</span><span class="s2">select * from emp limit 5,5;  &gt;&gt;&gt;&gt;&gt; 第一个数字表示起始位置 第二个数字表示数据个数
-</span><span class="s2">
-</span><span class="s2">&gt;&gt;&gt;&gt;&gt; 求薪资最高的用户的用户名和薪资
-</span><span class="s2">	1.选按照薪资降序排序
-</span><span class="s2">    2.再利用limit只取第一条
-</span><span class="s2">select name,salary from emp order by salary desc limit 1;
-</span><span class="s2">&#34;&#34;&#34;</span>
-</code></pre></div><h3 id="查询关键字之regexp正则表达式">查询关键字之regexp(正则表达式)</h3>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
-</span><span class="s2">正则表达式
-</span><span class="s2">	通过一些符合的组合从字符串中筛选出你想要的内容
-</span><span class="s2">爬虫的时候再具体讲解
-</span><span class="s2">&#34;&#34;&#34;</span>
-<span class="s1">&#39;&#39;&#39;
-</span><span class="s1">select * from emp where name regexp &#39;^j.*(n|y)$&#39;;
-</span><span class="s1">^j.*(n|y)$ 
-</span><span class="s1">	&gt;&gt;&gt;&gt;&gt; 匹配字符串
-</span><span class="s1">    1.必须是以字母j开头
-</span><span class="s1">    2.必须是以字母n或者y结尾
-</span><span class="s1">    3.中间可以是任意个数任意字符
-</span><span class="s1">
-</span><span class="s1">补充:正则表达式是一门独立的语言，任何学科任何语言都可以学习使用，规律是一模一样的不受其他语言的影响
-</span><span class="s1">参考书籍:《正则指引》&#39;&#39;&#39;</span>
-</code></pre></div><h3 id="聚合函数">聚合函数</h3>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
-</span><span class="s1">聚合函数是在分组之后使用的
-</span><span class="s1">max		最大值
-</span><span class="s1">min		最小值
-</span><span class="s1">count	计数
-</span><span class="s1">avg		平均值
-</span><span class="s1">sum		求和
-</span><span class="s1">&#39;&#39;&#39;</span>
-</code></pre></div><h3 id="修改展示字段">修改展示字段</h3>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
-</span><span class="s1">&gt;&gt;&gt;&gt;&gt; 关键字as可以给字段起别名 用于展示的时候显示出来给用户看
-</span><span class="s1">select post as &#39;部门&#39;,max(salary) as &#39;最高薪资&#39; from emp group by post;
-</span><span class="s1">&gt;&gt;&gt;&gt;&gt; 并且as可以省略不写  但是建议你不要省略(容易造成混淆)
-</span><span class="s1">select post &#39;部门&#39;,max(salary) &#39;最高薪资&#39; from emp group by post;
-</span><span class="s1">&#39;&#39;&#39;</span>
-</code></pre></div><h3 id="作业">作业</h3>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
-</span><span class="s2">&gt;&gt;&gt;&gt;&gt; 刚开始查询表，一定要按照最基本的步骤，先确定是哪张表，再确定查这张表有没有限制条件，再确定是否需要分类，最后再确定需要什么字段对应的信息
-</span><span class="s2">1. 查询岗位名以及岗位包含的所有员工名字
-</span><span class="s2">2. 查询岗位名以及各岗位内包含的员工个数
-</span><span class="s2">3. 查询公司内男员工和女员工的个数
-</span><span class="s2">4. 查询岗位名以及各岗位的平均薪资
-</span><span class="s2">5. 查询岗位名以及各岗位的最高薪资
-</span><span class="s2">6. 查询岗位名以及各岗位的最低薪资
-</span><span class="s2">7. 查询男员工与男员工的平均薪资，女员工与女员工的平均薪资&#34;&#34;&#34;</span>
-</code></pre></div>]]></content>
+<pre><code>
+1.qq用户表
+2.客户表和学生表
+
+
+
+有时候一张表里面的数据量太多并且有大部分数据不是经常需要使用的，这个时候我们可以基于表关系的知识将一张表拆分为两张表，然后绑定表关系
+
+以用户表和用户详情表为例
+	1.先站在用户表的基础上
+    	问一个用户能否对应多个用户详情信息
+        	不可以
+    2.再站在用户详情表的基础上
+    	问一个用户详情能否对应多个用户信息
+        	不可以
+结论:双方都不可以，那么表关系就是&quot;一对一&quot;或者&quot;没有关系&quot;
+针对一对一
+    	外键字段建在任何一方都可以但是建议你建在查询频率较高的表中
+    
+    
+SQL语句实现
+create table user(
+	id int primary key auto_increment,
+    name varchar(32),
+    age int,
+    detail_id int unqiue,
+    foreign key(detail_id) references userDetail(id)
+);
+create table userDetail(
+	id int primary key auto_increment,
+    addr varchar(32),
+    phone int
+)
+</code></pre><h3 id="表关系的总结">表关系的总结</h3>
+<pre><code>&quot;&quot;&quot;
+我们学习了如何判断表关系以及如何建立表关系，但是在实际工作中
+遇到有关系的表不一定非要用外键去建立表关系
+因为当表特别多的时候，如果频繁的使用外键会导致表关系非常的复杂，操作起来关联性太强耦合程度太高
+我们可以在sql语句层面建立表与表之间的逻辑关系
+	比如:在修改用户表的时候房屋表也要跟着改，那么我们只需要将
+        修改用户表的sql语句和修改房屋表的sql语句放在一起执行&quot;&quot;&quot;
+</code></pre><h3 id="修改表的sql语句补充">修改表的SQL语句补充</h3>
+<pre><code>&quot;&quot;&quot;
+1.修改表的表名
+	alter table t1 rename t2;
+2.修改表的字段类型
+	alter table t1 modify id varchar(32);
+3.修改表的字段名
+	alter table t1 change id nid int;
+4.添加额外的字段  &gt;&gt;&gt;&gt;&gt; 默认在尾部追加字段
+	alter table t1 add password int;
+5.添加额外的字段  &gt;&gt;&gt;&gt;&gt; 自定义位置
+	alter table t1 add gender enum('male','female') after name;
+6.添加额外的字段  &gt;&gt;&gt;&gt;&gt; 直接在表的开头
+	alter table t1 add fid int first;
+7.删除字段
+	alter table t1 drop fid;
+&quot;&quot;&quot;
+</code></pre><h3 id="复制表了解">复制表（了解）</h3>
+<pre><code>&quot;&quot;&quot;
+sql语句的查询结果其实我们可以看成是一张存在于内存中的虚拟表
+
+create table t789 select * from dep;  &gt;&gt;&gt;&gt;&gt; 将后面表的查询结果直接作为新表的数据
+&gt;&gt;&gt;&gt;&gt; 上述复制表的语法只复制表数据不复制表结构
+
+create table t999 like dep;  &gt;&gt;&gt;&gt;&gt; 复制表结构不要表数据
+&quot;&quot;&quot;
+</code></pre><h3 id="单表查询">单表查询</h3>
+<pre><code>&quot;&quot;&quot;
+create table emp(
+  id int primary key auto_increment,
+  name varchar(20) not null,
+  sex enum('male','female') not null default 'male', &gt;&gt;&gt;&gt;&gt;大部分是男的
+  age int(3) unsigned not null default 28,
+  hire_date date not null,
+  post varchar(50),
+  post_comment varchar(100),
+  salary double(15,2),
+  office int, &gt;&gt;&gt;&gt;&gt;一个部门一个屋子
+  depart_id int
+);
+
+&gt;&gt;&gt;&gt;&gt;插入记录
+&gt;&gt;&gt;&gt;&gt;三个部门：教学，销售，运营
+insert into emp(name,sex,age,hire_date,post,salary,office,depart_id) values
+('jason','male',18,'20170301','张江第一帅形象代言',7300.33,401,1), &gt;&gt;&gt;&gt;&gt;以下是教学部
+('tom','male',78,'20150302','teacher',1000000.31,401,1),
+('kevin','male',81,'20130305','teacher',8300,401,1),
+('tony','male',73,'20140701','teacher',3500,401,1),
+('owen','male',28,'20121101','teacher',2100,401,1),
+('jack','female',18,'20110211','teacher',9000,401,1),
+('jenny','male',18,'19000301','teacher',30000,401,1),
+('sank','male',48,'20101111','teacher',10000,401,1),
+('哈哈','female',48,'20150311','sale',3000.13,402,2),&gt;&gt;&gt;&gt;&gt;以下是销售部门
+('呵呵','female',38,'20101101','sale',2000.35,402,2),
+('西西','female',18,'20110312','sale',1000.37,402,2),
+('乐乐','female',18,'20160513','sale',3000.29,402,2),
+('拉拉','female',28,'20170127','sale',4000.33,402,2),
+('僧龙','male',28,'20160311','operation',10000.13,403,3), &gt;&gt;&gt;&gt;&gt;以下是运营部门
+('程咬金','male',18,'19970312','operation',20000,403,3),
+('程咬银','female',18,'20130311','operation',19000,403,3),
+('程咬铜','male',18,'20150411','operation',18000,403,3),
+('程咬铁','female',18,'20140512','operation',17000,403,3);
+
+&gt;&gt;&gt;&gt;&gt;ps：如果在windows系统中，插入中文字符，select的结果为空白，可以将所有字符编码统一设置成gbk&quot;&quot;&quot;
+</code></pre><h3 id="查询语句的书写顺序和执行顺序">查询语句的书写顺序和执行顺序</h3>
+<pre><code>&quot;&quot;&quot;
+select * from emp where id&gt;3;
+
+关键字的书写顺序
+select
+from
+where
+
+关键字的执行顺序
+from
+where
+select
+
+&gt;&gt;&gt;&gt;&gt; 书写顺序和执行顺序不需要刻意的去记忆，你就按照书写的习惯从左往右书写即可
+&quot;&quot;&quot;
+</code></pre><h3 id="查询关键字之where筛选">查询关键字之where(筛选)</h3>
+<pre><code>&quot;&quot;&quot;
+where是用来做数据的筛选操作
+&gt;&gt;&gt;&gt;&gt; 1.查询id大于等于3小于等于6的数据
+select id,name from emp where id &gt;= 3 and id &lt;= 6;
+select *  from emp where id between 3 and 6;  
+
+&gt;&gt;&gt;&gt;&gt; 2.查询薪资是20000或者18000或者17000的数据
+select * from emp where salary=20000 or salary=18000 or salary=17000;
+select * from emp where salary in (20000,18000,17000);
+
+&gt;&gt;&gt;&gt;&gt; 3.查询员工姓名中包含字母o的员工的姓名和薪资
+
+模糊查询
+	关键字 like
+	关键符号
+		%:匹配任意个数的任意字符
+			eg:
+				%j只要字符串末尾是j的都能匹配到
+				%j%只要有j的都能匹配到
+				
+		_:匹配单个个数的任意字符
+			eg:
+				_j只能匹配尾部是j的两位字符
+				_j_只能匹配中间是j的三位字符
+
+select name,salary from emp where name like '%o%';
+
+&gt;&gt;&gt;&gt;&gt; 4.查询员工姓名是由四个字符组成的员工姓名和薪资
+select name,salary from emp where name like '____';
+select name,salary from emp where char_length(name) = 4;
+
+&gt;&gt;&gt;&gt;&gt; 5.查询id小于3或者大于6的数据
+select * from emp where id&lt;3 or id&gt;6;
+select *  from emp where id not between 3 and 6; 
+
+&gt;&gt;&gt;&gt;&gt; 6.查询岗位描述为空的员工的姓名和岗位名称
+select name,post from emp where post_comment=null;  &gt;&gt;&gt;&gt;&gt; 不行
+select name,post from emp where post_comment is NULL;  &gt;&gt;&gt;&gt;&gt; 可以
+'''针对null不能用等号需要用is'''
+&quot;&quot;&quot;
+</code></pre><h3 id="查询关键字之group-by分组">查询关键字之group by(分组)</h3>
+<pre><code>&quot;&quot;&quot;
+分组
+	将单个单个的数据按照一定的条件分门别类，之后以分类之后的整体作为运算集
+1.按照部门进行分组
+select * from emp group by post;
+
+需要注意的是在MySQL5.6版本及之前的版本上述语法不会报错
+但是真正情况下分组之后不能够再获取到分组内单个数据的信息，只能拿到分组的依据不能直接再获取到单个数据信息
+MySQL5.7及之后的版本会直接报错
+
+我们需要设置严格模式，让它符合分组之后的规律
+
+set global sql_mode = 'STRICT_TRANS_TABLES,ONLY_FULL_GROUP_BY';
+select post from emp group by post;
+
+2.获取每个部门的最高工资
+select post,max(salary) from emp group by post;
+
+3.获取每个部门的最低工资
+select post,min(salary) from emp group by post;
+
+4.获取每个部门的平均工资
+select post,avg(salary) from emp group by post;
+
+5.获取每个部门的总和工资
+select post,sum(salary) from emp group by post;
+
+6.获取每个部门的人数
+select post,count(id) from emp group by post;
+
+7.查询按照部门分组之后的每个部门名称和每个部门下员工姓名
+select post,group_concat(name) from emp group by post;
+
+group_concat用于分组之后获取非分组依据的其他字段数据
+括号里面可以接受多个数据 展示的时候会自动帮你拼接到一起展示出来
+
+8.查询按照部门分组之后的每个部门名称和每个部门下员工姓名和薪资
+select post,group_concat(name,':',salary) from emp group by post;
+select post,group_concat(name,'_NB') from emp group by post;
+
+
+concat功能跟group_concat是一致的 
+只不过concat只能用于分组之前
+group_concat用于分组之后
+
+&gt;&gt;&gt;&gt;&gt; 查询每个人的年薪
+select name,salary*12 as annual_salary from emp;
+select name,salary*12 annual_salary from emp;  &gt;&gt;&gt;&gt;&gt; as可以省略
+
+9.统计各部门年龄在30岁以上的员工平均工资
+	1.先筛选出年龄在30岁以上的员工
+    2.再按照部门分组运算即可
+select post,avg(salary) from emp where age&gt;30 group by post;
+&quot;&quot;&quot;
+</code></pre><h3 id="查询关键之having过滤">查询关键之having(过滤)</h3>
+<pre><code>&quot;&quot;&quot;
+where是分组之前用于数据的筛选
+having是分组之后用于数据的筛选
+&quot;&quot;&quot;
+'''
+1.统计各部门年龄在30岁以上的员工平均工资，并且保留平均工资大于10000的部门
+select post,avg(salary) from emp 
+			where age&gt;30 
+    		group by post 
+        	having avg(salary) &gt; 10000;
+'''
+</code></pre><h3 id="查询关键字之distinct去重">查询关键字之distinct(去重)</h3>
+<pre><code>'''
+去重的前提是数据必须是一模一样的才可以去重
+
+select distinct post from emp;
+'''
+</code></pre><h3 id="查询关键字之order-by排序">查询关键字之order by(排序)</h3>
+<pre><code>&quot;&quot;&quot;
+select * from emp order by salary  &gt;&gt;&gt;&gt;&gt; 默认是升序
+select * from emp order by salary asc;  &gt;&gt;&gt;&gt;&gt; asc升序的意思 默认可以不写
+select * from emp order by salary desc;  &gt;&gt;&gt;&gt;&gt; 降序
+
+排序的时候如果出现了相同值的情况 那么我们可以指定多个排序规则
+select * from emp order by age asc,salary desc;
+&gt;&gt;&gt;&gt;&gt; 先按照年龄升序排序 如果年龄相同再按照薪资降序排序
+&quot;&quot;&quot;
+</code></pre><h3 id="查询关键字之limit限制数据条数">查询关键字之limit(限制数据条数)</h3>
+<pre><code>&quot;&quot;&quot;
+
+limit的使用场景最常见的就是数据的分页展示
+select * from emp limit 5;  &gt;&gt;&gt;&gt;&gt; 只获取前五条数据
+select * from emp limit 5,5;  &gt;&gt;&gt;&gt;&gt; 第一个数字表示起始位置 第二个数字表示数据个数
+
+&gt;&gt;&gt;&gt;&gt; 求薪资最高的用户的用户名和薪资
+	1.选按照薪资降序排序
+    2.再利用limit只取第一条
+select name,salary from emp order by salary desc limit 1;
+&quot;&quot;&quot;
+</code></pre><h3 id="查询关键字之regexp正则表达式">查询关键字之regexp(正则表达式)</h3>
+<pre><code>&quot;&quot;&quot;
+正则表达式
+	通过一些符合的组合从字符串中筛选出你想要的内容
+爬虫的时候再具体讲解
+&quot;&quot;&quot;
+'''
+select * from emp where name regexp '^j.*(n|y)$';
+^j.*(n|y)$ 
+	&gt;&gt;&gt;&gt;&gt; 匹配字符串
+    1.必须是以字母j开头
+    2.必须是以字母n或者y结尾
+    3.中间可以是任意个数任意字符
+
+补充:正则表达式是一门独立的语言，任何学科任何语言都可以学习使用，规律是一模一样的不受其他语言的影响
+参考书籍:《正则指引》'''
+</code></pre><h3 id="聚合函数">聚合函数</h3>
+<pre><code>'''
+聚合函数是在分组之后使用的
+max		最大值
+min		最小值
+count	计数
+avg		平均值
+sum		求和
+'''
+</code></pre><h3 id="修改展示字段">修改展示字段</h3>
+<pre><code>'''
+&gt;&gt;&gt;&gt;&gt; 关键字as可以给字段起别名 用于展示的时候显示出来给用户看
+select post as '部门',max(salary) as '最高薪资' from emp group by post;
+&gt;&gt;&gt;&gt;&gt; 并且as可以省略不写  但是建议你不要省略(容易造成混淆)
+select post '部门',max(salary) '最高薪资' from emp group by post;
+'''
+</code></pre><h3 id="作业">作业</h3>
+<pre><code>&quot;&quot;&quot;
+刚开始查询表，一定要按照最基本的步骤，先确定是哪张表，再确定查这张表有没有限制条件，再确定是否需要分类，最后再确定需要什么字段对应的信息
+1. 查询岗位名以及岗位包含的所有员工名字
+2. 查询岗位名以及各岗位内包含的员工个数
+3. 查询公司内男员工和女员工的个数
+4. 查询岗位名以及各岗位的平均薪资
+5. 查询岗位名以及各岗位的最高薪资
+6. 查询岗位名以及各岗位的最低薪资
+7. 查询男员工与男员工的平均薪资，女员工与女员工的平均薪资&quot;&quot;&quot;
+</code></pre>]]></content>
 		</item>
 		
 		<item>
@@ -2484,7 +2417,7 @@ SELECTstudent.sname AS &amp;#39;姓名&amp;#39;,avg( score.num ) AS &amp;#39;�
 </span><span class="s1">    double(255,30)
 </span><span class="s1">    decimal(65,30)
 </span><span class="s1">     精确度不一致
-</span><span class="s1">    &#39;&#39;&#39;</span><span class="err">日常开发中很多看似需要用数字存储的数据其实都可以使用字符串来存储</span><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">    日常开发中很多看似需要用数字存储的数据其实都可以使用字符串来存储
 </span><span class="s1">  
 </span><span class="s1">字符类型
 </span><span class="s1">  char定长
@@ -2747,40 +2680,39 @@ SELECTstudent.sname AS &amp;#39;姓名&amp;#39;,avg( score.num ) AS &amp;#39;�
 </span><span class="s2">    on update cascade
 </span><span class="s2">    on delete cascade
 </span><span class="s2">);
+</span><span class="s2">
+</span><span class="s2">************************************************
+</span><span class="s2">★多对多外键字段需要你重新创建一张表来专门记录表关系
+</span><span class="s2">************************************************
+</span><span class="s2">
+</span><span class="s2">create table book(
+</span><span class="s2">	id int primary key auto_increment,
+</span><span class="s2">    title varchar(32),
+</span><span class="s2">    price float(18,2)
+</span><span class="s2">);
+</span><span class="s2">
+</span><span class="s2">create table author(
+</span><span class="s2">	id int primary key auto_increment,
+</span><span class="s2">    name varchar(32),
+</span><span class="s2">    phone int
+</span><span class="s2">);
+</span><span class="s2">create table book2author(
+</span><span class="s2">	id int primary key auto_increment,
+</span><span class="s2">    book_id int,
+</span><span class="s2">    author_id int,
+</span><span class="s2">    foreign key(author_id) references author(id)
+</span><span class="s2">    on update cascade
+</span><span class="s2">    on delete cascade,
+</span><span class="s2">    foreign key(book_id) references book(id)
+</span><span class="s2">    on update cascade
+</span><span class="s2">    on delete cascade
+</span><span class="s2">);
+</span><span class="s2">注意事项
+</span><span class="s2">1.两张关系表自身不需要做任何的外键字段
+</span><span class="s2">2.在录入数据的时候也不需要考虑先录入后录入的问题
+</span><span class="s2">3.在针对第三张关系表的时候需要注意约束
 </span><span class="s2">&#34;&#34;&#34;</span>
-<span class="o">*********************************************</span>
-<span class="err">多对多外键字段需要你重新创建一张表来专门记录表关系</span>
-<span class="o">*********************************************</span>
-
-
-<span class="n">create</span> <span class="n">table</span> <span class="n">book</span><span class="p">(</span>
-	<span class="nb">id</span> <span class="nb">int</span> <span class="n">primary</span> <span class="n">key</span> <span class="n">auto_increment</span><span class="p">,</span>
-    <span class="n">title</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">32</span><span class="p">),</span>
-    <span class="n">price</span> <span class="nb">float</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-<span class="p">);</span>
-
-<span class="n">create</span> <span class="n">table</span> <span class="n">author</span><span class="p">(</span>
-	<span class="nb">id</span> <span class="nb">int</span> <span class="n">primary</span> <span class="n">key</span> <span class="n">auto_increment</span><span class="p">,</span>
-    <span class="n">name</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">32</span><span class="p">),</span>
-    <span class="n">phone</span> <span class="nb">int</span>
-<span class="p">);</span>
-<span class="n">create</span> <span class="n">table</span> <span class="n">book2author</span><span class="p">(</span>
-	<span class="nb">id</span> <span class="nb">int</span> <span class="n">primary</span> <span class="n">key</span> <span class="n">auto_increment</span><span class="p">,</span>
-    <span class="n">book_id</span> <span class="nb">int</span><span class="p">,</span>
-    <span class="n">author_id</span> <span class="nb">int</span><span class="p">,</span>
-    <span class="n">foreign</span> <span class="n">key</span><span class="p">(</span><span class="n">author_id</span><span class="p">)</span> <span class="n">references</span> <span class="n">author</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
-    <span class="n">on</span> <span class="n">update</span> <span class="n">cascade</span>
-    <span class="n">on</span> <span class="n">delete</span> <span class="n">cascade</span><span class="p">,</span>
-    <span class="n">foreign</span> <span class="n">key</span><span class="p">(</span><span class="n">book_id</span><span class="p">)</span> <span class="n">references</span> <span class="n">book</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
-    <span class="n">on</span> <span class="n">update</span> <span class="n">cascade</span>
-    <span class="n">on</span> <span class="n">delete</span> <span class="n">cascade</span>
-<span class="p">);</span>
-<span class="err">注意事项</span>
-<span class="mf">1.</span><span class="err">两张关系表自身不需要做任何的外键字段</span>
-<span class="mf">2.</span><span class="err">在录入数据的时候也不需要考虑先录入后录入的问题</span>
-<span class="mf">3.</span><span class="err">在针对第三张关系表的时候需要注意约束</span>
-<span class="s2">&#34;&#34;&#34;
-</span></code></pre></div>]]></content>
+</code></pre></div>]]></content>
 		</item>
 		
 		<item>
@@ -2956,17 +2888,18 @@ SELECTstudent.sname AS &amp;#39;姓名&amp;#39;,avg( score.num ) AS &amp;#39;�
 </span><span class="s2">&#39;&#39;&#39;一定要退出客户端重新进入&#39;&#39;&#39;
 </span><span class="s2">&#34;&#34;&#34;</span>
 </code></pre></div><h4 id="时间类型">时间类型</h4>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">datetime</span>  <span class="err">年月日时分秒</span>
-<span class="n">date</span>	<span class="err">年月日</span>
-<span class="n">year</span>	<span class="err">年</span>
-<span class="n">time</span>	<span class="err">时分秒</span>
-<span class="n">create</span> <span class="n">table</span> <span class="n">t1</span><span class="p">(</span>
-	<span class="nb">id</span> <span class="nb">int</span><span class="p">,</span>
-	<span class="n">username</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">22</span><span class="p">),</span>
-	<span class="n">register_time</span> <span class="n">datatime</span><span class="p">,</span>
-	<span class="n">birthday</span> <span class="n">date</span><span class="p">,</span>
-	<span class="n">work_time</span> <span class="n">year</span>
-<span class="p">);</span>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">datetime  年月日时分秒
+</span><span class="s1">date	年月日
+</span><span class="s1">year	年
+</span><span class="s1">time	时分秒
+</span><span class="s1">create table t1(
+</span><span class="s1">	id int,
+</span><span class="s1">	username varchar(22),
+</span><span class="s1">	register_time datatime,
+</span><span class="s1">	birthday date,
+</span><span class="s1">	work_time year
+</span><span class="s1">);&#39;&#39;&#39;</span>
 
 </code></pre></div><h4 id="枚举与集合">枚举与集合</h4>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
@@ -5695,12 +5628,12 @@ pycharm 好东西，要钱，破解
 <li>
 <p>变量名的命名风格：可以不遵守</p>
 <p>1.下划线  python中推荐使用</p>
-<p>Age_of_eddy = 18</p>
-<p>2.小驼峰  Javascript中推荐使用</p>
-<p>ageOfEddy = 18</p>
-<p>3.大驼峰</p>
-<p>AgeOFeddy = 18</p>
-<h4 id="常量">常量</h4>
+<pre><code>Age_of_eddy = 18
+</code></pre><p>2.小驼峰  Javascript中推荐使用</p>
+<pre><code>ageOfEddy = 18
+</code></pre><p>3.大驼峰</p>
+<pre><code>AgeOFeddy = 18
+</code></pre><h4 id="常量">常量</h4>
 <div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="s1">&#39;&#39;&#39;即不变的量或很少变的量
 </span><span class="s1">python中没有绝对的常量，即所有的量都可以修改
 </span><span class="s1">但是作为python程序员我们会约定俗称的将常量的变量名全部大写来表示常量

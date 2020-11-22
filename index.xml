@@ -104,7 +104,7 @@ SELECTstudent.sname AS &amp;#39;姓名&amp;#39;,avg( score.num ) AS &amp;#39;�
       
       <guid>https://Eddy-622.github.io/posts/mysql%E4%B9%8B%E9%93%BE%E6%8E%A5python%E6%93%8D%E4%BD%9Csql%E6%B3%A8%E5%85%A5%E9%97%AE%E9%A2%98/</guid>
       <description>昨日内容回顾   连表操作
-&amp;#34;&amp;#34;&amp;#34;由于在实际应用中，我们需要的数据很有可能是来自于多张表 这个时候我们可以采用多表查询的方式1:连表操作 连表操作的本质就是先将多张表拼接成一张表，然后基于这张拼接之后的表做单表查询 &amp;gt;&amp;gt;&amp;gt; 笛卡尔积 select * from emp,dep; &amp;#34;&amp;#34;&amp;#34; 在涉及到多表查询SQL语句的编写过程中，为了避免字段冲突的问题 我们一般都会加上表名来做明确的区分，否则可能会报错 &amp;#34;&amp;#34;&amp;#34; &amp;gt;&amp;gt;&amp;gt; 连表操作 inner join 将两张表都有对应关系的数据按照指定的条件拼接到一起 select * from emp inner join dep on emp.dep_id = dep.id; left join 以关键字left join左边的表为基准，展示左表所有的记录，没有的null填充 select * from emp left join dep on emp.dep_id = dep.id; right join 以关键字right join右边的表为基准，展示右表所有的记录，没有的null填充 select * from emp right join dep on emp.dep_id = dep.id; union 两张表所有的技术全部展示出来，各自没有对应的全部用null填充 select * from emp left join dep on emp.</description>
+&amp;#34;&amp;#34;&amp;#34;由于在实际应用中，我们需要的数据很有可能是来自于多张表 这个时候我们可以采用多表查询的方式1:连表操作 连表操作的本质就是先将多张表拼接成一张表，然后基于这张拼接之后的表做单表查询 &amp;gt;&amp;gt;&amp;gt; 笛卡尔积 select * from emp,dep; 在涉及到多表查询SQL语句的编写过程中，为了避免字段冲突的问题 我们一般都会加上表名来做明确的区分，否则可能会报错 &amp;gt;&amp;gt;&amp;gt; 连表操作 inner join 将两张表都有对应关系的数据按照指定的条件拼接到一起 select * from emp inner join dep on emp.dep_id = dep.id; left join 以关键字left join左边的表为基准，展示左表所有的记录，没有的null填充 select * from emp left join dep on emp.dep_id = dep.id; right join 以关键字right join右边的表为基准，展示右表所有的记录，没有的null填充 select * from emp right join dep on emp.dep_id = dep.id; union 两张表所有的技术全部展示出来，各自没有对应的全部用null填充 select * from emp left join dep on emp.</description>
     </item>
     
     <item>
@@ -127,11 +127,12 @@ SELECTstudent.sname AS &amp;#39;姓名&amp;#39;,avg( score.num ) AS &amp;#39;�
       <pubDate>Wed, 11 Nov 2020 00:00:00 +0000</pubDate>
       
       <guid>https://Eddy-622.github.io/posts/mysql%E5%8D%95%E8%A1%A8%E6%9F%A5%E8%AF%A2%E5%85%B3%E9%94%AE%E5%AD%97%E5%AD%97%E6%AE%B5%E4%BF%AE%E6%94%B9/</guid>
-      <description>昨日内容回顾   创建表的完整语法
-&amp;#39;&amp;#39;&amp;#39;create table 表名(字段名1 字段类型(数字) 约束条件1 约束条件2,字段名2 字段类型(数字) 约束条件1 约束条件2,字段名3 字段类型(数字) 约束条件1 约束条件2);&amp;#39;&amp;#39;&amp;#39;  约束条件
-&amp;#39;&amp;#39;&amp;#39;unsignedzerofillnot nulldefaultunique单列唯一联合唯一primary key单一主键联合主键auto_increment自增&amp;#39;&amp;#39;&amp;#39;  外键
-&amp;#39;&amp;#39;&amp;#39;外键就是用来建立表与表之间的关系表与表之间关系一对多多对多一对一如何判断表关系&amp;#34;换位思考&amp;#34;换位思考之后如果得出的结论是一方可以一方不可以那么表关系就是&amp;#34;一对多&amp;#34;换位思考之后如果得出的结论是双方都可以那么表关系就是&amp;#34;多对多&amp;#34;换位思考之后如果得出的结论是双方都不可以那么表关系就是&amp;#34;一对一&amp;#34;或者&amp;#34;没有关系&amp;#34;针对不同的表关系外键字段的创建位置也不同1.针对一对多外键字段建在多的一方2.针对多对多外键字段建在第三张关系表中3.针对一对一外键字段建在任何一方都可以但是建议你建在查询频率较高的表中&amp;#39;&amp;#39;&amp;#39;  SQL实现
-&amp;#39;&amp;#39;&amp;#39;create table emp(...dep_id int,foreign key(dep_id) references dep(id)on update cascade &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; 同步更新on delete cascade &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; 同步删除)&amp;#39;&amp;#39;&amp;#39;  作业</description>
+      <description>今日内容概要   表关系判断之一对一
+  修改表的SQL语句补充
+  复制表(了解)
+  单表查询关键字的使用
+selectfrom wheregroup byhavingdistinctlimitorder byregexp  多表查询
+  今日内容详细 表关系判断之一对一 1.qq用户表2.客户表和学生表有时候一张表里面的数据量太多并且有大部分数据不是经常需要使用的，这个时候我们可以基于表关系的知识将一张表拆分为两张表，然后绑定表关系以用户表和用户详情表为例1.先站在用户表的基础上问一个用户能否对应多个用户详情信息不可以2.再站在用户详情表的基础上问一个用户详情能否对应多个用户信息不可以结论:双方都不可以，那么表关系就是&amp;quot;一对一&amp;quot;或者&amp;quot;没有关系&amp;quot;针对一对一外键字段建在任何一方都可以但是建议你建在查询频率较高的表中SQL语句实现create table user(id int primary key auto_increment,name varchar(32),age int,detail_id int unqiue,foreign key(detail_id) references userDetail(id));create table userDetail(id int primary key auto_increment,addr varchar(32),phone int)表关系的总结 &amp;quot;&amp;quot;&amp;quot;我们学习了如何判断表关系以及如何建立表关系，但是在实际工作中遇到有关系的表不一定非要用外键去建立表关系因为当表特别多的时候，如果频繁的使用外键会导致表关系非常的复杂，操作起来关联性太强耦合程度太高我们可以在sql语句层面建立表与表之间的逻辑关系比如:在修改用户表的时候房屋表也要跟着改，那么我们只需要将修改用户表的sql语句和修改房屋表的sql语句放在一起执行&amp;quot;&amp;quot;&amp;quot;修改表的SQL语句补充 &amp;quot;&amp;quot;&amp;quot;1.</description>
     </item>
     
     <item>

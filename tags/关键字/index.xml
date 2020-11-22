@@ -18,11 +18,12 @@
       <pubDate>Wed, 11 Nov 2020 00:00:00 +0000</pubDate>
       
       <guid>https://Eddy-622.github.io/posts/mysql%E5%8D%95%E8%A1%A8%E6%9F%A5%E8%AF%A2%E5%85%B3%E9%94%AE%E5%AD%97%E5%AD%97%E6%AE%B5%E4%BF%AE%E6%94%B9/</guid>
-      <description>昨日内容回顾   创建表的完整语法
-&amp;#39;&amp;#39;&amp;#39;create table 表名(字段名1 字段类型(数字) 约束条件1 约束条件2,字段名2 字段类型(数字) 约束条件1 约束条件2,字段名3 字段类型(数字) 约束条件1 约束条件2);&amp;#39;&amp;#39;&amp;#39;  约束条件
-&amp;#39;&amp;#39;&amp;#39;unsignedzerofillnot nulldefaultunique单列唯一联合唯一primary key单一主键联合主键auto_increment自增&amp;#39;&amp;#39;&amp;#39;  外键
-&amp;#39;&amp;#39;&amp;#39;外键就是用来建立表与表之间的关系表与表之间关系一对多多对多一对一如何判断表关系&amp;#34;换位思考&amp;#34;换位思考之后如果得出的结论是一方可以一方不可以那么表关系就是&amp;#34;一对多&amp;#34;换位思考之后如果得出的结论是双方都可以那么表关系就是&amp;#34;多对多&amp;#34;换位思考之后如果得出的结论是双方都不可以那么表关系就是&amp;#34;一对一&amp;#34;或者&amp;#34;没有关系&amp;#34;针对不同的表关系外键字段的创建位置也不同1.针对一对多外键字段建在多的一方2.针对多对多外键字段建在第三张关系表中3.针对一对一外键字段建在任何一方都可以但是建议你建在查询频率较高的表中&amp;#39;&amp;#39;&amp;#39;  SQL实现
-&amp;#39;&amp;#39;&amp;#39;create table emp(...dep_id int,foreign key(dep_id) references dep(id)on update cascade &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; 同步更新on delete cascade &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; 同步删除)&amp;#39;&amp;#39;&amp;#39;  作业</description>
+      <description>今日内容概要   表关系判断之一对一
+  修改表的SQL语句补充
+  复制表(了解)
+  单表查询关键字的使用
+selectfrom wheregroup byhavingdistinctlimitorder byregexp  多表查询
+  今日内容详细 表关系判断之一对一 1.qq用户表2.客户表和学生表有时候一张表里面的数据量太多并且有大部分数据不是经常需要使用的，这个时候我们可以基于表关系的知识将一张表拆分为两张表，然后绑定表关系以用户表和用户详情表为例1.先站在用户表的基础上问一个用户能否对应多个用户详情信息不可以2.再站在用户详情表的基础上问一个用户详情能否对应多个用户信息不可以结论:双方都不可以，那么表关系就是&amp;quot;一对一&amp;quot;或者&amp;quot;没有关系&amp;quot;针对一对一外键字段建在任何一方都可以但是建议你建在查询频率较高的表中SQL语句实现create table user(id int primary key auto_increment,name varchar(32),age int,detail_id int unqiue,foreign key(detail_id) references userDetail(id));create table userDetail(id int primary key auto_increment,addr varchar(32),phone int)表关系的总结 &amp;quot;&amp;quot;&amp;quot;我们学习了如何判断表关系以及如何建立表关系，但是在实际工作中遇到有关系的表不一定非要用外键去建立表关系因为当表特别多的时候，如果频繁的使用外键会导致表关系非常的复杂，操作起来关联性太强耦合程度太高我们可以在sql语句层面建立表与表之间的逻辑关系比如:在修改用户表的时候房屋表也要跟着改，那么我们只需要将修改用户表的sql语句和修改房屋表的sql语句放在一起执行&amp;quot;&amp;quot;&amp;quot;修改表的SQL语句补充 &amp;quot;&amp;quot;&amp;quot;1.</description>
     </item>
     
   </channel>
