@@ -6,27 +6,600 @@
 		<generator>Hugo -- gohugo.io</generator>
 		<language>zh-CN</language>
 		<copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-		<lastBuildDate>Fri, 20 Nov 2020 00:00:00 +0000</lastBuildDate>
+		<lastBuildDate>Tue, 24 Nov 2020 00:00:00 +0000</lastBuildDate>
 		<atom:link href="https://Eddy-622.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
 		
 		<item>
-			<title>爬虫之selenium模块、实例演示</title>
-			<link>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Bselenium%E6%A8%A1%E5%9D%97%E5%AE%9E%E4%BE%8B%E6%BC%94%E7%A4%BA/</link>
+			<title>爬虫实例、爬取思路、数据分析简介</title>
+			<link>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E5%AE%9E%E4%BE%8B%E7%88%AC%E5%8F%96%E6%80%9D%E8%B7%AF%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%AE%80%E4%BB%8B/</link>
+			<pubDate>Tue, 24 Nov 2020 00:00:00 +0000</pubDate>
+			
+			<guid>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E5%AE%9E%E4%BE%8B%E7%88%AC%E5%8F%96%E6%80%9D%E8%B7%AF%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%AE%80%E4%BB%8B/</guid>
+			<description>今日内容概要  知乎登录破解思路 红薯网小说爬取思路 爬虫框架之Scrapy安装 ipython模块 jupyter模块 anaconda数据分析软件  今日内容详细 知乎登录破解思路   网站手段 我们惯有的思路是登录成功之后网站返回给我们的cookie就是身份标识 但是有一些网站并不是这么做的 当你第一次不登陆情况下访问网站的时候，就已经偷偷给了一个cookie但是这个cookie是没有激活的状态 当你登录之后网站又会在之前的基础之上再给你一个cookie，我们会习惯性的人为第二次给的cookie才是有效的，其实不然 其实第二次给你的是个烟雾弹，真正起作用的恰巧是第一个(登录成功之后会将第一个给你的cookie激活)
+1.访问登录首页查看cookie数据
+ _xsrf	90d14e60-77f3-43b1-9ad0-f836a97cc631_zap	2afce640-f9c2-48dd-973a-e92c235f36382.点击用户名密码登录
+有时候需要输入图片验证码有时候不需要这个其实就是由内部的https://www.zhihu.com/api/v3/oauth/captcha?lang=cn3.验证码中文英文
+ lang=cn 中文汉字lang=en	英文数字4.提交post请求数据全部是加密过的 需要去js文件中查找到加密的算法 每个文件里面搜索关键字encrypt 查找到加密之前的字符串但是里面还是有url加密 需要使用python的模块继续解密
+ from urllib.parse import unquote_plusclient_id 用户id(固定值)grant_type 验证方式(固定值)timestamp 时间戳*1000,去尾source	(固定值)signature	签名(js加密,变动)username	用户名password	密码captcha	验证码lang	验证码方式(固定值)utm_source	(固定值)ref_source	(固定值)other_https://www.zhihu.com/signin?next=%2F5.signature也是js加密的需要破解
+ hmac加密sha1加密将上述推导步骤 熟悉一下即可</description>
+			<content type="html"><![CDATA[<h1 id="今日内容概要">今日内容概要</h1>
+<ul>
+<li>知乎登录破解思路</li>
+<li>红薯网小说爬取思路</li>
+<li>爬虫框架之Scrapy安装</li>
+<li>ipython模块</li>
+<li>jupyter模块</li>
+<li>anaconda数据分析软件</li>
+</ul>
+<h1 id="今日内容详细">今日内容详细</h1>
+<h3 id="知乎登录破解思路">知乎登录破解思路</h3>
+<ul>
+<li>
+<p>网站手段
+我们惯有的思路是登录成功之后网站返回给我们的cookie就是身份标识
+但是有一些网站并不是这么做的
+当你第一次不登陆情况下访问网站的时候，就已经偷偷给了一个cookie但是这个cookie是没有激活的状态
+当你登录之后网站又会在之前的基础之上再给你一个cookie，我们会习惯性的人为第二次给的cookie才是有效的，其实不然
+其实第二次给你的是个烟雾弹，真正起作用的恰巧是第一个(登录成功之后会将第一个给你的cookie激活)</p>
+<p>1.访问登录首页查看cookie数据</p>
+<pre><code>  _xsrf	90d14e60-77f3-43b1-9ad0-f836a97cc631
+    _zap	2afce640-f9c2-48dd-973a-e92c235f3638
+</code></pre><p>2.点击用户名密码登录</p>
+<pre><code>有时候需要输入图片验证码有时候不需要
+    这个其实就是由内部的
+    https://www.zhihu.com/api/v3/oauth/captcha?lang=cn
+   
+</code></pre><p>3.验证码中文英文</p>
+<pre><code>  lang=cn  中文汉字
+    lang=en	 英文数字
+</code></pre><p>4.提交post请求数据全部是加密过的
+需要去js文件中查找到加密的算法
+每个文件里面搜索关键字encrypt
+查找到加密之前的字符串但是里面还是有url加密
+需要使用python的模块继续解密</p>
+<pre><code>   from urllib.parse import unquote_plus
+        client_id      用户id(固定值)
+        grant_type     验证方式(固定值)
+        timestamp      时间戳*1000,去尾
+        source		   (固定值)
+        signature	   签名(js加密,变动)
+        username	   用户名
+        password	   密码
+        captcha		   验证码
+        lang		   验证码方式(固定值)
+        utm_source	   (固定值)
+        ref_source	   (固定值)other_https://www.zhihu.com/signin?next=%2F
+</code></pre><p>5.signature也是js加密的需要破解</p>
+<pre><code>  hmac加密
+    sha1加密
+</code></pre><p>将上述推导步骤 熟悉一下即可</p>
+</li>
+</ul>
+<h3 id="红薯网小说爬取">红薯网小说爬取</h3>
+<p>1.鼠标左右键都无法使用
+2.利用F12调出终端查看内部请求
+查看响应体无法得到网页小说文字数据
+3.筛选出ajax请求文件找到可疑项</p>
+<pre><code>{code: 119, msg: &quot;获取章节内容成功&quot;, key: &quot;86713409&quot;}
+	content:加密
+    other:加密
+</code></pre><p>逆向思维:加密就是为了让你看不懂(说明这块内容重要)</p>
+<p>4.研究上述两个js请求的请求体数据</p>
+<pre><code>method: getchptkey
+    bid: 3052
+    cid: 98805
+
+    method: getchpcontent
+    bid: 3052
+    jid: 3317
+    cid: 98805
+</code></pre><p>5.研究三个数字含义发现是构成该文件地址的三个关键参数
+<a href="https://www.hongshu.com/content/3052/3317-98805.html">https://www.hongshu.com/content/3052/3317-98805.html</a>
+6.加密英文单词叫encrypt解密英文单词decrypt</p>
+<pre><code>搜索到解密的关键代码
+    utf8to16(hs_decrypt(base64decode(data.content), key))
+	给上述代码所在的一行打上一个断点再次发送请求就会卡在这个断点
+    
+    utf8to16(hs_decrypt(base64decode(data.content), key))
+    utf8to16(hs_decrypt(base64decode(data.other), key))
+</code></pre><p>7.将上述解密之后的html代码放入html文件的body内
+将js代码放入js文件内，然后用script标签引入进来
+8.页面上有一些文字是通过css动态渲染的</p>
+<pre><code>1.通过js定位到所有的:befor标签
+    2.然后,获取到css属性的值(缺失的文字)
+    3.把缺失的文字插入到标签之间(innerText)
+    var element_list = 		document.querySelectorAll('#divChpContent span')
+for(var i=0;i&lt;element_list.length;i++){
+    var content = window.getComputedStyle(
+        element_list[i],':before'
+    ).getPropertyValue('content')
+    element_list[i].innerText = content.trim('&quot;');
+}
+</code></pre><p>代码无需掌握 明白思路即可</p>
+<h3 id="爬虫框架之scrapy">爬虫框架之Scrapy</h3>
+<p>Scrapy一个开源和协作的框架，其最初是为了页面抓取 (更确切来说, 网络抓取 )所设计的，使用它可以以快速、简单、可扩展的方式从网站中提取所需的数据。但目前Scrapy的用途十分广泛，可用于如数据挖掘、监测和自动化测试等领域，也可以应用在获取API所返回的数据(例如 Amazon Associates Web Services ) 或者通用的网络爬虫。</p>
+<p>下载模块</p>
+<pre><code>pip3 install scrapy
+</code></pre><p>windows电脑极有可能会报错 如果不报错那就忽略
+mac电脑不会报错</p>
+<p>报错解决思路</p>
+<pre><code>1.pip3 install scrapy
+2.pip3 install wheel
+3.去网站下载一个文件先随便放在一个位置
+	https://www.lfd.uci.edu/~gohlke/pythonlibs/#twisted
+    Twisted‑20.3.0‑cp36‑cp36m‑win_amd64.whl
+4.pip3 install Twisted‑20.3.0‑cp36‑cp36m‑win_amd64.whl
+	报错会提示你将该文件放到哪儿
+    之后重新执行下载命令
+5.pip3 install pywin32
+6.pip3 install scrapy
+</code></pre><pre><code>参考博客：https://www.cnblogs.com/Dominic-Ji/p/9550525.html
+</code></pre><h3 id="数据分析模块">数据分析模块</h3>
+<pre><code>为什么要学习数据分析
+	目前数据是最值钱的
+    &quot;数据是21世纪的石油&quot;
+ 
+数据分析能做的事情
+	1.商品推荐服务
+    2.抖音短视频推荐
+    	投喂
+        获取用户点击的视频记录，对视频进行分类
+        统计出用户点击最多的几个分类之后大概率推送相关分类视频
+    3.电影推荐
+    	同上
+    4.金融量化交易
+  	...
+   
+为什么用python做数据分析
+	1.python是目前最简单好学的一门编程语言
+    2.python的用途很广泛
+    3.基于python书写的用于数据分析的模块最大功能最强大
+   
+数据分析工作流程
+	1.提出需求
+    	到底要分析什么...
+    2.收集数据
+    	数据的来源
+        	1.公司自己内部的
+            2.花钱购买
+            3.自己写爬虫爬
+    3.处理数据
+    	无效数据
+        缺失数据
+        异常数据
+    4.数据分析
+    	数据分析软件SPSS
+        数据分析模型(算法)
+    5.数据可视化
+    	数据可视化软件Teableau、PowerBI
+        python可视化模块
+    6.数据分析报告
+    	过程中采用的算法
+        总结归纳分析结果
+        提出个人建议
+</code></pre><h3 id="python数据分析模块">python数据分析模块</h3>
+<p>1.numpy
+用于科学计算
+2.pandas
+基于numpy构建的更加强大的数据分析模块
+3.matplotlib
+数据可视化</p>
+<h3 id="ipython模块">ipython模块</h3>
+<pre><code>1.原生的python解释器环境有很多缺点
+	1.代码不会自动提示
+    2.颜色太单调
+    3.没有行数显示
+在工作中其实我们不会直接使用原生的python解释器环境，取而代之的是ipython模块提供的环境
+
+下载模块
+	pip3 install ipython
+    # 也可以使用国内的源
+    pip3 install ipython -i https://pypi.tuna.tsinghua.edu.cn/simple/
+基本使用
+	直接在cmd窗口下输入ipython即可进入环境
+    In [1]: print('hello world')
+    hello world
+
+    In [2]: import time
+
+    In [3]: time.time()
+    Out[3]: 1606191571.0108407
+
+    In [4]: import random
+
+    In [5]: random.random()
+    Out[5]: 0.5895398236819949
+
+    In [6]:
+优势:
+    1.代码有自动提示
+    	多敲几下tab即可
+    2.输入有行数显示
+    3.颜色有变化
+</code></pre><h3 id="jupyter模块">jupyter模块</h3>
+<pre><code>下载模块
+	pip3 install jupyter -i https://pypi.tuna.tsinghua.edu.cn/simple/
+      
+基本使用
+	在cmd窗口内直接输入jupyter notebook
+    在哪个路径下就会在浏览器里面展示出该路径下所有的文件
+    停止服务使用ctrl + C多敲几下
+
+下拉框功能
+	terminal
+    folder
+    text file
+</code></pre>]]></content>
+		</item>
+		
+		<item>
+			<title>爬虫之selenium模块、实例</title>
+			<link>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Bselenium%E6%A8%A1%E5%9D%97%E5%AE%9E%E4%BE%8B/</link>
+			<pubDate>Mon, 23 Nov 2020 00:00:00 +0000</pubDate>
+			
+			<guid>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Bselenium%E6%A8%A1%E5%9D%97%E5%AE%9E%E4%BE%8B/</guid>
+			<description>今日内容概要  selenium模块 爬取京东商品信息 研究知乎防爬策略 研究小说爬取思路 Scrapy框架了解 MongoDB数据库(非关系型数据库)  今日内容详细 selenium模块   通过id查找标签
+from selenium import webdriverimport timebro=webdriver.Chrome()bro.get(&amp;#34;http://www.baidu.com&amp;#34;)bro.implicitly_wait(10)inEle = bro.find_element_by_id(&amp;#39;kw&amp;#39;)往标签内写内容
+inEle.send_keys(&amp;#39;美女&amp;#39;)通过a标签内部的文本查找a标签
+aEle = bro.find_element_by_link_text(&amp;#39;登录&amp;#39;)点击a标签
+aEle.click()如果你不知道具体文本内容 或者想模糊查询
+find_element_by_partial_link_text查找div标签
+divEle = bro.find_element_by_tag_name(&amp;#39;div&amp;#39;)获取内部所有的文本信息
+print(divEle.text) 查看含有class属性值:
+s-top-right-text c-font-normal c-color-tspEle = bro.find_element_by_class_name(&amp;#39;s-top-right-text&amp;#39;)print(spEle.text)css选择器
+pEle = bro.find_element_by_css_selector(&amp;#39;#kw&amp;#39;)pEle.click()  自动登录 from selenium import webdriverimport timebro=webdriver.Chrome()bro.get(&amp;#34;http://www.baidu.com&amp;#34;)bro.implicitly_wait(10)  找到登录按钮</description>
+			<content type="html"><![CDATA[<h1 id="今日内容概要">今日内容概要</h1>
+<ul>
+<li>selenium模块</li>
+<li>爬取京东商品信息</li>
+<li>研究知乎防爬策略</li>
+<li>研究小说爬取思路</li>
+<li>Scrapy框架了解</li>
+<li>MongoDB数据库(非关系型数据库)</li>
+</ul>
+<h1 id="今日内容详细">今日内容详细</h1>
+<h3 id="selenium模块">selenium模块</h3>
+<ul>
+<li>
+<p>通过id查找标签</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">selenium</span> <span class="kn">import</span> <span class="n">webdriver</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="n">bro</span><span class="o">=</span><span class="n">webdriver</span><span class="o">.</span><span class="n">Chrome</span><span class="p">()</span>
+<span class="n">bro</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;http://www.baidu.com&#34;</span><span class="p">)</span>
+<span class="n">bro</span><span class="o">.</span><span class="n">implicitly_wait</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+  
+  
+<span class="n">inEle</span> <span class="o">=</span> <span class="n">bro</span><span class="o">.</span><span class="n">find_element_by_id</span><span class="p">(</span><span class="s1">&#39;kw&#39;</span><span class="p">)</span>
+</code></pre></div><p>往标签内写内容</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">inEle</span><span class="o">.</span><span class="n">send_keys</span><span class="p">(</span><span class="s1">&#39;美女&#39;</span><span class="p">)</span>
+</code></pre></div><p>通过a标签内部的文本查找a标签</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">aEle</span> <span class="o">=</span> <span class="n">bro</span><span class="o">.</span><span class="n">find_element_by_link_text</span><span class="p">(</span><span class="s1">&#39;登录&#39;</span><span class="p">)</span>
+</code></pre></div><p>点击a标签</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">aEle</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+</code></pre></div><p>如果你不知道具体文本内容 或者想模糊查询</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">find_element_by_partial_link_text</span>
+</code></pre></div><p>查找div标签</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">divEle</span> <span class="o">=</span> <span class="n">bro</span><span class="o">.</span><span class="n">find_element_by_tag_name</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">)</span>
+</code></pre></div><p>获取内部所有的文本信息</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="n">divEle</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>  
+</code></pre></div><p>查看含有class属性值:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">s</span><span class="o">-</span><span class="n">top</span><span class="o">-</span><span class="n">right</span><span class="o">-</span><span class="n">text</span> <span class="n">c</span><span class="o">-</span><span class="n">font</span><span class="o">-</span><span class="n">normal</span> <span class="n">c</span><span class="o">-</span><span class="n">color</span><span class="o">-</span><span class="n">t</span>
+<span class="n">spEle</span> <span class="o">=</span> <span class="n">bro</span><span class="o">.</span><span class="n">find_element_by_class_name</span><span class="p">(</span><span class="s1">&#39;s-top-right-text&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">spEle</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</code></pre></div><p>css选择器</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">pEle</span> <span class="o">=</span> <span class="n">bro</span><span class="o">.</span><span class="n">find_element_by_css_selector</span><span class="p">(</span><span class="s1">&#39;#kw&#39;</span><span class="p">)</span>
+<span class="n">pEle</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+</code></pre></div></li>
+</ul>
+<h3 id="自动登录">自动登录</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">selenium</span> <span class="kn">import</span> <span class="n">webdriver</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="n">bro</span><span class="o">=</span><span class="n">webdriver</span><span class="o">.</span><span class="n">Chrome</span><span class="p">()</span>
+<span class="n">bro</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;http://www.baidu.com&#34;</span><span class="p">)</span>
+<span class="n">bro</span><span class="o">.</span><span class="n">implicitly_wait</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</code></pre></div><ul>
+<li>
+<p>找到登录按钮</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">loginEle</span> <span class="o">=</span> <span class="n">bro</span><span class="o">.</span><span class="n">find_element_by_link_text</span><span class="p">(</span><span class="s1">&#39;登录&#39;</span><span class="p">)</span>
+</code></pre></div><p>点击登录按钮</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">loginEle</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+</code></pre></div><p>找到用户名登录标签</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">pEle</span> <span class="o">=</span> <span class="n">bro</span><span class="o">.</span><span class="n">find_element_by_id</span><span class="p">(</span><span class="s1">&#39;TANGRAM__PSP_11__footerULoginBtn&#39;</span><span class="p">)</span>
+</code></pre></div><p>点击按钮</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">pEle</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+</code></pre></div><p>找到获取用户名和密码的标签</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">userEle</span> <span class="o">=</span> <span class="n">bro</span><span class="o">.</span><span class="n">find_element_by_id</span><span class="p">(</span><span class="s1">&#39;TANGRAM__PSP_11__userName&#39;</span><span class="p">)</span>
+<span class="n">pwdEle</span> <span class="o">=</span> <span class="n">bro</span><span class="o">.</span><span class="n">find_element_by_id</span><span class="p">(</span><span class="s1">&#39;TANGRAM__PSP_11__password&#39;</span><span class="p">)</span>
+</code></pre></div><p>往两个框中分别属于内容</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">userEle</span><span class="o">.</span><span class="n">send_keys</span><span class="p">(</span><span class="s1">&#39;老男孩上海校区&#39;</span><span class="p">)</span>
+<span class="n">pwdEle</span><span class="o">.</span><span class="n">send_keys</span><span class="p">(</span><span class="s1">&#39;123hj13121283&#39;</span><span class="p">)</span>
+</code></pre></div><p>找到最终的登录按钮</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">btnEle</span> <span class="o">=</span> <span class="n">bro</span><span class="o">.</span><span class="n">find_element_by_id</span><span class="p">(</span><span class="s1">&#39;TANGRAM__PSP_11__submit&#39;</span><span class="p">)</span>
+<span class="n">btnEle</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+</code></pre></div></li>
+</ul>
+<h3 id="显示等待和隐示等待">显示等待和隐示等待</h3>
+<ul>
+<li>
+<p>隐式等待:在查找所有元素时，如果尚未被加载，则等10秒</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">browser</span><span class="o">.</span><span class="n">implicitly_wait</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>   <span class="c1"># 表示等待所有</span>
+</code></pre></div><p>推荐加上上述的隐式等待代码</p>
+</li>
+<li>
+<p>显式等待：显式地等待某个元素被加载</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">wait</span><span class="o">=</span><span class="n">WebDriverWait</span><span class="p">(</span><span class="n">browser</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>  <span class="c1">#了解即可</span>
+<span class="n">wait</span><span class="o">.</span><span class="n">until</span><span class="p">(</span><span class="n">EC</span><span class="o">.</span><span class="n">presence_of_element_located</span><span class="p">((</span><span class="n">By</span><span class="o">.</span><span class="n">ID</span><span class="p">,</span><span class="s1">&#39;content_left&#39;</span><span class="p">)))</span>
+</code></pre></div></li>
+</ul>
+<h3 id="控制页面元素滑动">控制页面元素滑动</h3>
+<ul>
+<li>
+<p>可以利用selenium模块来破解滑动验证码
+但是过程很复杂，还不如你自己快速的划一下</p>
+<p>参考文档:
+<a href="https://selenium-python.readthedocs.io/api.html#module-selenium.webdriver.common.action_chains">https://selenium-python.readthedocs.io/api.html#module-selenium.webdriver.common.action_chains</a></p>
+<p>案例代码:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">selenium</span> <span class="kn">import</span> <span class="n">webdriver</span>
+<span class="kn">from</span> <span class="nn">selenium.webdriver</span> <span class="kn">import</span> <span class="n">ActionChains</span>
+  
+<span class="kn">from</span> <span class="nn">selenium.webdriver.support.wait</span> <span class="kn">import</span> <span class="n">WebDriverWait</span>  <span class="c1"># 等待页面加载某些元素</span>
+<span class="kn">import</span> <span class="nn">time</span>
+  
+<span class="n">driver</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Chrome</span><span class="p">()</span>
+<span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://www.runoob.com/try/try.php?filename=jqueryui-api-droppable&#39;</span><span class="p">)</span>
+<span class="n">wait</span><span class="o">=</span><span class="n">WebDriverWait</span><span class="p">(</span><span class="n">driver</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+  
+<span class="n">driver</span><span class="o">.</span><span class="n">implicitly_wait</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>  <span class="c1"># 使用隐式等待</span>
+  
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">driver</span><span class="o">.</span><span class="n">switch_to</span><span class="o">.</span><span class="n">frame</span><span class="p">(</span><span class="s1">&#39;iframeResult&#39;</span><span class="p">)</span> <span class="c1">#切换到iframeResult</span>
+    <span class="n">sourse</span><span class="o">=</span><span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_id</span><span class="p">(</span><span class="s1">&#39;draggable&#39;</span><span class="p">)</span>
+    <span class="n">targ</span>	<span class="n">et</span><span class="o">=</span><span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_id</span><span class="p">(</span><span class="s1">&#39;droppable&#39;</span><span class="p">)</span>
+</code></pre></div><p>方式一：基于同一个动作链串行执行</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">actions</span>	<span class="o">=</span><span class="n">ActionChains</span><span class="p">(</span><span class="n">driver</span><span class="p">)</span> <span class="c1">#拿到动作链对象</span>
+  
+<span class="n">actions</span><span class="o">.</span><span class="n">drag_and_drop</span><span class="p">(</span><span class="n">sourse</span><span class="p">,</span><span class="n">target</span><span class="p">)</span> <span class="c1">#把动作放到动作链中，准备串行执行</span>
+  
+<span class="n">actions</span><span class="o">.</span><span class="n">perform</span><span class="p">()</span>
+</code></pre></div><p>方式二：不同的动作链，每次移动的位移都不同</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">  <span class="n">ActionChains</span><span class="p">(</span><span class="n">driver</span><span class="p">)</span><span class="o">.</span><span class="n">click_and_hold</span><span class="p">(</span><span class="n">sourse</span><span class="p">)</span><span class="o">.</span><span class="n">perform</span><span class="p">()</span>
+    <span class="n">distance</span><span class="o">=</span><span class="n">target</span><span class="o">.</span><span class="n">location</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">-</span><span class="n">sourse</span><span class="o">.</span><span class="n">location</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span>
+  
+<span class="err">​</span>    <span class="n">track</span><span class="o">=</span><span class="mi">0</span>
+<span class="err">​</span>    <span class="k">while</span> <span class="n">track</span> <span class="o">&lt;</span> <span class="n">distance</span><span class="p">:</span>
+<span class="err">​</span>        <span class="n">ActionChains</span><span class="p">(</span><span class="n">driver</span><span class="p">)</span><span class="o">.</span><span class="n">move_by_offset</span><span class="p">(</span><span class="n">xoffset</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">yoffset</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">perform</span><span class="p">()</span>
+<span class="err">​</span>        <span class="n">track</span><span class="o">+=</span><span class="mi">2</span>
+  
+<span class="err">​</span>    <span class="n">ActionChains</span><span class="p">(</span><span class="n">driver</span><span class="p">)</span><span class="o">.</span><span class="n">release</span><span class="p">()</span><span class="o">.</span><span class="n">perform</span><span class="p">()</span>
+  
+<span class="err">​</span>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+  
+<span class="k">finally</span><span class="p">:</span>
+    <span class="n">driver</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div><p>针对滑动验证码得到自动破解其实是有对应的防爬措施
+如果你滑动的速度特别快并且特别精确那么系统会认为你是一个程序</p>
+</li>
+</ul>
+<h3 id="异常捕获">异常捕获</h3>
+<ul>
+<li>
+<p>有时候连我们自己都不知道自己写的代码时候会报错
+那么这个时候我们可以提前采用异常捕获的形式一旦代码报错直接自动处理</p>
+<p>针对报错信息主要有三块
+1.报错的定位信息
+2.错误的类型
+3.错误的具体信息</p>
+<p>异常主要分类两类
+1.语法错误
+if:
+def:</p>
+<p>语法错误是不能容忍的</p>
+<p>逻辑错误是可以被允许发生的</p>
+<p>代码一旦出现异常会导致整个程序停止运行，如何避免这种情况的发生
+我们可以使用异常处理</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">11</span><span class="p">,</span><span class="mi">22</span><span class="p">,</span><span class="mi">33</span><span class="p">]</span>
+<span class="k">try</span><span class="p">:</span>
+  <span class="n">l</span><span class="p">[</span><span class="mi">100000</span><span class="p">]</span>  <span class="c1"># 可能会报错的代码</span>
+  <span class="n">aaa</span>
+<span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>  <span class="c1"># 针对不同的报错类型设置不同的处理机制</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;索引超出范围了&#39;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>  <span class="c1">#针对不同的报错类型设置不同的处理机制</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;变量名必须先定义后使用&#39;</span><span class="p">)</span>
+</code></pre></div><p>如果遇到错误类型无法预估，如何做?</p>
+<p>万能异常：Exception</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">try</span><span class="p">:</span>
+    <span class="n">l</span><span class="p">[</span><span class="mi">100000</span><span class="p">]</span>  <span class="c1"># 可能会报错的代码</span>
+  
+<span class="n">aaa</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>  <span class="c1"># e就是系统的具体报错提示</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;所有的错我都能捕获&#39;</span><span class="p">)</span>
+</code></pre></div><p>代码中不要出现太多的异常捕获代码，尽可能少的使用
+并且try代码块里面被监测的代码也应该尽量的少</p>
+</li>
+</ul>
+<h3 id="控制前进后退">控制前进后退</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">selenium</span> <span class="kn">import</span> <span class="n">webdriver</span>
+
+<span class="n">browser</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Chrome</span><span class="p">()</span>
+<span class="n">browser</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://www.baidu.com&#39;</span><span class="p">)</span>
+<span class="n">browser</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://www.taobao.com&#39;</span><span class="p">)</span>
+<span class="n">browser</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://www.sina.com.cn/&#39;</span><span class="p">)</span>
+
+<span class="n">browser</span><span class="o">.</span><span class="n">back</span><span class="p">()</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">browser</span><span class="o">.</span><span class="n">forward</span><span class="p">()</span>
+<span class="n">browser</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div><h3 id="执行js代码">执行js代码</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">selenium</span> <span class="kn">import</span> <span class="n">webdriver</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">bro</span><span class="o">=</span><span class="n">webdriver</span><span class="o">.</span><span class="n">Chrome</span><span class="p">()</span>
+<span class="n">bro</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;http://www.baidu.com&#34;</span><span class="p">)</span>
+<span class="n">bro</span><span class="o">.</span><span class="n">execute_script</span><span class="p">(</span><span class="s1">&#39;prompt(&#34;你确定要走吗?&#34;)&#39;</span><span class="p">)</span> <span class="c1">#打印警告</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</code></pre></div><h3 id="cookie操作">cookie操作</h3>
+<p>requests方法获取cookie</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://www.baidu.com&#39;</span><span class="p">)</span>
+<span class="n">res</span><span class="o">.</span><span class="n">cookies</span><span class="o">.</span><span class="n">get_dict</span><span class="p">()</span> <span class="c1">#获取cookies</span>
+</code></pre></div><p>使用selenium打开网址,然后让用户完成手工登录,再获取cookie</p>
+<ul>
+<li>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">selenium</span> <span class="kn">import</span> <span class="n">webdriver</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://account.cnblogs.com/signin?returnUrl=https%3A</span><span class="si">%2F%2F</span><span class="s1">www.cnblogs.com</span><span class="si">%2F</span><span class="s1">&#39;</span>
+<span class="n">driver</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Chrome</span><span class="p">()</span>
+<span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">driver</span><span class="o">.</span><span class="n">refresh</span><span class="p">()</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">get_cookies</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;xxx.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+  
+  
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;xxx.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+  <span class="n">di</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="n">cookies</span> <span class="o">=</span> <span class="p">{}</span>
+</code></pre></div></li>
+<li>
+<p>获取cookie中的name和value,转化成requests可以使用的形式</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">for</span> <span class="n">cookie</span> <span class="ow">in</span> <span class="n">di</span><span class="p">:</span>
+<span class="n">cookies</span><span class="p">[</span><span class="n">cookie</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">cookie</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">cookies</span><span class="p">)</span>
+</code></pre></div></li>
+<li>
+<p>当请求头也有很多校验信息的时候你干脆直接全部带上</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">&#39;authority&#39;</span><span class="p">:</span> <span class="s1">&#39;i-beta.cnblogs.com&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="s1">&#39;GET&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;path&#39;</span><span class="p">:</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;scheme&#39;</span><span class="p">:</span> <span class="s1">&#39;https&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;accept&#39;</span><span class="p">:</span> <span class="s1">&#39;text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;accept-encoding&#39;</span><span class="p">:</span> <span class="s1">&#39;gzip, deflate, br&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;accept-language&#39;</span><span class="p">:</span> <span class="s1">&#39;zh-CN,zh;q=0.9&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;cache-control&#39;</span><span class="p">:</span> <span class="s1">&#39;max-age=0&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;if-modified-since&#39;</span><span class="p">:</span> <span class="s1">&#39;Sun, 24 Nov 2019 06:14:53 GMT&#39;</span><span class="p">,</span>
+  
+<span class="s1">&#39;if-modified-since&#39;</span><span class="p">:</span> <span class="s1">&#39;Sun, 24 Nov 2019 06:14:53 GMT,</span>
+<span class="s1">&#39;sec-fetch-mode&#39;</span><span class="p">:</span> <span class="s1">&#39;navigate&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;sec-fetch-site&#39;</span><span class="p">:</span> <span class="s1">&#39;none&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;sec-fetch-user&#39;</span><span class="p">:</span> <span class="s1">&#39;?1&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;upgrade-insecure-requests&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;user-agent&#39;</span><span class="p">:</span> <span class="s1">&#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36&#39;</span>
+  <span class="p">}</span>
+</code></pre></div></li>
+<li>
+<p>使用该cookie完成请求</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://i-beta.cnblogs.com/api/user&#39;</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">cookies</span><span class="o">=</span><span class="n">cookies</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;xxx&#39;</span><span class="p">)</span>
+<span class="n">response</span><span class="o">.</span><span class="n">encoding</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">apparent_encoding</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</code></pre></div><p>利用获取cookie的方式可以一定程度上避开用户身份校验</p>
+</li>
+</ul>
+<h3 id="爬取京东商品信息">爬取京东商品信息</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">selenium</span> <span class="kn">import</span> <span class="n">webdriver</span>
+<span class="kn">from</span> <span class="nn">selenium.webdriver.common.keys</span> <span class="kn">import</span> <span class="n">Keys</span>  <span class="c1"># 通过模块模仿键盘按键操作</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">bro</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Chrome</span><span class="p">()</span>
+<span class="n">bro</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;https://www.jd.com&#34;</span><span class="p">)</span>
+<span class="n">bro</span><span class="o">.</span><span class="n">implicitly_wait</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+</code></pre></div><ul>
+<li>
+<p>查找输入框</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">inputEle</span> <span class="o">=</span> <span class="n">bro</span><span class="o">.</span><span class="n">find_element_by_id</span><span class="p">(</span><span class="s1">&#39;key&#39;</span><span class="p">)</span>
+</code></pre></div></li>
+<li>
+<p>输入想要获取的商品名称</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">inputEle</span><span class="o">.</span><span class="n">send_keys</span><span class="p">(</span><span class="s1">&#39;球&#39;</span><span class="p">)</span>
+<span class="n">inputEle</span><span class="o">.</span><span class="n">send_keys</span><span class="p">(</span><span class="n">Keys</span><span class="o">.</span><span class="n">ENTER</span><span class="p">)</span>  <span class="c1"># 模拟键盘enter键</span>
+</code></pre></div></li>
+<li>
+<p>研究商品展示标签发送都是一个个的li标签   element后面加不加s表示查找单个或者多个</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">li_list</span> <span class="o">=</span> <span class="n">bro</span><span class="o">.</span><span class="n">find_elements_by_class_name</span><span class="p">(</span><span class="s1">&#39;gl-item&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">li</span> <span class="ow">in</span> <span class="n">li_list</span><span class="p">:</span>
+  
+<span class="c1">#根据标签的特点一个个筛选</span>
+<span class="n">aEle</span> <span class="o">=</span> <span class="n">li</span><span class="o">.</span><span class="n">find_element_by_tag_name</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">)</span>
+  
+<span class="c1">#获取每个商品的详细地址</span>
+  
+<span class="c1">#当一种选择器不行的时候 可以考虑使用其他的试试</span>
+<span class="n">imgEle</span> <span class="o">=</span> <span class="n">li</span><span class="o">.</span><span class="n">find_element_by_css_selector</span><span class="p">(</span><span class="s1">&#39;.p-img a img&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="s1">&#39;src&#39;</span><span class="p">)</span>
+  <span class="k">if</span> <span class="ow">not</span> <span class="n">imgEle</span><span class="p">:</span>
+<span class="k">pass</span>
+</code></pre></div><p>针对缺失的图片 不要一根筋死在一个页面上 
+可以请求该商品的详细页面 然后再拿图片地址</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">  <span class="n">priceEle</span> <span class="o">=</span> <span class="n">li</span><span class="o">.</span><span class="n">find_element_by_css_selector</span><span class="p">(</span><span class="s1">&#39;.p-price i&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+  
+  <span class="n">infoEle</span> <span class="o">=</span> <span class="n">li</span><span class="o">.</span><span class="n">find_elemenst_by_css_selector</span><span class="p">(</span><span class="s1">&#39;.p-name em&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+  
+  <span class="n">commit</span> <span class="o">=</span> <span class="n">li</span><span class="o">.</span><span class="n">find_element_by_css_selector</span><span class="p">(</span><span class="s1">&#39;.p-commit strong&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+  
+  <span class="k">print</span><span class="p">(</span><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">    商品链接：</span><span class="si">%s</span><span class="s2">
+</span><span class="s2">    商品图片：</span><span class="si">%s</span><span class="s2">
+</span><span class="s2">    商品名字：</span><span class="si">%s</span><span class="s2">
+</span><span class="s2">    商品价格：</span><span class="si">%s</span><span class="s2">
+</span><span class="s2">    商品评论数：</span><span class="si">%s</span><span class="s2">
+</span><span class="s2">  
+</span><span class="s2">  &#34;&#34;&#34;</span><span class="o">%</span><span class="p">(</span><span class="n">aEle</span><span class="p">,</span><span class="n">imgEle</span><span class="p">,</span><span class="n">infoEle</span><span class="p">,</span><span class="n">priceEle</span><span class="p">,</span><span class="n">commit</span><span class="p">))</span>
+</code></pre></div></li>
+</ul>
+<p>&quot;&rdquo;&rdquo;
+学有余力的同学(研究)
+1.动态加载
+2.翻页爬取
+&quot;&rdquo;&rdquo;</p>
+<h3 id="图片验证码破解思路">图片验证码破解思路</h3>
+<pre><code>三种方式
+	方式1(较为复杂)
+  	代码破解
+    	软件:Tesseract-ocr 
+    	模块:pytesseract(课下研究一下看看)
+  方式2
+  	打码平台
+    &quot;&quot;&quot;
+    将含有验证码的图片发送给平台后端的工作人员
+    工作人员肉眼识别给你发回来结果
+    &quot;&quot;&quot;
+    	eg:http://sb.daredian.cn/?spm=dm.pc@baidu
+  方式3
+  	人工打码
+    &quot;&quot;&quot;
+    自己在登录环节手动人为干预一下
+    &quot;&quot;&quot;
+</code></pre><h3 id="作业">作业</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="mf">1.</span><span class="err">尽量脱稿完成课上爬虫案例</span>
+<span class="mf">2.</span><span class="err">根据自身情况每日抄写一遍基础阶段的上课笔记</span>
+	<span class="err">比如从</span><span class="n">day01开始</span>
+<span class="mf">3.</span><span class="err">利用</span><span class="n">selenium模块尝试着自动打开京东搜索你感兴趣的商品</span>
+<span class="mf">4.</span><span class="err">爬取京东商品信息</span> <span class="err">针对拿不到的图片想办法给我获取到</span>
+<span class="mf">5.</span><span class="err">利用所学知识点爬取网站表情包</span>
+</code></pre></div>]]></content>
+		</item>
+		
+		<item>
+			<title>爬虫之selenium模块</title>
+			<link>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Bselenium%E6%A8%A1%E5%9D%97/</link>
 			<pubDate>Fri, 20 Nov 2020 00:00:00 +0000</pubDate>
 			
-			<guid>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Bselenium%E6%A8%A1%E5%9D%97%E5%AE%9E%E4%BE%8B%E6%BC%94%E7%A4%BA/</guid>
+			<guid>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Bselenium%E6%A8%A1%E5%9D%97/</guid>
 			<description>今日内容概要  爬取天气信息 爬取汽车之家信息 selenium模块  今日内容详细   爬取天气信息 http://tianqi.2345.com有一些网站的数据是后续js动态加载的 (网站的地址不变数据在变) 打开浏览器network点击获取数据的按钮查看内部js请求 多请求几次总结url变化规律
 http://tianqi.2345.com/Pc/GetHistoryareaInfo%5BareaId%5D=60010&amp;amp;areaInfo%5BareaType%5D=2&amp;amp;date%5Byear%5D=2020&amp;amp;date%5Bmonth%5D=9http://tianqi.2345.com/Pc/GetHistoryareaInfo%5BareaId%5D=71447&amp;amp;areaInfo%5BareaType%5D=2&amp;amp;date%5Byear%5D=2020&amp;amp;date%5Bmonth%5D=10o%5BareaId%5D=60010&amp;amp;areaInfo%5BareaType%5D=2&amp;amp;date%5Byear%5D=2020&amp;amp;date%5Bmonth%5D=10 朝上述url发送get请求
-  import requests import json import pandas
-res = requests.get(&amp;lsquo;http://tianqi.2345.com/Pc/GetHistory?areaInfo%5BareaId%5D=71447&amp;amp;areaInfo%5BareaType%5D=2&amp;amp;date%5Byear%5D=2020&amp;amp;date%5Bmonth%5D=10&#39;) content = res.content
+  import requests import json import pandas res = requests.get(&amp;lsquo;http://tianqi.2345.com/Pc/GetHistory?areaInfo%5BareaId%5D=71447&amp;amp;areaInfo%5BareaType%5D=2&amp;amp;date%5Byear%5D=2020&amp;amp;date%5Bmonth%5D=10&#39;) content = res.content
 先反序列化成python里面的字典```pythonjson_dict = json.loads(content)​	loads方法既可以反序列化json格式字符串 ​	也可以发序列化json格式的二进制数据
 在利用字典取值获取天气相关的数据
 real_data = json_dict.get(&amp;#39;data&amp;#39;)直接将页面上的表格数据筛选出来
 res = pandas.read_html(real_data)print(res)爬取汽车之家数据 新闻标签页
-https://www.autohome.com.cn/news/总结每个页的url规律 推导出固定url格式
-https://www.autohome.com.cn/news/1/#liststarthttps://www.autohome.com.cn/news/2/#liststarthttps://www.autohome.com.cn/news/3/#liststart利用代码事先翻页的功能
-url_reg = &amp;#39;https://www.autohome.com.cn/news/%s/#liststart&amp;#39;for i in range(1,6010):print(url_reg%i)尝试着直接朝url发送get请求获取数据
-研究目标数据所在的HTML规律</description>
+ https://www.autohome.com.cn/news/总结每个页的url规律 推导出固定url格式
+ https://www.autohome.com.cn/news/1/#liststarthttps://www.autohome.com.cn/news/2/#liststarthttps://www.autohome.com.cn/news/3/#liststart利用代码事先翻页的功能
+url_reg = &amp;#39;https://www.autohome.com.cn/news/%s/#liststart&amp;#39;for i in range(1,6010):print(url_reg%i)尝试着直接朝url发送get请求获取数据</description>
 			<content type="html"><![CDATA[<h1 id="今日内容概要">今日内容概要</h1>
 <ul>
 <li>爬取天气信息</li>
@@ -50,8 +623,8 @@ http://tianqi.2345.com/Pc/GetHistoryareaInfo%5BareaId%5D=71447&amp;areaInfo%5Bar
 </ol>
 <p>import requests
 import json
-import pandas</p>
-<p>res = requests.get(&lsquo;<a href="http://tianqi.2345.com/Pc/GetHistory?areaInfo%5BareaId%5D=71447&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10'">http://tianqi.2345.com/Pc/GetHistory?areaInfo%5BareaId%5D=71447&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10'</a>)
+import pandas
+res = requests.get(&lsquo;<a href="http://tianqi.2345.com/Pc/GetHistory?areaInfo%5BareaId%5D=71447&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10'">http://tianqi.2345.com/Pc/GetHistory?areaInfo%5BareaId%5D=71447&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10'</a>)
 content = res.content</p>
 <pre><code>
 先反序列化成python里面的字典
@@ -61,58 +634,58 @@ json_dict = json.loads(content)
 </code></pre><p>​				loads方法既可以反序列化json格式字符串
 ​				也可以发序列化json格式的二进制数据</p>
 <p>在利用字典取值获取天气相关的数据</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">real_data</span> <span class="o">=</span> <span class="n">json_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">)</span>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">   <span class="n">real_data</span> <span class="o">=</span> <span class="n">json_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">)</span>
 </code></pre></div><p>直接将页面上的表格数据筛选出来</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">res</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_html</span><span class="p">(</span><span class="n">real_data</span><span class="p">)</span>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">   <span class="n">res</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_html</span><span class="p">(</span><span class="n">real_data</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
 </code></pre></div><h4 id="爬取汽车之家数据">爬取汽车之家数据</h4>
 <p>新闻标签页</p>
-<div class="highlight"><pre class="chroma"><code class="language-http" data-lang="http"><span class="err">https://www.autohome.com.cn/news/
-</span></code></pre></div><p>总结每个页的url规律 推导出固定url格式</p>
-<pre><code>https://www.autohome.com.cn/news/1/#liststart
+<pre><code>   https://www.autohome.com.cn/news/
+</code></pre><p>总结每个页的url规律 推导出固定url格式</p>
+<pre><code>   https://www.autohome.com.cn/news/1/#liststart
 https://www.autohome.com.cn/news/2/#liststart
-https://www.autohome.com.cn/news/3/#liststart
+   https://www.autohome.com.cn/news/3/#liststart
 </code></pre><p>利用代码事先翻页的功能</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">url_reg</span> <span class="o">=</span> <span class="s1">&#39;https://www.autohome.com.cn/news/</span><span class="si">%s</span><span class="s1">/#liststart&#39;</span>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">   <span class="n">url_reg</span> <span class="o">=</span> <span class="s1">&#39;https://www.autohome.com.cn/news/</span><span class="si">%s</span><span class="s1">/#liststart&#39;</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6010</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">url_reg</span><span class="o">%</span><span class="n">i</span><span class="p">)</span>
+       <span class="k">print</span><span class="p">(</span><span class="n">url_reg</span><span class="o">%</span><span class="n">i</span><span class="p">)</span>
 </code></pre></div><p>尝试着直接朝url发送get请求获取数据</p>
 <p>研究目标数据所在的HTML规律</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">requests</span>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">   <span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
-
-<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://www.autohome.com.cn/news/1/#liststart&#39;</span><span class="p">)</span>
-<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s1">&#39;lxml&#39;</span><span class="p">)</span>
+   
+   <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://www.autohome.com.cn/news/1/#liststart&#39;</span><span class="p">)</span>
+   <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s1">&#39;lxml&#39;</span><span class="p">)</span>
 </code></pre></div><p>每一个新闻其实就是一个li标签  所有的新闻li都是ul标签内</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">ul_obj_list</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;ul&#39;</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;article&#39;</span><span class="p">})[</span><span class="mi">0</span><span class="p">]</span>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">   <span class="n">ul_obj_list</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;ul&#39;</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;article&#39;</span><span class="p">})[</span><span class="mi">0</span><span class="p">]</span>
 </code></pre></div><p>从ul中筛选出一个个li标签</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">li_obj_list</span> <span class="o">=</span> <span class="n">ul_obj_list</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;li&#39;</span><span class="p">)</span>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">   <span class="n">li_obj_list</span> <span class="o">=</span> <span class="n">ul_obj_list</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;li&#39;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">li_obj</span> <span class="ow">in</span> <span class="n">li_obj_list</span><span class="p">:</span>
-    <span class="c1"># 筛选文字链接</span>
-    <span class="n">a_obj</span> <span class="o">=</span> <span class="n">li_obj</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
-    <span class="c1"># 排除干扰项</span>
-    <span class="k">if</span> <span class="n">a_obj</span><span class="p">:</span>
-        <span class="c1"># 获取文字链接</span>
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;https:&#39;</span> <span class="o">+</span> <span class="n">a_obj</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">))</span>
-
-    <span class="c1"># 筛选出文字标题</span>
-    <span class="n">h3_obj</span> <span class="o">=</span> <span class="n">li_obj</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;h3&#39;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">h3_obj</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">h3_obj</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
-
-    <span class="c1"># 筛选出发布时间</span>
-    <span class="n">div_obj</span> <span class="o">=</span> <span class="n">li_obj</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;article-bar&#39;</span><span class="p">})</span>
-    <span class="k">if</span> <span class="n">div_obj</span><span class="p">:</span>
-        <span class="n">time_span</span> <span class="o">=</span> <span class="n">div_obj</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;span&#39;</span><span class="p">)</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">time_span</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
-        <span class="n">read_span_obj</span> <span class="o">=</span> <span class="n">div_obj</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;span&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">read_span</span> <span class="o">=</span> <span class="n">read_span_obj</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;em&#39;</span><span class="p">)</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">read_span</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
-        <span class="n">comment_span</span> <span class="o">=</span> <span class="n">read_span_obj</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;em&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">comment_span</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
-    <span class="n">p_obj</span> <span class="o">=</span> <span class="n">li_obj</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">p_obj</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">p_obj</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+       <span class="c1"># 筛选文字链接</span>
+       <span class="n">a_obj</span> <span class="o">=</span> <span class="n">li_obj</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+       <span class="c1"># 排除干扰项</span>
+       <span class="k">if</span> <span class="n">a_obj</span><span class="p">:</span>
+           <span class="c1"># 获取文字链接</span>
+           <span class="k">print</span><span class="p">(</span><span class="s1">&#39;https:&#39;</span> <span class="o">+</span> <span class="n">a_obj</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">))</span>
+   
+       <span class="c1"># 筛选出文字标题</span>
+       <span class="n">h3_obj</span> <span class="o">=</span> <span class="n">li_obj</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;h3&#39;</span><span class="p">)</span>
+       <span class="k">if</span> <span class="n">h3_obj</span><span class="p">:</span>
+           <span class="k">print</span><span class="p">(</span><span class="n">h3_obj</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+   
+       <span class="c1"># 筛选出发布时间</span>
+       <span class="n">div_obj</span> <span class="o">=</span> <span class="n">li_obj</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;article-bar&#39;</span><span class="p">})</span>
+       <span class="k">if</span> <span class="n">div_obj</span><span class="p">:</span>
+           <span class="n">time_span</span> <span class="o">=</span> <span class="n">div_obj</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;span&#39;</span><span class="p">)</span>
+           <span class="k">print</span><span class="p">(</span><span class="n">time_span</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+           <span class="n">read_span_obj</span> <span class="o">=</span> <span class="n">div_obj</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;span&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+           <span class="n">read_span</span> <span class="o">=</span> <span class="n">read_span_obj</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;em&#39;</span><span class="p">)</span>
+           <span class="k">print</span><span class="p">(</span><span class="n">read_span</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+           <span class="n">comment_span</span> <span class="o">=</span> <span class="n">read_span_obj</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;em&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+           <span class="k">print</span><span class="p">(</span><span class="n">comment_span</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+       <span class="n">p_obj</span> <span class="o">=</span> <span class="n">li_obj</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
+       <span class="k">if</span> <span class="n">p_obj</span><span class="p">:</span>
+           <span class="k">print</span><span class="p">(</span><span class="n">p_obj</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 </code></pre></div><p>思考：</p>
 <p>1.如何实现爬取多页
 2.如何封装成函数 用户指定几页就爬几页</p>

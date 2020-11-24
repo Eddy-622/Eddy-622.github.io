@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>思路分析 on Eddy&#39;s Boke</title>
+    <link>https://Eddy-622.github.io/tags/%E6%80%9D%E8%B7%AF%E5%88%86%E6%9E%90/</link>
+    <description>Recent content in 思路分析 on Eddy&#39;s Boke</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Tue, 24 Nov 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://Eddy-622.github.io/tags/%E6%80%9D%E8%B7%AF%E5%88%86%E6%9E%90/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>爬虫实例、爬取思路、数据分析简介</title>
+      <link>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E5%AE%9E%E4%BE%8B%E7%88%AC%E5%8F%96%E6%80%9D%E8%B7%AF%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%AE%80%E4%BB%8B/</link>
+      <pubDate>Tue, 24 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E5%AE%9E%E4%BE%8B%E7%88%AC%E5%8F%96%E6%80%9D%E8%B7%AF%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%AE%80%E4%BB%8B/</guid>
+      <description>今日内容概要  知乎登录破解思路 红薯网小说爬取思路 爬虫框架之Scrapy安装 ipython模块 jupyter模块 anaconda数据分析软件  今日内容详细 知乎登录破解思路   网站手段 我们惯有的思路是登录成功之后网站返回给我们的cookie就是身份标识 但是有一些网站并不是这么做的 当你第一次不登陆情况下访问网站的时候，就已经偷偷给了一个cookie但是这个cookie是没有激活的状态 当你登录之后网站又会在之前的基础之上再给你一个cookie，我们会习惯性的人为第二次给的cookie才是有效的，其实不然 其实第二次给你的是个烟雾弹，真正起作用的恰巧是第一个(登录成功之后会将第一个给你的cookie激活)
+1.访问登录首页查看cookie数据
+ _xsrf	90d14e60-77f3-43b1-9ad0-f836a97cc631_zap	2afce640-f9c2-48dd-973a-e92c235f36382.点击用户名密码登录
+有时候需要输入图片验证码有时候不需要这个其实就是由内部的https://www.zhihu.com/api/v3/oauth/captcha?lang=cn3.验证码中文英文
+ lang=cn 中文汉字lang=en	英文数字4.提交post请求数据全部是加密过的 需要去js文件中查找到加密的算法 每个文件里面搜索关键字encrypt 查找到加密之前的字符串但是里面还是有url加密 需要使用python的模块继续解密
+ from urllib.parse import unquote_plusclient_id 用户id(固定值)grant_type 验证方式(固定值)timestamp 时间戳*1000,去尾source	(固定值)signature	签名(js加密,变动)username	用户名password	密码captcha	验证码lang	验证码方式(固定值)utm_source	(固定值)ref_source	(固定值)other_https://www.zhihu.com/signin?next=%2F5.signature也是js加密的需要破解
+ hmac加密sha1加密将上述推导步骤 熟悉一下即可</description>
+    </item>
+    
+    <item>
+      <title>爬虫之selenium模块、实例</title>
+      <link>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Bselenium%E6%A8%A1%E5%9D%97%E5%AE%9E%E4%BE%8B/</link>
+      <pubDate>Mon, 23 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Bselenium%E6%A8%A1%E5%9D%97%E5%AE%9E%E4%BE%8B/</guid>
+      <description>今日内容概要  selenium模块 爬取京东商品信息 研究知乎防爬策略 研究小说爬取思路 Scrapy框架了解 MongoDB数据库(非关系型数据库)  今日内容详细 selenium模块   通过id查找标签
+from selenium import webdriverimport timebro=webdriver.Chrome()bro.get(&amp;#34;http://www.baidu.com&amp;#34;)bro.implicitly_wait(10)inEle = bro.find_element_by_id(&amp;#39;kw&amp;#39;)往标签内写内容
+inEle.send_keys(&amp;#39;美女&amp;#39;)通过a标签内部的文本查找a标签
+aEle = bro.find_element_by_link_text(&amp;#39;登录&amp;#39;)点击a标签
+aEle.click()如果你不知道具体文本内容 或者想模糊查询
+find_element_by_partial_link_text查找div标签
+divEle = bro.find_element_by_tag_name(&amp;#39;div&amp;#39;)获取内部所有的文本信息
+print(divEle.text) 查看含有class属性值:
+s-top-right-text c-font-normal c-color-tspEle = bro.find_element_by_class_name(&amp;#39;s-top-right-text&amp;#39;)print(spEle.text)css选择器
+pEle = bro.find_element_by_css_selector(&amp;#39;#kw&amp;#39;)pEle.click()  自动登录 from selenium import webdriverimport timebro=webdriver.Chrome()bro.get(&amp;#34;http://www.baidu.com&amp;#34;)bro.implicitly_wait(10)  找到登录按钮</description>
+    </item>
+    
+  </channel>
+</rss>

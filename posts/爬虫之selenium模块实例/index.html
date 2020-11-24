@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="theme-color" content="#494f5c">
+	<meta name="msapplication-TileColor" content="#494f5c">
+<meta itemprop="name" content="爬虫之selenium模块、实例">
+<meta itemprop="description" content="今日内容概要  selenium模块 爬取京东商品信息 研究知乎防爬策略 研究小说爬取思路 Scrapy框架了解 MongoDB数据库(非关系型数据库)  今日内容详细 selenium模块   通过id查找标签
+from selenium import webdriverimport timebro=webdriver.Chrome()bro.get(&#34;http://www.baidu.com&#34;)bro.implicitly_wait(10)inEle = bro.find_element_by_id(&#39;kw&#39;)往标签内写内容
+inEle.send_keys(&#39;美女&#39;)通过a标签内部的文本查找a标签
+aEle = bro.find_element_by_link_text(&#39;登录&#39;)点击a标签
+aEle.click()如果你不知道具体文本内容 或者想模糊查询
+find_element_by_partial_link_text查找div标签
+divEle = bro.find_element_by_tag_name(&#39;div&#39;)获取内部所有的文本信息
+print(divEle.text) 查看含有class属性值:
+s-top-right-text c-font-normal c-color-tspEle = bro.find_element_by_class_name(&#39;s-top-right-text&#39;)print(spEle.text)css选择器
+pEle = bro.find_element_by_css_selector(&#39;#kw&#39;)pEle.click()  自动登录 from selenium import webdriverimport timebro=webdriver.Chrome()bro.get(&#34;http://www.baidu.com&#34;)bro.implicitly_wait(10)  找到登录按钮">
+<meta itemprop="datePublished" content="2020-11-23T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-11-23T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="472">
+
+
+
+<meta itemprop="keywords" content="爬虫,思路分析,爬虫实例,scrapy框架," /><meta property="og:title" content="爬虫之selenium模块、实例" />
+<meta property="og:description" content="今日内容概要  selenium模块 爬取京东商品信息 研究知乎防爬策略 研究小说爬取思路 Scrapy框架了解 MongoDB数据库(非关系型数据库)  今日内容详细 selenium模块   通过id查找标签
+from selenium import webdriverimport timebro=webdriver.Chrome()bro.get(&#34;http://www.baidu.com&#34;)bro.implicitly_wait(10)inEle = bro.find_element_by_id(&#39;kw&#39;)往标签内写内容
+inEle.send_keys(&#39;美女&#39;)通过a标签内部的文本查找a标签
+aEle = bro.find_element_by_link_text(&#39;登录&#39;)点击a标签
+aEle.click()如果你不知道具体文本内容 或者想模糊查询
+find_element_by_partial_link_text查找div标签
+divEle = bro.find_element_by_tag_name(&#39;div&#39;)获取内部所有的文本信息
+print(divEle.text) 查看含有class属性值:
+s-top-right-text c-font-normal c-color-tspEle = bro.find_element_by_class_name(&#39;s-top-right-text&#39;)print(spEle.text)css选择器
+pEle = bro.find_element_by_css_selector(&#39;#kw&#39;)pEle.click()  自动登录 from selenium import webdriverimport timebro=webdriver.Chrome()bro.get(&#34;http://www.baidu.com&#34;)bro.implicitly_wait(10)  找到登录按钮" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Bselenium%E6%A8%A1%E5%9D%97%E5%AE%9E%E4%BE%8B/" />
+<meta property="article:published_time" content="2020-11-23T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-11-23T00:00:00+00:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="爬虫之selenium模块、实例"/>
+<meta name="twitter:description" content="今日内容概要  selenium模块 爬取京东商品信息 研究知乎防爬策略 研究小说爬取思路 Scrapy框架了解 MongoDB数据库(非关系型数据库)  今日内容详细 selenium模块   通过id查找标签
+from selenium import webdriverimport timebro=webdriver.Chrome()bro.get(&#34;http://www.baidu.com&#34;)bro.implicitly_wait(10)inEle = bro.find_element_by_id(&#39;kw&#39;)往标签内写内容
+inEle.send_keys(&#39;美女&#39;)通过a标签内部的文本查找a标签
+aEle = bro.find_element_by_link_text(&#39;登录&#39;)点击a标签
+aEle.click()如果你不知道具体文本内容 或者想模糊查询
+find_element_by_partial_link_text查找div标签
+divEle = bro.find_element_by_tag_name(&#39;div&#39;)获取内部所有的文本信息
+print(divEle.text) 查看含有class属性值:
+s-top-right-text c-font-normal c-color-tspEle = bro.find_element_by_class_name(&#39;s-top-right-text&#39;)print(spEle.text)css选择器
+pEle = bro.find_element_by_css_selector(&#39;#kw&#39;)pEle.click()  自动登录 from selenium import webdriverimport timebro=webdriver.Chrome()bro.get(&#34;http://www.baidu.com&#34;)bro.implicitly_wait(10)  找到登录按钮"/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="/favicon.ico">
+
+	<title>爬虫之selenium模块、实例</title>
+	<link rel="stylesheet" href="https://Eddy-622.github.io/css/style.min.657bcb7af31123e4156b1a3d2ff60a636717e54ead74f882136b5114cf72b55e.css" integrity="sha256-ZXvLevMRI+QVaxo9L/YKY2cX5U6tdPiCE2tRFM9ytV4=" crossorigin="anonymous">
+	
+</head>
+
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp faster">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="https://Eddy-622.github.io">Eddy&#39;s Boke</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					
+				<a href="https://Eddy-622.github.io/posts/">博客</a>
+				<a href="https://Eddy-622.github.io/about-hugo/">关于</a>
+
+				</nav>
+			</div>
+			<div class="hdr-right hdr-icons">
+				<span class="hdr-social hide-in-mobile"><a href="https://mobile.twitter.com/zhang_kea" target="_blank" rel="noopener me" title="Twitter"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a><a href="https://www.facebook.com/kea.zhang.92" target="_blank" rel="noopener me" title="Instagram"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line></svg></a><a href="https://github.com/Eddy-622" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></span><button id="menu-btn" class="hdr-btn" title="Menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast">
+		<ul>
+			<li><a href="https://Eddy-622.github.io/posts/">博客</a></li>
+			<li><a href="https://Eddy-622.github.io/about-hugo/">关于</a></li>
+		</ul>
+	</div>
+
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta"><span>Nov 23, 2020</span></div>
+				<h1>爬虫之selenium模块、实例</h1>
+			</header>
+			<div class="content">
+				<h1 id="今日内容概要">今日内容概要<a href="#今日内容概要" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<ul>
+<li>selenium模块</li>
+<li>爬取京东商品信息</li>
+<li>研究知乎防爬策略</li>
+<li>研究小说爬取思路</li>
+<li>Scrapy框架了解</li>
+<li>MongoDB数据库(非关系型数据库)</li>
+</ul>
+<h1 id="今日内容详细">今日内容详细<a href="#今日内容详细" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<h3 id="selenium模块">selenium模块<a href="#selenium模块" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<ul>
+<li>
+<p>通过id查找标签</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">selenium</span> <span class="kn">import</span> <span class="n">webdriver</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="n">bro</span><span class="o">=</span><span class="n">webdriver</span><span class="o">.</span><span class="n">Chrome</span><span class="p">()</span>
+<span class="n">bro</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;http://www.baidu.com&#34;</span><span class="p">)</span>
+<span class="n">bro</span><span class="o">.</span><span class="n">implicitly_wait</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+  
+  
+<span class="n">inEle</span> <span class="o">=</span> <span class="n">bro</span><span class="o">.</span><span class="n">find_element_by_id</span><span class="p">(</span><span class="s1">&#39;kw&#39;</span><span class="p">)</span>
+</code></pre></div><p>往标签内写内容</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">inEle</span><span class="o">.</span><span class="n">send_keys</span><span class="p">(</span><span class="s1">&#39;美女&#39;</span><span class="p">)</span>
+</code></pre></div><p>通过a标签内部的文本查找a标签</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">aEle</span> <span class="o">=</span> <span class="n">bro</span><span class="o">.</span><span class="n">find_element_by_link_text</span><span class="p">(</span><span class="s1">&#39;登录&#39;</span><span class="p">)</span>
+</code></pre></div><p>点击a标签</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">aEle</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+</code></pre></div><p>如果你不知道具体文本内容 或者想模糊查询</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">find_element_by_partial_link_text</span>
+</code></pre></div><p>查找div标签</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">divEle</span> <span class="o">=</span> <span class="n">bro</span><span class="o">.</span><span class="n">find_element_by_tag_name</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">)</span>
+</code></pre></div><p>获取内部所有的文本信息</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="n">divEle</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>  
+</code></pre></div><p>查看含有class属性值:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">s</span><span class="o">-</span><span class="n">top</span><span class="o">-</span><span class="n">right</span><span class="o">-</span><span class="n">text</span> <span class="n">c</span><span class="o">-</span><span class="n">font</span><span class="o">-</span><span class="n">normal</span> <span class="n">c</span><span class="o">-</span><span class="n">color</span><span class="o">-</span><span class="n">t</span>
+<span class="n">spEle</span> <span class="o">=</span> <span class="n">bro</span><span class="o">.</span><span class="n">find_element_by_class_name</span><span class="p">(</span><span class="s1">&#39;s-top-right-text&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">spEle</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</code></pre></div><p>css选择器</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">pEle</span> <span class="o">=</span> <span class="n">bro</span><span class="o">.</span><span class="n">find_element_by_css_selector</span><span class="p">(</span><span class="s1">&#39;#kw&#39;</span><span class="p">)</span>
+<span class="n">pEle</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+</code></pre></div></li>
+</ul>
+<h3 id="自动登录">自动登录<a href="#自动登录" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">selenium</span> <span class="kn">import</span> <span class="n">webdriver</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="n">bro</span><span class="o">=</span><span class="n">webdriver</span><span class="o">.</span><span class="n">Chrome</span><span class="p">()</span>
+<span class="n">bro</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;http://www.baidu.com&#34;</span><span class="p">)</span>
+<span class="n">bro</span><span class="o">.</span><span class="n">implicitly_wait</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</code></pre></div><ul>
+<li>
+<p>找到登录按钮</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">loginEle</span> <span class="o">=</span> <span class="n">bro</span><span class="o">.</span><span class="n">find_element_by_link_text</span><span class="p">(</span><span class="s1">&#39;登录&#39;</span><span class="p">)</span>
+</code></pre></div><p>点击登录按钮</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">loginEle</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+</code></pre></div><p>找到用户名登录标签</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">pEle</span> <span class="o">=</span> <span class="n">bro</span><span class="o">.</span><span class="n">find_element_by_id</span><span class="p">(</span><span class="s1">&#39;TANGRAM__PSP_11__footerULoginBtn&#39;</span><span class="p">)</span>
+</code></pre></div><p>点击按钮</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">pEle</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+</code></pre></div><p>找到获取用户名和密码的标签</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">userEle</span> <span class="o">=</span> <span class="n">bro</span><span class="o">.</span><span class="n">find_element_by_id</span><span class="p">(</span><span class="s1">&#39;TANGRAM__PSP_11__userName&#39;</span><span class="p">)</span>
+<span class="n">pwdEle</span> <span class="o">=</span> <span class="n">bro</span><span class="o">.</span><span class="n">find_element_by_id</span><span class="p">(</span><span class="s1">&#39;TANGRAM__PSP_11__password&#39;</span><span class="p">)</span>
+</code></pre></div><p>往两个框中分别属于内容</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">userEle</span><span class="o">.</span><span class="n">send_keys</span><span class="p">(</span><span class="s1">&#39;老男孩上海校区&#39;</span><span class="p">)</span>
+<span class="n">pwdEle</span><span class="o">.</span><span class="n">send_keys</span><span class="p">(</span><span class="s1">&#39;123hj13121283&#39;</span><span class="p">)</span>
+</code></pre></div><p>找到最终的登录按钮</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">btnEle</span> <span class="o">=</span> <span class="n">bro</span><span class="o">.</span><span class="n">find_element_by_id</span><span class="p">(</span><span class="s1">&#39;TANGRAM__PSP_11__submit&#39;</span><span class="p">)</span>
+<span class="n">btnEle</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+</code></pre></div></li>
+</ul>
+<h3 id="显示等待和隐示等待">显示等待和隐示等待<a href="#显示等待和隐示等待" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<ul>
+<li>
+<p>隐式等待:在查找所有元素时，如果尚未被加载，则等10秒</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">browser</span><span class="o">.</span><span class="n">implicitly_wait</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>   <span class="c1"># 表示等待所有</span>
+</code></pre></div><p>推荐加上上述的隐式等待代码</p>
+</li>
+<li>
+<p>显式等待：显式地等待某个元素被加载</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">wait</span><span class="o">=</span><span class="n">WebDriverWait</span><span class="p">(</span><span class="n">browser</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>  <span class="c1">#了解即可</span>
+<span class="n">wait</span><span class="o">.</span><span class="n">until</span><span class="p">(</span><span class="n">EC</span><span class="o">.</span><span class="n">presence_of_element_located</span><span class="p">((</span><span class="n">By</span><span class="o">.</span><span class="n">ID</span><span class="p">,</span><span class="s1">&#39;content_left&#39;</span><span class="p">)))</span>
+</code></pre></div></li>
+</ul>
+<h3 id="控制页面元素滑动">控制页面元素滑动<a href="#控制页面元素滑动" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<ul>
+<li>
+<p>可以利用selenium模块来破解滑动验证码
+但是过程很复杂，还不如你自己快速的划一下</p>
+<p>参考文档:
+<a href="https://selenium-python.readthedocs.io/api.html#module-selenium.webdriver.common.action_chains">https://selenium-python.readthedocs.io/api.html#module-selenium.webdriver.common.action_chains</a></p>
+<p>案例代码:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">selenium</span> <span class="kn">import</span> <span class="n">webdriver</span>
+<span class="kn">from</span> <span class="nn">selenium.webdriver</span> <span class="kn">import</span> <span class="n">ActionChains</span>
+  
+<span class="kn">from</span> <span class="nn">selenium.webdriver.support.wait</span> <span class="kn">import</span> <span class="n">WebDriverWait</span>  <span class="c1"># 等待页面加载某些元素</span>
+<span class="kn">import</span> <span class="nn">time</span>
+  
+<span class="n">driver</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Chrome</span><span class="p">()</span>
+<span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://www.runoob.com/try/try.php?filename=jqueryui-api-droppable&#39;</span><span class="p">)</span>
+<span class="n">wait</span><span class="o">=</span><span class="n">WebDriverWait</span><span class="p">(</span><span class="n">driver</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+  
+<span class="n">driver</span><span class="o">.</span><span class="n">implicitly_wait</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>  <span class="c1"># 使用隐式等待</span>
+  
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">driver</span><span class="o">.</span><span class="n">switch_to</span><span class="o">.</span><span class="n">frame</span><span class="p">(</span><span class="s1">&#39;iframeResult&#39;</span><span class="p">)</span> <span class="c1">#切换到iframeResult</span>
+    <span class="n">sourse</span><span class="o">=</span><span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_id</span><span class="p">(</span><span class="s1">&#39;draggable&#39;</span><span class="p">)</span>
+    <span class="n">targ</span>	<span class="n">et</span><span class="o">=</span><span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_id</span><span class="p">(</span><span class="s1">&#39;droppable&#39;</span><span class="p">)</span>
+</code></pre></div><p>方式一：基于同一个动作链串行执行</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">actions</span>	<span class="o">=</span><span class="n">ActionChains</span><span class="p">(</span><span class="n">driver</span><span class="p">)</span> <span class="c1">#拿到动作链对象</span>
+  
+<span class="n">actions</span><span class="o">.</span><span class="n">drag_and_drop</span><span class="p">(</span><span class="n">sourse</span><span class="p">,</span><span class="n">target</span><span class="p">)</span> <span class="c1">#把动作放到动作链中，准备串行执行</span>
+  
+<span class="n">actions</span><span class="o">.</span><span class="n">perform</span><span class="p">()</span>
+</code></pre></div><p>方式二：不同的动作链，每次移动的位移都不同</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">  <span class="n">ActionChains</span><span class="p">(</span><span class="n">driver</span><span class="p">)</span><span class="o">.</span><span class="n">click_and_hold</span><span class="p">(</span><span class="n">sourse</span><span class="p">)</span><span class="o">.</span><span class="n">perform</span><span class="p">()</span>
+    <span class="n">distance</span><span class="o">=</span><span class="n">target</span><span class="o">.</span><span class="n">location</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">-</span><span class="n">sourse</span><span class="o">.</span><span class="n">location</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span>
+  
+<span class="err">​</span>    <span class="n">track</span><span class="o">=</span><span class="mi">0</span>
+<span class="err">​</span>    <span class="k">while</span> <span class="n">track</span> <span class="o">&lt;</span> <span class="n">distance</span><span class="p">:</span>
+<span class="err">​</span>        <span class="n">ActionChains</span><span class="p">(</span><span class="n">driver</span><span class="p">)</span><span class="o">.</span><span class="n">move_by_offset</span><span class="p">(</span><span class="n">xoffset</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">yoffset</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">perform</span><span class="p">()</span>
+<span class="err">​</span>        <span class="n">track</span><span class="o">+=</span><span class="mi">2</span>
+  
+<span class="err">​</span>    <span class="n">ActionChains</span><span class="p">(</span><span class="n">driver</span><span class="p">)</span><span class="o">.</span><span class="n">release</span><span class="p">()</span><span class="o">.</span><span class="n">perform</span><span class="p">()</span>
+  
+<span class="err">​</span>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+  
+<span class="k">finally</span><span class="p">:</span>
+    <span class="n">driver</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div><p>针对滑动验证码得到自动破解其实是有对应的防爬措施
+如果你滑动的速度特别快并且特别精确那么系统会认为你是一个程序</p>
+</li>
+</ul>
+<h3 id="异常捕获">异常捕获<a href="#异常捕获" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<ul>
+<li>
+<p>有时候连我们自己都不知道自己写的代码时候会报错
+那么这个时候我们可以提前采用异常捕获的形式一旦代码报错直接自动处理</p>
+<p>针对报错信息主要有三块
+1.报错的定位信息
+2.错误的类型
+3.错误的具体信息</p>
+<p>异常主要分类两类
+1.语法错误
+if:
+def:</p>
+<p>语法错误是不能容忍的</p>
+<p>逻辑错误是可以被允许发生的</p>
+<p>代码一旦出现异常会导致整个程序停止运行，如何避免这种情况的发生
+我们可以使用异常处理</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">11</span><span class="p">,</span><span class="mi">22</span><span class="p">,</span><span class="mi">33</span><span class="p">]</span>
+<span class="k">try</span><span class="p">:</span>
+  <span class="n">l</span><span class="p">[</span><span class="mi">100000</span><span class="p">]</span>  <span class="c1"># 可能会报错的代码</span>
+  <span class="n">aaa</span>
+<span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>  <span class="c1"># 针对不同的报错类型设置不同的处理机制</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;索引超出范围了&#39;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>  <span class="c1">#针对不同的报错类型设置不同的处理机制</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;变量名必须先定义后使用&#39;</span><span class="p">)</span>
+</code></pre></div><p>如果遇到错误类型无法预估，如何做?</p>
+<p>万能异常：Exception</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">try</span><span class="p">:</span>
+    <span class="n">l</span><span class="p">[</span><span class="mi">100000</span><span class="p">]</span>  <span class="c1"># 可能会报错的代码</span>
+  
+<span class="n">aaa</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>  <span class="c1"># e就是系统的具体报错提示</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;所有的错我都能捕获&#39;</span><span class="p">)</span>
+</code></pre></div><p>代码中不要出现太多的异常捕获代码，尽可能少的使用
+并且try代码块里面被监测的代码也应该尽量的少</p>
+</li>
+</ul>
+<h3 id="控制前进后退">控制前进后退<a href="#控制前进后退" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">selenium</span> <span class="kn">import</span> <span class="n">webdriver</span>
+
+<span class="n">browser</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Chrome</span><span class="p">()</span>
+<span class="n">browser</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://www.baidu.com&#39;</span><span class="p">)</span>
+<span class="n">browser</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://www.taobao.com&#39;</span><span class="p">)</span>
+<span class="n">browser</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://www.sina.com.cn/&#39;</span><span class="p">)</span>
+
+<span class="n">browser</span><span class="o">.</span><span class="n">back</span><span class="p">()</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">browser</span><span class="o">.</span><span class="n">forward</span><span class="p">()</span>
+<span class="n">browser</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div><h3 id="执行js代码">执行js代码<a href="#执行js代码" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">selenium</span> <span class="kn">import</span> <span class="n">webdriver</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">bro</span><span class="o">=</span><span class="n">webdriver</span><span class="o">.</span><span class="n">Chrome</span><span class="p">()</span>
+<span class="n">bro</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;http://www.baidu.com&#34;</span><span class="p">)</span>
+<span class="n">bro</span><span class="o">.</span><span class="n">execute_script</span><span class="p">(</span><span class="s1">&#39;prompt(&#34;你确定要走吗?&#34;)&#39;</span><span class="p">)</span> <span class="c1">#打印警告</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</code></pre></div><h3 id="cookie操作">cookie操作<a href="#cookie操作" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<p>requests方法获取cookie</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://www.baidu.com&#39;</span><span class="p">)</span>
+<span class="n">res</span><span class="o">.</span><span class="n">cookies</span><span class="o">.</span><span class="n">get_dict</span><span class="p">()</span> <span class="c1">#获取cookies</span>
+</code></pre></div><p>使用selenium打开网址,然后让用户完成手工登录,再获取cookie</p>
+<ul>
+<li>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">selenium</span> <span class="kn">import</span> <span class="n">webdriver</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://account.cnblogs.com/signin?returnUrl=https%3A</span><span class="si">%2F%2F</span><span class="s1">www.cnblogs.com</span><span class="si">%2F</span><span class="s1">&#39;</span>
+<span class="n">driver</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Chrome</span><span class="p">()</span>
+<span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">driver</span><span class="o">.</span><span class="n">refresh</span><span class="p">()</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">get_cookies</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;xxx.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+  
+  
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;xxx.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+  <span class="n">di</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="n">cookies</span> <span class="o">=</span> <span class="p">{}</span>
+</code></pre></div></li>
+<li>
+<p>获取cookie中的name和value,转化成requests可以使用的形式</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">for</span> <span class="n">cookie</span> <span class="ow">in</span> <span class="n">di</span><span class="p">:</span>
+<span class="n">cookies</span><span class="p">[</span><span class="n">cookie</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">cookie</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">cookies</span><span class="p">)</span>
+</code></pre></div></li>
+<li>
+<p>当请求头也有很多校验信息的时候你干脆直接全部带上</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">&#39;authority&#39;</span><span class="p">:</span> <span class="s1">&#39;i-beta.cnblogs.com&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="s1">&#39;GET&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;path&#39;</span><span class="p">:</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;scheme&#39;</span><span class="p">:</span> <span class="s1">&#39;https&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;accept&#39;</span><span class="p">:</span> <span class="s1">&#39;text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;accept-encoding&#39;</span><span class="p">:</span> <span class="s1">&#39;gzip, deflate, br&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;accept-language&#39;</span><span class="p">:</span> <span class="s1">&#39;zh-CN,zh;q=0.9&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;cache-control&#39;</span><span class="p">:</span> <span class="s1">&#39;max-age=0&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;if-modified-since&#39;</span><span class="p">:</span> <span class="s1">&#39;Sun, 24 Nov 2019 06:14:53 GMT&#39;</span><span class="p">,</span>
+  
+<span class="s1">&#39;if-modified-since&#39;</span><span class="p">:</span> <span class="s1">&#39;Sun, 24 Nov 2019 06:14:53 GMT,</span>
+<span class="s1">&#39;sec-fetch-mode&#39;</span><span class="p">:</span> <span class="s1">&#39;navigate&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;sec-fetch-site&#39;</span><span class="p">:</span> <span class="s1">&#39;none&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;sec-fetch-user&#39;</span><span class="p">:</span> <span class="s1">&#39;?1&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;upgrade-insecure-requests&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;user-agent&#39;</span><span class="p">:</span> <span class="s1">&#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36&#39;</span>
+  <span class="p">}</span>
+</code></pre></div></li>
+<li>
+<p>使用该cookie完成请求</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://i-beta.cnblogs.com/api/user&#39;</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">cookies</span><span class="o">=</span><span class="n">cookies</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;xxx&#39;</span><span class="p">)</span>
+<span class="n">response</span><span class="o">.</span><span class="n">encoding</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">apparent_encoding</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</code></pre></div><p>利用获取cookie的方式可以一定程度上避开用户身份校验</p>
+</li>
+</ul>
+<h3 id="爬取京东商品信息">爬取京东商品信息<a href="#爬取京东商品信息" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">selenium</span> <span class="kn">import</span> <span class="n">webdriver</span>
+<span class="kn">from</span> <span class="nn">selenium.webdriver.common.keys</span> <span class="kn">import</span> <span class="n">Keys</span>  <span class="c1"># 通过模块模仿键盘按键操作</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">bro</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Chrome</span><span class="p">()</span>
+<span class="n">bro</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;https://www.jd.com&#34;</span><span class="p">)</span>
+<span class="n">bro</span><span class="o">.</span><span class="n">implicitly_wait</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+</code></pre></div><ul>
+<li>
+<p>查找输入框</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">inputEle</span> <span class="o">=</span> <span class="n">bro</span><span class="o">.</span><span class="n">find_element_by_id</span><span class="p">(</span><span class="s1">&#39;key&#39;</span><span class="p">)</span>
+</code></pre></div></li>
+<li>
+<p>输入想要获取的商品名称</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">inputEle</span><span class="o">.</span><span class="n">send_keys</span><span class="p">(</span><span class="s1">&#39;球&#39;</span><span class="p">)</span>
+<span class="n">inputEle</span><span class="o">.</span><span class="n">send_keys</span><span class="p">(</span><span class="n">Keys</span><span class="o">.</span><span class="n">ENTER</span><span class="p">)</span>  <span class="c1"># 模拟键盘enter键</span>
+</code></pre></div></li>
+<li>
+<p>研究商品展示标签发送都是一个个的li标签   element后面加不加s表示查找单个或者多个</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">li_list</span> <span class="o">=</span> <span class="n">bro</span><span class="o">.</span><span class="n">find_elements_by_class_name</span><span class="p">(</span><span class="s1">&#39;gl-item&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">li</span> <span class="ow">in</span> <span class="n">li_list</span><span class="p">:</span>
+  
+<span class="c1">#根据标签的特点一个个筛选</span>
+<span class="n">aEle</span> <span class="o">=</span> <span class="n">li</span><span class="o">.</span><span class="n">find_element_by_tag_name</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">)</span>
+  
+<span class="c1">#获取每个商品的详细地址</span>
+  
+<span class="c1">#当一种选择器不行的时候 可以考虑使用其他的试试</span>
+<span class="n">imgEle</span> <span class="o">=</span> <span class="n">li</span><span class="o">.</span><span class="n">find_element_by_css_selector</span><span class="p">(</span><span class="s1">&#39;.p-img a img&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="s1">&#39;src&#39;</span><span class="p">)</span>
+  <span class="k">if</span> <span class="ow">not</span> <span class="n">imgEle</span><span class="p">:</span>
+<span class="k">pass</span>
+</code></pre></div><p>针对缺失的图片 不要一根筋死在一个页面上 
+可以请求该商品的详细页面 然后再拿图片地址</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">  <span class="n">priceEle</span> <span class="o">=</span> <span class="n">li</span><span class="o">.</span><span class="n">find_element_by_css_selector</span><span class="p">(</span><span class="s1">&#39;.p-price i&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+  
+  <span class="n">infoEle</span> <span class="o">=</span> <span class="n">li</span><span class="o">.</span><span class="n">find_elemenst_by_css_selector</span><span class="p">(</span><span class="s1">&#39;.p-name em&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+  
+  <span class="n">commit</span> <span class="o">=</span> <span class="n">li</span><span class="o">.</span><span class="n">find_element_by_css_selector</span><span class="p">(</span><span class="s1">&#39;.p-commit strong&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+  
+  <span class="k">print</span><span class="p">(</span><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">    商品链接：</span><span class="si">%s</span><span class="s2">
+</span><span class="s2">    商品图片：</span><span class="si">%s</span><span class="s2">
+</span><span class="s2">    商品名字：</span><span class="si">%s</span><span class="s2">
+</span><span class="s2">    商品价格：</span><span class="si">%s</span><span class="s2">
+</span><span class="s2">    商品评论数：</span><span class="si">%s</span><span class="s2">
+</span><span class="s2">  
+</span><span class="s2">  &#34;&#34;&#34;</span><span class="o">%</span><span class="p">(</span><span class="n">aEle</span><span class="p">,</span><span class="n">imgEle</span><span class="p">,</span><span class="n">infoEle</span><span class="p">,</span><span class="n">priceEle</span><span class="p">,</span><span class="n">commit</span><span class="p">))</span>
+</code></pre></div></li>
+</ul>
+<p>&quot;&rdquo;&rdquo;
+学有余力的同学(研究)
+1.动态加载
+2.翻页爬取
+&quot;&rdquo;&rdquo;</p>
+<h3 id="图片验证码破解思路">图片验证码破解思路<a href="#图片验证码破解思路" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<pre><code>三种方式
+	方式1(较为复杂)
+  	代码破解
+    	软件:Tesseract-ocr 
+    	模块:pytesseract(课下研究一下看看)
+  方式2
+  	打码平台
+    &quot;&quot;&quot;
+    将含有验证码的图片发送给平台后端的工作人员
+    工作人员肉眼识别给你发回来结果
+    &quot;&quot;&quot;
+    	eg:http://sb.daredian.cn/?spm=dm.pc@baidu
+  方式3
+  	人工打码
+    &quot;&quot;&quot;
+    自己在登录环节手动人为干预一下
+    &quot;&quot;&quot;
+</code></pre><h3 id="作业">作业<a href="#作业" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="mf">1.</span><span class="err">尽量脱稿完成课上爬虫案例</span>
+<span class="mf">2.</span><span class="err">根据自身情况每日抄写一遍基础阶段的上课笔记</span>
+	<span class="err">比如从</span><span class="n">day01开始</span>
+<span class="mf">3.</span><span class="err">利用</span><span class="n">selenium模块尝试着自动打开京东搜索你感兴趣的商品</span>
+<span class="mf">4.</span><span class="err">爬取京东商品信息</span> <span class="err">针对拿不到的图片想办法给我获取到</span>
+<span class="mf">5.</span><span class="err">利用所学知识点爬取网站表情包</span>
+</code></pre></div>
+			</div>
+			<hr class="post-end">
+			<footer class="post-info">
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>Eddy Zhang</p>
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://Eddy-622.github.io/tags/%E7%88%AC%E8%99%AB">爬虫</a></span><span class="tag"><a href="https://Eddy-622.github.io/tags/%E6%80%9D%E8%B7%AF%E5%88%86%E6%9E%90">思路分析</a></span><span class="tag"><a href="https://Eddy-622.github.io/tags/%E7%88%AC%E8%99%AB%E5%AE%9E%E4%BE%8B">爬虫实例</a></span><span class="tag"><a href="https://Eddy-622.github.io/tags/scrapy%E6%A1%86%E6%9E%B6">scrapy框架</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>472 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-11-23 08:00 &#43;0800</p>
+			</footer>
+		</article>
+		<div class="post-nav thin">
+			<a class="next-post" href="https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E5%AE%9E%E4%BE%8B%E7%88%AC%E5%8F%96%E6%80%9D%E8%B7%AF%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%AE%80%E4%BB%8B/">
+				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>爬虫实例、爬取思路、数据分析简介</span>
+			</a>
+			<a class="prev-post" href="https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Bselenium%E6%A8%A1%E5%9D%97/">
+				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>爬虫之selenium模块</span>
+			</a>
+		</div>
+		<div id="comments" class="thin">
+</div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p>&copy; 2020 <a href="https://Eddy-622.github.io">Eddy Zhang</a></p>
+		<p>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://Eddy-622.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+		</p>
+	</footer>
+
+
+
+	<script src="https://Eddy-622.github.io/js/bundle.min.4a9a0ac3d2217822c7865b4161e6c2a71de1d70492264337755427898dd718f6.js" integrity="sha256-SpoKw9IheCLHhltBYebCpx3h1wSSJkM3dVQniY3XGPY=" crossorigin="anonymous"></script>
+	
+
+</body>
+
+</html>

@@ -13,23 +13,21 @@
     
     
     <item>
-      <title>爬虫之selenium模块、实例演示</title>
-      <link>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Bselenium%E6%A8%A1%E5%9D%97%E5%AE%9E%E4%BE%8B%E6%BC%94%E7%A4%BA/</link>
+      <title>爬虫之selenium模块</title>
+      <link>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Bselenium%E6%A8%A1%E5%9D%97/</link>
       <pubDate>Fri, 20 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Bselenium%E6%A8%A1%E5%9D%97%E5%AE%9E%E4%BE%8B%E6%BC%94%E7%A4%BA/</guid>
+      <guid>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Bselenium%E6%A8%A1%E5%9D%97/</guid>
       <description>今日内容概要  爬取天气信息 爬取汽车之家信息 selenium模块  今日内容详细   爬取天气信息 http://tianqi.2345.com有一些网站的数据是后续js动态加载的 (网站的地址不变数据在变) 打开浏览器network点击获取数据的按钮查看内部js请求 多请求几次总结url变化规律
 http://tianqi.2345.com/Pc/GetHistoryareaInfo%5BareaId%5D=60010&amp;amp;areaInfo%5BareaType%5D=2&amp;amp;date%5Byear%5D=2020&amp;amp;date%5Bmonth%5D=9http://tianqi.2345.com/Pc/GetHistoryareaInfo%5BareaId%5D=71447&amp;amp;areaInfo%5BareaType%5D=2&amp;amp;date%5Byear%5D=2020&amp;amp;date%5Bmonth%5D=10o%5BareaId%5D=60010&amp;amp;areaInfo%5BareaType%5D=2&amp;amp;date%5Byear%5D=2020&amp;amp;date%5Bmonth%5D=10 朝上述url发送get请求
-  import requests import json import pandas
-res = requests.get(&amp;lsquo;http://tianqi.2345.com/Pc/GetHistory?areaInfo%5BareaId%5D=71447&amp;amp;areaInfo%5BareaType%5D=2&amp;amp;date%5Byear%5D=2020&amp;amp;date%5Bmonth%5D=10&#39;) content = res.content
+  import requests import json import pandas res = requests.get(&amp;lsquo;http://tianqi.2345.com/Pc/GetHistory?areaInfo%5BareaId%5D=71447&amp;amp;areaInfo%5BareaType%5D=2&amp;amp;date%5Byear%5D=2020&amp;amp;date%5Bmonth%5D=10&#39;) content = res.content
 先反序列化成python里面的字典```pythonjson_dict = json.loads(content)​	loads方法既可以反序列化json格式字符串 ​	也可以发序列化json格式的二进制数据
 在利用字典取值获取天气相关的数据
 real_data = json_dict.get(&amp;#39;data&amp;#39;)直接将页面上的表格数据筛选出来
 res = pandas.read_html(real_data)print(res)爬取汽车之家数据 新闻标签页
-https://www.autohome.com.cn/news/总结每个页的url规律 推导出固定url格式
-https://www.autohome.com.cn/news/1/#liststarthttps://www.autohome.com.cn/news/2/#liststarthttps://www.autohome.com.cn/news/3/#liststart利用代码事先翻页的功能
-url_reg = &amp;#39;https://www.autohome.com.cn/news/%s/#liststart&amp;#39;for i in range(1,6010):print(url_reg%i)尝试着直接朝url发送get请求获取数据
-研究目标数据所在的HTML规律</description>
+ https://www.autohome.com.cn/news/总结每个页的url规律 推导出固定url格式
+ https://www.autohome.com.cn/news/1/#liststarthttps://www.autohome.com.cn/news/2/#liststarthttps://www.autohome.com.cn/news/3/#liststart利用代码事先翻页的功能
+url_reg = &amp;#39;https://www.autohome.com.cn/news/%s/#liststart&amp;#39;for i in range(1,6010):print(url_reg%i)尝试着直接朝url发送get请求获取数据</description>
     </item>
     
   </channel>

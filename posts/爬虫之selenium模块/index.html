@@ -7,7 +7,7 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<meta name="theme-color" content="#494f5c">
 	<meta name="msapplication-TileColor" content="#494f5c">
-<meta itemprop="name" content="爬虫之selenium模块、实例演示">
+<meta itemprop="name" content="爬虫之selenium模块">
 <meta itemprop="description" content="今日内容概要  爬取天气信息 爬取汽车之家信息 selenium模块  今日内容详细   爬取天气信息 http://tianqi.2345.com有一些网站的数据是后续js动态加载的 (网站的地址不变数据在变) 打开浏览器network点击获取数据的按钮查看内部js请求 多请求几次总结url变化规律
 http://tianqi.2345.com/Pc/GetHistoryareaInfo%5BareaId%5D=60010&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=9http://tianqi.2345.com/Pc/GetHistoryareaInfo%5BareaId%5D=71447&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10o%5BareaId%5D=60010&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10 朝上述url发送get请求
   import requests import json import pandas res = requests.get(&lsquo;http://tianqi.2345.com/Pc/GetHistory?areaInfo%5BareaId%5D=71447&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10&#39;) content = res.content
@@ -24,7 +24,7 @@ url_reg = &#39;https://www.autohome.com.cn/news/%s/#liststart&#39;for i in rang
 
 
 
-<meta itemprop="keywords" content="爬虫,selenium模块,实例演示," /><meta property="og:title" content="爬虫之selenium模块、实例演示" />
+<meta itemprop="keywords" content="爬虫,selenium模块,实例演示," /><meta property="og:title" content="爬虫之selenium模块" />
 <meta property="og:description" content="今日内容概要  爬取天气信息 爬取汽车之家信息 selenium模块  今日内容详细   爬取天气信息 http://tianqi.2345.com有一些网站的数据是后续js动态加载的 (网站的地址不变数据在变) 打开浏览器network点击获取数据的按钮查看内部js请求 多请求几次总结url变化规律
 http://tianqi.2345.com/Pc/GetHistoryareaInfo%5BareaId%5D=60010&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=9http://tianqi.2345.com/Pc/GetHistoryareaInfo%5BareaId%5D=71447&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10o%5BareaId%5D=60010&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10 朝上述url发送get请求
   import requests import json import pandas res = requests.get(&lsquo;http://tianqi.2345.com/Pc/GetHistory?areaInfo%5BareaId%5D=71447&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10&#39;) content = res.content
@@ -36,11 +36,11 @@ res = pandas.read_html(real_data)print(res)爬取汽车之家数据 新闻标�
  https://www.autohome.com.cn/news/1/#liststarthttps://www.autohome.com.cn/news/2/#liststarthttps://www.autohome.com.cn/news/3/#liststart利用代码事先翻页的功能
 url_reg = &#39;https://www.autohome.com.cn/news/%s/#liststart&#39;for i in range(1,6010):print(url_reg%i)尝试着直接朝url发送get请求获取数据" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Bselenium%E6%A8%A1%E5%9D%97%E5%AE%9E%E4%BE%8B%E6%BC%94%E7%A4%BA/" />
+<meta property="og:url" content="https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Bselenium%E6%A8%A1%E5%9D%97/" />
 <meta property="article:published_time" content="2020-11-20T00:00:00+00:00" />
 <meta property="article:modified_time" content="2020-11-20T00:00:00+00:00" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="爬虫之selenium模块、实例演示"/>
+<meta name="twitter:title" content="爬虫之selenium模块"/>
 <meta name="twitter:description" content="今日内容概要  爬取天气信息 爬取汽车之家信息 selenium模块  今日内容详细   爬取天气信息 http://tianqi.2345.com有一些网站的数据是后续js动态加载的 (网站的地址不变数据在变) 打开浏览器network点击获取数据的按钮查看内部js请求 多请求几次总结url变化规律
 http://tianqi.2345.com/Pc/GetHistoryareaInfo%5BareaId%5D=60010&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=9http://tianqi.2345.com/Pc/GetHistoryareaInfo%5BareaId%5D=71447&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10o%5BareaId%5D=60010&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10 朝上述url发送get请求
   import requests import json import pandas res = requests.get(&lsquo;http://tianqi.2345.com/Pc/GetHistory?areaInfo%5BareaId%5D=71447&amp;areaInfo%5BareaType%5D=2&amp;date%5Byear%5D=2020&amp;date%5Bmonth%5D=10&#39;) content = res.content
@@ -59,7 +59,7 @@ url_reg = &#39;https://www.autohome.com.cn/news/%s/#liststart&#39;for i in rang
 	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
 	<link rel="shortcut icon" href="/favicon.ico">
 
-	<title>爬虫之selenium模块、实例演示</title>
+	<title>爬虫之selenium模块</title>
 	<link rel="stylesheet" href="https://Eddy-622.github.io/css/style.min.657bcb7af31123e4156b1a3d2ff60a636717e54ead74f882136b5114cf72b55e.css" integrity="sha256-ZXvLevMRI+QVaxo9L/YKY2cX5U6tdPiCE2tRFM9ytV4=" crossorigin="anonymous">
 	
 </head>
@@ -96,7 +96,7 @@ url_reg = &#39;https://www.autohome.com.cn/news/%s/#liststart&#39;for i in rang
 		<article class="thin">
 			<header class="post-header">
 				<div class="post-meta"><span>Nov 20, 2020</span></div>
-				<h1>爬虫之selenium模块、实例演示</h1>
+				<h1>爬虫之selenium模块</h1>
 			</header>
 			<div class="content">
 				<h1 id="今日内容概要">今日内容概要<a href="#今日内容概要" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>

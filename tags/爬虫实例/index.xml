@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>爬虫实例 on Eddy&#39;s Boke</title>
+    <link>https://Eddy-622.github.io/tags/%E7%88%AC%E8%99%AB%E5%AE%9E%E4%BE%8B/</link>
+    <description>Recent content in 爬虫实例 on Eddy&#39;s Boke</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Mon, 23 Nov 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://Eddy-622.github.io/tags/%E7%88%AC%E8%99%AB%E5%AE%9E%E4%BE%8B/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>爬虫之selenium模块、实例</title>
+      <link>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Bselenium%E6%A8%A1%E5%9D%97%E5%AE%9E%E4%BE%8B/</link>
+      <pubDate>Mon, 23 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Bselenium%E6%A8%A1%E5%9D%97%E5%AE%9E%E4%BE%8B/</guid>
+      <description>今日内容概要  selenium模块 爬取京东商品信息 研究知乎防爬策略 研究小说爬取思路 Scrapy框架了解 MongoDB数据库(非关系型数据库)  今日内容详细 selenium模块   通过id查找标签
+from selenium import webdriverimport timebro=webdriver.Chrome()bro.get(&amp;#34;http://www.baidu.com&amp;#34;)bro.implicitly_wait(10)inEle = bro.find_element_by_id(&amp;#39;kw&amp;#39;)往标签内写内容
+inEle.send_keys(&amp;#39;美女&amp;#39;)通过a标签内部的文本查找a标签
+aEle = bro.find_element_by_link_text(&amp;#39;登录&amp;#39;)点击a标签
+aEle.click()如果你不知道具体文本内容 或者想模糊查询
+find_element_by_partial_link_text查找div标签
+divEle = bro.find_element_by_tag_name(&amp;#39;div&amp;#39;)获取内部所有的文本信息
+print(divEle.text) 查看含有class属性值:
+s-top-right-text c-font-normal c-color-tspEle = bro.find_element_by_class_name(&amp;#39;s-top-right-text&amp;#39;)print(spEle.text)css选择器
+pEle = bro.find_element_by_css_selector(&amp;#39;#kw&amp;#39;)pEle.click()  自动登录 from selenium import webdriverimport timebro=webdriver.Chrome()bro.get(&amp;#34;http://www.baidu.com&amp;#34;)bro.implicitly_wait(10)  找到登录按钮</description>
+    </item>
+    
+  </channel>
+</rss>

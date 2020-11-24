@@ -13,23 +13,54 @@
     
     
     <item>
-      <title>爬虫之selenium模块、实例演示</title>
-      <link>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Bselenium%E6%A8%A1%E5%9D%97%E5%AE%9E%E4%BE%8B%E6%BC%94%E7%A4%BA/</link>
+      <title>爬虫实例、爬取思路、数据分析简介</title>
+      <link>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E5%AE%9E%E4%BE%8B%E7%88%AC%E5%8F%96%E6%80%9D%E8%B7%AF%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%AE%80%E4%BB%8B/</link>
+      <pubDate>Tue, 24 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E5%AE%9E%E4%BE%8B%E7%88%AC%E5%8F%96%E6%80%9D%E8%B7%AF%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%AE%80%E4%BB%8B/</guid>
+      <description>今日内容概要  知乎登录破解思路 红薯网小说爬取思路 爬虫框架之Scrapy安装 ipython模块 jupyter模块 anaconda数据分析软件  今日内容详细 知乎登录破解思路   网站手段 我们惯有的思路是登录成功之后网站返回给我们的cookie就是身份标识 但是有一些网站并不是这么做的 当你第一次不登陆情况下访问网站的时候，就已经偷偷给了一个cookie但是这个cookie是没有激活的状态 当你登录之后网站又会在之前的基础之上再给你一个cookie，我们会习惯性的人为第二次给的cookie才是有效的，其实不然 其实第二次给你的是个烟雾弹，真正起作用的恰巧是第一个(登录成功之后会将第一个给你的cookie激活)
+1.访问登录首页查看cookie数据
+ _xsrf	90d14e60-77f3-43b1-9ad0-f836a97cc631_zap	2afce640-f9c2-48dd-973a-e92c235f36382.点击用户名密码登录
+有时候需要输入图片验证码有时候不需要这个其实就是由内部的https://www.zhihu.com/api/v3/oauth/captcha?lang=cn3.验证码中文英文
+ lang=cn 中文汉字lang=en	英文数字4.提交post请求数据全部是加密过的 需要去js文件中查找到加密的算法 每个文件里面搜索关键字encrypt 查找到加密之前的字符串但是里面还是有url加密 需要使用python的模块继续解密
+ from urllib.parse import unquote_plusclient_id 用户id(固定值)grant_type 验证方式(固定值)timestamp 时间戳*1000,去尾source	(固定值)signature	签名(js加密,变动)username	用户名password	密码captcha	验证码lang	验证码方式(固定值)utm_source	(固定值)ref_source	(固定值)other_https://www.zhihu.com/signin?next=%2F5.signature也是js加密的需要破解
+ hmac加密sha1加密将上述推导步骤 熟悉一下即可</description>
+    </item>
+    
+    <item>
+      <title>爬虫之selenium模块、实例</title>
+      <link>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Bselenium%E6%A8%A1%E5%9D%97%E5%AE%9E%E4%BE%8B/</link>
+      <pubDate>Mon, 23 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Bselenium%E6%A8%A1%E5%9D%97%E5%AE%9E%E4%BE%8B/</guid>
+      <description>今日内容概要  selenium模块 爬取京东商品信息 研究知乎防爬策略 研究小说爬取思路 Scrapy框架了解 MongoDB数据库(非关系型数据库)  今日内容详细 selenium模块   通过id查找标签
+from selenium import webdriverimport timebro=webdriver.Chrome()bro.get(&amp;#34;http://www.baidu.com&amp;#34;)bro.implicitly_wait(10)inEle = bro.find_element_by_id(&amp;#39;kw&amp;#39;)往标签内写内容
+inEle.send_keys(&amp;#39;美女&amp;#39;)通过a标签内部的文本查找a标签
+aEle = bro.find_element_by_link_text(&amp;#39;登录&amp;#39;)点击a标签
+aEle.click()如果你不知道具体文本内容 或者想模糊查询
+find_element_by_partial_link_text查找div标签
+divEle = bro.find_element_by_tag_name(&amp;#39;div&amp;#39;)获取内部所有的文本信息
+print(divEle.text) 查看含有class属性值:
+s-top-right-text c-font-normal c-color-tspEle = bro.find_element_by_class_name(&amp;#39;s-top-right-text&amp;#39;)print(spEle.text)css选择器
+pEle = bro.find_element_by_css_selector(&amp;#39;#kw&amp;#39;)pEle.click()  自动登录 from selenium import webdriverimport timebro=webdriver.Chrome()bro.get(&amp;#34;http://www.baidu.com&amp;#34;)bro.implicitly_wait(10)  找到登录按钮</description>
+    </item>
+    
+    <item>
+      <title>爬虫之selenium模块</title>
+      <link>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Bselenium%E6%A8%A1%E5%9D%97/</link>
       <pubDate>Fri, 20 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Bselenium%E6%A8%A1%E5%9D%97%E5%AE%9E%E4%BE%8B%E6%BC%94%E7%A4%BA/</guid>
+      <guid>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Bselenium%E6%A8%A1%E5%9D%97/</guid>
       <description>今日内容概要  爬取天气信息 爬取汽车之家信息 selenium模块  今日内容详细   爬取天气信息 http://tianqi.2345.com有一些网站的数据是后续js动态加载的 (网站的地址不变数据在变) 打开浏览器network点击获取数据的按钮查看内部js请求 多请求几次总结url变化规律
 http://tianqi.2345.com/Pc/GetHistoryareaInfo%5BareaId%5D=60010&amp;amp;areaInfo%5BareaType%5D=2&amp;amp;date%5Byear%5D=2020&amp;amp;date%5Bmonth%5D=9http://tianqi.2345.com/Pc/GetHistoryareaInfo%5BareaId%5D=71447&amp;amp;areaInfo%5BareaType%5D=2&amp;amp;date%5Byear%5D=2020&amp;amp;date%5Bmonth%5D=10o%5BareaId%5D=60010&amp;amp;areaInfo%5BareaType%5D=2&amp;amp;date%5Byear%5D=2020&amp;amp;date%5Bmonth%5D=10 朝上述url发送get请求
-  import requests import json import pandas
-res = requests.get(&amp;lsquo;http://tianqi.2345.com/Pc/GetHistory?areaInfo%5BareaId%5D=71447&amp;amp;areaInfo%5BareaType%5D=2&amp;amp;date%5Byear%5D=2020&amp;amp;date%5Bmonth%5D=10&#39;) content = res.content
+  import requests import json import pandas res = requests.get(&amp;lsquo;http://tianqi.2345.com/Pc/GetHistory?areaInfo%5BareaId%5D=71447&amp;amp;areaInfo%5BareaType%5D=2&amp;amp;date%5Byear%5D=2020&amp;amp;date%5Bmonth%5D=10&#39;) content = res.content
 先反序列化成python里面的字典```pythonjson_dict = json.loads(content)​	loads方法既可以反序列化json格式字符串 ​	也可以发序列化json格式的二进制数据
 在利用字典取值获取天气相关的数据
 real_data = json_dict.get(&amp;#39;data&amp;#39;)直接将页面上的表格数据筛选出来
 res = pandas.read_html(real_data)print(res)爬取汽车之家数据 新闻标签页
-https://www.autohome.com.cn/news/总结每个页的url规律 推导出固定url格式
-https://www.autohome.com.cn/news/1/#liststarthttps://www.autohome.com.cn/news/2/#liststarthttps://www.autohome.com.cn/news/3/#liststart利用代码事先翻页的功能
-url_reg = &amp;#39;https://www.autohome.com.cn/news/%s/#liststart&amp;#39;for i in range(1,6010):print(url_reg%i)尝试着直接朝url发送get请求获取数据
-研究目标数据所在的HTML规律</description>
+ https://www.autohome.com.cn/news/总结每个页的url规律 推导出固定url格式
+ https://www.autohome.com.cn/news/1/#liststarthttps://www.autohome.com.cn/news/2/#liststarthttps://www.autohome.com.cn/news/3/#liststart利用代码事先翻页的功能
+url_reg = &amp;#39;https://www.autohome.com.cn/news/%s/#liststart&amp;#39;for i in range(1,6010):print(url_reg%i)尝试着直接朝url发送get请求获取数据</description>
     </item>
     
     <item>
@@ -119,31 +150,6 @@ SELECTstudent.sname AS &amp;#39;姓名&amp;#39;,avg( score.num ) AS &amp;#39;�
   多表查询练习题(课上一起写五道练习题)
   python如何操作MySQL
   今日内容详细 多表操作的两大方法 &amp;#34;&amp;#34;&amp;#34;我们需要的数据可能来自于多张表 数据准备 &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;建表 create table dep( id int primary key auto_increment, name varchar(20) ); create table emp( id int primary key auto_increment, name varchar(20), sex enum(&amp;#39;male&amp;#39;,&amp;#39;female&amp;#39;) not null default &amp;#39;male&amp;#39;, age int, dep_id int ); &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;插入数据 insert into dep values (200,&amp;#39;技术&amp;#39;), (201,&amp;#39;人力资源&amp;#39;), (202,&amp;#39;销售&amp;#39;), (203,&amp;#39;运营&amp;#39;), (205,&amp;#39;财务&amp;#39;) ; insert into emp(name,sex,age,dep_id) values (&amp;#39;jason&amp;#39;,&amp;#39;male&amp;#39;,18,200), (&amp;#39;egon&amp;#39;,&amp;#39;female&amp;#39;,48,201), (&amp;#39;kevin&amp;#39;,&amp;#39;male&amp;#39;,18,201), (&amp;#39;nick&amp;#39;,&amp;#39;male&amp;#39;,28,202), (&amp;#39;owen&amp;#39;,&amp;#39;male&amp;#39;,18,203), (&amp;#39;jerry&amp;#39;,&amp;#39;female&amp;#39;,18,204);&amp;#34;&amp;#34;&amp;#34; 连接表的概念 &amp;#34;&amp;#34;&amp;#34;select * from dep,emp; &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; 结果是一个笛卡尔积(了解) &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; 我们要的不是全部对应一遍，而是按照相同的条件做对应关系 select * from dep,emp where dep.</description>
-    </item>
-    
-    <item>
-      <title>MySQL之单表查询，关键字，字段修改</title>
-      <link>https://Eddy-622.github.io/posts/mysql%E5%8D%95%E8%A1%A8%E6%9F%A5%E8%AF%A2%E5%85%B3%E9%94%AE%E5%AD%97%E5%AD%97%E6%AE%B5%E4%BF%AE%E6%94%B9/</link>
-      <pubDate>Wed, 11 Nov 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://Eddy-622.github.io/posts/mysql%E5%8D%95%E8%A1%A8%E6%9F%A5%E8%AF%A2%E5%85%B3%E9%94%AE%E5%AD%97%E5%AD%97%E6%AE%B5%E4%BF%AE%E6%94%B9/</guid>
-      <description>今日内容概要   表关系判断之一对一
-  修改表的SQL语句补充
-  复制表(了解)
-  单表查询关键字的使用
-selectfrom wheregroup byhavingdistinctlimitorder byregexp  多表查询
-  今日内容详细 表关系判断之一对一 1.qq用户表2.客户表和学生表有时候一张表里面的数据量太多并且有大部分数据不是经常需要使用的，这个时候我们可以基于表关系的知识将一张表拆分为两张表，然后绑定表关系以用户表和用户详情表为例1.先站在用户表的基础上问一个用户能否对应多个用户详情信息不可以2.再站在用户详情表的基础上问一个用户详情能否对应多个用户信息不可以结论:双方都不可以，那么表关系就是&amp;quot;一对一&amp;quot;或者&amp;quot;没有关系&amp;quot;针对一对一外键字段建在任何一方都可以但是建议你建在查询频率较高的表中SQL语句实现create table user(id int primary key auto_increment,name varchar(32),age int,detail_id int unqiue,foreign key(detail_id) references userDetail(id));create table userDetail(id int primary key auto_increment,addr varchar(32),phone int)表关系的总结 &amp;quot;&amp;quot;&amp;quot;我们学习了如何判断表关系以及如何建立表关系，但是在实际工作中遇到有关系的表不一定非要用外键去建立表关系因为当表特别多的时候，如果频繁的使用外键会导致表关系非常的复杂，操作起来关联性太强耦合程度太高我们可以在sql语句层面建立表与表之间的逻辑关系比如:在修改用户表的时候房屋表也要跟着改，那么我们只需要将修改用户表的sql语句和修改房屋表的sql语句放在一起执行&amp;quot;&amp;quot;&amp;quot;修改表的SQL语句补充 &amp;quot;&amp;quot;&amp;quot;1.</description>
-    </item>
-    
-    <item>
-      <title>MySQL之完整语法、外键、约束条件</title>
-      <link>https://Eddy-622.github.io/posts/mysql%E5%AE%8C%E6%95%B4%E8%AF%AD%E6%B3%95%E4%B8%BB%E9%94%AE%E5%A4%96%E9%94%AE/</link>
-      <pubDate>Tue, 10 Nov 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://Eddy-622.github.io/posts/mysql%E5%AE%8C%E6%95%B4%E8%AF%AD%E6%B3%95%E4%B8%BB%E9%94%AE%E5%A4%96%E9%94%AE/</guid>
-      <description>昨日内容回顾   存储引擎
-&amp;#39;&amp;#39;&amp;#39;查看存储引擎show engines;InnoDBMyISAMMemoryBlackHolecreate table t1(id int) engine=memory;&amp;#39;&amp;#39;&amp;#39;  基本SQL语句
-&amp;#39;&amp;#39;&amp;#39;针对库show databases;show create database db1;create database db1;alter database db1 charset=&amp;#39;gbk&amp;#39;;drop database db1;针对表select database();use db1;show tables;show create table t1;describe t1;desc t1;create table t1(id int);alter table t1 modify id tinyiny;alter table t1 change id nid int;alter table t1 rename t2;drop table t1;针对记录select * from t1;select id,username from t1;select User,Hostname from mysql.</description>
     </item>
     
   </channel>

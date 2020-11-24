@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="theme-color" content="#494f5c">
+	<meta name="msapplication-TileColor" content="#494f5c">
+<meta itemprop="name" content="爬虫实例、爬取思路、数据分析简介">
+<meta itemprop="description" content="今日内容概要  知乎登录破解思路 红薯网小说爬取思路 爬虫框架之Scrapy安装 ipython模块 jupyter模块 anaconda数据分析软件  今日内容详细 知乎登录破解思路   网站手段 我们惯有的思路是登录成功之后网站返回给我们的cookie就是身份标识 但是有一些网站并不是这么做的 当你第一次不登陆情况下访问网站的时候，就已经偷偷给了一个cookie但是这个cookie是没有激活的状态 当你登录之后网站又会在之前的基础之上再给你一个cookie，我们会习惯性的人为第二次给的cookie才是有效的，其实不然 其实第二次给你的是个烟雾弹，真正起作用的恰巧是第一个(登录成功之后会将第一个给你的cookie激活)
+1.访问登录首页查看cookie数据
+ _xsrf	90d14e60-77f3-43b1-9ad0-f836a97cc631_zap	2afce640-f9c2-48dd-973a-e92c235f36382.点击用户名密码登录
+有时候需要输入图片验证码有时候不需要这个其实就是由内部的https://www.zhihu.com/api/v3/oauth/captcha?lang=cn3.验证码中文英文
+ lang=cn 中文汉字lang=en	英文数字4.提交post请求数据全部是加密过的 需要去js文件中查找到加密的算法 每个文件里面搜索关键字encrypt 查找到加密之前的字符串但是里面还是有url加密 需要使用python的模块继续解密
+ from urllib.parse import unquote_plusclient_id 用户id(固定值)grant_type 验证方式(固定值)timestamp 时间戳*1000,去尾source	(固定值)signature	签名(js加密,变动)username	用户名password	密码captcha	验证码lang	验证码方式(固定值)utm_source	(固定值)ref_source	(固定值)other_https://www.zhihu.com/signin?next=%2F5.signature也是js加密的需要破解
+ hmac加密sha1加密将上述推导步骤 熟悉一下即可">
+<meta itemprop="datePublished" content="2020-11-24T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-11-24T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="286">
+
+
+
+<meta itemprop="keywords" content="爬虫、数据分析,思路分析,实例,jupyter、ipython环境安装," /><meta property="og:title" content="爬虫实例、爬取思路、数据分析简介" />
+<meta property="og:description" content="今日内容概要  知乎登录破解思路 红薯网小说爬取思路 爬虫框架之Scrapy安装 ipython模块 jupyter模块 anaconda数据分析软件  今日内容详细 知乎登录破解思路   网站手段 我们惯有的思路是登录成功之后网站返回给我们的cookie就是身份标识 但是有一些网站并不是这么做的 当你第一次不登陆情况下访问网站的时候，就已经偷偷给了一个cookie但是这个cookie是没有激活的状态 当你登录之后网站又会在之前的基础之上再给你一个cookie，我们会习惯性的人为第二次给的cookie才是有效的，其实不然 其实第二次给你的是个烟雾弹，真正起作用的恰巧是第一个(登录成功之后会将第一个给你的cookie激活)
+1.访问登录首页查看cookie数据
+ _xsrf	90d14e60-77f3-43b1-9ad0-f836a97cc631_zap	2afce640-f9c2-48dd-973a-e92c235f36382.点击用户名密码登录
+有时候需要输入图片验证码有时候不需要这个其实就是由内部的https://www.zhihu.com/api/v3/oauth/captcha?lang=cn3.验证码中文英文
+ lang=cn 中文汉字lang=en	英文数字4.提交post请求数据全部是加密过的 需要去js文件中查找到加密的算法 每个文件里面搜索关键字encrypt 查找到加密之前的字符串但是里面还是有url加密 需要使用python的模块继续解密
+ from urllib.parse import unquote_plusclient_id 用户id(固定值)grant_type 验证方式(固定值)timestamp 时间戳*1000,去尾source	(固定值)signature	签名(js加密,变动)username	用户名password	密码captcha	验证码lang	验证码方式(固定值)utm_source	(固定值)ref_source	(固定值)other_https://www.zhihu.com/signin?next=%2F5.signature也是js加密的需要破解
+ hmac加密sha1加密将上述推导步骤 熟悉一下即可" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E5%AE%9E%E4%BE%8B%E7%88%AC%E5%8F%96%E6%80%9D%E8%B7%AF%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%AE%80%E4%BB%8B/" />
+<meta property="article:published_time" content="2020-11-24T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-11-24T00:00:00+00:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="爬虫实例、爬取思路、数据分析简介"/>
+<meta name="twitter:description" content="今日内容概要  知乎登录破解思路 红薯网小说爬取思路 爬虫框架之Scrapy安装 ipython模块 jupyter模块 anaconda数据分析软件  今日内容详细 知乎登录破解思路   网站手段 我们惯有的思路是登录成功之后网站返回给我们的cookie就是身份标识 但是有一些网站并不是这么做的 当你第一次不登陆情况下访问网站的时候，就已经偷偷给了一个cookie但是这个cookie是没有激活的状态 当你登录之后网站又会在之前的基础之上再给你一个cookie，我们会习惯性的人为第二次给的cookie才是有效的，其实不然 其实第二次给你的是个烟雾弹，真正起作用的恰巧是第一个(登录成功之后会将第一个给你的cookie激活)
+1.访问登录首页查看cookie数据
+ _xsrf	90d14e60-77f3-43b1-9ad0-f836a97cc631_zap	2afce640-f9c2-48dd-973a-e92c235f36382.点击用户名密码登录
+有时候需要输入图片验证码有时候不需要这个其实就是由内部的https://www.zhihu.com/api/v3/oauth/captcha?lang=cn3.验证码中文英文
+ lang=cn 中文汉字lang=en	英文数字4.提交post请求数据全部是加密过的 需要去js文件中查找到加密的算法 每个文件里面搜索关键字encrypt 查找到加密之前的字符串但是里面还是有url加密 需要使用python的模块继续解密
+ from urllib.parse import unquote_plusclient_id 用户id(固定值)grant_type 验证方式(固定值)timestamp 时间戳*1000,去尾source	(固定值)signature	签名(js加密,变动)username	用户名password	密码captcha	验证码lang	验证码方式(固定值)utm_source	(固定值)ref_source	(固定值)other_https://www.zhihu.com/signin?next=%2F5.signature也是js加密的需要破解
+ hmac加密sha1加密将上述推导步骤 熟悉一下即可"/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="/favicon.ico">
+
+	<title>爬虫实例、爬取思路、数据分析简介</title>
+	<link rel="stylesheet" href="https://Eddy-622.github.io/css/style.min.657bcb7af31123e4156b1a3d2ff60a636717e54ead74f882136b5114cf72b55e.css" integrity="sha256-ZXvLevMRI+QVaxo9L/YKY2cX5U6tdPiCE2tRFM9ytV4=" crossorigin="anonymous">
+	
+</head>
+
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp faster">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="https://Eddy-622.github.io">Eddy&#39;s Boke</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					
+				<a href="https://Eddy-622.github.io/posts/">博客</a>
+				<a href="https://Eddy-622.github.io/about-hugo/">关于</a>
+
+				</nav>
+			</div>
+			<div class="hdr-right hdr-icons">
+				<span class="hdr-social hide-in-mobile"><a href="https://mobile.twitter.com/zhang_kea" target="_blank" rel="noopener me" title="Twitter"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a><a href="https://www.facebook.com/kea.zhang.92" target="_blank" rel="noopener me" title="Instagram"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line></svg></a><a href="https://github.com/Eddy-622" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></span><button id="menu-btn" class="hdr-btn" title="Menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast">
+		<ul>
+			<li><a href="https://Eddy-622.github.io/posts/">博客</a></li>
+			<li><a href="https://Eddy-622.github.io/about-hugo/">关于</a></li>
+		</ul>
+	</div>
+
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta"><span>Nov 24, 2020</span></div>
+				<h1>爬虫实例、爬取思路、数据分析简介</h1>
+			</header>
+			<div class="content">
+				<h1 id="今日内容概要">今日内容概要<a href="#今日内容概要" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<ul>
+<li>知乎登录破解思路</li>
+<li>红薯网小说爬取思路</li>
+<li>爬虫框架之Scrapy安装</li>
+<li>ipython模块</li>
+<li>jupyter模块</li>
+<li>anaconda数据分析软件</li>
+</ul>
+<h1 id="今日内容详细">今日内容详细<a href="#今日内容详细" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<h3 id="知乎登录破解思路">知乎登录破解思路<a href="#知乎登录破解思路" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<ul>
+<li>
+<p>网站手段
+我们惯有的思路是登录成功之后网站返回给我们的cookie就是身份标识
+但是有一些网站并不是这么做的
+当你第一次不登陆情况下访问网站的时候，就已经偷偷给了一个cookie但是这个cookie是没有激活的状态
+当你登录之后网站又会在之前的基础之上再给你一个cookie，我们会习惯性的人为第二次给的cookie才是有效的，其实不然
+其实第二次给你的是个烟雾弹，真正起作用的恰巧是第一个(登录成功之后会将第一个给你的cookie激活)</p>
+<p>1.访问登录首页查看cookie数据</p>
+<pre><code>  _xsrf	90d14e60-77f3-43b1-9ad0-f836a97cc631
+    _zap	2afce640-f9c2-48dd-973a-e92c235f3638
+</code></pre><p>2.点击用户名密码登录</p>
+<pre><code>有时候需要输入图片验证码有时候不需要
+    这个其实就是由内部的
+    https://www.zhihu.com/api/v3/oauth/captcha?lang=cn
+   
+</code></pre><p>3.验证码中文英文</p>
+<pre><code>  lang=cn  中文汉字
+    lang=en	 英文数字
+</code></pre><p>4.提交post请求数据全部是加密过的
+需要去js文件中查找到加密的算法
+每个文件里面搜索关键字encrypt
+查找到加密之前的字符串但是里面还是有url加密
+需要使用python的模块继续解密</p>
+<pre><code>   from urllib.parse import unquote_plus
+        client_id      用户id(固定值)
+        grant_type     验证方式(固定值)
+        timestamp      时间戳*1000,去尾
+        source		   (固定值)
+        signature	   签名(js加密,变动)
+        username	   用户名
+        password	   密码
+        captcha		   验证码
+        lang		   验证码方式(固定值)
+        utm_source	   (固定值)
+        ref_source	   (固定值)other_https://www.zhihu.com/signin?next=%2F
+</code></pre><p>5.signature也是js加密的需要破解</p>
+<pre><code>  hmac加密
+    sha1加密
+</code></pre><p>将上述推导步骤 熟悉一下即可</p>
+</li>
+</ul>
+<h3 id="红薯网小说爬取">红薯网小说爬取<a href="#红薯网小说爬取" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<p>1.鼠标左右键都无法使用
+2.利用F12调出终端查看内部请求
+查看响应体无法得到网页小说文字数据
+3.筛选出ajax请求文件找到可疑项</p>
+<pre><code>{code: 119, msg: &quot;获取章节内容成功&quot;, key: &quot;86713409&quot;}
+	content:加密
+    other:加密
+</code></pre><p>逆向思维:加密就是为了让你看不懂(说明这块内容重要)</p>
+<p>4.研究上述两个js请求的请求体数据</p>
+<pre><code>method: getchptkey
+    bid: 3052
+    cid: 98805
+
+    method: getchpcontent
+    bid: 3052
+    jid: 3317
+    cid: 98805
+</code></pre><p>5.研究三个数字含义发现是构成该文件地址的三个关键参数
+<a href="https://www.hongshu.com/content/3052/3317-98805.html">https://www.hongshu.com/content/3052/3317-98805.html</a>
+6.加密英文单词叫encrypt解密英文单词decrypt</p>
+<pre><code>搜索到解密的关键代码
+    utf8to16(hs_decrypt(base64decode(data.content), key))
+	给上述代码所在的一行打上一个断点再次发送请求就会卡在这个断点
+    
+    utf8to16(hs_decrypt(base64decode(data.content), key))
+    utf8to16(hs_decrypt(base64decode(data.other), key))
+</code></pre><p>7.将上述解密之后的html代码放入html文件的body内
+将js代码放入js文件内，然后用script标签引入进来
+8.页面上有一些文字是通过css动态渲染的</p>
+<pre><code>1.通过js定位到所有的:befor标签
+    2.然后,获取到css属性的值(缺失的文字)
+    3.把缺失的文字插入到标签之间(innerText)
+    var element_list = 		document.querySelectorAll('#divChpContent span')
+for(var i=0;i&lt;element_list.length;i++){
+    var content = window.getComputedStyle(
+        element_list[i],':before'
+    ).getPropertyValue('content')
+    element_list[i].innerText = content.trim('&quot;');
+}
+</code></pre><p>代码无需掌握 明白思路即可</p>
+<h3 id="爬虫框架之scrapy">爬虫框架之Scrapy<a href="#爬虫框架之scrapy" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<p>Scrapy一个开源和协作的框架，其最初是为了页面抓取 (更确切来说, 网络抓取 )所设计的，使用它可以以快速、简单、可扩展的方式从网站中提取所需的数据。但目前Scrapy的用途十分广泛，可用于如数据挖掘、监测和自动化测试等领域，也可以应用在获取API所返回的数据(例如 Amazon Associates Web Services ) 或者通用的网络爬虫。</p>
+<p>下载模块</p>
+<pre><code>pip3 install scrapy
+</code></pre><p>windows电脑极有可能会报错 如果不报错那就忽略
+mac电脑不会报错</p>
+<p>报错解决思路</p>
+<pre><code>1.pip3 install scrapy
+2.pip3 install wheel
+3.去网站下载一个文件先随便放在一个位置
+	https://www.lfd.uci.edu/~gohlke/pythonlibs/#twisted
+    Twisted‑20.3.0‑cp36‑cp36m‑win_amd64.whl
+4.pip3 install Twisted‑20.3.0‑cp36‑cp36m‑win_amd64.whl
+	报错会提示你将该文件放到哪儿
+    之后重新执行下载命令
+5.pip3 install pywin32
+6.pip3 install scrapy
+</code></pre><pre><code>参考博客：https://www.cnblogs.com/Dominic-Ji/p/9550525.html
+</code></pre><h3 id="数据分析模块">数据分析模块<a href="#数据分析模块" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<pre><code>为什么要学习数据分析
+	目前数据是最值钱的
+    &quot;数据是21世纪的石油&quot;
+ 
+数据分析能做的事情
+	1.商品推荐服务
+    2.抖音短视频推荐
+    	投喂
+        获取用户点击的视频记录，对视频进行分类
+        统计出用户点击最多的几个分类之后大概率推送相关分类视频
+    3.电影推荐
+    	同上
+    4.金融量化交易
+  	...
+   
+为什么用python做数据分析
+	1.python是目前最简单好学的一门编程语言
+    2.python的用途很广泛
+    3.基于python书写的用于数据分析的模块最大功能最强大
+   
+数据分析工作流程
+	1.提出需求
+    	到底要分析什么...
+    2.收集数据
+    	数据的来源
+        	1.公司自己内部的
+            2.花钱购买
+            3.自己写爬虫爬
+    3.处理数据
+    	无效数据
+        缺失数据
+        异常数据
+    4.数据分析
+    	数据分析软件SPSS
+        数据分析模型(算法)
+    5.数据可视化
+    	数据可视化软件Teableau、PowerBI
+        python可视化模块
+    6.数据分析报告
+    	过程中采用的算法
+        总结归纳分析结果
+        提出个人建议
+</code></pre><h3 id="python数据分析模块">python数据分析模块<a href="#python数据分析模块" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<p>1.numpy
+用于科学计算
+2.pandas
+基于numpy构建的更加强大的数据分析模块
+3.matplotlib
+数据可视化</p>
+<h3 id="ipython模块">ipython模块<a href="#ipython模块" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<pre><code>1.原生的python解释器环境有很多缺点
+	1.代码不会自动提示
+    2.颜色太单调
+    3.没有行数显示
+在工作中其实我们不会直接使用原生的python解释器环境，取而代之的是ipython模块提供的环境
+
+下载模块
+	pip3 install ipython
+    # 也可以使用国内的源
+    pip3 install ipython -i https://pypi.tuna.tsinghua.edu.cn/simple/
+基本使用
+	直接在cmd窗口下输入ipython即可进入环境
+    In [1]: print('hello world')
+    hello world
+
+    In [2]: import time
+
+    In [3]: time.time()
+    Out[3]: 1606191571.0108407
+
+    In [4]: import random
+
+    In [5]: random.random()
+    Out[5]: 0.5895398236819949
+
+    In [6]:
+优势:
+    1.代码有自动提示
+    	多敲几下tab即可
+    2.输入有行数显示
+    3.颜色有变化
+</code></pre><h3 id="jupyter模块">jupyter模块<a href="#jupyter模块" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<pre><code>下载模块
+	pip3 install jupyter -i https://pypi.tuna.tsinghua.edu.cn/simple/
+      
+基本使用
+	在cmd窗口内直接输入jupyter notebook
+    在哪个路径下就会在浏览器里面展示出该路径下所有的文件
+    停止服务使用ctrl + C多敲几下
+
+下拉框功能
+	terminal
+    folder
+    text file
+</code></pre>
+			</div>
+			<hr class="post-end">
+			<footer class="post-info">
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>Eddy Zhang</p>
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://Eddy-622.github.io/tags/%E7%88%AC%E8%99%AB%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90">爬虫、数据分析</a></span><span class="tag"><a href="https://Eddy-622.github.io/tags/%E6%80%9D%E8%B7%AF%E5%88%86%E6%9E%90">思路分析</a></span><span class="tag"><a href="https://Eddy-622.github.io/tags/%E5%AE%9E%E4%BE%8B">实例</a></span><span class="tag"><a href="https://Eddy-622.github.io/tags/jupyteripython%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85">jupyter、ipython环境安装</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>286 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-11-24 08:00 &#43;0800</p>
+			</footer>
+		</article>
+		<div class="post-nav thin">
+			<a class="prev-post" href="https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Bselenium%E6%A8%A1%E5%9D%97%E5%AE%9E%E4%BE%8B/">
+				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>爬虫之selenium模块、实例</span>
+			</a>
+		</div>
+		<div id="comments" class="thin">
+</div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p>&copy; 2020 <a href="https://Eddy-622.github.io">Eddy Zhang</a></p>
+		<p>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://Eddy-622.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+		</p>
+	</footer>
+
+
+
+	<script src="https://Eddy-622.github.io/js/bundle.min.4a9a0ac3d2217822c7865b4161e6c2a71de1d70492264337755427898dd718f6.js" integrity="sha256-SpoKw9IheCLHhltBYebCpx3h1wSSJkM3dVQniY3XGPY=" crossorigin="anonymous"></script>
+	
+
+</body>
+
+</html>
