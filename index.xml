@@ -13,6 +13,21 @@
     
     
     <item>
+      <title>数据分析之环境配置</title>
+      <link>https://Eddy-622.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B9%8B%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Wed, 25 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B9%8B%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</guid>
+      <description>今日内容概要  notebook的基本使用 anaconda软件下载 anaconda功能介绍 notebook快捷键操作 数据分析三大模块学习  今日内容详细 notebook的基本使用 下拉框点击python3会创建一个notebook文件
+  该文件的特点 1.开发环境是基于ipython模块 2.该文件具有非常易识别的后缀名.ipynb
+​ 也就意味着以后遇到该文件只能用notebook环境打开 ​ 如果你收到了后缀名是ipynb的文件应该如何正确的打开呢？ ​ 点击右上方upload按钮，将ipynb文件上传到jupyter内 ​ 即可使用notebook正常打开了
+  anaconda软件介绍   虽然我们的jupyter模块已经能够给我们提供python数据分析的notebook环境，但是在数据分析过程中需要使用到大量的第三方模块(200多个)，如果仅仅基于jupyter模块那么需要我们手动下载的模块太多了
+  anaconda软件内部也是提供了jupyter模块，不同的是它自动帮你下载了跟数据分析相关的200多个包(也就意味着你自己不需要下载直接可以使用) 并且anaconda内部还提供了其他的数据分析环境和一系列学习文档
+  anaconda软件下载    如果你想让anaconda能够正常的呼起你的默认浏览器 一定要确保你的计算机名称中不能含有中文
+   下载地址:https://www.anaconda.com/products/individual download-section点击下载选择对应的系统，下载的文件是一个.exe结尾的启动文件下载完成后直接双击启动即可(按照提示一步步的点击next即可) 注意该软件下载完毕之后是不能在桌面上展示出来的，第一次启动需要你打开搜索输入anaconda 点击弹出来的anaconda navigator 等待启动完成之后右键任务栏图标把它固定到开始屏幕或者任务栏中 之后就可以鼠标双击启动  anaconda软件介绍  home主页 anaconda给我们提供的很多数据分析相关的开发环境 显示为launch的就是直接可以启动运行使用的 显示为install就是需要额外下载才可以使用的 但是我们目前只需要使用jupyter即可 Envirnments环境 anaconda提前给你准备的数据分析相关的第三方模块(200多个) learning学习环境 给你提供了很多官方权威的学习文档(有空的时候多看看) community社区环境 学习交流平台  主要功能学习 专业名词介绍</description>
+    </item>
+    
+    <item>
       <title>爬虫实例、爬取思路、数据分析简介</title>
       <link>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E5%AE%9E%E4%BE%8B%E7%88%AC%E5%8F%96%E6%80%9D%E8%B7%AF%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%AE%80%E4%BB%8B/</link>
       <pubDate>Tue, 24 Nov 2020 00:00:00 +0000</pubDate>
@@ -136,20 +151,6 @@ SELECTstudent.sname AS &amp;#39;姓名&amp;#39;,avg( score.num ) AS &amp;#39;�
       <guid>https://Eddy-622.github.io/posts/mysql%E4%B9%8B%E9%93%BE%E6%8E%A5python%E6%93%8D%E4%BD%9Csql%E6%B3%A8%E5%85%A5%E9%97%AE%E9%A2%98/</guid>
       <description>昨日内容回顾   连表操作
 &amp;#34;&amp;#34;&amp;#34;由于在实际应用中，我们需要的数据很有可能是来自于多张表 这个时候我们可以采用多表查询的方式1:连表操作 连表操作的本质就是先将多张表拼接成一张表，然后基于这张拼接之后的表做单表查询 &amp;gt;&amp;gt;&amp;gt; 笛卡尔积 select * from emp,dep; 在涉及到多表查询SQL语句的编写过程中，为了避免字段冲突的问题 我们一般都会加上表名来做明确的区分，否则可能会报错 &amp;gt;&amp;gt;&amp;gt; 连表操作 inner join 将两张表都有对应关系的数据按照指定的条件拼接到一起 select * from emp inner join dep on emp.dep_id = dep.id; left join 以关键字left join左边的表为基准，展示左表所有的记录，没有的null填充 select * from emp left join dep on emp.dep_id = dep.id; right join 以关键字right join右边的表为基准，展示右表所有的记录，没有的null填充 select * from emp right join dep on emp.dep_id = dep.id; union 两张表所有的技术全部展示出来，各自没有对应的全部用null填充 select * from emp left join dep on emp.</description>
-    </item>
-    
-    <item>
-      <title>MySQL之多表查询、连接表、子查询、Nevicat</title>
-      <link>https://Eddy-622.github.io/posts/mysql%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2%E5%AD%90%E6%9F%A5%E8%AF%A2%E8%BF%9E%E6%8E%A5%E8%A1%A8/</link>
-      <pubDate>Thu, 12 Nov 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://Eddy-622.github.io/posts/mysql%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2%E5%AD%90%E6%9F%A5%E8%AF%A2%E8%BF%9E%E6%8E%A5%E8%A1%A8/</guid>
-      <description>今日内容概要   多表操作的两大方法
-  Navicat软件的使用
-能够让你通过鼠标点点点的操作，来完成对数据库的增删改查
-  多表查询练习题(课上一起写五道练习题)
-  python如何操作MySQL
-  今日内容详细 多表操作的两大方法 &amp;#34;&amp;#34;&amp;#34;我们需要的数据可能来自于多张表 数据准备 &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;建表 create table dep( id int primary key auto_increment, name varchar(20) ); create table emp( id int primary key auto_increment, name varchar(20), sex enum(&amp;#39;male&amp;#39;,&amp;#39;female&amp;#39;) not null default &amp;#39;male&amp;#39;, age int, dep_id int ); &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;插入数据 insert into dep values (200,&amp;#39;技术&amp;#39;), (201,&amp;#39;人力资源&amp;#39;), (202,&amp;#39;销售&amp;#39;), (203,&amp;#39;运营&amp;#39;), (205,&amp;#39;财务&amp;#39;) ; insert into emp(name,sex,age,dep_id) values (&amp;#39;jason&amp;#39;,&amp;#39;male&amp;#39;,18,200), (&amp;#39;egon&amp;#39;,&amp;#39;female&amp;#39;,48,201), (&amp;#39;kevin&amp;#39;,&amp;#39;male&amp;#39;,18,201), (&amp;#39;nick&amp;#39;,&amp;#39;male&amp;#39;,28,202), (&amp;#39;owen&amp;#39;,&amp;#39;male&amp;#39;,18,203), (&amp;#39;jerry&amp;#39;,&amp;#39;female&amp;#39;,18,204);&amp;#34;&amp;#34;&amp;#34; 连接表的概念 &amp;#34;&amp;#34;&amp;#34;select * from dep,emp; &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; 结果是一个笛卡尔积(了解) &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; 我们要的不是全部对应一遍，而是按照相同的条件做对应关系 select * from dep,emp where dep.</description>
     </item>
     
   </channel>

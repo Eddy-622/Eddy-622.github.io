@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Anaconda on Eddy&#39;s Boke</title>
+    <link>https://Eddy-622.github.io/tags/anaconda/</link>
+    <description>Recent content in Anaconda on Eddy&#39;s Boke</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Wed, 25 Nov 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://Eddy-622.github.io/tags/anaconda/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>数据分析之环境配置</title>
+      <link>https://Eddy-622.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B9%8B%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Wed, 25 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B9%8B%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</guid>
+      <description>今日内容概要  notebook的基本使用 anaconda软件下载 anaconda功能介绍 notebook快捷键操作 数据分析三大模块学习  今日内容详细 notebook的基本使用 下拉框点击python3会创建一个notebook文件
+  该文件的特点 1.开发环境是基于ipython模块 2.该文件具有非常易识别的后缀名.ipynb
+​ 也就意味着以后遇到该文件只能用notebook环境打开 ​ 如果你收到了后缀名是ipynb的文件应该如何正确的打开呢？ ​ 点击右上方upload按钮，将ipynb文件上传到jupyter内 ​ 即可使用notebook正常打开了
+  anaconda软件介绍   虽然我们的jupyter模块已经能够给我们提供python数据分析的notebook环境，但是在数据分析过程中需要使用到大量的第三方模块(200多个)，如果仅仅基于jupyter模块那么需要我们手动下载的模块太多了
+  anaconda软件内部也是提供了jupyter模块，不同的是它自动帮你下载了跟数据分析相关的200多个包(也就意味着你自己不需要下载直接可以使用) 并且anaconda内部还提供了其他的数据分析环境和一系列学习文档
+  anaconda软件下载    如果你想让anaconda能够正常的呼起你的默认浏览器 一定要确保你的计算机名称中不能含有中文
+   下载地址:https://www.anaconda.com/products/individual download-section点击下载选择对应的系统，下载的文件是一个.exe结尾的启动文件下载完成后直接双击启动即可(按照提示一步步的点击next即可) 注意该软件下载完毕之后是不能在桌面上展示出来的，第一次启动需要你打开搜索输入anaconda 点击弹出来的anaconda navigator 等待启动完成之后右键任务栏图标把它固定到开始屏幕或者任务栏中 之后就可以鼠标双击启动  anaconda软件介绍  home主页 anaconda给我们提供的很多数据分析相关的开发环境 显示为launch的就是直接可以启动运行使用的 显示为install就是需要额外下载才可以使用的 但是我们目前只需要使用jupyter即可 Envirnments环境 anaconda提前给你准备的数据分析相关的第三方模块(200多个) learning学习环境 给你提供了很多官方权威的学习文档(有空的时候多看看) community社区环境 学习交流平台  主要功能学习 专业名词介绍</description>
+    </item>
+    
+  </channel>
+</rss>
