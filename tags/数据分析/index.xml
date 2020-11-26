@@ -7,10 +7,31 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Wed, 25 Nov 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 26 Nov 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://Eddy-622.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>数据分析之Numpy基础使用</title>
+      <link>https://Eddy-622.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B9%8Bnumpy%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Thu, 26 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B9%8Bnumpy%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/</guid>
+      <description>今日内容概要  常用方法 常用方式 索引与切片 运算符 函数 随机数模块 赌场输赢案例(输赢概率五五开)  今日内容详细 补充 1.我们尽量做到将所有导入模块的语句写在文件的最上方(开头)
+ps:我们可以先直接书写代码，写完之后将所有导入模块的语句全部整理到文件开头
+2.在notebook环境下左侧In里面 如果是*号表示正在运行 如果是数字表示已经运行完毕
+3.在执行完单元格之后 1.如果没有任何的返回结果 说明改变的是源数据 2.如果有返回结果 说明没有改变源数据,而是产生了新的结果
+4.数组的特点 1.数组内所有的元素肯定是相同的数据类型 2.数组的大小无法修改 3.数组的数学运算默认都是挨个元素挨个元素逐一运算
+a = array([1,2,3])a + 1 array([1+1,2+1,3+1])​ 4.数组之间做运算一定要确保彼此之间列相同
+​ 5.如何查看方法的内部注释 ​
+1.shift(先按) + tab(再多按几下)2.在方法的后面加?执行6.其实我们的日常生活中包括将来我们工作之后 操作浮点型的概率都是较高的 所以numpy里面默认也都是浮点型
+常用方法 T 数组的转置（对高维数组而言）
+li1 = [[1,2,3],[4,5,6]] a = np.array(li1) 二维数组(两行三列) a.T 转置(三行两列)dtype 数组元素的数据类型
+a.dtypesize 数组元素的个数（常用）
+a.sizendim 数组的维数
+ar1 = np.</description>
+    </item>
     
     <item>
       <title>数据分析之环境配置</title>
@@ -23,8 +44,8 @@
 ​ 也就意味着以后遇到该文件只能用notebook环境打开 ​ 如果你收到了后缀名是ipynb的文件应该如何正确的打开呢？ ​ 点击右上方upload按钮，将ipynb文件上传到jupyter内 ​ 即可使用notebook正常打开了
   anaconda软件介绍   虽然我们的jupyter模块已经能够给我们提供python数据分析的notebook环境，但是在数据分析过程中需要使用到大量的第三方模块(200多个)，如果仅仅基于jupyter模块那么需要我们手动下载的模块太多了
   anaconda软件内部也是提供了jupyter模块，不同的是它自动帮你下载了跟数据分析相关的200多个包(也就意味着你自己不需要下载直接可以使用) 并且anaconda内部还提供了其他的数据分析环境和一系列学习文档
-  anaconda软件下载    如果你想让anaconda能够正常的呼起你的默认浏览器 一定要确保你的计算机名称中不能含有中文
-   下载地址:https://www.anaconda.com/products/individual download-section点击下载选择对应的系统，下载的文件是一个.exe结尾的启动文件下载完成后直接双击启动即可(按照提示一步步的点击next即可) 注意该软件下载完毕之后是不能在桌面上展示出来的，第一次启动需要你打开搜索输入anaconda 点击弹出来的anaconda navigator 等待启动完成之后右键任务栏图标把它固定到开始屏幕或者任务栏中 之后就可以鼠标双击启动  anaconda软件介绍  home主页 anaconda给我们提供的很多数据分析相关的开发环境 显示为launch的就是直接可以启动运行使用的 显示为install就是需要额外下载才可以使用的 但是我们目前只需要使用jupyter即可 Envirnments环境 anaconda提前给你准备的数据分析相关的第三方模块(200多个) learning学习环境 给你提供了很多官方权威的学习文档(有空的时候多看看) community社区环境 学习交流平台  主要功能学习 专业名词介绍</description>
+  anaconda软件下载  如果你想让anaconda能够正常的呼起你的默认浏览器 一定要确保你的计算机名称中不能含有中文  下载地址:https://www.anaconda.com/products/individual download-section点击下载选择对应的系统，下载的文件是一个.exe结尾的启动文件下载完成后直接双击启动即可(按照提示一步步的点击next即可) 注意该软件下载完毕之后是不能在桌面上展示出来的，第一次启动需要你打开搜索输入anaconda 点击弹出来的anaconda navigator 等待启动完成之后右键任务栏图标把它固定到开始屏幕或者任务栏中 之后就可以鼠标双击启动  anaconda软件介绍  home主页 anaconda给我们提供的很多数据分析相关的开发环境 显示为launch的就是直接可以启动运行使用的 显示为install就是需要额外下载才可以使用的 但是我们目前只需要使用jupyter即可 Envirnments环境 anaconda提前给你准备的数据分析相关的第三方模块(200多个) learning学习环境 给你提供了很多官方权威的学习文档(有空的时候多看看) community社区环境 学习交流平台  主要功能学习 专业名词介绍
+cells 单元格(当前正在被编辑的代码区)copy	拷贝paste	粘贴above	在.</description>
     </item>
     
   </channel>

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Python on Eddy&#39;s Boke</title>
-    <link>https://Eddy-622.github.io/tags/python/</link>
-    <description>Recent content in Python on Eddy&#39;s Boke</description>
+    <title>Numpy基础用法 on Eddy&#39;s Boke</title>
+    <link>https://Eddy-622.github.io/tags/numpy%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/</link>
+    <description>Recent content in Numpy基础用法 on Eddy&#39;s Boke</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
     <lastBuildDate>Thu, 26 Nov 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://Eddy-622.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://Eddy-622.github.io/tags/numpy%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -31,34 +31,6 @@ li1 = [[1,2,3],[4,5,6]] a = np.array(li1) 二维数组(两行三列) a.T 转�
 a.dtypesize 数组元素的个数（常用）
 a.sizendim 数组的维数
 ar1 = np.</description>
-    </item>
-    
-    <item>
-      <title>Python之初识Python</title>
-      <link>https://Eddy-622.github.io/posts/python%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</link>
-      <pubDate>Thu, 29 Oct 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://Eddy-622.github.io/posts/python%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</guid>
-      <description>10.28回顾   简单的cmd操作 选择盘符E: ， cd 切换目录，dir显示当前列表
-  路径的概念
-​	相对路径
-​	绝对路径
-  环境变量的设置
-win7 大同小异，win7注意单行地址栏操作各路径之间用；隔开
-win10
-  解释器的多版本共存
-配置不同的环境变量以及拷贝exe文件修改文件名以达到共存的目的
-  执行python程序
-cmd窗口中输入代码
-txt，word等文件中输入代码，用解释器执行
-专业的python编辑器
-  python编辑器推荐
-vscode 凑合用，适合老手
-anaconda 主要用途为数据分析、
-pycharm 好东西，要钱，破解
-  pycharm的使用
-&amp;#39;&amp;#39;&amp;#39;安装好设置好文件存放路径已经选择好解释器版本后启动新建py文件，写入代码，运行文件&amp;#39;&amp;#39;&amp;#39;  文件后缀名
-&amp;#39;&amp;#39;&amp;#39;明确对文件的分类，使人一眼就能看懂文件的类型&amp;#39;&amp;#39;&amp;#39;  今日内容   python中的注释 &amp;#39;&amp;#39;&amp;#39;注释就是对于一段代码的文字解释。python中的注释是用来给人看，给自己看，帮助理解代码使用的方便后期更新维护方式1（单行注释）#或选中注释区域后使用 快捷键 CTRL + /再次激活快捷键为解开注释&amp;#39;&amp;#39;&amp;#39;&amp;#39;&amp;#39;&amp;#39;方式2（多行注释）&amp;#39;&amp;#39;&amp;#39;&amp;#39;&amp;#39;&amp;#39;三个单引号&amp;#39;&amp;#39;&amp;#39;&amp;#34;&amp;#34;&amp;#34;三个双引号&amp;#34;&amp;#34;&amp;#34;  python中的变量 &amp;#39;&amp;#39;&amp;#39;1.</description>
     </item>
     
   </channel>

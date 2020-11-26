@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="theme-color" content="#494f5c">
+	<meta name="msapplication-TileColor" content="#494f5c">
+<meta itemprop="name" content="数据分析之Numpy基础使用">
+<meta itemprop="description" content="今日内容概要  常用方法 常用方式 索引与切片 运算符 函数 随机数模块 赌场输赢案例(输赢概率五五开)  今日内容详细 补充 1.我们尽量做到将所有导入模块的语句写在文件的最上方(开头)
+ps:我们可以先直接书写代码，写完之后将所有导入模块的语句全部整理到文件开头
+2.在notebook环境下左侧In里面 如果是*号表示正在运行 如果是数字表示已经运行完毕
+3.在执行完单元格之后 1.如果没有任何的返回结果 说明改变的是源数据 2.如果有返回结果 说明没有改变源数据,而是产生了新的结果
+4.数组的特点 1.数组内所有的元素肯定是相同的数据类型 2.数组的大小无法修改 3.数组的数学运算默认都是挨个元素挨个元素逐一运算
+a = array([1,2,3])a &#43; 1 array([1&#43;1,2&#43;1,3&#43;1])​ 4.数组之间做运算一定要确保彼此之间列相同
+​ 5.如何查看方法的内部注释 ​
+1.shift(先按) &#43; tab(再多按几下)2.在方法的后面加?执行6.其实我们的日常生活中包括将来我们工作之后 操作浮点型的概率都是较高的 所以numpy里面默认也都是浮点型
+常用方法 T 数组的转置（对高维数组而言）
+li1 = [[1,2,3],[4,5,6]] a = np.array(li1) 二维数组(两行三列) a.T 转置(三行两列)dtype 数组元素的数据类型
+a.dtypesize 数组元素的个数（常用）
+a.sizendim 数组的维数
+ar1 = np.">
+<meta itemprop="datePublished" content="2020-11-26T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-11-26T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="375">
+
+
+
+<meta itemprop="keywords" content="数据分析,Python,Numpy基础用法," /><meta property="og:title" content="数据分析之Numpy基础使用" />
+<meta property="og:description" content="今日内容概要  常用方法 常用方式 索引与切片 运算符 函数 随机数模块 赌场输赢案例(输赢概率五五开)  今日内容详细 补充 1.我们尽量做到将所有导入模块的语句写在文件的最上方(开头)
+ps:我们可以先直接书写代码，写完之后将所有导入模块的语句全部整理到文件开头
+2.在notebook环境下左侧In里面 如果是*号表示正在运行 如果是数字表示已经运行完毕
+3.在执行完单元格之后 1.如果没有任何的返回结果 说明改变的是源数据 2.如果有返回结果 说明没有改变源数据,而是产生了新的结果
+4.数组的特点 1.数组内所有的元素肯定是相同的数据类型 2.数组的大小无法修改 3.数组的数学运算默认都是挨个元素挨个元素逐一运算
+a = array([1,2,3])a &#43; 1 array([1&#43;1,2&#43;1,3&#43;1])​ 4.数组之间做运算一定要确保彼此之间列相同
+​ 5.如何查看方法的内部注释 ​
+1.shift(先按) &#43; tab(再多按几下)2.在方法的后面加?执行6.其实我们的日常生活中包括将来我们工作之后 操作浮点型的概率都是较高的 所以numpy里面默认也都是浮点型
+常用方法 T 数组的转置（对高维数组而言）
+li1 = [[1,2,3],[4,5,6]] a = np.array(li1) 二维数组(两行三列) a.T 转置(三行两列)dtype 数组元素的数据类型
+a.dtypesize 数组元素的个数（常用）
+a.sizendim 数组的维数
+ar1 = np." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://Eddy-622.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B9%8Bnumpy%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/" />
+<meta property="article:published_time" content="2020-11-26T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-11-26T00:00:00+00:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="数据分析之Numpy基础使用"/>
+<meta name="twitter:description" content="今日内容概要  常用方法 常用方式 索引与切片 运算符 函数 随机数模块 赌场输赢案例(输赢概率五五开)  今日内容详细 补充 1.我们尽量做到将所有导入模块的语句写在文件的最上方(开头)
+ps:我们可以先直接书写代码，写完之后将所有导入模块的语句全部整理到文件开头
+2.在notebook环境下左侧In里面 如果是*号表示正在运行 如果是数字表示已经运行完毕
+3.在执行完单元格之后 1.如果没有任何的返回结果 说明改变的是源数据 2.如果有返回结果 说明没有改变源数据,而是产生了新的结果
+4.数组的特点 1.数组内所有的元素肯定是相同的数据类型 2.数组的大小无法修改 3.数组的数学运算默认都是挨个元素挨个元素逐一运算
+a = array([1,2,3])a &#43; 1 array([1&#43;1,2&#43;1,3&#43;1])​ 4.数组之间做运算一定要确保彼此之间列相同
+​ 5.如何查看方法的内部注释 ​
+1.shift(先按) &#43; tab(再多按几下)2.在方法的后面加?执行6.其实我们的日常生活中包括将来我们工作之后 操作浮点型的概率都是较高的 所以numpy里面默认也都是浮点型
+常用方法 T 数组的转置（对高维数组而言）
+li1 = [[1,2,3],[4,5,6]] a = np.array(li1) 二维数组(两行三列) a.T 转置(三行两列)dtype 数组元素的数据类型
+a.dtypesize 数组元素的个数（常用）
+a.sizendim 数组的维数
+ar1 = np."/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="/favicon.ico">
+
+	<title>数据分析之Numpy基础使用</title>
+	<link rel="stylesheet" href="https://Eddy-622.github.io/css/style.min.657bcb7af31123e4156b1a3d2ff60a636717e54ead74f882136b5114cf72b55e.css" integrity="sha256-ZXvLevMRI+QVaxo9L/YKY2cX5U6tdPiCE2tRFM9ytV4=" crossorigin="anonymous">
+	
+</head>
+
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp faster">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="https://Eddy-622.github.io">Eddy&#39;s Boke</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					
+				<a href="https://Eddy-622.github.io/posts/">博客</a>
+				<a href="https://Eddy-622.github.io/about-hugo/">关于</a>
+
+				</nav>
+			</div>
+			<div class="hdr-right hdr-icons">
+				<span class="hdr-social hide-in-mobile"><a href="https://mobile.twitter.com/zhang_kea" target="_blank" rel="noopener me" title="Twitter"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a><a href="https://www.facebook.com/kea.zhang.92" target="_blank" rel="noopener me" title="Instagram"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line></svg></a><a href="https://github.com/Eddy-622" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></span><button id="menu-btn" class="hdr-btn" title="Menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast">
+		<ul>
+			<li><a href="https://Eddy-622.github.io/posts/">博客</a></li>
+			<li><a href="https://Eddy-622.github.io/about-hugo/">关于</a></li>
+		</ul>
+	</div>
+
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta"><span>Nov 26, 2020</span></div>
+				<h1>数据分析之Numpy基础使用</h1>
+			</header>
+			<div class="content">
+				<h1 id="今日内容概要">今日内容概要<a href="#今日内容概要" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<ul>
+<li>常用方法</li>
+<li>常用方式</li>
+<li>索引与切片</li>
+<li>运算符</li>
+<li>函数</li>
+<li>随机数模块</li>
+<li>赌场输赢案例(输赢概率五五开)</li>
+</ul>
+<h1 id="今日内容详细">今日内容详细<a href="#今日内容详细" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<h3 id="补充">补充<a href="#补充" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<p>1.我们尽量做到将所有导入模块的语句写在文件的最上方(开头)</p>
+<p>ps:我们可以先直接书写代码，写完之后将所有导入模块的语句全部整理到文件开头</p>
+<p>2.在notebook环境下左侧In里面
+如果是*号表示正在运行
+如果是数字表示已经运行完毕</p>
+<p>3.在执行完单元格之后
+1.如果没有任何的返回结果
+说明改变的是源数据
+2.如果有返回结果
+说明没有改变源数据,而是产生了新的结果</p>
+<p>4.数组的特点
+1.数组内所有的元素肯定是相同的数据类型
+2.数组的大小无法修改
+3.数组的数学运算默认都是挨个元素挨个元素逐一运算</p>
+<pre><code>a = array([1,2,3])
+a + 1     array([1+1,2+1,3+1])
+</code></pre><p>​     4.数组之间做运算一定要确保彼此之间列相同<br>
+​ <br>
+5.如何查看方法的内部注释
+​</p>
+<pre><code>1.shift(先按) + tab(再多按几下)
+2.在方法的后面加?执行
+</code></pre><p>6.其实我们的日常生活中包括将来我们工作之后
+操作浮点型的概率都是较高的
+所以numpy里面默认也都是浮点型</p>
+<h3 id="常用方法">常用方法<a href="#常用方法" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<p>T 数组的转置（对高维数组而言）</p>
+<pre><code>li1 = [
+      [1,2,3],
+      [4,5,6]
+  ]  
+a = np.array(li1)     二维数组(两行三列) 
+a.T     转置(三行两列)
+</code></pre><p>dtype 数组元素的数据类型</p>
+<pre><code>a.dtype
+</code></pre><p>size 数组元素的个数（常用）</p>
+<pre><code>a.size
+</code></pre><p>ndim 数组的维数</p>
+<pre><code>ar1 = np.array([1,2,3,4])
+ar1.ndim
+</code></pre><p>shape 以元组形式获取行数和列数（常用）</p>
+<pre><code>a.shape
+</code></pre><p>reshape 修改数组大小(行列)</p>
+<pre><code>a.reshape(1,6)
+a.reshape(3,2)
+</code></pre><h3 id="创建方式">创建方式<a href="#创建方式" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<p>array()  在创建数组的时候可以修改数据类型</p>
+<pre><code>l = [1,2,3]
+res = np.array(l,dtype='float')  
+res.dtype
+</code></pre><p>arange()   range的numpy版，支持浮点数</p>
+<pre><code>np.arange(0,10,2)     array([0, 2, 4, 6, 8])
+np.arange(1.2,2.2,0.4)     array([1.2, 1.6, 2. ])
+</code></pre><p>linspace() 类似arange()，第三个参数为数组长度</p>
+<pre><code>np.linspace(1,10,20)  
+   #在1到10之间生成的二十个数每个数字之间的距离相等
+</code></pre><p>zeros()根据指定形状和dtype创建全0数组</p>
+<pre><code>np.zeros((2,3),dtype='int')     #快速创建数组
+</code></pre><p>ones() 根据指定形状和dtype创建全1数组</p>
+<pre><code>np.ones((3,3),dtype='int')  
+</code></pre><p>empty() 根据指定形状和dtype创建空数组（随机值）</p>
+<pre><code>np.empty((3,3))
+</code></pre><p>eye() 根据指定边长和dtype创建单位矩阵</p>
+<pre><code>np.eye(5,5)
+</code></pre><h3 id="索引与切片">索引与切片<a href="#索引与切片" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<p>&lsquo;&lsquo;&lsquo;一维数组与列表在索引和切片上的操作一致&rsquo;&rsquo;&rsquo;
+列表</p>
+<pre><code>  l = [13,19,22,14,19,11]
+   l[1]      #19
+   l[-1]      #11
+   l[1:3]      #[19, 22]
+   
+   
+age = np.array([13,19,22,14,19,11])
+age[1]     #19
+age[-1]     #11
+age[1:3]     #array([19, 22])
+</code></pre><p>&lsquo;&lsquo;&lsquo;二维数组在索引和切片上有新的知识&rsquo;&rsquo;&rsquo;</p>
+<pre><code>ar2 = np.array([[1,2,3,4],[6,7,8,9],[22,33,44,55]])
+ar2
+
+ar2[1,2]     8
+针对二维数组有行索引和列索引  ar2[行索引,列索引]
+
+切片
+获取2 3 7 8 
+ar2[0:2,1:3]     ar2[行切片,列切片]
+
+冒号左右不写数字表示所有
+ar2[1:,]
+</code></pre><h2 id="花式索引间断索引">花式索引(间断索引)<a href="#花式索引间断索引" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">ar1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">11</span><span class="p">,</span><span class="mi">22</span><span class="p">,</span><span class="mi">33</span><span class="p">,</span><span class="mi">44</span><span class="p">,</span><span class="mi">55</span><span class="p">,</span><span class="mi">66</span><span class="p">,</span><span class="mi">77</span><span class="p">])</span>
+   <span class="err">获取元素</span><span class="mi">11</span> <span class="mi">33</span> <span class="mi">44</span> <span class="mi">77</span><span class="p">(</span><span class="err">没有任何规律</span><span class="p">)</span>
+<span class="n">ar1</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">]]</span>     <span class="n">ar1</span><span class="p">[[</span><span class="err">索引</span><span class="mi">1</span><span class="p">,</span><span class="err">索引</span><span class="mi">2</span><span class="p">,</span><span class="err">索引</span><span class="mf">3.</span><span class="o">..</span><span class="p">]]</span>
+</code></pre></div><h2 id="布尔值索引逻辑索引">布尔值索引(逻辑索引)<a href="#布尔值索引逻辑索引" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">age</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">13</span><span class="p">,</span><span class="mi">19</span><span class="p">,</span><span class="mi">22</span><span class="p">,</span><span class="mi">14</span><span class="p">,</span><span class="mi">19</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">55</span><span class="p">,</span><span class="mi">78</span><span class="p">,</span><span class="mi">22</span><span class="p">,</span><span class="mi">16</span><span class="p">])</span>
+   <span class="err">筛选出年龄大于</span><span class="mi">18</span><span class="err">岁的数据</span>
+<span class="n">age</span><span class="o">&gt;</span><span class="mi">18</span>     <span class="err">依次判断每个元素是否大于</span><span class="mi">18</span>
+   <span class="err">布尔值索引</span><span class="p">(</span><span class="err">逻辑索引</span><span class="p">)</span>
+<span class="n">age</span><span class="p">[</span><span class="n">age</span><span class="o">&gt;</span><span class="mi">18</span><span class="p">]</span>
+</code></pre></div><h3 id="数学函数">数学函数<a href="#数学函数" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<p>常用的数学函数</p>
+<pre><code>np.round(arr)
+</code></pre><p>​	对各元素四舍五入
+​</p>
+<pre><code>np.sqrt(arr)
+</code></pre><pre><code>计算各元素的算术平方根  
+</code></pre>
+<pre><code> np.square(arr)
+</code></pre><pre><code>计算各元素的平方值
+</code></pre>
+<pre><code> np.exp(arr)
+</code></pre><pre><code>计算以e为底的指数
+</code></pre>
+<pre><code>np.power(arr, α)
+</code></pre><pre><code>计算各元素的指数
+</code></pre>
+<pre><code>np.log2(arr)
+</code></pre><pre><code>计算以2为底各元素的对数
+</code></pre>
+<pre><code>np.log10(arr)
+</code></pre><pre><code>计算以10为底各元素的对数
+</code></pre>
+<pre><code>np.log(arr)
+</code></pre><pre><code>计算以e为底各元素的对数
+</code></pre>
+<h3 id="统计函数">统计函数<a href="#统计函数" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<pre><code>res = np.array([[ 80.5, 60., 40.1, 20., 90.7],
+       [ 10.5, 30., 50.4, 70.3, 90.],
+       [ 35.2, 35., 39.8, 39., 31.],
+       [91.2, 83.4, 85.6, 67.8, 99.]])
+</code></pre><ul>
+<li>
+<p>&lsquo;&lsquo;&lsquo;简单需求:全部元素&rsquo;&rsquo;&rsquo;
+求数组里面最小的数</p>
+<pre><code>np.min(res)     等价 res.min()
+</code></pre><p>求数组里面最大的数</p>
+<pre><code>np.max(res)     等价 res.max()
+</code></pre><p>求数组里面所有元素的平均值</p>
+<pre><code>np.mean(res)     等价 res.mean()
+</code></pre><p>求数组里面所有元素的和</p>
+<pre><code>np.sum(res)     等价 res.sum()
+</code></pre><p>求数组里面所有元素的中位数</p>
+<pre><code>np.median(res)     等价 res.median()
+</code></pre><p>求数组里面所有元素的标准差</p>
+<pre><code>np.std(res)     等价 res.std()
+</code></pre><p>求数组里面所有元素的方差</p>
+<pre><code>np.var(res)     等价 res.var()
+</code></pre></li>
+<li>
+<p>&lsquo;&lsquo;&lsquo;复杂需求:以行列为单位&rsquo;&rsquo;&rsquo;</p>
+<p>axis参数就是用来控制行列的
+0表示列 1表示行</p>
+<p>求每一列的最小值</p>
+<pre><code>np.min(res,axis=0)     res.min(axis=0)
+</code></pre><p>求每一行的最大值</p>
+<pre><code>np.min(res,axis=1)     res.max(axis=1)
+</code></pre></li>
+<li>
+<p>&lsquo;&lsquo;&lsquo;不借助与axis参数&rsquo;&rsquo;&rsquo;
+不使用axis参数
+计算每一行的和</p>
+<pre><code>for i in range(res.shape[0]):
+     #取出每一行数据再用统计函数即可
+  print(np.sum(res[i]))
+      
+   #计算每一列的平均
+for j in range(res.shape[1]):
+       #取出每一列数据再用统计函数即可
+    print(np.mean(res[:,j]))
+</code></pre></li>
+</ul>
+<h3 id="随机数模块">随机数模块<a href="#随机数模块" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<pre><code>   #跟python里面的random模块用法一致
+   import random
+   random.random
+   rand  #给定形状产生随机数组（0到1之间的数）
+np.random.rand(3,3)  
+   randint(整数范围,size=(行数,列数))
+np.random.randint(3,size=(3,3))
+   choice  （整数范围,选择的个数）
+np.random.choice(10,2)
+   shuffle  与random.shuffle相同(随机打乱元素位置)
+res = [1,2,3,4]
+res1 = np.array([[1,2,3],[4,5,6],[7,8,9]])
+np.random.shuffle(res1)
+res1
+   uniform （起始位置数，终止位置数，个数）
+np.random.uniform(0,10,100)
+   normal  随机正态分布
+np.random.normal(1,5,100)
+</code></pre><h3 id="赌场案例">赌场案例<a href="#赌场案例" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<pre><code>&quot;&quot;&quot;
+jason有10000块钱，去某赌场嗨皮
+假设输赢概率都是50%，
+并且赢一场赚100，输一场亏100
+jason总共玩了1500场
+&quot;&quot;&quot;
+   总钞票数
+money = 10000
+   先利用uniform生成1500次0到1之间的随机均匀分布
+r = np.random.uniform(0,1,1500)
+   判断输赢
+for time in r:
+    if time &lt; 0.5:
+        money -= 100
+    else:
+        money += 100
+money
+
+
+
+
+'''记录每一次赌局完成后的钞票数'''
+money = 10000
+   起始钱数
+pgs = [money]
+   先利用uniform生成1500次0到1之间的随机均匀分布
+r = np.random.uniform(0,1,1500)
+for time in r:
+    if time &lt; 0.5:
+        money -= 100
+    else:
+        money += 100
+    pgs.append(money)  
+
+'''提前搂一眼后面会详细讲解的matplotlib模块'''
+import matplotlib.pyplot as plt
+plt.plot(range(1501),pgs)     x轴与y轴坐标数据
+plt.show()
+</code></pre>
+			</div>
+			<hr class="post-end">
+			<footer class="post-info">
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>Eddy Zhang</p>
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://Eddy-622.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90">数据分析</a></span><span class="tag"><a href="https://Eddy-622.github.io/tags/python">Python</a></span><span class="tag"><a href="https://Eddy-622.github.io/tags/numpy%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95">Numpy基础用法</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>375 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-11-26 08:00 &#43;0800</p>
+			</footer>
+		</article>
+		<div class="post-nav thin">
+			<a class="prev-post" href="https://Eddy-622.github.io/posts/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B9%8B%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">
+				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>数据分析之环境配置</span>
+			</a>
+		</div>
+		<div id="comments" class="thin">
+</div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p>&copy; 2020 <a href="https://Eddy-622.github.io">Eddy Zhang</a></p>
+		<p>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://Eddy-622.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+		</p>
+	</footer>
+
+
+
+	<script src="https://Eddy-622.github.io/js/bundle.min.4a9a0ac3d2217822c7865b4161e6c2a71de1d70492264337755427898dd718f6.js" integrity="sha256-SpoKw9IheCLHhltBYebCpx3h1wSSJkM3dVQniY3XGPY=" crossorigin="anonymous"></script>
+	
+
+</body>
+
+</html>
