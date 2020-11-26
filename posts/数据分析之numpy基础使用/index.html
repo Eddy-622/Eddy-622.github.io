@@ -211,16 +211,16 @@ ar2[0:2,1:3]     ar2[行切片,列切片]
 冒号左右不写数字表示所有
 ar2[1:,]
 </code></pre><h2 id="花式索引间断索引">花式索引(间断索引)<a href="#花式索引间断索引" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">ar1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">11</span><span class="p">,</span><span class="mi">22</span><span class="p">,</span><span class="mi">33</span><span class="p">,</span><span class="mi">44</span><span class="p">,</span><span class="mi">55</span><span class="p">,</span><span class="mi">66</span><span class="p">,</span><span class="mi">77</span><span class="p">])</span>
-   <span class="err">获取元素</span><span class="mi">11</span> <span class="mi">33</span> <span class="mi">44</span> <span class="mi">77</span><span class="p">(</span><span class="err">没有任何规律</span><span class="p">)</span>
-<span class="n">ar1</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">]]</span>     <span class="n">ar1</span><span class="p">[[</span><span class="err">索引</span><span class="mi">1</span><span class="p">,</span><span class="err">索引</span><span class="mi">2</span><span class="p">,</span><span class="err">索引</span><span class="mf">3.</span><span class="o">..</span><span class="p">]]</span>
-</code></pre></div><h2 id="布尔值索引逻辑索引">布尔值索引(逻辑索引)<a href="#布尔值索引逻辑索引" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">age</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">13</span><span class="p">,</span><span class="mi">19</span><span class="p">,</span><span class="mi">22</span><span class="p">,</span><span class="mi">14</span><span class="p">,</span><span class="mi">19</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">55</span><span class="p">,</span><span class="mi">78</span><span class="p">,</span><span class="mi">22</span><span class="p">,</span><span class="mi">16</span><span class="p">])</span>
-   <span class="err">筛选出年龄大于</span><span class="mi">18</span><span class="err">岁的数据</span>
-<span class="n">age</span><span class="o">&gt;</span><span class="mi">18</span>     <span class="err">依次判断每个元素是否大于</span><span class="mi">18</span>
-   <span class="err">布尔值索引</span><span class="p">(</span><span class="err">逻辑索引</span><span class="p">)</span>
-<span class="n">age</span><span class="p">[</span><span class="n">age</span><span class="o">&gt;</span><span class="mi">18</span><span class="p">]</span>
-</code></pre></div><h3 id="数学函数">数学函数<a href="#数学函数" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<pre><code>ar1 = np.array([11,22,33,44,55,66,77])
+   获取元素11 33 44 77(没有任何规律)
+ar1[[0,2,3,6]]     ar1[[索引1,索引2,索引3...]]
+</code></pre><h2 id="布尔值索引逻辑索引">布尔值索引(逻辑索引)<a href="#布尔值索引逻辑索引" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<pre><code>age = np.array([13,19,22,14,19,11,55,78,22,16])
+   筛选出年龄大于18岁的数据
+age&gt;18     依次判断每个元素是否大于18
+   布尔值索引(逻辑索引)
+age[age&gt;18]
+</code></pre><h3 id="数学函数">数学函数<a href="#数学函数" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <p>常用的数学函数</p>
 <pre><code>np.round(arr)
 </code></pre><p>​	对各元素四舍五入
