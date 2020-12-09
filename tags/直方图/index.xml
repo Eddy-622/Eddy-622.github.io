@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>直方图 on Eddy&#39;s Boke</title>
+    <link>https://Eddy-622.github.io/tags/%E7%9B%B4%E6%96%B9%E5%9B%BE/</link>
+    <description>Recent content in 直方图 on Eddy&#39;s Boke</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    
+	<atom:link href="https://Eddy-622.github.io/tags/%E7%9B%B4%E6%96%B9%E5%9B%BE/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Matplotlib之饼图、条形图、直方图</title>
+      <link>https://Eddy-622.github.io/posts/matplotlib%E4%B9%8B%E9%A5%BC%E5%9B%BE%E6%9D%A1%E5%BD%A2%E5%9B%BE%E7%9B%B4%E6%96%B9%E5%9B%BE/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/posts/matplotlib%E4%B9%8B%E9%A5%BC%E5%9B%BE%E6%9D%A1%E5%BD%A2%E5%9B%BE%E7%9B%B4%E6%96%B9%E5%9B%BE/</guid>
+      <description>今日内容 数据可视化 大白话其实就是画图画图的工具有很多我们先学习一个用python代码画图的方式之后我们还会学习画图软件Teableau、PowerBI可视化模块 matplotlib# 数据分析三剑客之一numpypandasmatplotlib是一个强大的python绘图和数据可视化工具包，数据可视化也是我们数据分析重要环节之一，可以帮助我们分析出很多价值信息，也是数据分析的最后一个可视化阶段# 下载模块python开发环境pip3 install matplotlibconda环境conda install matplotlib# 在notebook环境下直接执行下载命令需要在前面加一个感叹号# 在anaconda提供的环境下数据分析相关的模块都已经提前下载好了# 基本使用(也需要起别名)import numpy as npimport pandas as pdimport matplotlib.pyplot as plt&#39;&#39;&#39;以后在使用notebook环境的时候，可以直接先将上面的三个模块全部导入&#39;&#39;&#39;基本使用 &amp;#34;&amp;#34;&amp;#34;一定要知道每个图形擅长领域并且尽量记忆图形的大致轮廓&amp;#34;&amp;#34;&amp;#34;# 如果想让你绘制的图形弹窗展示 %matplotlib # 执行一遍之后删除即可 饼图的绘制 饼图属于最传统的统计图形之一，几乎随处可见，例如大型公司的屏幕墙、各种年度论坛的演示稿以及各大媒体发布的数据统计报告等;饼图是将一个圆分割成不同大小的楔(扇)形，而圆中的每一个楔形代表了不同的类别值，通常根据楔形的面积大小来判断类别值的差异;pie(x, explode=None, labels=None, colors=None, autopct=None, pctdistance=0.6, labeldistance=1.1)x:指定绘图的数据 explode:指定饼图某些部分的突出显示，即呈现爆炸式labels:为饼图添加标签说明，类似于图例说明 colors:指定饼图的填充色 autopct:自动添加百分比显示，可以采用格式化的方法显示 pctdistance:设置百分比标签与圆心的距离 labeldistance:设置各扇形标签(图例)与圆心的距离# 导入第三方模块import matplotlib.</description>
+    </item>
+    
+  </channel>
+</rss>

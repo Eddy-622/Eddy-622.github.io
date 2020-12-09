@@ -7033,5 +7033,721 @@ pycharm     ===&gt;专业软件，好用，要钱，贵，破解！
 ]]></content>
 		</item>
 		
+		<item>
+			<title>Matplotlib之箱线图、折线图、散点图、热力图</title>
+			<link>https://Eddy-622.github.io/posts/matplotlib%E4%B9%8B%E7%AE%B1%E7%BA%BF%E5%9B%BE%E6%8A%98%E7%BA%BF%E5%9B%BE%E6%95%A3%E7%82%B9%E5%9B%BE%E7%83%AD%E5%8A%9B%E5%9B%BE/</link>
+			<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+			
+			<guid>https://Eddy-622.github.io/posts/matplotlib%E4%B9%8B%E7%AE%B1%E7%BA%BF%E5%9B%BE%E6%8A%98%E7%BA%BF%E5%9B%BE%E6%95%A3%E7%82%B9%E5%9B%BE%E7%83%AD%E5%8A%9B%E5%9B%BE/</guid>
+			<description>今日内容概要  箱线图 折线图 散点图 气泡图 热力图 组合图(掌握)  今日内容详细 箱线图 箱线图是另一种体现数据分布的图形，通过该图可以得知数据的下须值(Q1-1.5IQR)、下四分位数(Q1)、中位数(Q2)、均值、上四分位(Q3)数和上须值(Q3+1.5IQR)，更重要的是，箱线图还可以发现数据中的异常点;plt.boxplot(x, vert=None, whis=None, patch_artist=None, meanline=None, showmeans=None, showcaps=None, showbox=None, showfliers=None, boxprops=None, labels=None, flierprops=None, medianprops=None, meanprops=None, capprops=None, whiskerprops=None)x:指定要绘制箱线图的数据 vert:是否需要将箱线图垂直摆放，默认垂直摆放whis:指定上下须与上下四分位的距离，默认为1.5倍的四分位差 patch_artist:bool类型参数，是否填充箱体的颜色;默认为False meanline:bool类型参数，是否用线的形式表示均值，默认为False showmeans:bool类型参数，是否显示均值，默认为False showcaps:bool类型参数，是否显示箱线图顶端和末端的两条线(即上下须)，默认为True showbox:bool类型参数，是否显示箱线图的箱体，默认为Trueshowfliers:是否显示异常值，默认为True boxprops:设置箱体的属性，如边框色，填充色等labels:为箱线图添加标签，类似于图例的作用 filerprops:设置异常值的属性，如异常点的形状、大小、填充色等 medianprops:设置中位数的属性，如线的类型、粗细等 meanprops:设置均值的属性，如点的大小、颜色等 capprops:设置箱线图顶端和末端线条的属性，如颜色、粗细等 whiskerprops:设置须的属性，如颜色、粗细、线的类型等Sec_Buildings = pd.read_excel(&#39;sec_buildings.xlsx&#39;)# 绘制箱线图plt.boxplot(x = Sec_Buildings.price_unit, # 指定绘图数据patch_artist=True, # 要求用自定义颜色填充盒形图，默认白色填充showmeans=True, # 以点的形式显示均值boxprops = {&#39;color&#39;:&#39;black&#39;,&#39;facecolor&#39;:&#39;steelblue&#39;},# 设置箱体属性，如边框色和填充色# 设置异常点属性，如点的形状、填充色和点的大小flierprops = {&#39;marker&#39;:&#39;o&#39;,&#39;markerfacecolor&#39;:&#39;red&#39;, &#39;markersize&#39;:3,&#39;markeredgecolor&#39;:&#39;red&#39;}, # 设置均值点的属性，如点的形状、填充色和点的大小meanprops = {&#39;marker&#39;:&#39;D&#39;,&#39;markerfacecolor&#39;:&#39;indianred&#39;, &#39;markersize&#39;:4}, # 设置中位数线的属性，如线的类型和颜色medianprops = {&#39;linestyle&#39;:&#39;--&#39;,&#39;color&#39;:&#39;orange&#39;}, labels = [&#39;&#39;] # 删除x轴的刻度标签，否则图形显示刻度标签为1)# 添加图形标题plt.</description>
+			<content type="html"><![CDATA[<h1 id="今日内容概要">今日内容概要</h1>
+<ul>
+<li>箱线图</li>
+<li>折线图</li>
+<li>散点图</li>
+<li>气泡图</li>
+<li>热力图</li>
+<li>组合图(掌握)</li>
+</ul>
+<h1 id="今日内容详细">今日内容详细</h1>
+<h3 id="箱线图">箱线图</h3>
+<pre><code>箱线图是另一种体现数据分布的图形，通过该图可以得知数据的下须值(Q1-1.5IQR)、下四分位数(Q1)、中位数(Q2)、均值、上四分位(Q3)数和上须值(Q3+1.5IQR)，更重要的是，箱线图还可以发现数据中的异常点;
+
+plt.boxplot(x, vert=None, whis=None, patch_artist=None, meanline=None, showmeans=None, showcaps=None, showbox=None, showfliers=None, boxprops=None, labels=None, flierprops=None, medianprops=None, meanprops=None, capprops=None, whiskerprops=None)
+
+x:指定要绘制箱线图的数据 
+vert:是否需要将箱线图垂直摆放，默认垂直摆放
+whis:指定上下须与上下四分位的距离，默认为1.5倍的四分位差 
+patch_artist:bool类型参数，是否填充箱体的颜色;默认为False 
+meanline:bool类型参数，是否用线的形式表示均值，默认为False 
+showmeans:bool类型参数，是否显示均值，默认为False 
+showcaps:bool类型参数，是否显示箱线图顶端和末端的两条线(即上下须)，默认为True 
+showbox:bool类型参数，是否显示箱线图的箱体，默认为True
+showfliers:是否显示异常值，默认为True 
+boxprops:设置箱体的属性，如边框色，填充色等
+labels:为箱线图添加标签，类似于图例的作用 
+filerprops:设置异常值的属性，如异常点的形状、大小、填充色等 
+medianprops:设置中位数的属性，如线的类型、粗细等 
+meanprops:设置均值的属性，如点的大小、颜色等 
+capprops:设置箱线图顶端和末端线条的属性，如颜色、粗细等 
+whiskerprops:设置须的属性，如颜色、粗细、线的类型等
+  
+  
+Sec_Buildings = pd.read_excel('sec_buildings.xlsx')
+# 绘制箱线图
+plt.boxplot(x = Sec_Buildings.price_unit, # 指定绘图数据
+            patch_artist=True, # 要求用自定义颜色填充盒形图，默认白色填充
+            showmeans=True, # 以点的形式显示均值
+            boxprops = {'color':'black','facecolor':'steelblue'},# 设置箱体属性，如边框色和填充色
+            # 设置异常点属性，如点的形状、填充色和点的大小
+            flierprops = {'marker':'o','markerfacecolor':'red', 'markersize':3,'markeredgecolor':'red'}, 
+            # 设置均值点的属性，如点的形状、填充色和点的大小
+            meanprops = {'marker':'D','markerfacecolor':'indianred', 'markersize':4}, 
+            # 设置中位数线的属性，如线的类型和颜色
+            medianprops = {'linestyle':'--','color':'orange'}, 
+            labels = [''] # 删除x轴的刻度标签，否则图形显示刻度标签为1
+           )
+# 添加图形标题
+plt.title('二手房单价分布的箱线图')
+# 显示图形
+plt.show()
+</code></pre><h3 id="折线图">折线图</h3>
+<pre><code>对于时间序列数据而言，一般都会使用折线图反映数据背后的趋势。通常折线图的横坐标指代日期数据，纵坐标代表某个数值型变量，当然还可以使用第三个离散变量对折线图进行分组处理;
+
+plt.plot(x, y, linestyle, linewidth, color, marker,markersize, markeredgecolor, markerfactcolor,markeredgewidth, label, alpha)
+
+x:指定折线图的x轴数据 
+y:指定折线图的y轴数据
+linestyle:指定折线的类型，可以是实线、虚线、点虚线、点点线等，默认为实线 linewidth:指定折线的宽度 
+marker:可以为折线图添加点，该参数是设置点的形状 
+markersize:设置点的大小
+markeredgecolor:设置点的边框色 
+markerfactcolor:设置点的填充色 
+markeredgewidth:设置点的边框宽度 
+label:为折线图添加标签，类似于图例的作用
+  
+  
+%matplotlib  # 以弹框的形式显示图形
+# 数据读取
+wechat = pd.read_excel(r'wechat.xlsx')
+# 绘制单条折线图
+plt.plot(wechat.Date, # x轴数据
+         wechat.Counts, # y轴数据
+         linestyle = '-', # 折线类型
+         linewidth = 2, # 折线宽度
+         color = 'steelblue', # 折线颜色
+         marker = 'o', # 折线图中添加圆点
+         markersize = 6, # 点的大小
+         markeredgecolor='black', # 点的边框色
+         markerfacecolor='brown') # 点的填充色
+# 获取图的坐标信息
+ax = plt.gca()
+# 设置日期的显示格式  
+date_format = mpl.dates.DateFormatter(&quot;%m-%d&quot;)  
+ax.xaxis.set_major_formatter(date_format) 
+# 设置x轴每个刻度的间隔天数
+xlocator = mpl.ticker.MultipleLocator(7)
+ax.xaxis.set_major_locator(xlocator)
+# 添加y轴标签
+plt.ylabel('人数')
+# 添加图形标题
+plt.title('每天微信文章阅读人数趋势')
+# 显示图形
+plt.show()
+
+</code></pre><h3 id="多条折线图">多条折线图</h3>
+<pre><code># 绘制两条折线图
+# 导入模块，用于日期刻度的修改
+import matplotlib as mpl
+# 绘制阅读人数折线图
+plt.plot(wechat.Date, # x轴数据
+         wechat.Counts, # y轴数据
+         linestyle = '-', # 折线类型，实心线
+         color = 'steelblue', # 折线颜色
+         label = '阅读人数'
+         )
+# 绘制阅读人次折线图
+plt.plot(wechat.Date, # x轴数据
+         wechat.Times, # y轴数据
+         linestyle = '--', # 折线类型，虚线
+         color = 'indianred', # 折线颜色
+         label = '阅读人次'
+         )
+# 获取图的坐标信息
+ax = plt.gca()
+# 设置日期的显示格式  
+date_format = mpl.dates.DateFormatter(&quot;%m-%d&quot;)  
+ax.xaxis.set_major_formatter(date_format) 
+# 设置x轴显示多少个日期刻度
+# xlocator = mpl.ticker.LinearLocator(10)
+# 设置x轴每个刻度的间隔天数
+xlocator = mpl.ticker.MultipleLocator(7)
+ax.xaxis.set_major_locator(xlocator)
+# 为了避免x轴刻度标签的紧凑，将刻度标签旋转45度
+plt.xticks(rotation=45)
+
+# 添加y轴标签
+plt.ylabel('人数')
+# 添加图形标题
+plt.title('每天微信文章阅读人数与人次趋势')
+# 添加图例
+plt.legend()
+# 显示图形
+plt.show()
+</code></pre><h3 id="散点图的绘制">散点图的绘制</h3>
+<pre><code>如果需要研究两个数值型变量之间是否存在某种关系，例如正向的线性关系，或者是趋势性的非线性关系，那么散点图将是最佳的选择;
+
+scatter(x, y, s=20, c=None, marker='o', alpha=None, linewidths=None, edgecolors=None) 
+x:指定散点图的x轴数据
+y:指定散点图的y轴数据 
+s:指定散点图点的大小，默认为20，通过传入其他数值型变量，可以实现气泡图的绘制 
+c:指定散点图点的颜色，默认为蓝色，也可以传递其他数值型变量，通过cmap参数的色阶表示数值大小
+marker:指定散点图点的形状，默认为空心圆
+alpha:设置散点的透明度
+linewidths:设置散点边界线的宽度
+edgecolors:设置散点边界线的颜色
+  
+# 读入数据
+iris = pd.read_csv(r'iris.csv')
+# 绘制散点图
+plt.scatter(x = iris.Petal_Width, # 指定散点图的x轴数据
+            y = iris.Petal_Length, # 指定散点图的y轴数据
+            color = 'steelblue' # 指定散点图中点的颜色
+           )
+# 添加x轴和y轴标签
+plt.xlabel('花瓣宽度')
+plt.ylabel('花瓣长度')
+# 添加标题
+plt.title('鸢尾花的花瓣宽度与长度关系')
+# 显示图形
+plt.show()
+</code></pre><h3 id="气泡图的绘制">气泡图的绘制</h3>
+<pre><code>气泡图的实质就是通过第三个数值型变量控制每个散点的大小，点越大，代表的第三维数值越高，反之亦然;
+气泡图的绘制，使用的仍然是scatter函数，区别在于函数的s参数被赋予了具体的数值型变量;
+</code></pre><h3 id="热力图的绘制">热力图的绘制</h3>
+<pre><code>热力图也称为交叉填充表，图形最典型的用法就是实现列联表的可视化，即通过图形的方式展现两个离散变量之间的组合关系;
+
+# matplotlib绘制热力图不太方便需要借助于seaborn模块
+sns.heatmap(data, cmap=None, annot=None, fmt='.2g', annot_kws=None, linewidths=0, linecolor ='white)
+            
+data:指定绘制热力图的数据集 
+cmap:指定一个colormap对象，用于热力图的填充色
+annot:指定一个bool类型的值或与data参数形状一样的数组，如果为True，就在热力图的每个单元上显示数值 
+fmt:指定单元格中数据的显示格式
+annot_kws:有关单元格中数值标签的其他属性描述，如颜色、大小等 
+linewidths:指定每个单元格的边框宽度 
+linecolor:指定每个单元格的边框颜色
+            
+import numpy as np
+import seaborn as sns
+# 读取数据
+Sales = pd.read_excel(r'Sales.xlsx')
+# 根据交易日期，衍生出年份和月份字段
+Sales['year'] = Sales.Date.dt.year
+Sales['month'] = Sales.Date.dt.month
+# 统计每年各月份的销售总额（绘制热力图之前，必须将数据转换为交叉表形式）
+Summary = Sales.pivot_table(index = 'month', columns = 'year', values = 'Sales', aggfunc = np.sum)
+Summary
+# 绘制热力图
+sns.heatmap(data = Summary, # 指定绘图数据
+            cmap = 'PuBuGn', # 指定填充色
+            linewidths = .1, # 设置每个单元格边框的宽度
+            annot = True, # 显示数值
+            fmt = '.1e' # 以科学计算法显示数据
+            )
+#添加标题
+plt.title('每年各月份销售总额热力图')
+# 显示图形
+plt.show()
+</code></pre><h3 id="强调">强调</h3>
+<pre><code>平时一定要做到自我思考，自我提升
+	由已知去推未知，不要仅仅只局限于老师讲了什么才会什么
+    
+爬虫对一名数据分析师来说是一门必须掌握的技能
+
+# 爬取房产信息理想化程序
+	1.用户可以指定爬取哪个城市
+    	1.中文		转成		拼音(借助于第三方模块)
+        2.直接规定用户必须按照你设置好的输入方式输入
+    2.之后用户输入指定城市里面的区域
+    3.然后一键爬取所有房产信息
+    
+    
+    
+    
+1.当你写的代码运行之后报错，不要慌张一定要学会看错误提示
+	最重要的就是最后一行错误提示，前面的你都可以不看
+    NameError: name 'sec_Buildings' is not defined
+	变量名写错了
+	IndexError: list index out of range
+</code></pre><h3 id="补充">补充</h3>
+<pre><code>利用爬虫程序爬取到的数据可以保存到三个地方
+	1.普通的文本文件
+    2.excel表格
+    3.数据库中
+    	关系型数据库:MySQL
+            将excel数据直接同步到MySQL的表中(自己研究一下试试)
+        非关系型数据库:MongoDB
+            
+ 针对表格数据的读取
+	如果文件后缀名是.csv或者普通的.txt
+    	那么使用read_csv
+    如果文件后缀名是.xlsx
+    	那么使用read_excel
+</code></pre><h3 id="作业">作业</h3>
+<pre><code>熟练掌握不下于十五种图形
+1.echarts
+网址:https://echarts.apache.org/examples/zh/index.html#chart-type-line
+尽量将该网站左侧图形及对应的结构掌握
+
+
+2.highcharts
+网址：https://www.highcharts.com.cn/demo/highcharts
+尽量将该网站左侧图形及对应的结构掌握  
+
+
+</code></pre>]]></content>
+		</item>
+		
+		<item>
+			<title>Matplotlib之饼图、条形图、直方图</title>
+			<link>https://Eddy-622.github.io/posts/matplotlib%E4%B9%8B%E9%A5%BC%E5%9B%BE%E6%9D%A1%E5%BD%A2%E5%9B%BE%E7%9B%B4%E6%96%B9%E5%9B%BE/</link>
+			<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+			
+			<guid>https://Eddy-622.github.io/posts/matplotlib%E4%B9%8B%E9%A5%BC%E5%9B%BE%E6%9D%A1%E5%BD%A2%E5%9B%BE%E7%9B%B4%E6%96%B9%E5%9B%BE/</guid>
+			<description>今日内容 数据可视化 大白话其实就是画图画图的工具有很多我们先学习一个用python代码画图的方式之后我们还会学习画图软件Teableau、PowerBI可视化模块 matplotlib# 数据分析三剑客之一numpypandasmatplotlib是一个强大的python绘图和数据可视化工具包，数据可视化也是我们数据分析重要环节之一，可以帮助我们分析出很多价值信息，也是数据分析的最后一个可视化阶段# 下载模块python开发环境pip3 install matplotlibconda环境conda install matplotlib# 在notebook环境下直接执行下载命令需要在前面加一个感叹号# 在anaconda提供的环境下数据分析相关的模块都已经提前下载好了# 基本使用(也需要起别名)import numpy as npimport pandas as pdimport matplotlib.pyplot as plt&#39;&#39;&#39;以后在使用notebook环境的时候，可以直接先将上面的三个模块全部导入&#39;&#39;&#39;基本使用 &amp;#34;&amp;#34;&amp;#34;一定要知道每个图形擅长领域并且尽量记忆图形的大致轮廓&amp;#34;&amp;#34;&amp;#34;# 如果想让你绘制的图形弹窗展示 %matplotlib # 执行一遍之后删除即可 饼图的绘制 饼图属于最传统的统计图形之一，几乎随处可见，例如大型公司的屏幕墙、各种年度论坛的演示稿以及各大媒体发布的数据统计报告等;饼图是将一个圆分割成不同大小的楔(扇)形，而圆中的每一个楔形代表了不同的类别值，通常根据楔形的面积大小来判断类别值的差异;pie(x, explode=None, labels=None, colors=None, autopct=None, pctdistance=0.6, labeldistance=1.1)x:指定绘图的数据 explode:指定饼图某些部分的突出显示，即呈现爆炸式labels:为饼图添加标签说明，类似于图例说明 colors:指定饼图的填充色 autopct:自动添加百分比显示，可以采用格式化的方法显示 pctdistance:设置百分比标签与圆心的距离 labeldistance:设置各扇形标签(图例)与圆心的距离# 导入第三方模块import matplotlib.</description>
+			<content type="html"><![CDATA[<h1 id="今日内容">今日内容</h1>
+<h3 id="数据可视化">数据可视化</h3>
+<pre><code>大白话其实就是画图
+	画图的工具有很多
+    我们先学习一个用python代码画图的方式
+    之后我们还会学习画图软件Teableau、PowerBI
+</code></pre><h3 id="可视化模块">可视化模块</h3>
+<pre><code>matplotlib
+# 数据分析三剑客之一
+	numpy
+    pandas
+    matplotlib
+
+是一个强大的python绘图和数据可视化工具包，数据可视化也是我们数据分析重要环节之一，可以帮助我们分析出很多价值信息，也是数据分析的最后一个可视化阶段
+
+
+# 下载模块
+python开发环境
+	pip3 install matplotlib
+conda环境
+	conda install matplotlib
+# 在notebook环境下直接执行下载命令需要在前面加一个感叹号
+# 在anaconda提供的环境下数据分析相关的模块都已经提前下载好了
+
+
+
+# 基本使用(也需要起别名)
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+'''
+以后在使用notebook环境的时候，可以直接先将上面的三个模块全部导入
+'''
+</code></pre><h3 id="基本使用">基本使用</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">一定要知道每个图形擅长领域
+</span><span class="s2">并且尽量记忆图形的大致轮廓
+</span><span class="s2">&#34;&#34;&#34;</span>
+<span class="c1"># 如果想让你绘制的图形弹窗展示</span>
+<span class="o">%</span><span class="n">matplotlib</span>  <span class="c1"># 执行一遍之后删除即可</span>
+</code></pre></div><h3 id="饼图的绘制">饼图的绘制</h3>
+<pre><code>饼图属于最传统的统计图形之一，几乎随处可见，例如大型公司的屏幕墙、各种年度论坛的演示稿以及各大媒体发布的数据统计报告等;
+饼图是将一个圆分割成不同大小的楔(扇)形，而圆中的每一个楔形代表了不同的类别值，通常根据楔形的面积大小来判断类别值的差异;
+
+pie(x, explode=None, labels=None, colors=None, autopct=None, pctdistance=0.6, labeldistance=1.1)
+
+x:指定绘图的数据 
+explode:指定饼图某些部分的突出显示，即呈现爆炸式
+labels:为饼图添加标签说明，类似于图例说明 
+colors:指定饼图的填充色 
+autopct:自动添加百分比显示，可以采用格式化的方法显示 
+pctdistance:设置百分比标签与圆心的距离 
+labeldistance:设置各扇形标签(图例)与圆心的距离
+  
+# 导入第三方模块
+import matplotlib.pyplot as plt
+# 解决中文乱码情况
+plt.rcParams['font.sans-serif'] = ['SimHei']
+# 构造数据
+edu = [0.2515,0.3724,0.3336,0.0368,0.0057]
+labels = ['中专','大专','本科','硕士','其他']
+explode = [0,0.1,0,0,0]
+# 绘制饼图                                                                              plt.axes(aspect='equal')  # 如果python版本较低可能是扁的需要加该代码   
+plt.pie(x = edu,  # 绘图数据
+        labels=labels,  # 添加教育水平标签
+        autopct='%.1f%%',  # 设置百分比的格式，这里保留一位小数
+        explode = explode
+       )
+# 显示图形
+plt.show()
+</code></pre><h3 id="条形图的绘制">条形图的绘制</h3>
+<pre><code>虽然饼图可以很好地表达离散型变量在各水平上的差异，但其不擅长对比差异不大或水平值过多的离散型变量，因为饼图是通过各扇形面积的大小来比价差异的，面积的比较有时并不直观;
+对于条形图而言，对比的是柱形的高低，柱体越高，代表的数值越大，反之亦然;
+
+bar(x, height, width=0.8, bottom=None, color=None, edgecolor=None, tick_label=None, label = None, ecolor=None)
+
+x:传递数值序列，指定条形图中x轴上的刻度值 
+height:传递数值序列，指定条形图y轴上的高度
+width:指定条形图的宽度，默认为0.8 
+bottom:用于绘制堆叠条形图 
+color:指定条形图的填充色 
+edgecolor:指定条形图的边框色 
+tick_label:指定条形图的刻度标签 
+label:指定条形图的标签，一般用以添加图例
+  
+ 
+'''垂直条形图'''
+import pandas as pd
+# 读入数据
+GDP = pd.read_excel(r'Province GDP 2017.xlsx')
+
+# 设置绘图风格（不妨使用R语言中的ggplot2风格）
+plt.style.use('ggplot')
+# 绘制条形图
+plt.bar(x = range(GDP.shape[0]), # 指定条形图x轴的刻度值
+        height = GDP.GDP, # 指定条形图y轴的数值
+        tick_label = GDP.Province, # 指定条形图x轴的刻度标签
+        color = 'steelblue', # 指定条形图的填充色
+       )
+# 添加y轴的标签
+plt.ylabel('GDP(万亿)')
+# 添加条形图的标题
+plt.title('2017年度6个省份GDP分布')
+# 为每个条形图添加数值标签
+for x,y in enumerate(GDP.GDP):
+    plt.text(x,y+0.1,'%s' %round(y,1),ha='center')
+# 显示图形    
+plt.show()
+
+
+'''水平条形图'''
+# 对读入的数据做升序排序
+GDP.sort_values(by = 'GDP', inplace = True)
+# 绘制条形图
+plt.barh(y = range(GDP.shape[0]), # 指定条形图y轴的刻度值
+        width = GDP.GDP, # 指定条形图x轴的数值
+        tick_label = GDP.Province, # 指定条形图y轴的刻度标签
+        color = 'steelblue', # 指定条形图的填充色
+       )
+# 添加x轴的标签
+plt.xlabel('GDP(万亿)')
+# 添加条形图的标题
+plt.title('2017年度6个省份GDP分布')
+# 为每个条形图添加数值标签
+for y,x in enumerate(GDP.GDP):
+    plt.text(x+0.1,y,'%s' %round(x,1),va='center')
+# 显示图形    
+plt.show()
+
+
+'''交叉条形图'''
+HuRun = pd.read_excel('HuRun.xlsx')
+# Pandas模块之水平交错条形图
+HuRun_reshape = HuRun.pivot_table(index = 'City', columns='Year',
+values='Counts').reset_index()
+# 对数据集降序排序
+HuRun_reshape.sort_values(by = 2016, ascending = False, inplace = True)
+HuRun_reshape.plot(x = 'City', y = [2016,2017], kind = 'bar', 
+color = ['steelblue', 'indianred'], 
+                              # 用于旋转x轴刻度标签的角度，0表示水平显示刻度标签
+                   	rot = 0, 
+                   	width = 0.8, title = '近两年5个城市亿万资产家庭数比较')
+
+# 添加y轴标签
+plt.ylabel('亿万资产家庭数')
+plt.xlabel('')
+plt.show()
+</code></pre><h3 id="直方图的绘制">直方图的绘制</h3>
+<pre><code>直方图一般用来观察数据的分布形态，横坐标代表数值的均匀分段，纵坐标代表每个段内的观测数量(频数);
+
+一般直方图都会与核密度图搭配使用，目的是更加清晰地掌握数据的分布特征;
+
+plt.hist(x, bins=10, normed=False, orientation='vertical', color=None, label=None)
+x:指定要绘制直方图的数据。 
+bins:指定直方图条形的个数。
+normed:是否将直方图的频数转换成频率
+orientation:设置直方图的摆放方向，默认为垂直方向 
+color:设置直方图的填充色 
+edgecolor:设置直方图边框色 
+label:设置直方图的标签，可通过legend展示其图例
+  
+  
+  
+Titanic = pd.read_csv('titanic_train.csv')
+
+# 检查年龄是否有缺失（如果数据中存在缺失值，将无法绘制直方图）
+any(Titanic.Age.isnull())
+# 不妨删除含有缺失年龄的观察
+Titanic.dropna(subset=['Age'], inplace=True)
+# 绘制直方图
+plt.hist(x = Titanic.Age, # 指定绘图数据
+         bins = 20, # 指定直方图中条块的个数
+         color = 'steelblue', # 指定直方图的填充色
+         edgecolor = 'black' # 指定直方图的边框色
+         )
+# 添加x轴和y轴标签
+plt.xlabel('年龄')
+plt.ylabel('频数')
+# 添加标题
+plt.title('乘客年龄分布')
+# 显示图形
+plt.show()
+</code></pre><h3 id="补充">补充</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 枚举</span>
+<span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">111</span><span class="p">,</span><span class="mi">222</span><span class="p">,</span><span class="mi">333</span><span class="p">,</span><span class="mi">444</span><span class="p">,</span><span class="mi">555</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">l</span><span class="p">:</span>
+     <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="mi">111</span>
+<span class="mi">222</span>
+<span class="mi">333</span>
+<span class="mi">444</span>
+<span class="mi">555</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+     <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+<span class="mi">0</span> 	<span class="mi">111</span>
+<span class="mi">1</span> 	<span class="mi">222</span>
+<span class="mi">2</span> 	<span class="mi">333</span>
+<span class="mi">3</span> 	<span class="mi">444</span>
+<span class="mi">4</span> 	<span class="mi">555</span>
+</code></pre></div>]]></content>
+		</item>
+		
+		<item>
+			<title>Pandas之数据处理、筛选、分组、聚合</title>
+			<link>https://Eddy-622.github.io/posts/pandas%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E7%AD%9B%E9%80%89%E5%88%86%E7%BB%84%E8%81%9A%E5%90%88/</link>
+			<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+			
+			<guid>https://Eddy-622.github.io/posts/pandas%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E7%AD%9B%E9%80%89%E5%88%86%E7%BB%84%E8%81%9A%E5%90%88/</guid>
+			<description>数据概览 df = pd.read_csv(r&amp;#39;sec_cars.csv&amp;#39;)# 1.查看表格的前N条数据 df.head(5) # 不写默认也是五条 # 2.查看表格的后N条数据 df.tail(5) # 不写默认也是五条 # 3.查看表的行列 df.shape # 结果是一个元组(行数,列数) # 4.获取表中所有的列名称 df.columns# 5.获取表中所有的行索引 df.index# 6.查看数据的数据类型 df.dtypes # 在处理数据之前应该用该方法查看一下数据类型 # 7.快速统计 df.describe() # 默认只会统计数字类型的数据 df.describe(include=&amp;#39;object&amp;#39;) # 可以通过include参数指定统计的数据类型 df.describe(include=&amp;#39;all&amp;#39;) 行列操作 df1 = pd.read_excel(r&amp;#39;data_test02.xlsx&amp;#39;,header=None)# 1.修改列名称 df1.rename(columns={0:&amp;#39;序号&amp;#39;})df1.rename(columns={0:&amp;#39;序号&amp;#39;,1:&amp;#39;类型&amp;#39;,2:&amp;#39;颜色&amp;#39;,3:&amp;#39;尺码&amp;#39;},inplace=True)# &amp;#39;&amp;#39;&amp;#39; # # 能修改 但是会报个错误 可以添加下列配置 # pd.</description>
+			<content type="html"><![CDATA[<h2 id="数据概览">数据概览</h2>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;sec_cars.csv&#39;</span><span class="p">)</span>
+<span class="c1"># 1.查看表格的前N条数据</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>  <span class="c1"># 不写默认也是五条</span>
+<span class="c1"># 2.查看表格的后N条数据</span>
+<span class="n">df</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>  <span class="c1"># 不写默认也是五条</span>
+<span class="c1"># 3.查看表的行列</span>
+<span class="n">df</span><span class="o">.</span><span class="n">shape</span>  <span class="c1"># 结果是一个元组(行数,列数)</span>
+<span class="c1"># 4.获取表中所有的列名称</span>
+<span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+<span class="c1"># 5.获取表中所有的行索引</span>
+<span class="n">df</span><span class="o">.</span><span class="n">index</span>
+<span class="c1"># 6.查看数据的数据类型</span>
+<span class="n">df</span><span class="o">.</span><span class="n">dtypes</span>  <span class="c1"># 在处理数据之前应该用该方法查看一下数据类型</span>
+<span class="c1"># 7.快速统计</span>
+<span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>  <span class="c1"># 默认只会统计数字类型的数据</span>
+<span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;object&#39;</span><span class="p">)</span> <span class="c1"># 可以通过include参数指定统计的数据类型</span>
+<span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">)</span> 
+</code></pre></div><h2 id="行列操作">行列操作</h2>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;data_test02.xlsx&#39;</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+
+<span class="c1"># 1.修改列名称</span>
+<span class="n">df1</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="s1">&#39;序号&#39;</span><span class="p">})</span>
+<span class="n">df1</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="s1">&#39;序号&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="s1">&#39;类型&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">:</span><span class="s1">&#39;颜色&#39;</span><span class="p">,</span><span class="mi">3</span><span class="p">:</span><span class="s1">&#39;尺码&#39;</span><span class="p">},</span><span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="c1"># &#39;&#39;&#39;</span>
+<span class="c1"># # 能修改 但是会报个错误 可以添加下列配置</span>
+<span class="c1"># pd.set_option(&#39;mode.chained_assignment&#39;,None)</span>
+<span class="c1"># &#39;&#39;&#39;</span>
+
+<span class="n">df1</span><span class="p">[</span><span class="s1">&#39;序号&#39;</span><span class="p">]</span>  <span class="c1"># 获取序号列对应的列数据</span>
+<span class="n">df1</span><span class="p">[</span><span class="s1">&#39;库存&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">666</span>  <span class="c1"># 加了赋值符号就是设值</span>
+<span class="c1"># 1.如果该列名称存在则修改列数据</span>
+<span class="c1"># 2.如果该列名称不存在则创建新的</span>
+<span class="n">df1</span><span class="p">[</span><span class="s1">&#39;测试&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df1</span><span class="p">[</span><span class="s1">&#39;尺码&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">df1</span><span class="p">[</span><span class="s1">&#39;库存&#39;</span><span class="p">]</span>
+<span class="c1"># 注意:新的列数据可以是直接写死的，也可以是通过其他字段动态计算</span>
+
+<span class="n">df1</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;插队&#39;</span><span class="p">,</span><span class="mi">6969</span><span class="p">)</span>
+<span class="c1"># 还可以控制插入列的位置</span>
+</code></pre></div><h2 id="数据筛选">数据筛选</h2>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 以二手车为例</span>
+<span class="c1"># 1.获取列数据</span>
+<span class="c1"># df[&#39;Brand&#39;]  # 只获取一列数据</span>
+<span class="c1"># df[[&#39;Brand&#39;,&#39;Name&#39;,&#39;New_price&#39;]]  # 获取多列一定要是表格的形式</span>
+<span class="c1"># 2.获取行数据</span>
+<span class="c1"># df.loc[df[&#39;Brand&#39;]==&#39;众泰&#39;]  # 只有一个条件的</span>
+<span class="s1">&#39;&#39;&#39;逻辑运算符在连接条件的时候 条件都必须加括号&#39;&#39;&#39;</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Brand&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;众泰&#39;</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Discharge&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;国4&#39;</span><span class="p">)]</span>
+
+<span class="c1"># 3.针对筛选出来的行数据 做列数据的过滤</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Brand&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;众泰&#39;</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Discharge&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;国4&#39;</span><span class="p">),[</span><span class="s1">&#39;Brand&#39;</span><span class="p">,</span><span class="s1">&#39;Name&#39;</span><span class="p">]]</span>
+</code></pre></div><h2 id="数据处理">数据处理</h2>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">sec_car</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;sec_cars.csv&#39;</span><span class="p">)</span>
+<span class="n">sec_car</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">sec_car</span><span class="o">.</span><span class="n">dtypes</span>
+<span class="c1"># 日期应该是日期类型而不是字符串类型</span>
+<span class="c1"># 新车价格应该是数字类型而不是字符串类型</span>
+<span class="n">sec_car</span><span class="p">[</span><span class="s1">&#39;Boarding_time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">sec_car</span><span class="p">[</span><span class="s1">&#39;Boarding_time&#39;</span><span class="p">],</span>
+                                         <span class="n">format</span><span class="o">=</span><span class="s1">&#39;%Y年%m月&#39;</span>
+                                         <span class="p">)</span>
+<span class="c1"># 常见的日期符号 %Y %m %d %H %M %S %X</span>
+<span class="n">sec_car</span><span class="o">.</span><span class="n">dtypes</span>
+
+<span class="n">sec_car</span><span class="o">.</span><span class="n">New_price</span>  <span class="c1"># 新车价格里面有字符串类型</span>
+<span class="c1"># 1.需要先将字符串去除(方式1:字符串的替换 方式2:切片操作)</span>
+<span class="n">sec_car</span><span class="o">.</span><span class="n">New_price</span><span class="o">.</span><span class="n">str</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># 一定要加上关键字str</span>
+<span class="c1"># 2.之后才能数据类型转换</span>
+<span class="n">sec_car</span><span class="o">.</span><span class="n">New_price</span><span class="o">.</span><span class="n">str</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>  <span class="c1"># astype数据类型转换</span>
+
+<span class="n">sec_car</span><span class="p">[</span><span class="s1">&#39;New_price&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sec_car</span><span class="o">.</span><span class="n">New_price</span><span class="o">.</span><span class="n">str</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;data_test04.xlsx&#39;</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="c1"># 判断数据是否有重复项</span>
+<span class="n">data</span><span class="o">.</span><span class="n">duplicated</span><span class="p">()</span>
+<span class="c1"># 删除重复的数据项</span>
+<span class="n">data</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+</code></pre></div><h2 id="缺失值处理">缺失值处理</h2>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">data05</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;data_test05.xlsx&#39;</span><span class="p">)</span>
+<span class="c1"># 1.当样本数据量特别多的时候，可以考虑直接删除个别缺失数据</span>
+<span class="c1"># 2.当缺失数据占比较高的时候不能直接删除，而应该使用填充数据的方式</span>
+
+<span class="c1"># 判断是否含有缺失值</span>
+<span class="n">data05</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span>  <span class="c1"># 不太好</span>
+<span class="n">data05</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># 判断列是否有缺失数据</span>
+<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">axis=0表示列字段
+</span><span class="s2">axis=1表示行索引
+</span><span class="s2">&#34;&#34;&#34;</span>
+
+<span class="c1"># 计算缺失数据的占比</span>
+<span class="n">data05</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="n">data05</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="c1"># 不能够直接删除缺失数据data05.dropna()</span>
+<span class="c1"># 也不能一股脑的瞎填充data05.fillna(666)</span>
+<span class="c1">############################################################</span>
+<span class="n">data05</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">value</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">&#39;gender&#39;</span><span class="p">:</span><span class="n">data05</span><span class="o">.</span><span class="n">gender</span><span class="o">.</span><span class="n">mode</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span>  <span class="c1"># 众数:可以有一个也可能是多个</span>
+  <span class="s1">&#39;age&#39;</span><span class="p">:</span><span class="n">data05</span><span class="o">.</span><span class="n">age</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>  <span class="c1"># 平均值</span>
+  <span class="s1">&#39;income&#39;</span><span class="p">:</span><span class="n">data05</span><span class="o">.</span><span class="n">income</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>  <span class="c1"># 薪资推荐使用:中位数</span>
+<span class="p">},</span> <span class="n">inplace</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+<span class="c1">############################################################</span>
+<span class="n">data05</span>
+</code></pre></div><h2 id="数据汇总">数据汇总</h2>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">data06</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;diamonds.csv&#39;</span><span class="p">)</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">data06</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="s1">&#39;color&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;price&#39;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">data06</span><span class="p">,</span> 
+               <span class="n">index</span> <span class="o">=</span> <span class="s1">&#39;color&#39;</span><span class="p">,</span> 
+               <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;clarity&#39;</span><span class="p">,</span> 
+               <span class="n">values</span><span class="o">=</span><span class="s1">&#39;price&#39;</span><span class="p">,</span> 
+               <span class="n">aggfunc</span><span class="o">=</span><span class="s1">&#39;size&#39;</span><span class="p">)</span>
+<span class="c1"># 当数据量小于10万 基本上使用常用软件excel SPSS即可操作</span>
+<span class="c1"># 高于10万之后才可能需要使用代码处理</span>
+</code></pre></div><h2 id="分组与聚合">分组与聚合</h2>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 对颜色进行分组</span>
+<span class="c1"># data06.groupby(by=[&#39;color&#39;,])  # 按照单个字段分组</span>
+<span class="c1"># 分组之后如果直接想看结果可以使用groups  粗略的查看</span>
+<span class="c1"># data06.groupby(by=[&#39;color&#39;,]).groups</span>
+
+<span class="c1"># 分组一般都是配合聚合函数一起使用</span>
+<span class="c1"># gg = data06.groupby(by=[&#39;color&#39;,])  # 先分组</span>
+<span class="c1"># res = gg.aggregate({&#39;color&#39;:np.size})  # 再聚合</span>
+<span class="c1"># res</span>
+
+<span class="c1"># 可以对多个字段聚合    针对聚合函数最好都用np点出来</span>
+<span class="c1"># res1 = gg.aggregate({&#39;color&#39;:np.size,</span>
+<span class="c1">#                      &#39;price&#39;:np.mean,</span>
+<span class="c1">#                      &#39;table&#39;:np.max</span>
+<span class="c1">#                     })</span>
+<span class="c1"># res1</span>
+
+<span class="c1"># 还可以按照多个字段分组</span>
+<span class="c1">######################################</span>
+<span class="n">gg1</span> <span class="o">=</span> <span class="n">data06</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">,</span><span class="s1">&#39;cut&#39;</span><span class="p">])</span>
+<span class="n">res2</span> <span class="o">=</span> <span class="n">gg1</span><span class="o">.</span><span class="n">aggregate</span><span class="p">({</span><span class="s1">&#39;color&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">,</span>
+                     <span class="s1">&#39;price&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span>
+                     <span class="s1">&#39;table&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">max</span>
+                    <span class="p">})</span>
+<span class="n">res2</span>
+<span class="c1">######################################</span>
+<span class="c1"># 调整变量名的顺序</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">res2</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">,</span><span class="s1">&#39;color&#39;</span><span class="p">,</span><span class="s1">&#39;table&#39;</span><span class="p">])</span>
+<span class="n">result</span>
+
+<span class="c1"># 数据集重命名</span>
+<span class="n">result</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span><span class="s1">&#39;个数&#39;</span><span class="p">,</span>
+                       <span class="s1">&#39;price&#39;</span><span class="p">:</span><span class="s1">&#39;均价&#39;</span><span class="p">,</span>
+                       <span class="s1">&#39;table&#39;</span><span class="p">:</span><span class="s1">&#39;最大面积&#39;</span><span class="p">},</span> 
+              <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">result</span>
+</code></pre></div><h2 id="分组与聚合练习题">分组与聚合练习题</h2>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># pandas中的read_html可以爬取页面上table标签里面的数据</span>
+<span class="n">cp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_html</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;https://baike.baidu.com/item/NBA</span><span class="si">%E</span><span class="s1">6</span><span class="si">%80%</span><span class="s1">BB</span><span class="si">%E</span><span class="s1">5</span><span class="si">%86%</span><span class="s1">A0</span><span class="si">%E</span><span class="s1">5</span><span class="si">%86%</span><span class="s1">9B/2173192?fr=aladdin&#39;</span><span class="p">)</span>
+<span class="c1"># 结果是一个列表数据类型 我们只需要第一个元素</span>
+<span class="n">ch</span> <span class="o">=</span> <span class="n">cp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># 列名称数据处理</span>
+<span class="n">ch</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">ch</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># 将第一行数据替换成列名称</span>
+
+
+<span class="c1"># 将第一行数据删除</span>
+<span class="n">ch</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> 
+<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">这里规律相反
+</span><span class="s2">axis=0表示行
+</span><span class="s2">axis=1表示列
+</span><span class="s2">如果记不住以后直接先查看该方法的案例提示再操作
+</span><span class="s2">&#34;&#34;&#34;</span>
+
+<span class="c1"># 1.统计每个球队夺冠的次数</span>
+<span class="n">cpm</span> <span class="o">=</span> <span class="n">ch</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;冠军&#39;</span><span class="p">,])</span>  <span class="c1"># 先分组</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">cpm</span><span class="o">.</span><span class="n">aggregate</span><span class="p">({</span><span class="s2">&#34;冠军&#34;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">})</span>
+<span class="n">res</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;冠军&#39;</span><span class="p">:</span><span class="s1">&#39;夺冠次数&#39;</span><span class="p">},</span><span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="c1"># 对夺冠次数进行排序</span>
+<span class="n">res</span><span class="p">[</span><span class="s1">&#39;夺冠次数&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+
+<span class="n">cpm1</span> <span class="o">=</span> <span class="n">ch</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;冠军&#39;</span><span class="p">,</span><span class="s1">&#39;FMVP&#39;</span><span class="p">])</span>
+<span class="n">res1</span> <span class="o">=</span> <span class="n">cpm1</span><span class="o">.</span><span class="n">aggregate</span><span class="p">({</span>
+        <span class="s1">&#39;FMVP&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">,</span>
+<span class="p">})</span>
+</code></pre></div><h2 id="数据的纵向合并添加数据项">数据的纵向合并(添加数据项)</h2>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+  <span class="s1">&#39;name&#39;</span><span class="p">:[</span><span class="s1">&#39;张三&#39;</span><span class="p">,</span><span class="s1">&#39;李四&#39;</span><span class="p">,</span><span class="s1">&#39;王二&#39;</span><span class="p">],</span> 
+  <span class="s1">&#39;age&#39;</span><span class="p">:[</span><span class="mi">21</span><span class="p">,</span><span class="mi">25</span><span class="p">,</span><span class="mi">22</span><span class="p">],</span> 
+  <span class="s1">&#39;gender&#39;</span><span class="p">:[</span><span class="s1">&#39;男&#39;</span><span class="p">,</span><span class="s1">&#39;女&#39;</span><span class="p">,</span><span class="s1">&#39;男&#39;</span><span class="p">]}</span>
+<span class="p">)</span>
+<span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+  <span class="s1">&#39;name&#39;</span><span class="p">:[</span><span class="s1">&#39;丁一&#39;</span><span class="p">,</span><span class="s1">&#39;赵五&#39;</span><span class="p">],</span> 
+  <span class="s1">&#39;age&#39;</span><span class="p">:[</span><span class="mi">23</span><span class="p">,</span><span class="mi">22</span><span class="p">],</span> 
+  <span class="s1">&#39;gender&#39;</span><span class="p">:[</span><span class="s1">&#39;女&#39;</span><span class="p">,</span><span class="s1">&#39;女&#39;</span><span class="p">]}</span>
+<span class="p">)</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df1</span><span class="p">,</span><span class="n">df2</span><span class="p">])</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df1</span><span class="p">,</span><span class="n">df2</span><span class="p">]</span> <span class="p">,</span> <span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;df1&#39;</span><span class="p">,</span><span class="s1">&#39;df2&#39;</span><span class="p">])</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df1</span><span class="p">,</span><span class="n">df2</span><span class="p">])</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;index&#39;</span><span class="p">])</span>
+<span class="c1"># reset_index 生成一个从0开始的新的索引项</span>
+
+<span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+  <span class="s1">&#39;Name&#39;</span><span class="p">:[</span><span class="s1">&#39;丁一&#39;</span><span class="p">,</span><span class="s1">&#39;赵五&#39;</span><span class="p">],</span> 
+  <span class="s1">&#39;age&#39;</span><span class="p">:[</span><span class="mi">23</span><span class="p">,</span><span class="mi">22</span><span class="p">],</span> 
+  <span class="s1">&#39;gender&#39;</span><span class="p">:[</span><span class="s1">&#39;女&#39;</span><span class="p">,</span><span class="s1">&#39;女&#39;</span><span class="p">]}</span>
+<span class="p">)</span>
+</code></pre></div><h2 id="数据的横向合并链表操作">数据的横向合并(链表操作)</h2>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">dep
+</span><span class="s2">    id    name     desc
+</span><span class="s2">
+</span><span class="s2">emp
+</span><span class="s2">    id    name     gender     dep_id
+</span><span class="s2">    
+</span><span class="s2">select * from emp inner join dep on emp.dep_id = dep.id;
+</span><span class="s2">&#34;&#34;&#34;</span>
+<span class="n">df3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+  <span class="s1">&#39;id&#39;</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span>
+  <span class="s1">&#39;name&#39;</span><span class="p">:[</span><span class="s1">&#39;张三&#39;</span><span class="p">,</span><span class="s1">&#39;李四&#39;</span><span class="p">,</span><span class="s1">&#39;王二&#39;</span><span class="p">,</span><span class="s1">&#39;丁一&#39;</span><span class="p">,</span><span class="s1">&#39;赵五&#39;</span><span class="p">],</span>
+  <span class="s1">&#39;age&#39;</span><span class="p">:[</span><span class="mi">27</span><span class="p">,</span><span class="mi">24</span><span class="p">,</span><span class="mi">25</span><span class="p">,</span><span class="mi">23</span><span class="p">,</span><span class="mi">25</span><span class="p">],</span>
+  <span class="s1">&#39;gender&#39;</span><span class="p">:[</span><span class="s1">&#39;男&#39;</span><span class="p">,</span><span class="s1">&#39;男&#39;</span><span class="p">,</span><span class="s1">&#39;男&#39;</span><span class="p">,</span><span class="s1">&#39;女&#39;</span><span class="p">,</span><span class="s1">&#39;女&#39;</span><span class="p">]})</span>
+<span class="n">df4</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+  <span class="s1">&#39;Id&#39;</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> 
+  <span class="s1">&#39;score&#39;</span><span class="p">:[</span><span class="mi">83</span><span class="p">,</span><span class="mi">81</span><span class="p">,</span><span class="mi">87</span><span class="p">,</span><span class="mi">75</span><span class="p">,</span><span class="mi">86</span><span class="p">,</span><span class="mi">74</span><span class="p">,</span><span class="mi">88</span><span class="p">],</span> 
+  <span class="s1">&#39;kemu&#39;</span><span class="p">:[</span><span class="s1">&#39;科目1&#39;</span><span class="p">,</span><span class="s1">&#39;科目1&#39;</span><span class="p">,</span><span class="s1">&#39;科目2&#39;</span><span class="p">,</span><span class="s1">&#39;科目1&#39;</span><span class="p">,</span><span class="s1">&#39;科目2&#39;</span><span class="p">,</span><span class="s1">&#39;科目3&#39;</span><span class="p">,</span><span class="s1">&#39;科目1&#39;</span><span class="p">]})</span>
+<span class="n">df5</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+  <span class="s1">&#39;id&#39;</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span>
+  <span class="s1">&#39;name&#39;</span><span class="p">:[</span><span class="s1">&#39;张三&#39;</span><span class="p">,</span><span class="s1">&#39;王二&#39;</span><span class="p">,</span><span class="s1">&#39;赵五&#39;</span><span class="p">],</span>
+  <span class="s1">&#39;income&#39;</span><span class="p">:[</span><span class="mi">13500</span><span class="p">,</span><span class="mi">18000</span><span class="p">,</span><span class="mi">15000</span><span class="p">]})</span>
+
+
+<span class="n">merge1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left</span> <span class="o">=</span> <span class="n">df3</span><span class="p">,</span> 
+                  <span class="n">right</span> <span class="o">=</span> <span class="n">df4</span><span class="p">,</span> 
+                  <span class="n">how</span> <span class="o">=</span> <span class="s1">&#39;inner&#39;</span><span class="p">,</span> 
+                  <span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> 
+                  <span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;Id&#39;</span><span class="p">)</span>
+
+
+<span class="n">merge2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left</span> <span class="o">=</span> <span class="n">merge1</span><span class="p">,</span> 
+                  <span class="n">right</span> <span class="o">=</span> <span class="n">df5</span><span class="p">,</span> 
+                  <span class="n">how</span> <span class="o">=</span> <span class="s1">&#39;left&#39;</span><span class="p">)</span>  <span class="c1"># 不指定默认找相同的字段</span>
+</code></pre></div>]]></content>
+		</item>
+		
 	</channel>
 </rss>

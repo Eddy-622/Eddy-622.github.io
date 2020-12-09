@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="theme-color" content="#494f5c">
+	<meta name="msapplication-TileColor" content="#494f5c">
+<meta itemprop="name" content="Pandas之数据处理、筛选、分组、聚合">
+<meta itemprop="description" content="数据概览 df = pd.read_csv(r&#39;sec_cars.csv&#39;)# 1.查看表格的前N条数据 df.head(5) # 不写默认也是五条 # 2.查看表格的后N条数据 df.tail(5) # 不写默认也是五条 # 3.查看表的行列 df.shape # 结果是一个元组(行数,列数) # 4.获取表中所有的列名称 df.columns# 5.获取表中所有的行索引 df.index# 6.查看数据的数据类型 df.dtypes # 在处理数据之前应该用该方法查看一下数据类型 # 7.快速统计 df.describe() # 默认只会统计数字类型的数据 df.describe(include=&#39;object&#39;) # 可以通过include参数指定统计的数据类型 df.describe(include=&#39;all&#39;) 行列操作 df1 = pd.read_excel(r&#39;data_test02.xlsx&#39;,header=None)# 1.修改列名称 df1.rename(columns={0:&#39;序号&#39;})df1.rename(columns={0:&#39;序号&#39;,1:&#39;类型&#39;,2:&#39;颜色&#39;,3:&#39;尺码&#39;},inplace=True)# &#39;&#39;&#39; # # 能修改 但是会报个错误 可以添加下列配置 # pd.">
+
+<meta itemprop="wordCount" content="448">
+
+
+
+<meta itemprop="keywords" content="Pandas,数据处理,数据清洗,分组聚合," /><meta property="og:title" content="Pandas之数据处理、筛选、分组、聚合" />
+<meta property="og:description" content="数据概览 df = pd.read_csv(r&#39;sec_cars.csv&#39;)# 1.查看表格的前N条数据 df.head(5) # 不写默认也是五条 # 2.查看表格的后N条数据 df.tail(5) # 不写默认也是五条 # 3.查看表的行列 df.shape # 结果是一个元组(行数,列数) # 4.获取表中所有的列名称 df.columns# 5.获取表中所有的行索引 df.index# 6.查看数据的数据类型 df.dtypes # 在处理数据之前应该用该方法查看一下数据类型 # 7.快速统计 df.describe() # 默认只会统计数字类型的数据 df.describe(include=&#39;object&#39;) # 可以通过include参数指定统计的数据类型 df.describe(include=&#39;all&#39;) 行列操作 df1 = pd.read_excel(r&#39;data_test02.xlsx&#39;,header=None)# 1.修改列名称 df1.rename(columns={0:&#39;序号&#39;})df1.rename(columns={0:&#39;序号&#39;,1:&#39;类型&#39;,2:&#39;颜色&#39;,3:&#39;尺码&#39;},inplace=True)# &#39;&#39;&#39; # # 能修改 但是会报个错误 可以添加下列配置 # pd." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://Eddy-622.github.io/posts/pandas%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E7%AD%9B%E9%80%89%E5%88%86%E7%BB%84%E8%81%9A%E5%90%88/" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Pandas之数据处理、筛选、分组、聚合"/>
+<meta name="twitter:description" content="数据概览 df = pd.read_csv(r&#39;sec_cars.csv&#39;)# 1.查看表格的前N条数据 df.head(5) # 不写默认也是五条 # 2.查看表格的后N条数据 df.tail(5) # 不写默认也是五条 # 3.查看表的行列 df.shape # 结果是一个元组(行数,列数) # 4.获取表中所有的列名称 df.columns# 5.获取表中所有的行索引 df.index# 6.查看数据的数据类型 df.dtypes # 在处理数据之前应该用该方法查看一下数据类型 # 7.快速统计 df.describe() # 默认只会统计数字类型的数据 df.describe(include=&#39;object&#39;) # 可以通过include参数指定统计的数据类型 df.describe(include=&#39;all&#39;) 行列操作 df1 = pd.read_excel(r&#39;data_test02.xlsx&#39;,header=None)# 1.修改列名称 df1.rename(columns={0:&#39;序号&#39;})df1.rename(columns={0:&#39;序号&#39;,1:&#39;类型&#39;,2:&#39;颜色&#39;,3:&#39;尺码&#39;},inplace=True)# &#39;&#39;&#39; # # 能修改 但是会报个错误 可以添加下列配置 # pd."/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="/favicon.ico">
+
+	<title>Pandas之数据处理、筛选、分组、聚合</title>
+	<link rel="stylesheet" href="https://Eddy-622.github.io/css/style.min.657bcb7af31123e4156b1a3d2ff60a636717e54ead74f882136b5114cf72b55e.css" integrity="sha256-ZXvLevMRI+QVaxo9L/YKY2cX5U6tdPiCE2tRFM9ytV4=" crossorigin="anonymous">
+	
+</head>
+
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp faster">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="https://Eddy-622.github.io">Eddy&#39;s Boke</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					
+				<a href="https://Eddy-622.github.io/posts/">博客</a>
+				<a href="https://Eddy-622.github.io/about-hugo/">关于</a>
+
+				</nav>
+			</div>
+			<div class="hdr-right hdr-icons">
+				<span class="hdr-social hide-in-mobile"><a href="https://mobile.twitter.com/zhang_kea" target="_blank" rel="noopener me" title="Twitter"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a><a href="https://www.facebook.com/kea.zhang.92" target="_blank" rel="noopener me" title="Instagram"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line></svg></a><a href="https://github.com/Eddy-622" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></span><button id="menu-btn" class="hdr-btn" title="Menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast">
+		<ul>
+			<li><a href="https://Eddy-622.github.io/posts/">博客</a></li>
+			<li><a href="https://Eddy-622.github.io/about-hugo/">关于</a></li>
+		</ul>
+	</div>
+
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta"><span>Jan 1, 0001</span></div>
+				<h1>Pandas之数据处理、筛选、分组、聚合</h1>
+			</header>
+			<div class="content">
+				<h2 id="数据概览">数据概览<a href="#数据概览" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;sec_cars.csv&#39;</span><span class="p">)</span>
+<span class="c1"># 1.查看表格的前N条数据</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>  <span class="c1"># 不写默认也是五条</span>
+<span class="c1"># 2.查看表格的后N条数据</span>
+<span class="n">df</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>  <span class="c1"># 不写默认也是五条</span>
+<span class="c1"># 3.查看表的行列</span>
+<span class="n">df</span><span class="o">.</span><span class="n">shape</span>  <span class="c1"># 结果是一个元组(行数,列数)</span>
+<span class="c1"># 4.获取表中所有的列名称</span>
+<span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+<span class="c1"># 5.获取表中所有的行索引</span>
+<span class="n">df</span><span class="o">.</span><span class="n">index</span>
+<span class="c1"># 6.查看数据的数据类型</span>
+<span class="n">df</span><span class="o">.</span><span class="n">dtypes</span>  <span class="c1"># 在处理数据之前应该用该方法查看一下数据类型</span>
+<span class="c1"># 7.快速统计</span>
+<span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>  <span class="c1"># 默认只会统计数字类型的数据</span>
+<span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;object&#39;</span><span class="p">)</span> <span class="c1"># 可以通过include参数指定统计的数据类型</span>
+<span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">)</span> 
+</code></pre></div><h2 id="行列操作">行列操作<a href="#行列操作" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;data_test02.xlsx&#39;</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+
+<span class="c1"># 1.修改列名称</span>
+<span class="n">df1</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="s1">&#39;序号&#39;</span><span class="p">})</span>
+<span class="n">df1</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="s1">&#39;序号&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="s1">&#39;类型&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">:</span><span class="s1">&#39;颜色&#39;</span><span class="p">,</span><span class="mi">3</span><span class="p">:</span><span class="s1">&#39;尺码&#39;</span><span class="p">},</span><span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="c1"># &#39;&#39;&#39;</span>
+<span class="c1"># # 能修改 但是会报个错误 可以添加下列配置</span>
+<span class="c1"># pd.set_option(&#39;mode.chained_assignment&#39;,None)</span>
+<span class="c1"># &#39;&#39;&#39;</span>
+
+<span class="n">df1</span><span class="p">[</span><span class="s1">&#39;序号&#39;</span><span class="p">]</span>  <span class="c1"># 获取序号列对应的列数据</span>
+<span class="n">df1</span><span class="p">[</span><span class="s1">&#39;库存&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">666</span>  <span class="c1"># 加了赋值符号就是设值</span>
+<span class="c1"># 1.如果该列名称存在则修改列数据</span>
+<span class="c1"># 2.如果该列名称不存在则创建新的</span>
+<span class="n">df1</span><span class="p">[</span><span class="s1">&#39;测试&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df1</span><span class="p">[</span><span class="s1">&#39;尺码&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">df1</span><span class="p">[</span><span class="s1">&#39;库存&#39;</span><span class="p">]</span>
+<span class="c1"># 注意:新的列数据可以是直接写死的，也可以是通过其他字段动态计算</span>
+
+<span class="n">df1</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;插队&#39;</span><span class="p">,</span><span class="mi">6969</span><span class="p">)</span>
+<span class="c1"># 还可以控制插入列的位置</span>
+</code></pre></div><h2 id="数据筛选">数据筛选<a href="#数据筛选" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 以二手车为例</span>
+<span class="c1"># 1.获取列数据</span>
+<span class="c1"># df[&#39;Brand&#39;]  # 只获取一列数据</span>
+<span class="c1"># df[[&#39;Brand&#39;,&#39;Name&#39;,&#39;New_price&#39;]]  # 获取多列一定要是表格的形式</span>
+<span class="c1"># 2.获取行数据</span>
+<span class="c1"># df.loc[df[&#39;Brand&#39;]==&#39;众泰&#39;]  # 只有一个条件的</span>
+<span class="s1">&#39;&#39;&#39;逻辑运算符在连接条件的时候 条件都必须加括号&#39;&#39;&#39;</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Brand&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;众泰&#39;</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Discharge&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;国4&#39;</span><span class="p">)]</span>
+
+<span class="c1"># 3.针对筛选出来的行数据 做列数据的过滤</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Brand&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;众泰&#39;</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Discharge&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;国4&#39;</span><span class="p">),[</span><span class="s1">&#39;Brand&#39;</span><span class="p">,</span><span class="s1">&#39;Name&#39;</span><span class="p">]]</span>
+</code></pre></div><h2 id="数据处理">数据处理<a href="#数据处理" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">sec_car</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;sec_cars.csv&#39;</span><span class="p">)</span>
+<span class="n">sec_car</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">sec_car</span><span class="o">.</span><span class="n">dtypes</span>
+<span class="c1"># 日期应该是日期类型而不是字符串类型</span>
+<span class="c1"># 新车价格应该是数字类型而不是字符串类型</span>
+<span class="n">sec_car</span><span class="p">[</span><span class="s1">&#39;Boarding_time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">sec_car</span><span class="p">[</span><span class="s1">&#39;Boarding_time&#39;</span><span class="p">],</span>
+                                         <span class="n">format</span><span class="o">=</span><span class="s1">&#39;%Y年%m月&#39;</span>
+                                         <span class="p">)</span>
+<span class="c1"># 常见的日期符号 %Y %m %d %H %M %S %X</span>
+<span class="n">sec_car</span><span class="o">.</span><span class="n">dtypes</span>
+
+<span class="n">sec_car</span><span class="o">.</span><span class="n">New_price</span>  <span class="c1"># 新车价格里面有字符串类型</span>
+<span class="c1"># 1.需要先将字符串去除(方式1:字符串的替换 方式2:切片操作)</span>
+<span class="n">sec_car</span><span class="o">.</span><span class="n">New_price</span><span class="o">.</span><span class="n">str</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># 一定要加上关键字str</span>
+<span class="c1"># 2.之后才能数据类型转换</span>
+<span class="n">sec_car</span><span class="o">.</span><span class="n">New_price</span><span class="o">.</span><span class="n">str</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>  <span class="c1"># astype数据类型转换</span>
+
+<span class="n">sec_car</span><span class="p">[</span><span class="s1">&#39;New_price&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sec_car</span><span class="o">.</span><span class="n">New_price</span><span class="o">.</span><span class="n">str</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;data_test04.xlsx&#39;</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="c1"># 判断数据是否有重复项</span>
+<span class="n">data</span><span class="o">.</span><span class="n">duplicated</span><span class="p">()</span>
+<span class="c1"># 删除重复的数据项</span>
+<span class="n">data</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+</code></pre></div><h2 id="缺失值处理">缺失值处理<a href="#缺失值处理" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">data05</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;data_test05.xlsx&#39;</span><span class="p">)</span>
+<span class="c1"># 1.当样本数据量特别多的时候，可以考虑直接删除个别缺失数据</span>
+<span class="c1"># 2.当缺失数据占比较高的时候不能直接删除，而应该使用填充数据的方式</span>
+
+<span class="c1"># 判断是否含有缺失值</span>
+<span class="n">data05</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span>  <span class="c1"># 不太好</span>
+<span class="n">data05</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># 判断列是否有缺失数据</span>
+<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">axis=0表示列字段
+</span><span class="s2">axis=1表示行索引
+</span><span class="s2">&#34;&#34;&#34;</span>
+
+<span class="c1"># 计算缺失数据的占比</span>
+<span class="n">data05</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="n">data05</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="c1"># 不能够直接删除缺失数据data05.dropna()</span>
+<span class="c1"># 也不能一股脑的瞎填充data05.fillna(666)</span>
+<span class="c1">############################################################</span>
+<span class="n">data05</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">value</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">&#39;gender&#39;</span><span class="p">:</span><span class="n">data05</span><span class="o">.</span><span class="n">gender</span><span class="o">.</span><span class="n">mode</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span>  <span class="c1"># 众数:可以有一个也可能是多个</span>
+  <span class="s1">&#39;age&#39;</span><span class="p">:</span><span class="n">data05</span><span class="o">.</span><span class="n">age</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>  <span class="c1"># 平均值</span>
+  <span class="s1">&#39;income&#39;</span><span class="p">:</span><span class="n">data05</span><span class="o">.</span><span class="n">income</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>  <span class="c1"># 薪资推荐使用:中位数</span>
+<span class="p">},</span> <span class="n">inplace</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+<span class="c1">############################################################</span>
+<span class="n">data05</span>
+</code></pre></div><h2 id="数据汇总">数据汇总<a href="#数据汇总" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">data06</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;diamonds.csv&#39;</span><span class="p">)</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">data06</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="s1">&#39;color&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;price&#39;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">data06</span><span class="p">,</span> 
+               <span class="n">index</span> <span class="o">=</span> <span class="s1">&#39;color&#39;</span><span class="p">,</span> 
+               <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;clarity&#39;</span><span class="p">,</span> 
+               <span class="n">values</span><span class="o">=</span><span class="s1">&#39;price&#39;</span><span class="p">,</span> 
+               <span class="n">aggfunc</span><span class="o">=</span><span class="s1">&#39;size&#39;</span><span class="p">)</span>
+<span class="c1"># 当数据量小于10万 基本上使用常用软件excel SPSS即可操作</span>
+<span class="c1"># 高于10万之后才可能需要使用代码处理</span>
+</code></pre></div><h2 id="分组与聚合">分组与聚合<a href="#分组与聚合" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 对颜色进行分组</span>
+<span class="c1"># data06.groupby(by=[&#39;color&#39;,])  # 按照单个字段分组</span>
+<span class="c1"># 分组之后如果直接想看结果可以使用groups  粗略的查看</span>
+<span class="c1"># data06.groupby(by=[&#39;color&#39;,]).groups</span>
+
+<span class="c1"># 分组一般都是配合聚合函数一起使用</span>
+<span class="c1"># gg = data06.groupby(by=[&#39;color&#39;,])  # 先分组</span>
+<span class="c1"># res = gg.aggregate({&#39;color&#39;:np.size})  # 再聚合</span>
+<span class="c1"># res</span>
+
+<span class="c1"># 可以对多个字段聚合    针对聚合函数最好都用np点出来</span>
+<span class="c1"># res1 = gg.aggregate({&#39;color&#39;:np.size,</span>
+<span class="c1">#                      &#39;price&#39;:np.mean,</span>
+<span class="c1">#                      &#39;table&#39;:np.max</span>
+<span class="c1">#                     })</span>
+<span class="c1"># res1</span>
+
+<span class="c1"># 还可以按照多个字段分组</span>
+<span class="c1">######################################</span>
+<span class="n">gg1</span> <span class="o">=</span> <span class="n">data06</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">,</span><span class="s1">&#39;cut&#39;</span><span class="p">])</span>
+<span class="n">res2</span> <span class="o">=</span> <span class="n">gg1</span><span class="o">.</span><span class="n">aggregate</span><span class="p">({</span><span class="s1">&#39;color&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">,</span>
+                     <span class="s1">&#39;price&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span>
+                     <span class="s1">&#39;table&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">max</span>
+                    <span class="p">})</span>
+<span class="n">res2</span>
+<span class="c1">######################################</span>
+<span class="c1"># 调整变量名的顺序</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">res2</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">,</span><span class="s1">&#39;color&#39;</span><span class="p">,</span><span class="s1">&#39;table&#39;</span><span class="p">])</span>
+<span class="n">result</span>
+
+<span class="c1"># 数据集重命名</span>
+<span class="n">result</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span><span class="s1">&#39;个数&#39;</span><span class="p">,</span>
+                       <span class="s1">&#39;price&#39;</span><span class="p">:</span><span class="s1">&#39;均价&#39;</span><span class="p">,</span>
+                       <span class="s1">&#39;table&#39;</span><span class="p">:</span><span class="s1">&#39;最大面积&#39;</span><span class="p">},</span> 
+              <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">result</span>
+</code></pre></div><h2 id="分组与聚合练习题">分组与聚合练习题<a href="#分组与聚合练习题" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># pandas中的read_html可以爬取页面上table标签里面的数据</span>
+<span class="n">cp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_html</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;https://baike.baidu.com/item/NBA</span><span class="si">%E</span><span class="s1">6</span><span class="si">%80%</span><span class="s1">BB</span><span class="si">%E</span><span class="s1">5</span><span class="si">%86%</span><span class="s1">A0</span><span class="si">%E</span><span class="s1">5</span><span class="si">%86%</span><span class="s1">9B/2173192?fr=aladdin&#39;</span><span class="p">)</span>
+<span class="c1"># 结果是一个列表数据类型 我们只需要第一个元素</span>
+<span class="n">ch</span> <span class="o">=</span> <span class="n">cp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># 列名称数据处理</span>
+<span class="n">ch</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">ch</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># 将第一行数据替换成列名称</span>
+
+
+<span class="c1"># 将第一行数据删除</span>
+<span class="n">ch</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> 
+<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">这里规律相反
+</span><span class="s2">axis=0表示行
+</span><span class="s2">axis=1表示列
+</span><span class="s2">如果记不住以后直接先查看该方法的案例提示再操作
+</span><span class="s2">&#34;&#34;&#34;</span>
+
+<span class="c1"># 1.统计每个球队夺冠的次数</span>
+<span class="n">cpm</span> <span class="o">=</span> <span class="n">ch</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;冠军&#39;</span><span class="p">,])</span>  <span class="c1"># 先分组</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">cpm</span><span class="o">.</span><span class="n">aggregate</span><span class="p">({</span><span class="s2">&#34;冠军&#34;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">})</span>
+<span class="n">res</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;冠军&#39;</span><span class="p">:</span><span class="s1">&#39;夺冠次数&#39;</span><span class="p">},</span><span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="c1"># 对夺冠次数进行排序</span>
+<span class="n">res</span><span class="p">[</span><span class="s1">&#39;夺冠次数&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+
+<span class="n">cpm1</span> <span class="o">=</span> <span class="n">ch</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;冠军&#39;</span><span class="p">,</span><span class="s1">&#39;FMVP&#39;</span><span class="p">])</span>
+<span class="n">res1</span> <span class="o">=</span> <span class="n">cpm1</span><span class="o">.</span><span class="n">aggregate</span><span class="p">({</span>
+        <span class="s1">&#39;FMVP&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">,</span>
+<span class="p">})</span>
+</code></pre></div><h2 id="数据的纵向合并添加数据项">数据的纵向合并(添加数据项)<a href="#数据的纵向合并添加数据项" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+  <span class="s1">&#39;name&#39;</span><span class="p">:[</span><span class="s1">&#39;张三&#39;</span><span class="p">,</span><span class="s1">&#39;李四&#39;</span><span class="p">,</span><span class="s1">&#39;王二&#39;</span><span class="p">],</span> 
+  <span class="s1">&#39;age&#39;</span><span class="p">:[</span><span class="mi">21</span><span class="p">,</span><span class="mi">25</span><span class="p">,</span><span class="mi">22</span><span class="p">],</span> 
+  <span class="s1">&#39;gender&#39;</span><span class="p">:[</span><span class="s1">&#39;男&#39;</span><span class="p">,</span><span class="s1">&#39;女&#39;</span><span class="p">,</span><span class="s1">&#39;男&#39;</span><span class="p">]}</span>
+<span class="p">)</span>
+<span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+  <span class="s1">&#39;name&#39;</span><span class="p">:[</span><span class="s1">&#39;丁一&#39;</span><span class="p">,</span><span class="s1">&#39;赵五&#39;</span><span class="p">],</span> 
+  <span class="s1">&#39;age&#39;</span><span class="p">:[</span><span class="mi">23</span><span class="p">,</span><span class="mi">22</span><span class="p">],</span> 
+  <span class="s1">&#39;gender&#39;</span><span class="p">:[</span><span class="s1">&#39;女&#39;</span><span class="p">,</span><span class="s1">&#39;女&#39;</span><span class="p">]}</span>
+<span class="p">)</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df1</span><span class="p">,</span><span class="n">df2</span><span class="p">])</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df1</span><span class="p">,</span><span class="n">df2</span><span class="p">]</span> <span class="p">,</span> <span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;df1&#39;</span><span class="p">,</span><span class="s1">&#39;df2&#39;</span><span class="p">])</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df1</span><span class="p">,</span><span class="n">df2</span><span class="p">])</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;index&#39;</span><span class="p">])</span>
+<span class="c1"># reset_index 生成一个从0开始的新的索引项</span>
+
+<span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+  <span class="s1">&#39;Name&#39;</span><span class="p">:[</span><span class="s1">&#39;丁一&#39;</span><span class="p">,</span><span class="s1">&#39;赵五&#39;</span><span class="p">],</span> 
+  <span class="s1">&#39;age&#39;</span><span class="p">:[</span><span class="mi">23</span><span class="p">,</span><span class="mi">22</span><span class="p">],</span> 
+  <span class="s1">&#39;gender&#39;</span><span class="p">:[</span><span class="s1">&#39;女&#39;</span><span class="p">,</span><span class="s1">&#39;女&#39;</span><span class="p">]}</span>
+<span class="p">)</span>
+</code></pre></div><h2 id="数据的横向合并链表操作">数据的横向合并(链表操作)<a href="#数据的横向合并链表操作" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">dep
+</span><span class="s2">    id    name     desc
+</span><span class="s2">
+</span><span class="s2">emp
+</span><span class="s2">    id    name     gender     dep_id
+</span><span class="s2">    
+</span><span class="s2">select * from emp inner join dep on emp.dep_id = dep.id;
+</span><span class="s2">&#34;&#34;&#34;</span>
+<span class="n">df3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+  <span class="s1">&#39;id&#39;</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span>
+  <span class="s1">&#39;name&#39;</span><span class="p">:[</span><span class="s1">&#39;张三&#39;</span><span class="p">,</span><span class="s1">&#39;李四&#39;</span><span class="p">,</span><span class="s1">&#39;王二&#39;</span><span class="p">,</span><span class="s1">&#39;丁一&#39;</span><span class="p">,</span><span class="s1">&#39;赵五&#39;</span><span class="p">],</span>
+  <span class="s1">&#39;age&#39;</span><span class="p">:[</span><span class="mi">27</span><span class="p">,</span><span class="mi">24</span><span class="p">,</span><span class="mi">25</span><span class="p">,</span><span class="mi">23</span><span class="p">,</span><span class="mi">25</span><span class="p">],</span>
+  <span class="s1">&#39;gender&#39;</span><span class="p">:[</span><span class="s1">&#39;男&#39;</span><span class="p">,</span><span class="s1">&#39;男&#39;</span><span class="p">,</span><span class="s1">&#39;男&#39;</span><span class="p">,</span><span class="s1">&#39;女&#39;</span><span class="p">,</span><span class="s1">&#39;女&#39;</span><span class="p">]})</span>
+<span class="n">df4</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+  <span class="s1">&#39;Id&#39;</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> 
+  <span class="s1">&#39;score&#39;</span><span class="p">:[</span><span class="mi">83</span><span class="p">,</span><span class="mi">81</span><span class="p">,</span><span class="mi">87</span><span class="p">,</span><span class="mi">75</span><span class="p">,</span><span class="mi">86</span><span class="p">,</span><span class="mi">74</span><span class="p">,</span><span class="mi">88</span><span class="p">],</span> 
+  <span class="s1">&#39;kemu&#39;</span><span class="p">:[</span><span class="s1">&#39;科目1&#39;</span><span class="p">,</span><span class="s1">&#39;科目1&#39;</span><span class="p">,</span><span class="s1">&#39;科目2&#39;</span><span class="p">,</span><span class="s1">&#39;科目1&#39;</span><span class="p">,</span><span class="s1">&#39;科目2&#39;</span><span class="p">,</span><span class="s1">&#39;科目3&#39;</span><span class="p">,</span><span class="s1">&#39;科目1&#39;</span><span class="p">]})</span>
+<span class="n">df5</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+  <span class="s1">&#39;id&#39;</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span>
+  <span class="s1">&#39;name&#39;</span><span class="p">:[</span><span class="s1">&#39;张三&#39;</span><span class="p">,</span><span class="s1">&#39;王二&#39;</span><span class="p">,</span><span class="s1">&#39;赵五&#39;</span><span class="p">],</span>
+  <span class="s1">&#39;income&#39;</span><span class="p">:[</span><span class="mi">13500</span><span class="p">,</span><span class="mi">18000</span><span class="p">,</span><span class="mi">15000</span><span class="p">]})</span>
+
+
+<span class="n">merge1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left</span> <span class="o">=</span> <span class="n">df3</span><span class="p">,</span> 
+                  <span class="n">right</span> <span class="o">=</span> <span class="n">df4</span><span class="p">,</span> 
+                  <span class="n">how</span> <span class="o">=</span> <span class="s1">&#39;inner&#39;</span><span class="p">,</span> 
+                  <span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> 
+                  <span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;Id&#39;</span><span class="p">)</span>
+
+
+<span class="n">merge2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left</span> <span class="o">=</span> <span class="n">merge1</span><span class="p">,</span> 
+                  <span class="n">right</span> <span class="o">=</span> <span class="n">df5</span><span class="p">,</span> 
+                  <span class="n">how</span> <span class="o">=</span> <span class="s1">&#39;left&#39;</span><span class="p">)</span>  <span class="c1"># 不指定默认找相同的字段</span>
+</code></pre></div>
+			</div>
+			<hr class="post-end">
+			<footer class="post-info">
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>Eddy Zhang</p>
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://Eddy-622.github.io/tags/pandas">Pandas</a></span><span class="tag"><a href="https://Eddy-622.github.io/tags/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86">数据处理</a></span><span class="tag"><a href="https://Eddy-622.github.io/tags/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97">数据清洗</a></span><span class="tag"><a href="https://Eddy-622.github.io/tags/%E5%88%86%E7%BB%84%E8%81%9A%E5%90%88">分组聚合</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>448 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>0001-01-01 08:00 &#43;0800</p>
+			</footer>
+		</article>
+		<div class="post-nav thin">
+			<a class="next-post" href="https://Eddy-622.github.io/posts/matplotlib%E4%B9%8B%E9%A5%BC%E5%9B%BE%E6%9D%A1%E5%BD%A2%E5%9B%BE%E7%9B%B4%E6%96%B9%E5%9B%BE/">
+				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>Matplotlib之饼图、条形图、直方图</span>
+			</a>
+		</div>
+		<div id="comments" class="thin">
+</div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p>&copy; 2020 <a href="https://Eddy-622.github.io">Eddy Zhang</a></p>
+		<p>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://Eddy-622.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+		</p>
+	</footer>
+
+
+
+	<script src="https://Eddy-622.github.io/js/bundle.min.4a9a0ac3d2217822c7865b4161e6c2a71de1d70492264337755427898dd718f6.js" integrity="sha256-SpoKw9IheCLHhltBYebCpx3h1wSSJkM3dVQniY3XGPY=" crossorigin="anonymous"></script>
+	
+
+</body>
+
+</html>
