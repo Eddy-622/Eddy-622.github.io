@@ -13,6 +13,26 @@
     
     
     <item>
+      <title>Matplotlib之多表绘制</title>
+      <link>https://Eddy-622.github.io/posts/matplotlib%E4%B9%8B%E5%A4%9A%E8%A1%A8%E7%BB%98%E5%88%B6/</link>
+      <pubDate>Thu, 10 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/posts/matplotlib%E4%B9%8B%E5%A4%9A%E8%A1%A8%E7%BB%98%E5%88%B6/</guid>
+      <description>箱线图
+可以反映出很多特征量上下须值四分之一、三位数中位数平均值等并且还可以非常直观的识别出数据中的异常值代码你可以不记忆，但是最起码也要自己手动敲个两三遍熟悉过程  折线图
+最常用于跟时间序列相关的数据统计x轴是时间y轴是随时间变化的量# 单条折线图 eg:公司历年(月)业绩# 多条折线图 eg:员工绩效考核(设定的业绩与实际业绩关系)  散点图
+主要是用来寻找两个变量之间是否有线性关系(正相关、负相关)  气泡图
+其实就是散点图的演变将点的大小根据第三个变量的不同设置成不同的大小eg:x轴时间y轴人口数气泡大小国家面积  热力图
+研究变量之间的组合关系(交叉填充表)热力图我们使用的是seaborn模块来绘制参考资料:http://seaborn.pydata.org/tutorial/axis_grids.html  昨日表处理重点
+数据透视表制作(热力图知识点)日期字段的拆分(热力图知识点)  今日内容概要   组合图形的绘制
+  数据清洗理论
+  数据清洗案例
+  操作excel表格的python模块(openpyxl)
+  MongoDB数据库
+数据库只有两大类关系型MySQL(必会)非关系型MongoDB每一类学一个，就可以做到之后所有的数据库都能够非常快速的上手  今日内容详细 组合图形的绘制 # 读取数据 Prod_Trade = pd.</description>
+    </item>
+    
+    <item>
       <title>Matplotlib之箱线图、折线图、散点图、热力图</title>
       <link>https://Eddy-622.github.io/posts/matplotlib%E4%B9%8B%E7%AE%B1%E7%BA%BF%E5%9B%BE%E6%8A%98%E7%BA%BF%E5%9B%BE%E6%95%A3%E7%82%B9%E5%9B%BE%E7%83%AD%E5%8A%9B%E5%9B%BE/</link>
       <pubDate>Wed, 09 Dec 2020 00:00:00 +0000</pubDate>
@@ -142,15 +162,6 @@ about_text = about.text查看该标签所有的属性
 about_attr = about.attrs查看该标签内部包含的所有a标签
 about_a = about.find(&amp;#39;a&amp;#39;)for a in about_a:print(a.text) # 获取每个a标签内部的文本 print(a.links) # 获取每个a标签内部的链接地址 requests-html官方文档
 http://requests-html.kennethreitz.org/ # 习惯看英文文档   BS4模块</description>
-    </item>
-    
-    <item>
-      <title>爬虫之requests模块、cookie与session、json格式数据</title>
-      <link>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Brequests%E6%A8%A1%E5%9D%97cookie%E4%B8%8Esessionjson%E6%A0%BC%E5%BC%8F%E6%95%B0%E6%8D%AE/</link>
-      <pubDate>Wed, 18 Nov 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Brequests%E6%A8%A1%E5%9D%97cookie%E4%B8%8Esessionjson%E6%A0%BC%E5%BC%8F%E6%95%B0%E6%8D%AE/</guid>
-      <description>今日内容概要  requests模块 cookie与session requests爬取网址数据实战演练 json格式数据  今日内容详细 requests模块 &amp;#34;&amp;#34;&amp;#34;get请求携带参数在url中携带 url？username=jason&amp;amp;hobby=readrequestes模块携带参数import requestsres = requests.get(&amp;#39;https://www.baidu.com/s&amp;#39;,params={&amp;#39;wd&amp;#39;: &amp;#39;美女&amp;#39;},headers={&amp;#39;User-Agent&amp;#39;: &amp;#39;Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.76 Mobile Safari/537.36&amp;#39;,})with open(r&amp;#39;mn1.html&amp;#39;, &amp;#39;wb&amp;#39;) as f:f.write(res.content)总结:大部分网址基本上都会校验你是否是个浏览器，所以我们以后在发送请求的时候最后将User-agent携带着res = requests.get(&amp;#39;url&amp;#39;),params={字典形式携带的参数}headers={浏览器校验头，防止一般的简单网站防爬}&amp;#34;&amp;#34;&amp;#34;cookie与session &amp;#34;&amp;#34;&amp;#34;cookie与session都是用来记录当前用户状态的二者产生的原因在于HTTP协议是无状态的 &amp;gt;&amp;gt;&amp;gt; HTTP协议不记录用户信息但是网站需要记录用户的状态，登录信息等，cookie 和 session 便是分别负责在服务端与客户端进行身份识别cookie的由来就是保存在浏览器上面的k:v键值对session的由来就是保存在服务端上面的数据&amp;#39;&amp;#39;&amp;#39;在互联网中没有绝对意义上的安全&amp;#39;&amp;#39;&amp;#39;两者工作机制session的工作需要依赖于cookie总结:只要是需要保存用户状态的网址，都需要借助于cookie浏览器可以选择保存cookie也可以选择拒绝一旦浏览器拒绝保存cookie，那么所有网址的登录都无法进行知识扩展:https://www.</description>
     </item>
     
   </channel>

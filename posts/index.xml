@@ -6,8 +6,229 @@
 		<generator>Hugo -- gohugo.io</generator>
 		<language>zh-CN</language>
 		<copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-		<lastBuildDate>Wed, 09 Dec 2020 00:00:00 +0000</lastBuildDate>
+		<lastBuildDate>Thu, 10 Dec 2020 00:00:00 +0000</lastBuildDate>
 		<atom:link href="https://Eddy-622.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Matplotlib之多表绘制</title>
+			<link>https://Eddy-622.github.io/posts/matplotlib%E4%B9%8B%E5%A4%9A%E8%A1%A8%E7%BB%98%E5%88%B6/</link>
+			<pubDate>Thu, 10 Dec 2020 00:00:00 +0000</pubDate>
+			
+			<guid>https://Eddy-622.github.io/posts/matplotlib%E4%B9%8B%E5%A4%9A%E8%A1%A8%E7%BB%98%E5%88%B6/</guid>
+			<description>箱线图
+可以反映出很多特征量上下须值四分之一、三位数中位数平均值等并且还可以非常直观的识别出数据中的异常值代码你可以不记忆，但是最起码也要自己手动敲个两三遍熟悉过程  折线图
+最常用于跟时间序列相关的数据统计x轴是时间y轴是随时间变化的量# 单条折线图 eg:公司历年(月)业绩# 多条折线图 eg:员工绩效考核(设定的业绩与实际业绩关系)  散点图
+主要是用来寻找两个变量之间是否有线性关系(正相关、负相关)  气泡图
+其实就是散点图的演变将点的大小根据第三个变量的不同设置成不同的大小eg:x轴时间y轴人口数气泡大小国家面积  热力图
+研究变量之间的组合关系(交叉填充表)热力图我们使用的是seaborn模块来绘制参考资料:http://seaborn.pydata.org/tutorial/axis_grids.html  昨日表处理重点
+数据透视表制作(热力图知识点)日期字段的拆分(热力图知识点)  今日内容概要   组合图形的绘制
+  数据清洗理论
+  数据清洗案例
+  操作excel表格的python模块(openpyxl)
+  MongoDB数据库
+数据库只有两大类关系型MySQL(必会)非关系型MongoDB每一类学一个，就可以做到之后所有的数据库都能够非常快速的上手  今日内容详细 组合图形的绘制 # 读取数据 Prod_Trade = pd.</description>
+			<content type="html"><![CDATA[<ul>
+<li>
+<p>箱线图</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="err">可以反映出很多特征量</span>
+  <span class="err">上下须值</span>
+    <span class="err">四分之一、三位数</span>
+    <span class="err">中位数</span>
+    <span class="err">平均值等</span>
+<span class="err">并且还可以非常直观的识别出数据中的异常值</span>
+  
+<span class="err">代码你可以不记忆，但是最起码也要自己手动敲个两三遍熟悉过程</span>
+</code></pre></div></li>
+<li>
+<p>折线图</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="err">最常用于跟时间序列相关的数据统计</span>
+  <span class="n">x轴是时间</span>
+    <span class="n">y轴是随时间变化的量</span>
+   
+<span class="c1"># 单条折线图</span>
+  <span class="n">eg</span><span class="p">:</span><span class="err">公司历年</span><span class="p">(</span><span class="err">月</span><span class="p">)</span><span class="err">业绩</span>
+<span class="c1"># 多条折线图</span>
+  <span class="n">eg</span><span class="p">:</span><span class="err">员工绩效考核</span><span class="p">(</span><span class="err">设定的业绩与实际业绩关系</span><span class="p">)</span>
+</code></pre></div></li>
+<li>
+<p>散点图</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="err">主要是用来寻找两个变量之间是否有线性关系</span><span class="p">(</span><span class="err">正相关、负相关</span><span class="p">)</span>
+</code></pre></div></li>
+<li>
+<p>气泡图</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="err">其实就是散点图的演变</span>
+  <span class="err">将点的大小根据第三个变量的不同设置成不同的大小</span>
+<span class="n">eg</span><span class="p">:</span>
+    <span class="n">x轴时间</span>
+    <span class="n">y轴人口数</span>
+    <span class="err">气泡大小国家面积</span>
+</code></pre></div></li>
+<li>
+<p>热力图</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="err">研究变量之间的组合关系</span><span class="p">(</span><span class="err">交叉填充表</span><span class="p">)</span>
+  
+<span class="err">热力图我们使用的是</span><span class="n">seaborn模块来绘制</span>
+  
+<span class="err">参考资料</span><span class="p">:</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">seaborn</span><span class="o">.</span><span class="n">pydata</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">tutorial</span><span class="o">/</span><span class="n">axis_grids</span><span class="o">.</span><span class="n">html</span>
+</code></pre></div></li>
+<li>
+<p>昨日表处理重点</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="err">数据透视表制作</span><span class="p">(</span><span class="err">热力图知识点</span><span class="p">)</span>
+<span class="err">日期字段的拆分</span><span class="p">(</span><span class="err">热力图知识点</span><span class="p">)</span>
+</code></pre></div></li>
+</ul>
+<h1 id="今日内容概要">今日内容概要</h1>
+<ul>
+<li>
+<p>组合图形的绘制</p>
+</li>
+<li>
+<p>数据清洗理论</p>
+</li>
+<li>
+<p>数据清洗案例</p>
+</li>
+<li>
+<p>操作excel表格的python模块(openpyxl)</p>
+</li>
+<li>
+<p>MongoDB数据库</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="err">数据库只有两大类</span>
+  <span class="err">关系型</span>
+      <span class="n">MySQL</span><span class="p">(</span><span class="err">必会</span><span class="p">)</span>
+    <span class="err">非关系型</span>
+      <span class="n">MongoDB</span>
+    <span class="err">每一类学一个，就可以做到之后所有的数据库都能够非常快速的上手</span>
+</code></pre></div></li>
+</ul>
+<h1 id="今日内容详细">今日内容详细</h1>
+<h3 id="组合图形的绘制">组合图形的绘制</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 读取数据</span>
+<span class="n">Prod_Trade</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Prod_Trade.xlsx&#39;</span><span class="p">)</span>
+<span class="c1"># 衍生出交易年份和月份字段</span>
+<span class="n">Prod_Trade</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Prod_Trade</span><span class="o">.</span><span class="n">Date</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span>
+<span class="n">Prod_Trade</span><span class="p">[</span><span class="s1">&#39;month&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Prod_Trade</span><span class="o">.</span><span class="n">Date</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">month</span>
+
+<span class="c1"># 设置大图框的长和高</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="c1"># 设置第一个子图的布局</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot2grid</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">loc</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+<span class="c1"># 统计2012年各订单等级的数量</span>
+<span class="n">Class_Counts</span> <span class="o">=</span> <span class="n">Prod_Trade</span><span class="o">.</span><span class="n">Order_Class</span><span class="p">[</span><span class="n">Prod_Trade</span><span class="o">.</span><span class="n">year</span> <span class="o">==</span> <span class="mi">2012</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="n">Class_Percent</span> <span class="o">=</span> <span class="n">Class_Counts</span><span class="o">/</span><span class="n">Class_Counts</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="c1"># 将饼图设置为圆形（否则有点像椭圆）</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="n">aspect</span> <span class="o">=</span> <span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+<span class="c1"># 绘制订单等级饼图</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">Class_Percent</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">Class_Percent</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">autopct</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%.1f%%</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="c1"># 添加标题</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;各等级订单比例&#39;</span><span class="p">)</span>
+
+<span class="c1"># 设置第二个子图的布局</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot2grid</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">loc</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="c1"># 统计2012年每月销售额</span>
+<span class="n">Month_Sales</span> <span class="o">=</span> <span class="n">Prod_Trade</span><span class="p">[</span><span class="n">Prod_Trade</span><span class="o">.</span><span class="n">year</span> <span class="o">==</span> <span class="mi">2012</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span> <span class="o">=</span> <span class="s1">&#39;month&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">aggregate</span><span class="p">({</span><span class="s1">&#39;Sales&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">})</span>
+<span class="c1"># 绘制销售额趋势图</span>
+<span class="n">Month_Sales</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;2012年各月销售趋势&#39;</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">ax2</span><span class="p">,</span> <span class="n">legend</span> <span class="o">=</span> <span class="bp">False</span><span class="p">)</span>
+<span class="c1"># 删除x轴标签</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+<span class="c1"># 设置第三个子图的布局</span>
+<span class="n">ax3</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot2grid</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">loc</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="n">rowspan</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+<span class="c1"># 绘制各运输方式的成本箱线图</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;Transport&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;Trans_Cost&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">Prod_Trade</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">ax3</span><span class="p">)</span>
+<span class="c1"># 添加标题</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;各运输方式成本分布&#39;</span><span class="p">)</span>
+<span class="c1"># 删除x轴标签</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="c1"># 修改y轴标签</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;运输成本&#39;</span><span class="p">)</span>
+
+<span class="c1"># 设置第四个子图的布局</span>
+<span class="n">ax4</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot2grid</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">loc</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">colspan</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+<span class="c1"># 2012年客单价分布直方图</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">Prod_Trade</span><span class="o">.</span><span class="n">Sales</span><span class="p">[</span><span class="n">Prod_Trade</span><span class="o">.</span><span class="n">year</span> <span class="o">==</span> <span class="mi">2012</span><span class="p">],</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">40</span><span class="p">,</span> <span class="n">norm_hist</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">ax4</span><span class="p">,</span> <span class="n">hist_kws</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span><span class="s1">&#39;steelblue&#39;</span><span class="p">},</span> <span class="n">kde_kws</span><span class="o">=</span><span class="p">({</span><span class="s1">&#39;linestyle&#39;</span><span class="p">:</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="s1">&#39;color&#39;</span><span class="p">:</span><span class="s1">&#39;red&#39;</span><span class="p">}))</span>
+<span class="c1"># 添加标题</span>
+<span class="n">ax4</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;2012年客单价分布图&#39;</span><span class="p">)</span>
+<span class="c1"># 修改x轴标签</span>
+<span class="n">ax4</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;销售额&#39;</span><span class="p">)</span>
+
+<span class="c1"># 调整子图之间的水平间距和高度间距</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="c1"># 图形显示</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div><h3 id="补充">补充</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#在展示图形的时候出现乱码不同的系统有不同的解决方法</span>
+<span class="c1"># 解决中文乱码情况</span>
+<span class="c1"># 针对windows</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.sans-serif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SimHei&#39;</span><span class="p">]</span>
+
+<span class="c1"># 针对mac</span>
+<span class="c1"># 配置</span>
+<span class="kn">from</span> <span class="nn">matplotlib.font_manager</span> <span class="kn">import</span> <span class="n">FontProperties</span>
+<span class="n">font</span> <span class="o">=</span> <span class="n">FontProperties</span><span class="p">(</span><span class="n">fname</span><span class="o">=</span><span class="s1">&#39;/Users/jason/Downloads/font/Hanzipen.ttc&#39;</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">font2</span> <span class="o">=</span> <span class="n">FontProperties</span><span class="p">(</span><span class="n">fname</span><span class="o">=</span><span class="s1">&#39;/Users/jason/Downloads/font/Hanzipen.ttc&#39;</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+<span class="c1"># 字体的选择可以有多个文件类型</span>
+<span class="c1"># 使用</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;哈哈哈&#39;</span><span class="p">,</span><span class="n">FontProperties</span><span class="o">=</span><span class="n">font</span><span class="p">)</span>
+</code></pre></div><h3 id="总结">总结</h3>
+<pre><code>数据可视化方式有很多，我们学习的目前来说是代码层面的可能并不是最简单的
+但是这块知识点你得知道
+
+后续还会学习可视化软件的使用，画图更加的简单
+
+可视化模块
+	matplotlib
+    seaborn
+可视化包(前端)
+	echarts
+    highcharts
+</code></pre><h3 id="pyecharts模块">pyecharts模块</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 下载</span>
+<span class="n">pip3</span> <span class="n">install</span> <span class="n">pyecharts</span> <span class="o">-</span><span class="n">i</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">pypi</span><span class="o">.</span><span class="n">tuna</span><span class="o">.</span><span class="n">tsinghua</span><span class="o">.</span><span class="n">edu</span><span class="o">.</span><span class="n">cn</span><span class="o">/</span><span class="n">simple</span><span class="o">/</span>
+
+    
+<span class="c1"># 参考</span>
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">pyecharts</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="c1">#/zh-cn/intro</span>
+</code></pre></div><h3 id="数据清洗概念">数据清洗概念</h3>
+<pre><code>数据分析工作流程
+1.提出需求
+
+2.收集数据
+
+3.整理数据
+	数据清洗环节
+    是我们数据分析流程中必不可少的环境
+ 
+4.数据分析
+
+5.数据可视化
+
+6.数据分析报告
+
+# 其实可以将整个数据分析环境比喻成做菜的过程
+
+数据清洗环节就类似于炒菜之前的菜品准备过程
+
+专业术语
+	脏数据
+    	缺失数据
+        异常数据
+        重复数据
+        ...
+    干净的数据
+    	可以直接拿来使用的数据
+     
+查看数据
+	shape
+    describle
+    info
+   
+常见的坑
+	1.列名称首位有空格
+   		不容易察觉，但是却非常有可能出现
+        
+</code></pre>]]></content>
+		</item>
 		
 		<item>
 			<title>Matplotlib之箱线图、折线图、散点图、热力图</title>
