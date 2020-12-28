@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="theme-color" content="#494f5c">
+	<meta name="msapplication-TileColor" content="#494f5c">
+<meta itemprop="name" content="Linux之大数据应用">
+<meta itemprop="description" content="本周内容概要 大数据之Hadoop(了解并掌握基本操作即可)
+ 重要理论 hadoop实操  大数据之数据仓库(简单了解基本原理即可)
+今日内容详细 大数据的概念 指⽆法在⼀定时间范围内⽤常规软件⼯具进⾏捕捉、管理和处理的数据集合，是需要新处理模式才能具有更强的决策⼒、洞察发现⼒和流程优化能⼒的海量、⾼增⻓率和多样化的信息资产1.海量(数据量特别大)2.⾼增⻓率(较小的时间内涌入大量数据)3.多样化(数据种类很多)大数据的目的 主要解决，海量数据的存储和海量数据的分析计算问题。1.海量数据存储2.海量数据分析计算重要的单位换算 8bit = 1bytes1024bytes = 1KB1024KB = 1MB1024MB = 1GB1024GB = 1TB1024TB = 1PB1024PB = 1EB数据量至少要达到PB级别才能够称之为是大数据大数据的特点 Volume(⼤量)Velocity(⾼速)Variety(多样)Value(低价值密度)大数据的用途 物流仓储零售旅游商品⼴告推荐保险金融房地产人工智能...诸多领域Hadoop简介 主要解决，海量数据的存储和海量数据的分析计算问题(即针对大数据应运而生)从狭义上看Hadoop可以是一个数据库软件从广义上看Hadoop是一个生态圈(包含了很多软件)Hadoop发展史 1.Hadoop是基于Google的三篇论文开发的2.2006年Hadoop正式诞生3.作者是Doug Cutting，软件图标是一个玩具大象Hadoop版本 Hadoop 三⼤发⾏版本Apache、Cloudera、Hortonworks Apache 版本最原始（最基础）的版本，对于⼊⻔学习最好Cloudera 在⼤型互联⽹企业中⽤的较多Hortonworks ⽂档较好官⽹地址：http://hadoop.">
+<meta itemprop="datePublished" content="2020-12-28T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-12-28T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="176">
+
+
+
+<meta itemprop="keywords" content="Linuc,大数据应用,Hadoop," /><meta property="og:title" content="Linux之大数据应用" />
+<meta property="og:description" content="本周内容概要 大数据之Hadoop(了解并掌握基本操作即可)
+ 重要理论 hadoop实操  大数据之数据仓库(简单了解基本原理即可)
+今日内容详细 大数据的概念 指⽆法在⼀定时间范围内⽤常规软件⼯具进⾏捕捉、管理和处理的数据集合，是需要新处理模式才能具有更强的决策⼒、洞察发现⼒和流程优化能⼒的海量、⾼增⻓率和多样化的信息资产1.海量(数据量特别大)2.⾼增⻓率(较小的时间内涌入大量数据)3.多样化(数据种类很多)大数据的目的 主要解决，海量数据的存储和海量数据的分析计算问题。1.海量数据存储2.海量数据分析计算重要的单位换算 8bit = 1bytes1024bytes = 1KB1024KB = 1MB1024MB = 1GB1024GB = 1TB1024TB = 1PB1024PB = 1EB数据量至少要达到PB级别才能够称之为是大数据大数据的特点 Volume(⼤量)Velocity(⾼速)Variety(多样)Value(低价值密度)大数据的用途 物流仓储零售旅游商品⼴告推荐保险金融房地产人工智能...诸多领域Hadoop简介 主要解决，海量数据的存储和海量数据的分析计算问题(即针对大数据应运而生)从狭义上看Hadoop可以是一个数据库软件从广义上看Hadoop是一个生态圈(包含了很多软件)Hadoop发展史 1.Hadoop是基于Google的三篇论文开发的2.2006年Hadoop正式诞生3.作者是Doug Cutting，软件图标是一个玩具大象Hadoop版本 Hadoop 三⼤发⾏版本Apache、Cloudera、Hortonworks Apache 版本最原始（最基础）的版本，对于⼊⻔学习最好Cloudera 在⼤型互联⽹企业中⽤的较多Hortonworks ⽂档较好官⽹地址：http://hadoop." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://Eddy-622.github.io/posts/linux%E4%B9%8B%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BA%94%E7%94%A8/" />
+<meta property="article:published_time" content="2020-12-28T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-12-28T00:00:00+00:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Linux之大数据应用"/>
+<meta name="twitter:description" content="本周内容概要 大数据之Hadoop(了解并掌握基本操作即可)
+ 重要理论 hadoop实操  大数据之数据仓库(简单了解基本原理即可)
+今日内容详细 大数据的概念 指⽆法在⼀定时间范围内⽤常规软件⼯具进⾏捕捉、管理和处理的数据集合，是需要新处理模式才能具有更强的决策⼒、洞察发现⼒和流程优化能⼒的海量、⾼增⻓率和多样化的信息资产1.海量(数据量特别大)2.⾼增⻓率(较小的时间内涌入大量数据)3.多样化(数据种类很多)大数据的目的 主要解决，海量数据的存储和海量数据的分析计算问题。1.海量数据存储2.海量数据分析计算重要的单位换算 8bit = 1bytes1024bytes = 1KB1024KB = 1MB1024MB = 1GB1024GB = 1TB1024TB = 1PB1024PB = 1EB数据量至少要达到PB级别才能够称之为是大数据大数据的特点 Volume(⼤量)Velocity(⾼速)Variety(多样)Value(低价值密度)大数据的用途 物流仓储零售旅游商品⼴告推荐保险金融房地产人工智能...诸多领域Hadoop简介 主要解决，海量数据的存储和海量数据的分析计算问题(即针对大数据应运而生)从狭义上看Hadoop可以是一个数据库软件从广义上看Hadoop是一个生态圈(包含了很多软件)Hadoop发展史 1.Hadoop是基于Google的三篇论文开发的2.2006年Hadoop正式诞生3.作者是Doug Cutting，软件图标是一个玩具大象Hadoop版本 Hadoop 三⼤发⾏版本Apache、Cloudera、Hortonworks Apache 版本最原始（最基础）的版本，对于⼊⻔学习最好Cloudera 在⼤型互联⽹企业中⽤的较多Hortonworks ⽂档较好官⽹地址：http://hadoop."/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="/favicon.ico">
+
+	<title>Linux之大数据应用</title>
+	<link rel="stylesheet" href="https://Eddy-622.github.io/css/style.min.657bcb7af31123e4156b1a3d2ff60a636717e54ead74f882136b5114cf72b55e.css" integrity="sha256-ZXvLevMRI+QVaxo9L/YKY2cX5U6tdPiCE2tRFM9ytV4=" crossorigin="anonymous">
+	
+</head>
+
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp faster">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="https://Eddy-622.github.io">Eddy&#39;s Boke</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					
+				<a href="https://Eddy-622.github.io/posts/">博客</a>
+				<a href="https://Eddy-622.github.io/about-hugo/">关于</a>
+
+				</nav>
+			</div>
+			<div class="hdr-right hdr-icons">
+				<span class="hdr-social hide-in-mobile"><a href="https://mobile.twitter.com/zhang_kea" target="_blank" rel="noopener me" title="Twitter"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a><a href="https://www.facebook.com/kea.zhang.92" target="_blank" rel="noopener me" title="Instagram"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line></svg></a><a href="https://github.com/Eddy-622" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></span><button id="menu-btn" class="hdr-btn" title="Menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast">
+		<ul>
+			<li><a href="https://Eddy-622.github.io/posts/">博客</a></li>
+			<li><a href="https://Eddy-622.github.io/about-hugo/">关于</a></li>
+		</ul>
+	</div>
+
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta"><span>Dec 28, 2020</span></div>
+				<h1>Linux之大数据应用</h1>
+			</header>
+			<div class="content">
+				<h1 id="本周内容概要">本周内容概要<a href="#本周内容概要" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<p>大数据之Hadoop(了解并掌握基本操作即可)</p>
+<ul>
+<li>重要理论</li>
+<li>hadoop实操</li>
+</ul>
+<p>大数据之数据仓库(简单了解基本原理即可)</p>
+<h1 id="今日内容详细">今日内容详细<a href="#今日内容详细" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<h3 id="大数据的概念">大数据的概念<a href="#大数据的概念" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<pre><code>指⽆法在⼀定时间范围内⽤常规软件⼯具进⾏捕捉、管理
+和处理的数据集合，是需要新处理模式才能具有更强的决策⼒、洞察发现⼒和流程
+优化能⼒的海量、⾼增⻓率和多样化的信息资产
+1.海量(数据量特别大)
+2.⾼增⻓率(较小的时间内涌入大量数据)
+3.多样化(数据种类很多)
+</code></pre><h3 id="大数据的目的">大数据的目的<a href="#大数据的目的" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<pre><code>主要解决，海量数据的存储和海量数据的分析计算问题。
+1.海量数据存储
+2.海量数据分析计算
+</code></pre><h3 id="重要的单位换算">重要的单位换算<a href="#重要的单位换算" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<pre><code>8bit = 1bytes
+1024bytes = 1KB
+1024KB = 1MB
+1024MB = 1GB
+1024GB = 1TB
+1024TB = 1PB
+1024PB = 1EB
+数据量至少要达到PB级别才能够称之为是大数据
+</code></pre><h3 id="大数据的特点">大数据的特点<a href="#大数据的特点" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<pre><code>Volume(⼤量)
+Velocity(⾼速)
+Variety(多样)
+Value(低价值密度)
+</code></pre><h3 id="大数据的用途">大数据的用途<a href="#大数据的用途" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<pre><code>物流仓储
+零售
+旅游
+商品⼴告推荐
+保险
+金融
+房地产
+人工智能
+...诸多领域
+</code></pre><h2 id="hadoop简介">Hadoop简介<a href="#hadoop简介" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<pre><code>主要解决，海量数据的存储和海量数据的分析计算问题(即针对大数据应运而生)
+从狭义上看Hadoop可以是一个数据库软件
+从广义上看Hadoop是一个生态圈(包含了很多软件)
+</code></pre><h3 id="hadoop发展史">Hadoop发展史<a href="#hadoop发展史" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<pre><code>1.Hadoop是基于Google的三篇论文开发的
+2.2006年Hadoop正式诞生
+3.作者是Doug Cutting，软件图标是一个玩具大象
+
+</code></pre><h3 id="hadoop版本">Hadoop版本<a href="#hadoop版本" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<pre><code>Hadoop 三⼤发⾏版本
+ 	Apache、Cloudera、Hortonworks 
+    Apache 版本最原始（最基础）的版本，对于⼊⻔学习最好
+    Cloudera 在⼤型互联⽹企业中⽤的较多
+    Hortonworks ⽂档较好
+ 
+官⽹地址：http://hadoop.apache.org/releases.html
+下载地址：https://archive.apache.org/dist/hadoop/common/
+    
+官⽹地址：https://www.cloudera.com/downloads/cdh/5-10-0.html
+下载地址：http://archive-primary.cloudera.com/cdh5/cdh/5/
+ 
+官⽹地址：https://hortonworks.com/products/data-center/hdp/
+下载地址：https://hortonworks.com/downloads/#data-platform
+</code></pre><h3 id="hadoop优势">hadoop优势<a href="#hadoop优势" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<pre><code>1）⾼可靠性：Hadoop底层维护多个数据副本，所以即使Hadoop某个计算元素
+或存储出现故障，也不会导致数据的丢失。
+2）⾼扩展性：在集群间分配任务数据，可⽅便的扩展数以千计的节点。
+3）⾼效性：在MapReduce的思想下，Hadoop是并⾏⼯作的，以加快任务处理
+4）⾼容错性：能够⾃动将失败的任务重新分配。
+</code></pre><h3 id="串行并发并行">串行、并发、并行<a href="#串行并发并行" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<pre><code>计算机里面真正干活的是CPU，一台计算机里面有几个CPU就相当于有几个可以干活的人
+我们现在假设一台计算机里面只有一个CPU
+1.现在我需要运行三个软件
+	只能一个一个排队运行(串行)
+  
+2.现在我需要运行三个软件并且让用户感觉不出来三个软件是依次执行的
+	在多个任务之间实现快速切换加保存状态(并发)
+    # 看起来像同时在运行的就可以称之为是并发
+   
+3.现在我需要运行三个软件并且这三个软件一刻都不会停歇
+	一个CPU无法实现，需要多个CPU同时执行(并行)
+    # 多个任务之间真正意义上的同时执行称之为并行
+    
+&quot;&quot;&quot;
+淘宝在双十一的时候可以做到1个亿的并行，这句话对否？
+	肯定是错误的，因为要想实现并行必须有对应个数的CPU，而计算机的CPU个数不可能达到1个亿
+
+正确的描述是淘宝在双十一的时候可以做到1个亿的并发
+	并发是看上去像同时运行就可以了，只需要多个CPU做到快速切换加保存状态即可
+&quot;&quot;&quot;
+</code></pre><h3 id="hadoop组成">Hadoop组成<a href="#hadoop组成" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<pre><code>注意版本的不同所带来的不同组成架构
+Hadoop1.x和Hadoop2.x区别
+
+Hadoop1.x只包含三个部分
+	MapReduce(计算+资源调度)
+    HDFS(数据存储相当于数据库)
+    Common(辅助工具相当于python内置模块方法)
+    
+Hadoop2.x为了减轻MapReduce新增了Yarn
+	MapReduce(计算)
+    Yarn(资源调度)
+    HDFS(数据存储相当于数据库)
+    Common(辅助工具相当于python内置模块方法)
+&quot;&quot;&quot;
+MapReduce(计算)
+Yarn(资源调度)
+HDFS(数据存储相当于数据库)
+&quot;&quot;&quot;
+</code></pre><h3 id="hdfs架构">HDFS架构<a href="#hdfs架构" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<pre><code>主要就是用来存储数据的，内部分为三层
+NameNode
+	可以看成是存储数据的目录结构等其他相关信息，不保存真实数据
+DataNode
+	用来真正存储真实数据
+Secondary NameNode
+	主要是用来辅助NameNode工作的
+</code></pre><h3 id="yarn架构">Yarn架构<a href="#yarn架构" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<pre><code>主要是用来做资源调度的
+1.ResourceManager(RM)
+	类似于公司的大老板
+2.NodeManager(NM)
+	类似于部门经理
+3.ApplicationMaster(AppMr)
+	类似于真正干活的员工
+4.Container
+	类似于资源(办公环境、资金)
+由于Hadoop是集群操作，所以Yarn也可能需要管理多台计算机
+但是一定要明确是RM只有一个，NM有多个
+</code></pre><h3 id="mapreduce架构">MapReduce架构<a href="#mapreduce架构" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<pre><code>主要就是用来做计算的
+1.Map
+	将一个计算任务拆分成多个小人物分发给对台计算机完成
+2.Reduce
+	将多台计算机运行的任务结果合并到一起完成整个任务需求
+    
+eg:在100个TB的硬盘中查找某位老师2020最新动作教学视频
+    	先map拆分成多个区域交给不同的人查询
+        再reduce汇总多个人查找的结果之后产出
+</code></pre><h3 id="数据来源">数据来源<a href="#数据来源" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<pre><code>无论是大数据也好还是数据分析也好，操作的数据来源肯定不能是线上真正使用的业务数据库
+为了保证线上(正在服务用户的软件)数据库的安全，我们都是将线上数据想办法导入到其他地方之后再做分析处理
+
+
+线上不同类型的数据，再导入到Hadoop中需要借助于不同的工具
+针对关系型数据库存储的结构化数据需要使用Sqoop导入
+针对非关系型数据库存储的非结构化数据需要使用
+	Flume日志采集
+    Kafka消息队列
+</code></pre><h3 id="补充">补充<a href="#补充" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<pre><code>1.互联网的本质
+	诸多计算机之间实现彼此互联
+2.上网的本质
+	其实就是在访问某台计算机上面的数据
+3.浏览器的本质
+	帮助我们去连接互联网的诸多计算机上查询想要的数据
+# 浏览器其实内部就是在处理大数据
+
+
+横向优化与纵向优化
+...
+</code></pre><h3 id="作业">作业<a href="#作业" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<pre><code>1.手抄今日笔记
+2.提前百度查看什么是队列，什么是堆栈，什么又是消息队里
+	每日我们来讲，针对部分内容用python代码实现
+3.提前准备好一台虚拟机保证网络通畅
+</code></pre>
+			</div>
+			<hr class="post-end">
+			<footer class="post-info">
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>Eddy Zhang</p>
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://Eddy-622.github.io/tags/linuc">Linuc</a></span><span class="tag"><a href="https://Eddy-622.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BA%94%E7%94%A8">大数据应用</a></span><span class="tag"><a href="https://Eddy-622.github.io/tags/hadoop">Hadoop</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>176 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-12-28 08:00 &#43;0800</p>
+			</footer>
+		</article>
+		<div class="post-nav thin">
+			<a class="prev-post" href="https://Eddy-622.github.io/posts/matplotlib%E4%B9%8B%E5%A4%9A%E8%A1%A8%E7%BB%98%E5%88%B6/">
+				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>Matplotlib之多表绘制</span>
+			</a>
+		</div>
+		<div id="comments" class="thin">
+</div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p>&copy; 2020 <a href="https://Eddy-622.github.io">Eddy Zhang</a></p>
+		<p>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://Eddy-622.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+		</p>
+	</footer>
+
+
+
+	<script src="https://Eddy-622.github.io/js/bundle.min.4a9a0ac3d2217822c7865b4161e6c2a71de1d70492264337755427898dd718f6.js" integrity="sha256-SpoKw9IheCLHhltBYebCpx3h1wSSJkM3dVQniY3XGPY=" crossorigin="anonymous"></script>
+	
+
+</body>
+
+</html>

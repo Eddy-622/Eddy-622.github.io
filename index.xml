@@ -13,6 +13,17 @@
     
     
     <item>
+      <title>Linux之大数据应用</title>
+      <link>https://Eddy-622.github.io/posts/linux%E4%B9%8B%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BA%94%E7%94%A8/</link>
+      <pubDate>Mon, 28 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/posts/linux%E4%B9%8B%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BA%94%E7%94%A8/</guid>
+      <description>本周内容概要 大数据之Hadoop(了解并掌握基本操作即可)
+ 重要理论 hadoop实操  大数据之数据仓库(简单了解基本原理即可)
+今日内容详细 大数据的概念 指⽆法在⼀定时间范围内⽤常规软件⼯具进⾏捕捉、管理和处理的数据集合，是需要新处理模式才能具有更强的决策⼒、洞察发现⼒和流程优化能⼒的海量、⾼增⻓率和多样化的信息资产1.海量(数据量特别大)2.⾼增⻓率(较小的时间内涌入大量数据)3.多样化(数据种类很多)大数据的目的 主要解决，海量数据的存储和海量数据的分析计算问题。1.海量数据存储2.海量数据分析计算重要的单位换算 8bit = 1bytes1024bytes = 1KB1024KB = 1MB1024MB = 1GB1024GB = 1TB1024TB = 1PB1024PB = 1EB数据量至少要达到PB级别才能够称之为是大数据大数据的特点 Volume(⼤量)Velocity(⾼速)Variety(多样)Value(低价值密度)大数据的用途 物流仓储零售旅游商品⼴告推荐保险金融房地产人工智能...诸多领域Hadoop简介 主要解决，海量数据的存储和海量数据的分析计算问题(即针对大数据应运而生)从狭义上看Hadoop可以是一个数据库软件从广义上看Hadoop是一个生态圈(包含了很多软件)Hadoop发展史 1.Hadoop是基于Google的三篇论文开发的2.2006年Hadoop正式诞生3.作者是Doug Cutting，软件图标是一个玩具大象Hadoop版本 Hadoop 三⼤发⾏版本Apache、Cloudera、Hortonworks Apache 版本最原始（最基础）的版本，对于⼊⻔学习最好Cloudera 在⼤型互联⽹企业中⽤的较多Hortonworks ⽂档较好官⽹地址：http://hadoop.</description>
+    </item>
+    
+    <item>
       <title>Matplotlib之多表绘制</title>
       <link>https://Eddy-622.github.io/posts/matplotlib%E4%B9%8B%E5%A4%9A%E8%A1%A8%E7%BB%98%E5%88%B6/</link>
       <pubDate>Thu, 10 Dec 2020 00:00:00 +0000</pubDate>
@@ -144,24 +155,6 @@ res = pandas.read_html(real_data)print(res)爬取汽车之家数据 新闻标�
  https://www.autohome.com.cn/news/总结每个页的url规律 推导出固定url格式
  https://www.autohome.com.cn/news/1/#liststarthttps://www.autohome.com.cn/news/2/#liststarthttps://www.autohome.com.cn/news/3/#liststart利用代码事先翻页的功能
 url_reg = &amp;#39;https://www.autohome.com.cn/news/%s/#liststart&amp;#39;for i in range(1,6010):print(url_reg%i)尝试着直接朝url发送get请求获取数据</description>
-    </item>
-    
-    <item>
-      <title>爬虫之requests-html模块、BS4模块</title>
-      <link>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Brequests-html%E6%A8%A1%E5%9D%97bs4%E6%A8%A1%E5%9D%97/</link>
-      <pubDate>Thu, 19 Nov 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://Eddy-622.github.io/posts/%E7%88%AC%E8%99%AB%E4%B9%8Brequests-html%E6%A8%A1%E5%9D%97bs4%E6%A8%A1%E5%9D%97/</guid>
-      <description>今日内容概要  requests-html模块 BS4模块 爬取红牛分公司信息 爬取链家二手房信息  今日内容详细 requests-html模块 该模块的作者就是requests模块的作者
-相比之下此模块更牛逼，可以直接运行js代码
-  下载
-pip3 install requests-html  基本使用
-from requests-html import HTMLSessionr = HTMLSession.get(&amp;#39;URL&amp;#39;)a_link = r.html.linksprint(a_link)all_link = r.html.absolute_linksprint(all_link)查找标签id是downloads的标签
-about = r.html.find(&amp;#39;#downloads&amp;#39;, first=True)查看该标签内部所有的文本信息
-about_text = about.text查看该标签所有的属性
-about_attr = about.attrs查看该标签内部包含的所有a标签
-about_a = about.find(&amp;#39;a&amp;#39;)for a in about_a:print(a.text) # 获取每个a标签内部的文本 print(a.links) # 获取每个a标签内部的链接地址 requests-html官方文档
-http://requests-html.kennethreitz.org/ # 习惯看英文文档   BS4模块</description>
     </item>
     
   </channel>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hadoop on Eddy&#39;s Boke</title>
+    <link>https://Eddy-622.github.io/tags/hadoop/</link>
+    <description>Recent content in Hadoop on Eddy&#39;s Boke</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Mon, 28 Dec 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://Eddy-622.github.io/tags/hadoop/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Linux之大数据应用</title>
+      <link>https://Eddy-622.github.io/posts/linux%E4%B9%8B%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BA%94%E7%94%A8/</link>
+      <pubDate>Mon, 28 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/posts/linux%E4%B9%8B%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BA%94%E7%94%A8/</guid>
+      <description>本周内容概要 大数据之Hadoop(了解并掌握基本操作即可)
+ 重要理论 hadoop实操  大数据之数据仓库(简单了解基本原理即可)
+今日内容详细 大数据的概念 指⽆法在⼀定时间范围内⽤常规软件⼯具进⾏捕捉、管理和处理的数据集合，是需要新处理模式才能具有更强的决策⼒、洞察发现⼒和流程优化能⼒的海量、⾼增⻓率和多样化的信息资产1.海量(数据量特别大)2.⾼增⻓率(较小的时间内涌入大量数据)3.多样化(数据种类很多)大数据的目的 主要解决，海量数据的存储和海量数据的分析计算问题。1.海量数据存储2.海量数据分析计算重要的单位换算 8bit = 1bytes1024bytes = 1KB1024KB = 1MB1024MB = 1GB1024GB = 1TB1024TB = 1PB1024PB = 1EB数据量至少要达到PB级别才能够称之为是大数据大数据的特点 Volume(⼤量)Velocity(⾼速)Variety(多样)Value(低价值密度)大数据的用途 物流仓储零售旅游商品⼴告推荐保险金融房地产人工智能...诸多领域Hadoop简介 主要解决，海量数据的存储和海量数据的分析计算问题(即针对大数据应运而生)从狭义上看Hadoop可以是一个数据库软件从广义上看Hadoop是一个生态圈(包含了很多软件)Hadoop发展史 1.Hadoop是基于Google的三篇论文开发的2.2006年Hadoop正式诞生3.作者是Doug Cutting，软件图标是一个玩具大象Hadoop版本 Hadoop 三⼤发⾏版本Apache、Cloudera、Hortonworks Apache 版本最原始（最基础）的版本，对于⼊⻔学习最好Cloudera 在⼤型互联⽹企业中⽤的较多Hortonworks ⽂档较好官⽹地址：http://hadoop.</description>
+    </item>
+    
+  </channel>
+</rss>

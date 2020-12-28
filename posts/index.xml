@@ -6,8 +6,190 @@
 		<generator>Hugo -- gohugo.io</generator>
 		<language>zh-CN</language>
 		<copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-		<lastBuildDate>Thu, 10 Dec 2020 00:00:00 +0000</lastBuildDate>
+		<lastBuildDate>Mon, 28 Dec 2020 00:00:00 +0000</lastBuildDate>
 		<atom:link href="https://Eddy-622.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Linux之大数据应用</title>
+			<link>https://Eddy-622.github.io/posts/linux%E4%B9%8B%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BA%94%E7%94%A8/</link>
+			<pubDate>Mon, 28 Dec 2020 00:00:00 +0000</pubDate>
+			
+			<guid>https://Eddy-622.github.io/posts/linux%E4%B9%8B%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BA%94%E7%94%A8/</guid>
+			<description>本周内容概要 大数据之Hadoop(了解并掌握基本操作即可)
+ 重要理论 hadoop实操  大数据之数据仓库(简单了解基本原理即可)
+今日内容详细 大数据的概念 指⽆法在⼀定时间范围内⽤常规软件⼯具进⾏捕捉、管理和处理的数据集合，是需要新处理模式才能具有更强的决策⼒、洞察发现⼒和流程优化能⼒的海量、⾼增⻓率和多样化的信息资产1.海量(数据量特别大)2.⾼增⻓率(较小的时间内涌入大量数据)3.多样化(数据种类很多)大数据的目的 主要解决，海量数据的存储和海量数据的分析计算问题。1.海量数据存储2.海量数据分析计算重要的单位换算 8bit = 1bytes1024bytes = 1KB1024KB = 1MB1024MB = 1GB1024GB = 1TB1024TB = 1PB1024PB = 1EB数据量至少要达到PB级别才能够称之为是大数据大数据的特点 Volume(⼤量)Velocity(⾼速)Variety(多样)Value(低价值密度)大数据的用途 物流仓储零售旅游商品⼴告推荐保险金融房地产人工智能...诸多领域Hadoop简介 主要解决，海量数据的存储和海量数据的分析计算问题(即针对大数据应运而生)从狭义上看Hadoop可以是一个数据库软件从广义上看Hadoop是一个生态圈(包含了很多软件)Hadoop发展史 1.Hadoop是基于Google的三篇论文开发的2.2006年Hadoop正式诞生3.作者是Doug Cutting，软件图标是一个玩具大象Hadoop版本 Hadoop 三⼤发⾏版本Apache、Cloudera、Hortonworks Apache 版本最原始（最基础）的版本，对于⼊⻔学习最好Cloudera 在⼤型互联⽹企业中⽤的较多Hortonworks ⽂档较好官⽹地址：http://hadoop.</description>
+			<content type="html"><![CDATA[<h1 id="本周内容概要">本周内容概要</h1>
+<p>大数据之Hadoop(了解并掌握基本操作即可)</p>
+<ul>
+<li>重要理论</li>
+<li>hadoop实操</li>
+</ul>
+<p>大数据之数据仓库(简单了解基本原理即可)</p>
+<h1 id="今日内容详细">今日内容详细</h1>
+<h3 id="大数据的概念">大数据的概念</h3>
+<pre><code>指⽆法在⼀定时间范围内⽤常规软件⼯具进⾏捕捉、管理
+和处理的数据集合，是需要新处理模式才能具有更强的决策⼒、洞察发现⼒和流程
+优化能⼒的海量、⾼增⻓率和多样化的信息资产
+1.海量(数据量特别大)
+2.⾼增⻓率(较小的时间内涌入大量数据)
+3.多样化(数据种类很多)
+</code></pre><h3 id="大数据的目的">大数据的目的</h3>
+<pre><code>主要解决，海量数据的存储和海量数据的分析计算问题。
+1.海量数据存储
+2.海量数据分析计算
+</code></pre><h3 id="重要的单位换算">重要的单位换算</h3>
+<pre><code>8bit = 1bytes
+1024bytes = 1KB
+1024KB = 1MB
+1024MB = 1GB
+1024GB = 1TB
+1024TB = 1PB
+1024PB = 1EB
+数据量至少要达到PB级别才能够称之为是大数据
+</code></pre><h3 id="大数据的特点">大数据的特点</h3>
+<pre><code>Volume(⼤量)
+Velocity(⾼速)
+Variety(多样)
+Value(低价值密度)
+</code></pre><h3 id="大数据的用途">大数据的用途</h3>
+<pre><code>物流仓储
+零售
+旅游
+商品⼴告推荐
+保险
+金融
+房地产
+人工智能
+...诸多领域
+</code></pre><h2 id="hadoop简介">Hadoop简介</h2>
+<pre><code>主要解决，海量数据的存储和海量数据的分析计算问题(即针对大数据应运而生)
+从狭义上看Hadoop可以是一个数据库软件
+从广义上看Hadoop是一个生态圈(包含了很多软件)
+</code></pre><h3 id="hadoop发展史">Hadoop发展史</h3>
+<pre><code>1.Hadoop是基于Google的三篇论文开发的
+2.2006年Hadoop正式诞生
+3.作者是Doug Cutting，软件图标是一个玩具大象
+
+</code></pre><h3 id="hadoop版本">Hadoop版本</h3>
+<pre><code>Hadoop 三⼤发⾏版本
+ 	Apache、Cloudera、Hortonworks 
+    Apache 版本最原始（最基础）的版本，对于⼊⻔学习最好
+    Cloudera 在⼤型互联⽹企业中⽤的较多
+    Hortonworks ⽂档较好
+ 
+官⽹地址：http://hadoop.apache.org/releases.html
+下载地址：https://archive.apache.org/dist/hadoop/common/
+    
+官⽹地址：https://www.cloudera.com/downloads/cdh/5-10-0.html
+下载地址：http://archive-primary.cloudera.com/cdh5/cdh/5/
+ 
+官⽹地址：https://hortonworks.com/products/data-center/hdp/
+下载地址：https://hortonworks.com/downloads/#data-platform
+</code></pre><h3 id="hadoop优势">hadoop优势</h3>
+<pre><code>1）⾼可靠性：Hadoop底层维护多个数据副本，所以即使Hadoop某个计算元素
+或存储出现故障，也不会导致数据的丢失。
+2）⾼扩展性：在集群间分配任务数据，可⽅便的扩展数以千计的节点。
+3）⾼效性：在MapReduce的思想下，Hadoop是并⾏⼯作的，以加快任务处理
+4）⾼容错性：能够⾃动将失败的任务重新分配。
+</code></pre><h3 id="串行并发并行">串行、并发、并行</h3>
+<pre><code>计算机里面真正干活的是CPU，一台计算机里面有几个CPU就相当于有几个可以干活的人
+我们现在假设一台计算机里面只有一个CPU
+1.现在我需要运行三个软件
+	只能一个一个排队运行(串行)
+  
+2.现在我需要运行三个软件并且让用户感觉不出来三个软件是依次执行的
+	在多个任务之间实现快速切换加保存状态(并发)
+    # 看起来像同时在运行的就可以称之为是并发
+   
+3.现在我需要运行三个软件并且这三个软件一刻都不会停歇
+	一个CPU无法实现，需要多个CPU同时执行(并行)
+    # 多个任务之间真正意义上的同时执行称之为并行
+    
+&quot;&quot;&quot;
+淘宝在双十一的时候可以做到1个亿的并行，这句话对否？
+	肯定是错误的，因为要想实现并行必须有对应个数的CPU，而计算机的CPU个数不可能达到1个亿
+
+正确的描述是淘宝在双十一的时候可以做到1个亿的并发
+	并发是看上去像同时运行就可以了，只需要多个CPU做到快速切换加保存状态即可
+&quot;&quot;&quot;
+</code></pre><h3 id="hadoop组成">Hadoop组成</h3>
+<pre><code>注意版本的不同所带来的不同组成架构
+Hadoop1.x和Hadoop2.x区别
+
+Hadoop1.x只包含三个部分
+	MapReduce(计算+资源调度)
+    HDFS(数据存储相当于数据库)
+    Common(辅助工具相当于python内置模块方法)
+    
+Hadoop2.x为了减轻MapReduce新增了Yarn
+	MapReduce(计算)
+    Yarn(资源调度)
+    HDFS(数据存储相当于数据库)
+    Common(辅助工具相当于python内置模块方法)
+&quot;&quot;&quot;
+MapReduce(计算)
+Yarn(资源调度)
+HDFS(数据存储相当于数据库)
+&quot;&quot;&quot;
+</code></pre><h3 id="hdfs架构">HDFS架构</h3>
+<pre><code>主要就是用来存储数据的，内部分为三层
+NameNode
+	可以看成是存储数据的目录结构等其他相关信息，不保存真实数据
+DataNode
+	用来真正存储真实数据
+Secondary NameNode
+	主要是用来辅助NameNode工作的
+</code></pre><h3 id="yarn架构">Yarn架构</h3>
+<pre><code>主要是用来做资源调度的
+1.ResourceManager(RM)
+	类似于公司的大老板
+2.NodeManager(NM)
+	类似于部门经理
+3.ApplicationMaster(AppMr)
+	类似于真正干活的员工
+4.Container
+	类似于资源(办公环境、资金)
+由于Hadoop是集群操作，所以Yarn也可能需要管理多台计算机
+但是一定要明确是RM只有一个，NM有多个
+</code></pre><h3 id="mapreduce架构">MapReduce架构</h3>
+<pre><code>主要就是用来做计算的
+1.Map
+	将一个计算任务拆分成多个小人物分发给对台计算机完成
+2.Reduce
+	将多台计算机运行的任务结果合并到一起完成整个任务需求
+    
+eg:在100个TB的硬盘中查找某位老师2020最新动作教学视频
+    	先map拆分成多个区域交给不同的人查询
+        再reduce汇总多个人查找的结果之后产出
+</code></pre><h3 id="数据来源">数据来源</h3>
+<pre><code>无论是大数据也好还是数据分析也好，操作的数据来源肯定不能是线上真正使用的业务数据库
+为了保证线上(正在服务用户的软件)数据库的安全，我们都是将线上数据想办法导入到其他地方之后再做分析处理
+
+
+线上不同类型的数据，再导入到Hadoop中需要借助于不同的工具
+针对关系型数据库存储的结构化数据需要使用Sqoop导入
+针对非关系型数据库存储的非结构化数据需要使用
+	Flume日志采集
+    Kafka消息队列
+</code></pre><h3 id="补充">补充</h3>
+<pre><code>1.互联网的本质
+	诸多计算机之间实现彼此互联
+2.上网的本质
+	其实就是在访问某台计算机上面的数据
+3.浏览器的本质
+	帮助我们去连接互联网的诸多计算机上查询想要的数据
+# 浏览器其实内部就是在处理大数据
+
+
+横向优化与纵向优化
+...
+</code></pre><h3 id="作业">作业</h3>
+<pre><code>1.手抄今日笔记
+2.提前百度查看什么是队列，什么是堆栈，什么又是消息队里
+	每日我们来讲，针对部分内容用python代码实现
+3.提前准备好一台虚拟机保证网络通畅
+</code></pre>]]></content>
+		</item>
 		
 		<item>
 			<title>Matplotlib之多表绘制</title>
