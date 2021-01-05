@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>回归模型 on Eddy&#39;s Boke</title>
+    <link>https://Eddy-622.github.io/tags/%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B/</link>
+    <description>Recent content in 回归模型 on Eddy&#39;s Boke</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Tue, 05 Jan 2021 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://Eddy-622.github.io/tags/%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>数据仓库与回归模型认识</title>
+      <link>https://Eddy-622.github.io/posts/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E4%B8%8E%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B%E8%AE%A4%E8%AF%86/</link>
+      <pubDate>Tue, 05 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://Eddy-622.github.io/posts/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E4%B8%8E%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B%E8%AE%A4%E8%AF%86/</guid>
+      <description>今日内容概要  数据仓库 一元线性回归模型理论 python代码实现 多元线性回归模型理论 python代码实现 岭回归模型理论 python代码实现  今日内容详细 数据仓库 数据仓库的诞生主要有两个原因：历史数据的积存需要企业数据分析的需要热数据:使用频率较高的数据冷数据:使用频率较低的数据数仓特点 1.面向主题针对不同的业务分析需求，可能需要多张表联表分组聚合查询2.集成将不同数据源的数据，进行标准化，整合成统一的数据规范，便于之后进行分析运算(统一单位)3.非易失不允许数据修改，只能通过工具对数据进行查询、分析4.时变性定期去接受、集成新的数据进来，保证与业务数据库数据一致但是数仓又不允许修改，所以以时间戳标记版本，老旧的数据可以选择定期删除或保留数据仓库与数据库的区别 # 数据库设计遵循设计范式、数据仓库则不遵循设计范式数据库是面向事务设计的，它属于 OLTP（在线事务处理）系统，为业务提供数据存储服务，主要操作是随机读写；在设计时尽量避免冗余，常采用符合规范来设计。数据仓库是面向主题设计的，属于 OLAP（在线分析处理）系统，主要操作是批量读写；关注数据整合，以及分析、处理性能；会有意引入冗余，采用反范式方式设计。参考截图即可地址:https://www.cnblogs.com/Dominic-Ji/articles/13796364.html密码:jason666 架构设计 # MPP架构是传统数据仓库中常见的技术架构，将单机数据库节点组成集群，从而提升处理性能集群中，这些节点间使用非共享架构，每个节点拥有独立的磁盘存储和内存系统，在计算过程中独立运行，而不必去关心整个集群的状态，也不关心其他节点存储的数据信息每台数据节点通过专用网络或者商业通用网络互相连接优点:MPP 数据库更适合中等规模的结构化数据处理，性能上有很好的体现缺点:随着集群规模的增大，节点的故障率会逐渐升高，瓶颈就会越发明显	# 分布式架构分布式架构是大数据中常见的技术架构，也称为 Hadoop 架构/批处理架构优点:数据在集群中是全局透明共享的，每个节点拥有自治的运算资源因为使用了公共的数据存储，所以它的扩展性极强，而且非常适合处理非结构化、半结构化数据缺点:在数据量较低的情况下，运行速度远不及 MPP 架构；但数据量一旦超过某个量级，吞吐量的优势会极大的发挥出来。# MPP + 分布式架构数据存储层采用分布式架构中的公共存储，提升了分区容错性，也将 MPP 的扩展性得到了质的提升。上层处理架构依然采用 MPP，减少运算的延迟# 总结MPP 架构和分布式架构的适用场景不同。MPP 适合中等规模的数据处理，延迟低、SQL 支持高是它主要的优势；分布式（批处理）架构更适合海量数据规模的批处理计算，吞吐高、运算速度快、扩展性强是它的优势，而这也是离线批处理数仓所看重的。MPP + 分布式架构集成了两者的优势，扩展性强、延迟低、SQL 支持率高，实际上是两者间取了个折中，能够在海量数据规模下依然具有较好的低延迟特性。这些架构并没有好坏之分，对于不同的场景只有适合和不适合之分。如果使用分布式架构的数据仓库对较少的数据量进行交互式的 SQL 查询，需要 5 分钟，但使用传统数仓只需要 1 秒；那不是产品的问题，而是用错的场景而已。数据仓库技术实现 传统数据仓库(MPP)优点1.</description>
+    </item>
+    
+  </channel>
+</rss>
