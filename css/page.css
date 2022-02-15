@@ -1,0 +1,23 @@
+body {
+  background: rgb(18,235,251);
+  background: linear-gradient(90deg, rgba(18,235,251,1) 0%, rgba(147,241,195,1) 51%, rgba(0,194,255,1) 100%);
+}
+
+.text {
+  text-align: center;
+  font-family: "Bitstream Vera Sans Mono", Monaco, "Courier New", Courier, monospace;
+  font-style: normal;
+  font-size: 60px;
+  font-weight: 400;
+  color: darkslategrey;
+  padding-top: 15%;
+}
+
+.footer {
+  text-align: center;
+  font-family: "Bitstream Vera Sans Mono", Monaco, "Courier New", Courier, monospace;
+  font-style: normal;
+  font-size: 20px;
+  font-weight: 400;
+  color: darkslategrey;
+}
